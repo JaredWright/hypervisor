@@ -18,7 +18,6 @@ set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
 # Build attributes
 # ------------------------------------------------------------------------------
 
-
 set(BUILD_SHARED_LIBS OFF
     CACHE BOOL
     "Build libraries as shared libraries"
@@ -141,4 +140,3 @@ set(TOOLCHAIN_PATH_BFVMM ${BF_DEFAULT_VMM_TOOLCHAIN_FILE}
     CACHE PATH
     "Path to a cmake toolchain file for building bfvmm"
 )
-

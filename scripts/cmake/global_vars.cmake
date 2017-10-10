@@ -85,4 +85,3 @@ set(BF_DEFAULT_VMM_TOOLCHAIN_FILE "${BF_TOOLCHAIN_DIR}/default_vmm.cmake"
     CACHE INTERNAL
     "Path to the default cmake toolchain file for building vmm tools"
 )
-
