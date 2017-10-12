@@ -23,12 +23,6 @@ include(${CMAKE_SOURCE_DIR}/scripts/cmake/global_vars.cmake)
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/config/default.cmake)
 include(${CMAKE_SOURCE_DIR}/bfsdk/cmake/CMakeGlobal_Project.txt)
 
-if(ENABLE_DEPEND_UPDATES)
-    set(EP_UPDATE_DISCONNECTED OFF)
-else()
-    set(EP_UPDATE_DISCONNECTED ON)
-endif()
-
 set(BAREFLANK_INSTALL_TEST_PREFIX ${CMAKE_BINARY_DIR}/bfprefix_test)
 
 if(EXTENDED_APIS_PATH)
