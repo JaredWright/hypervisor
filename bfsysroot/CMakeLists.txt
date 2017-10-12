@@ -66,7 +66,9 @@ else()
         SOURCE_DIR          ${BAREFLANK_BINARY_DIR}/external/newlib/src
         BINARY_DIR          ${CMAKE_BINARY_DIR}/newlib/build
         CONFIGURE_COMMAND   ${BAREFLANK_BINARY_DIR}/external/newlib/src/configure "${NEWLIB_ARGS}" CFLAGS_FOR_TARGET=${NEWLIB_CFLAGS}
-        BUILD_COMMAND       make -j1
+        UPDATE_DISCONNECTED 0
+        UPDATE_COMMAND      ""
+        BUILD_COMMAND       make
         INSTALL_COMMAND     make install
         LOG_CONFIGURE       1
         LOG_BUILD           1
@@ -127,7 +129,8 @@ else()
         STAMP_DIR       ${CMAKE_BINARY_DIR}/bfunwind/stamp
         SOURCE_DIR      ${CMAKE_SOURCE_DIR}/bfunwind
         BINARY_DIR      ${CMAKE_BINARY_DIR}/bfunwind/build
-        UPDATE_COMMAND  ${CMAKE_COMMAND} -E echo "checking for updates"
+        UPDATE_DISCONNECTED 0
+        UPDATE_COMMAND      ""
         DEPENDS         newlib
     )
 
@@ -175,6 +178,8 @@ else()
         STAMP_DIR       ${CMAKE_BINARY_DIR}/libcxxabi/stamp
         SOURCE_DIR      ${BAREFLANK_BINARY_DIR}/external/libcxxabi/src
         BINARY_DIR      ${CMAKE_BINARY_DIR}/libcxxabi/build
+        UPDATE_DISCONNECTED 0
+        UPDATE_COMMAND      ""
         DEPENDS         bfunwind
     )
 
@@ -223,6 +228,8 @@ else()
         STAMP_DIR       ${CMAKE_BINARY_DIR}/libcxx/stamp
         SOURCE_DIR      ${BAREFLANK_BINARY_DIR}/external/libcxx/src
         BINARY_DIR      ${CMAKE_BINARY_DIR}/libcxx/build
+        UPDATE_DISCONNECTED 0
+        UPDATE_COMMAND      ""
         DEPENDS         bfunwind libcxxabi
     )
 
@@ -256,7 +263,8 @@ ExternalProject_Add(
     STAMP_DIR       ${CMAKE_BINARY_DIR}/bfsupport/stamp
     SOURCE_DIR      ${CMAKE_SOURCE_DIR}/bfsupport
     BINARY_DIR      ${CMAKE_BINARY_DIR}/bfsupport/build
-    UPDATE_COMMAND  ${CMAKE_COMMAND} -E echo "checking for updates"
+    UPDATE_DISCONNECTED 0
+    UPDATE_COMMAND      ""
     DEPENDS         newlib libcxxabi libcxx
 )
 
