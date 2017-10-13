@@ -1,0 +1,5 @@
+find_program(GIT_BIN git)
+set(GIT_BIN ${GIT_BIN} CACHE INTERNAL "")
+if(GIT_BIN STREQUAL "GIT_BIN-NOTFOUND")
+    message(FATAL_ERROR "Unable to find git, or git is not installed")
+endif()
