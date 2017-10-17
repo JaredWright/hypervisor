@@ -18,7 +18,8 @@
 #
 
 include(ExternalProject)
-set_property(GLOBAL PROPERTY EP_BASE ${BF_DEPENDS_DIR})
+set_property(GLOBAL PROPERTY EP_BASE "${BF_BUILD_DEPENDS_DIR}/${BUILD_TARGET_ARCH}")
+# set_property(GLOBAL PROPERTY EP_PREFIX ${BF_BUILD_DEPENDS_DIR})
 
 include(${BF_DEPENDS_DIR}/python.cmake)
 include(${BF_DEPENDS_DIR}/git.cmake)

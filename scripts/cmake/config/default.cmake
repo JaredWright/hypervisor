@@ -1,5 +1,27 @@
-# All configurable build properties for Bareflank are defined here, set to
-# their default values.
+#
+# Bareflank Hypervisor
+# Copyright (C) 2015 Assured Information Security, Inc.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#
+# ------------------------------------------------------------------------------
+# README
+# ------------------------------------------------------------------------------
+# This file defines all CONFIGURABLE cmake variables set to their default value.
+# These variables are configurable through cmake-gui and ccmake.
+#
 
 # ------------------------------------------------------------------------------
 # Cmake build attributes
@@ -17,6 +39,27 @@ set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
 # ------------------------------------------------------------------------------
 # Build attributes
 # ------------------------------------------------------------------------------
+
+set(BUILD_TARGET_ARCH "host"
+    CACHE STRING
+    "The target architecture for the build"
+)
+set_property(CACHE BUILD_TARGET_ARCH PROPERTY STRINGS
+    "host"      # Auto-detect the host architecture of the current build
+    "x86_64"
+    "aarch64"
+)
+
+set(BUILD_TARGET_OS "host"
+    CACHE STRING
+    "The target operating system for the build"
+)
+set_property(CACHE BUILD_TARGET_OS PROPERTY STRINGS
+    "host"      # Auto-detect the host operating system of the current build
+    "none"      # VMM-only build
+    "linux"
+    "windows"
+)
 
 set(BUILD_SHARED_LIBS OFF
     CACHE BOOL
@@ -70,6 +113,11 @@ set(ENABLE_DEPEND_UPDATES OFF
 # ------------------------------------------------------------------------------
 # Toolchains
 # ------------------------------------------------------------------------------
+
+set(TOOLCHAIN_PATH_ASTYLE ${BF_DEFAULT_TOOLCHAIN_FILE}
+    CACHE PATH
+    "Path to a cmake toolchain file for building astyle"
+)
 
 set(TOOLCHAIN_PATH_BINUTILS ${BF_DEFAULT_TOOLCHAIN_FILE}
     CACHE PATH

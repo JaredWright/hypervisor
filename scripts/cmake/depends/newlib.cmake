@@ -13,13 +13,13 @@ endif()
 # Temporary hacks until the build system has a good way to specify
 # different toolchains to use for different dependencies
 # If you specify 
-if(${CMAKE_C_COMPILER_TARGET} STREQUAL "arm64-none-eabi")
-	set(NEWLIB_CC "aarch64-linux-gnu-gcc")
-	set(NEWLIB_TARGET "aarch64-none-elf")
-else()
-	set(NEWLIB_CC ${CMAKE_C_COMPILER})
-	set(NEWLIB_TARGET "x86_64-none-elf")
-endif()
+# if(${CMAKE_C_COMPILER_TARGET} STREQUAL "arm64-none-eabi")
+#     set(NEWLIB_CC "aarch64-linux-gnu-gcc")
+#     set(NEWLIB_TARGET "aarch64-none-elf")
+# else()
+#     set(NEWLIB_CC ${CMAKE_C_COMPILER})
+#     set(NEWLIB_TARGET "x86_64-none-elf")
+# endif()
 
 list(APPEND NEWLIB_ARGS
 	"--disable-libgloss"

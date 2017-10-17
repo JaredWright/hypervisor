@@ -38,6 +38,8 @@ else()
     set_property(GLOBAL PROPERTY EP_UPDATE_DISCONNECTED ON)
 endif()
 
+set_property(GLOBAL PROPERTY EP_BASE ${BF_DEPENDS_DIR})
+
 # ------------------------------------------------------------------------------
 # OS
 # ------------------------------------------------------------------------------
