@@ -17,10 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-include(ExternalProject)
-set_property(GLOBAL PROPERTY EP_BASE "${BF_BUILD_DEPENDS_DIR}/${BUILD_TARGET_ARCH}")
-# set_property(GLOBAL PROPERTY EP_PREFIX ${BF_BUILD_DEPENDS_DIR})
-
 include(${BF_DEPENDS_DIR}/python.cmake)
 include(${BF_DEPENDS_DIR}/git.cmake)
 include(${BF_DEPENDS_DIR}/binutils.cmake)
@@ -28,8 +24,8 @@ include(${BF_DEPENDS_DIR}/gsl.cmake)
 include(${BF_DEPENDS_DIR}/json.cmake)
 include(${BF_DEPENDS_DIR}/newlib.cmake)
 include(${BF_DEPENDS_DIR}/llvm.cmake)
-include(${BF_DEPENDS_DIR}/libcxxabi.cmake)
-include(${BF_DEPENDS_DIR}/libcxx.cmake)
+# include(${BF_DEPENDS_DIR}/libcxxabi.cmake)
+# include(${BF_DEPENDS_DIR}/libcxx.cmake)
 
 # TODO move this check to an x86 toolchain file
 # if(is an x86 build)
@@ -45,6 +41,8 @@ if(ENABLE_TIDY)
 endif()
 
 if(ENABLE_UNITTESTING)
+    include(CTest)
+    enable_testing(true)
 	include(${BF_DEPENDS_DIR}/catch.cmake)
 	include(${BF_DEPENDS_DIR}/hippomocks.cmake)
 endif()

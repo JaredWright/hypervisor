@@ -1,5 +1,5 @@
 list(APPEND JSON_CMAKE_ARGS
-    # -DCMAKE_INSTALL_PREFIX=${BF_BUILD_INSTALL_DIR}
+    -DCMAKE_INSTALL_PREFIX=${BF_BUILD_INSTALL_DIR}
     -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN_PATH_JSON}
 )
 
@@ -9,7 +9,7 @@ ExternalProject_Add(
     GIT_TAG             v1.2
     GIT_SHALLOW         1
     CMAKE_ARGS          ${JSON_CMAKE_ARGS}
-	# PREFIX              ${JSON_DIR}
+    # PREFIX              ${BF_BUILD_DEPENDS_DIR}/json
 	# TMP_DIR             ${JSON_DIR}/tmp
 	# STAMP_DIR           ${JSON_DIR}/tmp
 	# SOURCE_DIR          ${JSON_DIR}/src

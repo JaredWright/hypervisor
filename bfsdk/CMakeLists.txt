@@ -22,128 +22,128 @@ project(bfsdk C CXX)
 include(${CMAKE_SOURCE_DIR}/../scripts/cmake/macros.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/CMakeGlobal_Project.txt)
 
-# ------------------------------------------------------------------------------
-# JSON
-# ------------------------------------------------------------------------------
-
-list(APPEND JSON_CMAKE_ARGS
-    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-)
-
-ExternalProject_Add(
-    json
-    GIT_REPOSITORY      https://github.com/Bareflank/json.git
-    GIT_TAG             v1.2
-    GIT_SHALLOW         1
-    CMAKE_ARGS          ${JSON_CMAKE_ARGS}
-    PREFIX              ${CMAKE_BINARY_DIR}/json/prefix
-    TMP_DIR             ${CMAKE_BINARY_DIR}/json/tmp
-    STAMP_DIR           ${CMAKE_BINARY_DIR}/json/stamp
-    DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/json/download
-    SOURCE_DIR          ${CMAKE_BINARY_DIR}/json/src
-    BINARY_DIR          ${CMAKE_BINARY_DIR}/json/build
-)
-
-# ------------------------------------------------------------------------------
-# GSL
-# ------------------------------------------------------------------------------
-
-list(APPEND GSL_CMAKE_ARGS
-    -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-)
-
-ExternalProject_Add(
-    gsl
-    GIT_REPOSITORY      https://github.com/Bareflank/GSL.git
-    GIT_TAG             v1.2
-    GIT_SHALLOW         1
-    CMAKE_ARGS          ${GSL_CMAKE_ARGS}
-    PREFIX              ${CMAKE_BINARY_DIR}/gsl/prefix
-    TMP_DIR             ${CMAKE_BINARY_DIR}/gsl/tmp
-    STAMP_DIR           ${CMAKE_BINARY_DIR}/gsl/stamp
-    DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/gsl/download
-    SOURCE_DIR          ${CMAKE_BINARY_DIR}/gsl/src
-    BINARY_DIR          ${CMAKE_BINARY_DIR}/gsl/build
-)
-
-# ------------------------------------------------------------------------------
-# Catch
-# ------------------------------------------------------------------------------
-
-if(ENABLE_UNITTESTING)
-
-    list(APPEND CATCH_CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-    )
-
-    ExternalProject_Add(
-        catch
-        GIT_REPOSITORY      https://github.com/Bareflank/Catch.git
-        GIT_TAG             v1.2
-        GIT_SHALLOW         1
-        CMAKE_ARGS          ${CATCH_CMAKE_ARGS}
-        PREFIX              ${CMAKE_BINARY_DIR}/catch/prefix
-        TMP_DIR             ${CMAKE_BINARY_DIR}/catch/tmp
-        STAMP_DIR           ${CMAKE_BINARY_DIR}/catch/stamp
-        DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/catch/download
-        SOURCE_DIR          ${CMAKE_BINARY_DIR}/catch/src
-        BINARY_DIR          ${CMAKE_BINARY_DIR}/catch/build
-    )
-
-endif()
-
-# ------------------------------------------------------------------------------
-# Hippomocks
-# ------------------------------------------------------------------------------
-
-if(ENABLE_UNITTESTING)
-
-    list(APPEND HIPPOMOCKS_CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-    )
-
-    ExternalProject_Add(
-        hippomocks
-        GIT_REPOSITORY      https://github.com/Bareflank/hippomocks.git
-        GIT_TAG             v1.2
-        GIT_SHALLOW         1
-        CMAKE_ARGS          ${HIPPOMOCKS_CMAKE_ARGS}
-        PREFIX              ${CMAKE_BINARY_DIR}/hippomocks/prefix
-        TMP_DIR             ${CMAKE_BINARY_DIR}/hippomocks/tmp
-        STAMP_DIR           ${CMAKE_BINARY_DIR}/hippomocks/stamp
-        DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/hippomocks/download
-        SOURCE_DIR          ${CMAKE_BINARY_DIR}/hippomocks/src
-        BINARY_DIR          ${CMAKE_BINARY_DIR}/hippomocks/build
-    )
-
-endif()
-
-# ------------------------------------------------------------------------------
-# Astyle
-# ------------------------------------------------------------------------------
-
-if(ENABLE_ASTYLE)
-
-    list(APPEND ASTYLE_CMAKE_ARGS
-        -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    )
-
-    ExternalProject_Add(
-        astyle
-        GIT_REPOSITORY      https://github.com/Bareflank/astyle.git
-        GIT_TAG             v1.2
-        GIT_SHALLOW         1
-        CMAKE_ARGS          ${ASTYLE_CMAKE_ARGS}
-        PREFIX              ${CMAKE_BINARY_DIR}/astyle/prefix
-        TMP_DIR             ${CMAKE_BINARY_DIR}/astyle/tmp
-        STAMP_DIR           ${CMAKE_BINARY_DIR}/astyle/stamp
-        DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/astyle/download
-        SOURCE_DIR          ${CMAKE_BINARY_DIR}/astyle/src
-        BINARY_DIR          ${CMAKE_BINARY_DIR}/astyle/build
-    )
-
-endif()
+# # ------------------------------------------------------------------------------
+# # JSON
+# # ------------------------------------------------------------------------------
+#
+# list(APPEND JSON_CMAKE_ARGS
+#     -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+# )
+#
+# ExternalProject_Add(
+#     json
+#     GIT_REPOSITORY      https://github.com/Bareflank/json.git
+#     GIT_TAG             v1.2
+#     GIT_SHALLOW         1
+#     CMAKE_ARGS          ${JSON_CMAKE_ARGS}
+#     PREFIX              ${CMAKE_BINARY_DIR}/json/prefix
+#     TMP_DIR             ${CMAKE_BINARY_DIR}/json/tmp
+#     STAMP_DIR           ${CMAKE_BINARY_DIR}/json/stamp
+#     DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/json/download
+#     SOURCE_DIR          ${CMAKE_BINARY_DIR}/json/src
+#     BINARY_DIR          ${CMAKE_BINARY_DIR}/json/build
+# )
+#
+# # ------------------------------------------------------------------------------
+# # GSL
+# # ------------------------------------------------------------------------------
+#
+# list(APPEND GSL_CMAKE_ARGS
+#     -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+# )
+#
+# ExternalProject_Add(
+#     gsl
+#     GIT_REPOSITORY      https://github.com/Bareflank/GSL.git
+#     GIT_TAG             v1.2
+#     GIT_SHALLOW         1
+#     CMAKE_ARGS          ${GSL_CMAKE_ARGS}
+#     PREFIX              ${CMAKE_BINARY_DIR}/gsl/prefix
+#     TMP_DIR             ${CMAKE_BINARY_DIR}/gsl/tmp
+#     STAMP_DIR           ${CMAKE_BINARY_DIR}/gsl/stamp
+#     DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/gsl/download
+#     SOURCE_DIR          ${CMAKE_BINARY_DIR}/gsl/src
+#     BINARY_DIR          ${CMAKE_BINARY_DIR}/gsl/build
+# )
+#
+# # ------------------------------------------------------------------------------
+# # Catch
+# # ------------------------------------------------------------------------------
+#
+# if(ENABLE_UNITTESTING)
+#
+#     list(APPEND CATCH_CMAKE_ARGS
+#         -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+#     )
+#
+#     ExternalProject_Add(
+#         catch
+#         GIT_REPOSITORY      https://github.com/Bareflank/Catch.git
+#         GIT_TAG             v1.2
+#         GIT_SHALLOW         1
+#         CMAKE_ARGS          ${CATCH_CMAKE_ARGS}
+#         PREFIX              ${CMAKE_BINARY_DIR}/catch/prefix
+#         TMP_DIR             ${CMAKE_BINARY_DIR}/catch/tmp
+#         STAMP_DIR           ${CMAKE_BINARY_DIR}/catch/stamp
+#         DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/catch/download
+#         SOURCE_DIR          ${CMAKE_BINARY_DIR}/catch/src
+#         BINARY_DIR          ${CMAKE_BINARY_DIR}/catch/build
+#     )
+#
+# endif()
+#
+# # ------------------------------------------------------------------------------
+# # Hippomocks
+# # ------------------------------------------------------------------------------
+#
+# if(ENABLE_UNITTESTING)
+#
+#     list(APPEND HIPPOMOCKS_CMAKE_ARGS
+#         -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+#     )
+#
+#     ExternalProject_Add(
+#         hippomocks
+#         GIT_REPOSITORY      https://github.com/Bareflank/hippomocks.git
+#         GIT_TAG             v1.2
+#         GIT_SHALLOW         1
+#         CMAKE_ARGS          ${HIPPOMOCKS_CMAKE_ARGS}
+#         PREFIX              ${CMAKE_BINARY_DIR}/hippomocks/prefix
+#         TMP_DIR             ${CMAKE_BINARY_DIR}/hippomocks/tmp
+#         STAMP_DIR           ${CMAKE_BINARY_DIR}/hippomocks/stamp
+#         DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/hippomocks/download
+#         SOURCE_DIR          ${CMAKE_BINARY_DIR}/hippomocks/src
+#         BINARY_DIR          ${CMAKE_BINARY_DIR}/hippomocks/build
+#     )
+#
+# endif()
+#
+# # ------------------------------------------------------------------------------
+# # Astyle
+# # ------------------------------------------------------------------------------
+#
+# if(ENABLE_ASTYLE)
+#
+#     list(APPEND ASTYLE_CMAKE_ARGS
+#         -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
+#         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+#     )
+#
+#     ExternalProject_Add(
+#         astyle
+#         GIT_REPOSITORY      https://github.com/Bareflank/astyle.git
+#         GIT_TAG             v1.2
+#         GIT_SHALLOW         1
+#         CMAKE_ARGS          ${ASTYLE_CMAKE_ARGS}
+#         PREFIX              ${CMAKE_BINARY_DIR}/astyle/prefix
+#         TMP_DIR             ${CMAKE_BINARY_DIR}/astyle/tmp
+#         STAMP_DIR           ${CMAKE_BINARY_DIR}/astyle/stamp
+#         DOWNLOAD_DIR        ${CMAKE_BINARY_DIR}/astyle/download
+#         SOURCE_DIR          ${CMAKE_BINARY_DIR}/astyle/src
+#         BINARY_DIR          ${CMAKE_BINARY_DIR}/astyle/build
+#     )
+#
+# endif()
 
 # ------------------------------------------------------------------------------
 # Subdirectories

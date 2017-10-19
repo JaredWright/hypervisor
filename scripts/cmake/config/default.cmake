@@ -184,6 +184,16 @@ set(TOOLCHAIN_PATH_BFSYSROOT ${BF_DEFAULT_VMM_TOOLCHAIN_FILE}
     "Path to a cmake toolchain file for building bfsysroot"
 )
 
+set(TOOLCHAIN_PATH_BFSUPPORT ${BF_DEFAULT_VMM_TOOLCHAIN_FILE}
+    CACHE PATH
+    "Path to a cmake toolchain file for building bfsupport"
+)
+
+set(TOOLCHAIN_PATH_BFUNWIND ${BF_DEFAULT_VMM_TOOLCHAIN_FILE}
+    CACHE PATH
+    "Path to a cmake toolchain file for building bfunwind"
+)
+
 set(TOOLCHAIN_PATH_BFVMM ${BF_DEFAULT_VMM_TOOLCHAIN_FILE}
     CACHE PATH
     "Path to a cmake toolchain file for building bfvmm"

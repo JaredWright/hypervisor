@@ -1,4 +1,9 @@
-set(NEWLIB_DIR ${BF_BUILD_DEPENDS_DIR}/newlib)
+include(${TOOLCHAIN_PATH_NEWLIB})
+MESSAGE(STATUS "********** Newlib Toolchain: " ${TOOLCHAIN_PATH_NEWLIB})
+MESSAGE(STATUS "********** Newlib CC: " ${CMAKE_C_COMPILER})
+
+set(NEWLIB_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib)
+set(NEWLIB_INTERM_INSTALL_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib-install)
 
 set(NEWLIB_CFLAGS
 	"-DNOSTDINC_C"
@@ -17,8 +22,8 @@ endif()
 #     set(NEWLIB_CC "aarch64-linux-gnu-gcc")
 #     set(NEWLIB_TARGET "aarch64-none-elf")
 # else()
-#     set(NEWLIB_CC ${CMAKE_C_COMPILER})
-#     set(NEWLIB_TARGET "x86_64-none-elf")
+    set(NEWLIB_CC ${CMAKE_C_COMPILER})
+    set(NEWLIB_TARGET "x86_64-none-elf")
 # endif()
 
 list(APPEND NEWLIB_ARGS
@@ -27,7 +32,7 @@ list(APPEND NEWLIB_ARGS
 	"--disable-newlib-supplied-syscalls"
 	"--enable-newlib-multithread"
 	"--enable-newlib-iconv"
-	"--prefix=${BF_BUILD_INSTALL_DIR}"
+	"--prefix=${NEWLIB_INTERM_INSTALL_DIR}"
 	"--target=${NEWLIB_TARGET}"
 	"CC_FOR_TARGET=${NEWLIB_CC}"
 	"AS_FOR_TARGET=${CMAKE_ASM_COMPILER}"
@@ -40,23 +45,23 @@ ExternalProject_Add(
 	GIT_REPOSITORY      https://github.com/Bareflank/newlib.git
 	GIT_TAG             v1.2
 	GIT_SHALLOW         1
-	# PREFIX              ${NEWLIB_DIR}
+    # PREFIX              ${BF_BUILD_DEPENDS_DIR}/newlib
 	# TMP_DIR             ${NEWLIB_DIR}/tmp
 	# STAMP_DIR           ${NEWLIB_DIR}/tmp
 	# SOURCE_DIR          ${NEWLIB_DIR}/src
 	# BINARY_DIR          ${NEWLIB_DIR}/build
 	# INSTALL_DIR         ${NEWLIB_DIR}/install
-	CONFIGURE_COMMAND   ${NEWLIB_DIR}/src/configure "${NEWLIB_ARGS}" CFLAGS_FOR_TARGET=${NEWLIB_CFLAGS}
+	CONFIGURE_COMMAND   ${NEWLIB_DIR}/configure "${NEWLIB_ARGS}" CFLAGS_FOR_TARGET=${NEWLIB_CFLAGS}
 	BUILD_COMMAND       make
 	INSTALL_COMMAND		make install
 	)
 
-# ExternalProject_Add_Step(
-#     newlib
-#     sysroot_install
-#     COMMAND 			${CMAKE_COMMAND} -E copy_directory ${NEWLIB_DIR}/aarch64-none-elf/ ${BF_DEPENDS_BUILD_DIR}/aarch64-none-eabi/
-#     DEPENDEES          	install
-#     )
+ExternalProject_Add_Step(
+    newlib
+    sysroot_install
+    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/ ${BF_BUILD_INSTALL_DIR}
+    DEPENDEES          	install
+)
 
 # if(BUILD_SHARED_LIBS)
 #     ExternalProject_Add_Step(

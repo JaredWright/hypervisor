@@ -1,5 +1,5 @@
 list(APPEND GSL_CMAKE_ARGS
-    # -DCMAKE_INSTALL_PREFIX=${BF_BUILD_INSTALL_DIR}
+    -DCMAKE_INSTALL_PREFIX=${BF_BUILD_INSTALL_DIR}
     -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN_PATH_GSL}
 )
 
@@ -9,7 +9,7 @@ ExternalProject_Add(
     GIT_TAG             v1.2
     GIT_SHALLOW         1
     CMAKE_ARGS          ${GSL_CMAKE_ARGS}
-	# PREFIX              ${GSL_DIR}
+    # PREFIX              ${BF_BUILD_DEPENDS_DIR}/gsl
 	# TMP_DIR             ${GSL_DIR}/tmp
 	# STAMP_DIR           ${GSL_DIR}/tmp
 	# SOURCE_DIR          ${GSL_DIR}/src
