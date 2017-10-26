@@ -16,18 +16,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
-# ------------------------------------------------------------------------------
-# Definitions
-# ------------------------------------------------------------------------------
-
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DEXIT_HANDLER_TEST")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEXIT_HANDLER_TEST")
-
-# ------------------------------------------------------------------------------
-# Targets
-# ------------------------------------------------------------------------------
 
 macro(do_test str)
     add_executable(test_${str} test_${str}.cpp)

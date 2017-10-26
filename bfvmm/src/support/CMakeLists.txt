@@ -16,8 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
 # ------------------------------------------------------------------------------
 # Targets
 # ------------------------------------------------------------------------------
@@ -34,4 +32,4 @@ if(BUILD_STATIC_LIBS)
     add_library(bfvmm_support STATIC ${SOURCES})
 endif()
 
-install(TARGETS bfvmm_support DESTINATION ${INSTALL_LIB_DIR})
+install(TARGETS bfvmm_support DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)

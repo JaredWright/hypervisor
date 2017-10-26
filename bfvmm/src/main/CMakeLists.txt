@@ -16,17 +16,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
-# ------------------------------------------------------------------------------
-# Custom Flags
-# ------------------------------------------------------------------------------
-
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pie")
-
-# ------------------------------------------------------------------------------
-# Targets
-# ------------------------------------------------------------------------------
 
 if(NOT EXISTS ${CMAKE_BINARY_DIR}/null.cpp)
     file(WRITE
@@ -50,9 +40,9 @@ if(BUILD_SHARED_LIBS)
     target_link_libraries(bfvmm bfvmm_vmcs)
     target_link_libraries(bfvmm bfvmm_vmxon)
     target_link_libraries(bfvmm bfvmm_memory_manager)
-    if(CMAKE_TOOLCHAIN_FILE)
+    # if(CMAKE_TOOLCHAIN_FILE)
         target_link_libraries(bfvmm bfvmm_support)
-    endif()
+    # endif()
     target_link_libraries(bfvmm bfvmm_serial)
     target_link_libraries(bfvmm bfvmm_debug_ring)
     target_link_libraries(bfvmm bfvmm_intrinsics)
@@ -67,9 +57,9 @@ if(BUILD_STATIC_LIBS)
     target_link_libraries(bfvmm bfvmm_vmcs)
     target_link_libraries(bfvmm bfvmm_vmxon)
     target_link_libraries(bfvmm -Wl,--whole-archive bfvmm_memory_manager  -Wl,--no-whole-archive)
-    if(CMAKE_TOOLCHAIN_FILE)
+    # if(CMAKE_TOOLCHAIN_FILE)
         target_link_libraries(bfvmm bfvmm_support)
-    endif()
+    # endif()
     target_link_libraries(bfvmm bfvmm_serial)
     target_link_libraries(bfvmm bfvmm_debug_ring)
     target_link_libraries(bfvmm bfvmm_intrinsics)
@@ -79,5 +69,5 @@ endif()
 # Install
 # ------------------------------------------------------------------------------
 
-install(TARGETS bfvmm DESTINATION ${INSTALL_BIN_DIR})
-install(TARGETS bfvmm_main DESTINATION ${INSTALL_LIB_DIR})
+install(TARGETS bfvmm DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfvmm_main DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)

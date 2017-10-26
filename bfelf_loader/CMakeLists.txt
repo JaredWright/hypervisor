@@ -19,8 +19,12 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfelf_loader C CXX)
 
+if(ENABLE_UNITTESTING)
+    include(CTest)
+    enable_testing(true)
+endif()
+
 set(TIDY_EXCLUSIONS ,-cppcoreguidelines-pro-type-const-cast)
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Project.txt)
 
 # ------------------------------------------------------------------------------
 # Subdirectories
@@ -34,4 +38,4 @@ endif()
 # Install
 # ------------------------------------------------------------------------------
 
-install(FILES include/bfelf_loader.h DESTINATION include)
+install(FILES include/bfelf_loader.h DESTINATION ${BF_BUILD_INSTALL_DIR}/include)

@@ -16,12 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
-# ------------------------------------------------------------------------------
-# Targets
-# ------------------------------------------------------------------------------
-
 list(APPEND SOURCES
     vcpu.cpp
     vcpu_intel_x64.cpp
@@ -47,4 +41,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_vcpu PUBLIC STATIC_INTRINSICS)
 endif()
 
-install(TARGETS bfvmm_vcpu DESTINATION ${INSTALL_LIB_DIR})
+install(TARGETS bfvmm_vcpu DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)

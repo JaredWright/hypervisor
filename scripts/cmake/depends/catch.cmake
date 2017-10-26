@@ -1,7 +1,9 @@
+set(CATCH_INTERM_INSTALL_DIR ${BF_BUILD_DEPENDS_DIR}/src/catch-install)
+
 list(APPEND CATCH_CMAKE_ARGS
-    -DCMAKE_INSTALL_PREFIX=${BF_BUILD_INSTALL_DIR}
+    -DCMAKE_INSTALL_PREFIX=${CATCH_INTERM_INSTALL_DIR}
     -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN_PATH_CATCH}
-	)
+)
 
 ExternalProject_Add(
 	catch
@@ -9,13 +11,8 @@ ExternalProject_Add(
 	GIT_TAG             v1.2
 	GIT_SHALLOW         1
 	CMAKE_ARGS          ${CATCH_CMAKE_ARGS}
-    # PREFIX              ${BF_BUILD_DEPENDS_DIR}/catch
-	# TMP_DIR             ${CATCH_DIR}/tmp
-	# STAMP_DIR           ${CATCH_DIR}/tmp
-	# SOURCE_DIR          ${CATCH_DIR}/src
-	# BINARY_DIR          ${CATCH_DIR}/build
-	# INSTALL_DIR         ${CATCH_DIR}/install
-	)
+    DEPENDS             bfsdk binutils
+)
 
 # TODO: Install to the appropirate sysroot in the build tree
 # ExternalProject_Add_Step(

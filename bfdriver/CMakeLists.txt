@@ -19,7 +19,10 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfdrivers C CXX)
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Project.txt)
+if(ENABLE_UNITTESTING)
+    include(CTest)
+    enable_testing(true)
+endif()
 
 # ------------------------------------------------------------------------------
 # Subdirectories

@@ -16,8 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
 # ------------------------------------------------------------------------------
 # Targets
 # ------------------------------------------------------------------------------
@@ -28,15 +26,15 @@ list(APPEND SOURCES
     vmcs_intel_x64_vmm_state.cpp
 )
 
-if(CMAKE_TOOLCHAIN_FILE)
+# if(CMAKE_TOOLCHAIN_FILE)
     list(APPEND SOURCES vmcs_intel_x64_launch.asm)
     list(APPEND SOURCES vmcs_intel_x64_promote.asm)
     list(APPEND SOURCES vmcs_intel_x64_resume.asm)
-else()
-    list(APPEND SOURCES vmcs_intel_x64_launch_mock.cpp)
-    list(APPEND SOURCES vmcs_intel_x64_promote_mock.cpp)
-    list(APPEND SOURCES vmcs_intel_x64_resume_mock.cpp)
-endif()
+# else()
+#     list(APPEND SOURCES vmcs_intel_x64_launch_mock.cpp)
+#     list(APPEND SOURCES vmcs_intel_x64_promote_mock.cpp)
+#     list(APPEND SOURCES vmcs_intel_x64_resume_mock.cpp)
+# endif()
 
 if(BUILD_SHARED_LIBS)
     add_library(bfvmm_vmcs SHARED ${SOURCES})
@@ -52,4 +50,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_vmcs PUBLIC STATIC_INTRINSICS)
 endif()
 
-install(TARGETS bfvmm_vmcs DESTINATION ${INSTALL_LIB_DIR})
+install(TARGETS bfvmm_vmcs DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)

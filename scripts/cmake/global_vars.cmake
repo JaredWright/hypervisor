@@ -86,22 +86,3 @@ set(BF_BUILD_INSTALL_DIR ${BF_BUILD_DIR}/bfprefix
     CACHE INTERNAL
     "Intermediate build installation directory"
 )
-
-# ------------------------------------------------------------------------------
-# Default toolchains
-# ------------------------------------------------------------------------------
-
-set(BF_DEFAULT_TOOLCHAIN_FILE "${BF_TOOLCHAIN_DIR}/default.cmake"
-    CACHE INTERNAL
-    "Path to the default cmake toolchain file for building userspace tools"
-)
-
-set(BF_DEFAULT_KERNEL_TOOLCHAIN_FILE "${BF_TOOLCHAIN_DIR}/default_kernel.cmake"
-    CACHE INTERNAL
-    "Path to the default cmake toolchain file for building kernel/driver tools"
-)
-
-set(BF_DEFAULT_VMM_TOOLCHAIN_FILE "${BF_TOOLCHAIN_DIR}/default_vmm.cmake"
-    CACHE INTERNAL
-    "Path to the default cmake toolchain file for building vmm tools"
-)

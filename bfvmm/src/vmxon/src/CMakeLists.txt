@@ -16,12 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
-# ------------------------------------------------------------------------------
-# Targets
-# ------------------------------------------------------------------------------
-
 list(APPEND SOURCES
     vmxon_intel_x64.cpp
 )
@@ -40,4 +34,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_vmxon PUBLIC STATIC_INTRINSICS)
 endif()
 
-install(TARGETS bfvmm_vmxon DESTINATION ${INSTALL_LIB_DIR})
+install(TARGETS bfvmm_vmxon DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)

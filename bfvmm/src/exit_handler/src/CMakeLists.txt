@@ -16,22 +16,16 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
-# ------------------------------------------------------------------------------
-# Targets
-# ------------------------------------------------------------------------------
-
 list(APPEND SOURCES
     exit_handler_intel_x64.cpp
     exit_handler_intel_x64_entry.cpp
 )
 
-if(CMAKE_TOOLCHAIN_FILE)
+# if(CMAKE_TOOLCHAIN_FILE)
     list(APPEND SOURCES exit_handler_intel_x64_support.asm)
-else()
-    list(APPEND SOURCES exit_handler_intel_x64_support_mock.cpp)
-endif()
+# else()
+#     list(APPEND SOURCES exit_handler_intel_x64_support_mock.cpp)
+# endif()
 
 if(BUILD_SHARED_LIBS)
     add_library(bfvmm_exit_handler SHARED ${SOURCES})
@@ -46,4 +40,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_exit_handler PUBLIC STATIC_INTRINSICS)
 endif()
 
-install(TARGETS bfvmm_exit_handler DESTINATION ${INSTALL_LIB_DIR})
+install(TARGETS bfvmm_exit_handler DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)

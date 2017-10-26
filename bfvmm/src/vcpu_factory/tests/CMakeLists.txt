@@ -16,12 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
-# ------------------------------------------------------------------------------
-# Targets
-# ------------------------------------------------------------------------------
-
 macro(do_test str)
     add_executable(test_${str} test_${str}.cpp)
     target_compile_definitions(test_${str} PRIVATE STATIC_VCPU)

@@ -18,6 +18,6 @@
 
 add_subdirectory(src)
 
-if(ENABLE_UNITTESTING AND NOT CMAKE_TOOLCHAIN_FILE)
+if(ENABLE_UNITTESTING)
     add_subdirectory(tests)
 endif()

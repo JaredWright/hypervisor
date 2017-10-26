@@ -1,7 +1,3 @@
-include(${TOOLCHAIN_PATH_NEWLIB})
-MESSAGE(STATUS "********** Newlib Toolchain: " ${TOOLCHAIN_PATH_NEWLIB})
-MESSAGE(STATUS "********** Newlib CC: " ${CMAKE_C_COMPILER})
-
 set(NEWLIB_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib)
 set(NEWLIB_INTERM_INSTALL_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib-install)
 
@@ -15,16 +11,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
 	)
 endif()
 
-# Temporary hacks until the build system has a good way to specify
-# different toolchains to use for different dependencies
-# If you specify 
-# if(${CMAKE_C_COMPILER_TARGET} STREQUAL "arm64-none-eabi")
-#     set(NEWLIB_CC "aarch64-linux-gnu-gcc")
-#     set(NEWLIB_TARGET "aarch64-none-elf")
-# else()
-    set(NEWLIB_CC ${CMAKE_C_COMPILER})
-    set(NEWLIB_TARGET "x86_64-none-elf")
-# endif()
+set(NEWLIB_TARGET "${BUILD_TARGET_ARCH}-vmm-elf")
 
 list(APPEND NEWLIB_ARGS
 	"--disable-libgloss"
@@ -34,10 +21,10 @@ list(APPEND NEWLIB_ARGS
 	"--enable-newlib-iconv"
 	"--prefix=${NEWLIB_INTERM_INSTALL_DIR}"
 	"--target=${NEWLIB_TARGET}"
-	"CC_FOR_TARGET=${NEWLIB_CC}"
-	"AS_FOR_TARGET=${CMAKE_ASM_COMPILER}"
-	"AR_FOR_TARGET=${CMAKE_AR}"
-	"RANLIB_FOR_TARGET=${CMAKE_RANLIB}"
+    "CC_FOR_TARGET=${TOOLCHAIN_NEWLIB_CC}"
+    "AS_FOR_TARGET=${TOOLCHAIN_NEWLIB_AS}"
+	"AR_FOR_TARGET=${TOOLCHAIN_NEWLIB_AR}"
+    "RANLIB_FOR_TARGET=${TOOLCHAIN_NEWLIB_RANLIB}"
 )
 
 ExternalProject_Add(
@@ -45,16 +32,11 @@ ExternalProject_Add(
 	GIT_REPOSITORY      https://github.com/Bareflank/newlib.git
 	GIT_TAG             v1.2
 	GIT_SHALLOW         1
-    # PREFIX              ${BF_BUILD_DEPENDS_DIR}/newlib
-	# TMP_DIR             ${NEWLIB_DIR}/tmp
-	# STAMP_DIR           ${NEWLIB_DIR}/tmp
-	# SOURCE_DIR          ${NEWLIB_DIR}/src
-	# BINARY_DIR          ${NEWLIB_DIR}/build
-	# INSTALL_DIR         ${NEWLIB_DIR}/install
 	CONFIGURE_COMMAND   ${NEWLIB_DIR}/configure "${NEWLIB_ARGS}" CFLAGS_FOR_TARGET=${NEWLIB_CFLAGS}
 	BUILD_COMMAND       make
 	INSTALL_COMMAND		make install
-	)
+    DEPENDS             bfsdk binutils
+)
 
 ExternalProject_Add_Step(
     newlib

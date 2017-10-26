@@ -10,6 +10,9 @@ macro(install_symlink filepath sympath)
 endmacro(install_symlink)
 
 # Convenience wrapper around cmake's built-in find_program()
+# @arg path: Will hold the path to the program given by "name" on success
+# @arg name: The program to be searched for.
+# If the program given by "name" is not found, cmake exits with an error
 macro(check_program_installed path name)
     find_program(${path} ${name})
     if(${path} MATCHES "-NOTFOUND$")
@@ -17,8 +20,12 @@ macro(check_program_installed path name)
     endif()
 endmacro(check_program_installed)
 
-# Add a subdirectory to be built with a new toolchain
-macro(cross_compile_project path target toolchain depends)
+# Add a project directory to be built with a new toolchain
+# @arg path: Path to a directory to be built with cmake
+# @arg target: The name of the cmake target to be created for this project
+# @arg toolchain: Path to a cmake toolchain file to use for compiling "project"
+# @arg depends: A list of other targets this project depends on
+macro(add_subproject path target toolchain depends)
     if(NOT EXISTS ${path})
         message(FATAL_ERROR "Unable to find project at path ${path}")
     endif()
@@ -39,12 +46,15 @@ macro(cross_compile_project path target toolchain depends)
         endif()
     endforeach()
 
+    string(REPLACE " " ";" depends_list ${depends})
     ExternalProject_Add(
         ${target}
-        CMAKE_ARGS      ${_PROJECT_CMAKE_ARGS}
-        SOURCE_DIR      ${path}
+        CMAKE_ARGS ${_PROJECT_CMAKE_ARGS}
+        SOURCE_DIR ${path}
+        PREFIX ${BF_BUILD_DIR}/${target}
         UPDATE_DISCONNECTED 0
-        UPDATE_COMMAND      ""
-        DEPENDS         ${depends}
+        UPDATE_COMMAND ""
+        DEPENDS ${depends_list}
     )
-endmacro(cross_compile_project)
+endmacro(add_subproject)
+
