@@ -89,22 +89,10 @@ do
 done
 
 # ------------------------------------------------------------------------------
-# Newlib Defines
-# ------------------------------------------------------------------------------
-
-NEWLIB_DEFINES=""
-NEWLIB_DEFINES="$NEWLIB_DEFINES -D_HAVE_LONG_DOUBLE"
-NEWLIB_DEFINES="$NEWLIB_DEFINES -D_LDBL_EQ_DBL"
-NEWLIB_DEFINES="$NEWLIB_DEFINES -D_POSIX_TIMERS"
-NEWLIB_DEFINES="$NEWLIB_DEFINES -D_POSIX_PRIORITY_SCHEDULING"
-NEWLIB_DEFINES="$NEWLIB_DEFINES -U__STRICT_ANSI__"
-NEWLIB_DEFINES="$NEWLIB_DEFINES -DCLOCK_MONOTONIC"
-
-# ------------------------------------------------------------------------------
 # System Root
 # ------------------------------------------------------------------------------
 
-SYSROOT="$BIN_LOCATION/../sysroots/x86_64-$SYSROOT_NAME-elf"
+SYSROOT="$BIN_LOCATION/.."
 
 # ------------------------------------------------------------------------------
 # System Root Includes
@@ -129,20 +117,22 @@ fi
 # ------------------------------------------------------------------------------
 
 SYSROOT_LIB_PATH="-L$SYSROOT/lib"
+# SYSROOT_LIB_PATH="${SYSROOT_LIB_PATH} -lc++ -lc++abi -lpthread -lbfunwind"
+# SYSROOT_LIB_PATH="${SYSROOT_LIB_PATH} --whole-archive -lbfcrt --no-whole-archive -lc -lbfsyscall -lc"
 
-if [[ -z $DISABLE_LIB_C ]] && [[ ! $SHARED_LIBRARY == "true" ]]; then
-    if ls "$SYSROOT/lib/libc"* 1> /dev/null 2>&1 &&
-       ls "$SYSROOT/lib/libbfsyscall"* 1> /dev/null 2>&1 &&
-       ls "$SYSROOT/lib/libbfcrt"* 1> /dev/null 2>&1 ; then
-        if [[ -z $DISABLE_LIB_CXX ]] && [[ $CXX_COMPILER == "true" ]]; then
-            if ls "$SYSROOT/lib/libc++"* 1> /dev/null 2>&1; then
-                SYSROOT_LIB_PATH="${SYSROOT_LIB_PATH} -lc++ -lc++abi -lpthread -lbfunwind"
-            fi
-        fi
-
-        SYSROOT_LIB_PATH="${SYSROOT_LIB_PATH} --whole-archive -lbfcrt --no-whole-archive -lc -lbfsyscall -lc"
-    fi
-fi
+# if [[ -z $DISABLE_LIB_C ]] && [[ ! $SHARED_LIBRARY == "true" ]]; then
+#     if ls "$SYSROOT/lib/libc"* 1> /dev/null 2>&1 &&
+#        ls "$SYSROOT/lib/libbfsyscall"* 1> /dev/null 2>&1 &&
+#        ls "$SYSROOT/lib/libbfcrt"* 1> /dev/null 2>&1 ; then
+#         if [[ -z $DISABLE_LIB_CXX ]] && [[ $CXX_COMPILER == "true" ]]; then
+#             if ls "$SYSROOT/lib/libc++"* 1> /dev/null 2>&1; then
+#                 SYSROOT_LIB_PATH="${SYSROOT_LIB_PATH} -lc++ -lc++abi -lpthread -lbfunwind"
+#             fi
+#         fi
+#
+#         SYSROOT_LIB_PATH="${SYSROOT_LIB_PATH} --whole-archive -lbfcrt --no-whole-archive -lc -lbfsyscall -lc"
+#     fi
+# fi
 
 # ------------------------------------------------------------------------------
 # Filter Arguments
@@ -393,7 +383,7 @@ if [[ -n "$SOURCE_ARGS" ]]; then
         done
     fi
 
-    $COMPILER -U__USER_LABEL_PREFIX__ -D__USER_LABEL_PREFIX__="" -D__ELF__ --target=x86_64-elf -Qunused-arguments $NEWLIB_DEFINES --sysroot=$SYSROOT $SYSROOT_INC_PATH ${COMPILE_ARGS[*]} $REQUIRED_COMPILER_ARGS ${SOURCE_ARGS[*]}
+    $COMPILER -U__USER_LABEL_PREFIX__ -D__USER_LABEL_PREFIX__="" -D__ELF__ --target=x86_64-elf -Qunused-arguments --sysroot=$SYSROOT $SYSROOT_INC_PATH ${COMPILE_ARGS[*]} $REQUIRED_COMPILER_ARGS ${SOURCE_ARGS[*]}
 
 else
 

@@ -77,6 +77,11 @@ set(ENABLE_UNITTESTING OFF
     "Enable unit testing"
 )
 
+set(ENABLE_COMPILER_WARNINGS OFF
+    CACHE BOOL
+    "Enable compiler warnings"
+)
+
 set(ENABLE_ASAN OFF
     CACHE BOOL
     "Enable clang AddressSanitizer"
@@ -256,3 +261,27 @@ set(TOOLCHAIN_NEWLIB_RANLIB ${BF_BUILD_INSTALL_DIR}/bin/${BUILD_TARGET_ARCH}-vmm
     "Path to binutils ranlib for building newlib"
 )
 mark_as_advanced(TOOLCHAIN_NEWLIB_RANLIB)
+
+# ------------------------------------------------------------------------------
+# Compiler Flags
+# ------------------------------------------------------------------------------
+include(${BF_FLAGS_DIR}/flags.cmake)
+set(C_FLAGS_VMM "${DEFAULT_C_FLAGS_VMM}"
+    CACHE STRING
+    "C compiler flags for VMM components"
+)
+
+set(CXX_FLAGS_VMM "${DEFAULT_CXX_FLAGS_VMM}"
+    CACHE STRING
+    "C++ compiler flags for VMM components"
+)
+
+set(C_FLAGS_WARNING "${DEFAULT_C_FLAGS_WARNING}"
+    CACHE STRING
+    "C compiler flags to be used when compiler warnings are enabled"
+)
+
+set(CXX_FLAGS_WARNING "${DEFAULT_CXX_FLAGS_WARNING}"
+    CACHE STRING
+    "C++ compiler flags to be used when compiler warnings are enabled"
+)

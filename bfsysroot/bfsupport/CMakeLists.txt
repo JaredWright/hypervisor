@@ -19,6 +19,9 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfsupport C CXX)
 
+set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
+enable_language(ASM_NASM)
+
 if(ENABLE_UNITTESTING)
     include(CTest)
     enable_testing(true)
@@ -38,8 +41,8 @@ list(APPEND BFSUPPORT_LINK_DIRS
 )
 link_directories(${BFSUPPORT_LINK_DIRS})
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DNOSTDLIB_C" CACHE INTERNAL "")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOSTDLIB_C -DNOSTDLIB_CXX" CACHE INTERNAL "")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_FLAGS_VMM}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS_VMM} -fno-stack-protector")
 
 add_subdirectory(crt)
 add_subdirectory(syscall)

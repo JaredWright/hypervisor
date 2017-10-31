@@ -22,3 +22,6 @@ if(ENABLE_ASAN)
 elseif(ENABLE_USAN)
     include(${BF_FLAGS_DIR}/usan_flags.cmake)
 endif()
+
+include(${BF_FLAGS_DIR}/vmm_flags.cmake)
+include(${BF_FLAGS_DIR}/warning_flags.cmake)

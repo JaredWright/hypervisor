@@ -26,16 +26,8 @@ endif()
 
 set(TIDY_EXCLUSIONS ,-cppcoreguidelines-pro-type-const-cast)
 
-# ------------------------------------------------------------------------------
-# Subdirectories
-# ------------------------------------------------------------------------------
-
 if(NOT WIN32 AND ENABLE_UNITTESTING AND BUILD_SHARED_LIBS)
     add_subdirectory(tests)
 endif()
-
-# ------------------------------------------------------------------------------
-# Install
-# ------------------------------------------------------------------------------
 
 install(FILES include/bfelf_loader.h DESTINATION ${BF_BUILD_INSTALL_DIR}/include)

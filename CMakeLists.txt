@@ -25,7 +25,6 @@ project(hypervisor)
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/global_vars.cmake)
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/macros.cmake)
 include(${BF_CONFIG_DIR}/default.cmake)
-include(${BF_FLAGS_DIR}/flags.cmake)
 
 include(ExternalProject)
 set_property(GLOBAL PROPERTY EP_PREFIX ${BF_BUILD_DEPENDS_DIR})
@@ -133,7 +132,7 @@ add_subproject(
     ${BF_SOURCE_DIR}/bfsysroot/bfsupport
     bfsupport
     ${TOOLCHAIN_PATH_BFSUPPORT}
-    "bfsdk binutils newlib libcxxabi libcxx gsl"
+    "bfsdk binutils newlib gsl"
 )
 
 add_subproject(
@@ -163,7 +162,7 @@ add_subproject(
 #     ${TOOLCHAIN_PATH_BFM}
 #     "bfsdk"
 # )
-#
+
 # add_subproject(
 #     ${BF_SOURCE_DIR}/extended_apis
 #     extended_apis

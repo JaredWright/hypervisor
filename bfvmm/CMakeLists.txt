@@ -19,10 +19,16 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfvmm C CXX)
 
+set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
+enable_language(ASM_NASM)
+
 if(ENABLE_UNITTESTING)
     include(CTest)
     enable_testing(true)
 endif()
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_FLAGS_VMM} -fvisibility=hidden")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS_VMM} -fvisibility-inlines-hidden -fvisibility=hidden")
 
 list(APPEND BFSUPPORT_INCLUDE_DIRS
     "${CMAKE_CURRENT_LIST_DIR}/include"
@@ -37,10 +43,8 @@ list(APPEND BFSUPPORT_LINK_DIRS
 link_directories(${BFSUPPORT_LINK_DIRS})
 
 # if(NOT CMAKE_TOOLCHAIN_FILE)
-#     if(NOT CMAKE_TOOLCHAIN_FILE)
-#         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DDEBUG_LEVEL=1")
-#         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DDEBUG_LEVEL=1")
-#     endif()
+#     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DDEBUG_LEVEL=1")
+#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DDEBUG_LEVEL=1")
 # endif()
 
 add_subdirectory(src)

@@ -19,24 +19,22 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfunwind C CXX)
 
+set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
+enable_language(ASM_NASM)
+
 if(ENABLE_UNITTESTING)
     include(CTest)
     enable_testing(true)
 endif()
 
-include(${BF_SCRIPTS_DIR}/cmake/macros.cmake)
-
 set(TIDY_EXCLUSIONS ,-cppcoreguidelines-pro*)
-# include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
+
 include_directories(${BF_BUILD_INSTALL_DIR}/include)
 include_directories(${BF_SOURCE_DIR}/bfsdk/include)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
-# include_directories(SYSTEM ${BF_BUILD_INSTALL_DIR}/include)
 
-# if(CMAKE_TOOLCHAIN_FILE)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DNOSTDLIB_C")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNOSTDLIB_C -DNOSTDINC_CXX")
-# endif()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_FLAGS_VMM}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS_VMM}")
 
 add_subdirectory(src)
 
