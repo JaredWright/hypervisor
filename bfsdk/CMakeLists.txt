@@ -27,42 +27,8 @@ if(ENABLE_UNITTESTING)
     add_subdirectory(tests)
 endif()
 
-list(APPEND SDK_HEADER_FILES
-    include/bfaffinity.h
-    include/bfbenchmark.h   
-    include/bfbitmanip.h
-    include/bfbuffer.h
-    include/bfconstants.h
-    include/bfdebug.h
-    include/bfdebugringinterface.h
-    include/bfdriverinterface.h
-    include/bfdwarf.h
-    include/bfehframelist.h
-    include/bferrorcodes.h
-    include/bfexception.h
-    include/bfexports.h
-    include/bffile.h
-    include/bfgsl.h
-    include/bfjson.h
-    include/bfmemory.h
-    include/bfnewdelete.h
-    include/bfplatform.h
-    include/bfshuffle.h
-    include/bfstd.h
-    include/bfstring.h
-    include/bfsupport.h
-    include/bfthreadcontext.h
-    include/bftypes.h
-    include/bfupperlower.h
-    include/bfvcpuid.h
-    include/bfvector.h
-    include/bfvmcallinterface.h
-)
-
-install(FILES ${SDK_HEADER_FILES} DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-
-install(FILES src/bfvmcall_intel_x64.asm DESTINATION ${BF_BUILD_INSTALL_DIR}/src)
-
+install(DIRECTORY include DESTINATION ${BF_BUILD_INSTALL_DIR})
+# install(FILES src/bfvmcall_intel_x64.asm DESTINATION ${BF_BUILD_INSTALL_DIR}/src)
 install(
     PROGRAMS ${BF_SCRIPTS_DIR}/util/compiler_wrapper.sh
     DESTINATION ${BF_BUILD_INSTALL_DIR}/bin RENAME x86_64-vmm-clang
