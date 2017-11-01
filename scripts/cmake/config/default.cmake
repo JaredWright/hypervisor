@@ -21,32 +21,49 @@
 # ------------------------------------------------------------------------------
 # This file defines all CONFIGURABLE cmake variables set to their default value.
 # These variables are configurable through cmake-gui and ccmake.
-#
+# To override the default settings, you can specify an alternate config file
+# using: cmake /path/to/src -DBFCONFIG=/path/to/config.cmake
+
+# ------------------------------------------------------------------------------
+# Import user configuration file (if specified)
+# ------------------------------------------------------------------------------
+if(BFCONFIG)
+    find_file(BFCONFIG_PATH ${BFCONFIG} ${CMAKE_BINARY_DIR})
+    if(EXISTS ${BFCONFIG_PATH})
+        message(STATUS "Configuring Bareflank using: ${BFCONFIG_PATH}")
+        include(${BFCONFIG_PATH})
+    else()
+        message(FATAL_ERROR "Configuration file ${BFCONFIG} not found")
+    endif()
+else()
+    message(STATUS "No configuration specified, using default settings")
+endif()
 
 # ------------------------------------------------------------------------------
 # Build attributes
 # ------------------------------------------------------------------------------
-set(BUILD_TYPE ${CMAKE_BUILD_TYPE}
-    CACHE STRING
-    "The type of build"
+set(_BUILD_TYPE_DEFAULT "Release" CACHE INTERNAL "")
+if(CMAKE_BUILD_TYPE)
+    set(_BUILD_TYPE_DEFAULT ${CMAKE_BUILD_TYPE})
+endif()
+add_config(BUILD_TYPE ${_BUILD_TYPE_DEFAULT} 
+    STRING "The type of build"
 )
 set_property(CACHE BUILD_TYPE PROPERTY STRINGS
     "Release"
     "Debug"
 )
 
-set(BUILD_TARGET_ARCH ${CMAKE_HOST_SYSTEM_PROCESSOR}
-    CACHE STRING
-    "The target architecture for the build"
+add_config(BUILD_TARGET_ARCH ${CMAKE_HOST_SYSTEM_PROCESSOR}
+    STRING "The target architecture for the build"
 )
 set_property(CACHE BUILD_TARGET_ARCH PROPERTY STRINGS
     "x86_64"
     "aarch64"
 )
 
-set(BUILD_TARGET_OS ${CMAKE_HOST_SYSTEM_NAME}
-    CACHE STRING
-    "The target operating system for the build"
+add_config(BUILD_TARGET_OS ${CMAKE_HOST_SYSTEM_NAME}
+    STRING "The target operating system for the build"
 )
 set_property(CACHE BUILD_TARGET_OS PROPERTY STRINGS
     "None"      # VMM-only build
@@ -54,211 +71,189 @@ set_property(CACHE BUILD_TARGET_OS PROPERTY STRINGS
     "Windows"
 )
 
-set(BUILD_SHARED_LIBS OFF
-    CACHE BOOL
-    "Build libraries as shared libraries"
+add_config(BUILD_SHARED_LIBS OFF 
+    BOOL "Build libraries as shared libraries"
 )
 
-set(BUILD_STATIC_LIBS ON
-    CACHE BOOL
-    "Build libraries as static libraries"
+add_config(BUILD_STATIC_LIBS ON 
+    BOOL "Build libraries as static libraries"
 )
 
-set(BUILD_VERBOSE ${CMAKE_VERBOSE_MAKEFILE}
-    CACHE BOOL
-    "Display verbose output during build"
+add_config(BUILD_VERBOSE ${CMAKE_VERBOSE_MAKEFILE} 
+    BOOL "Display verbose output during build"
 )
 
+add_config(BUILD_SYSROOT_OS
+    ${BF_BUILD_INSTALL_DIR}/${BUILD_TARGET_OS}-${BUILD_TARGET_ARCH}-${BUILD_TYPE}
+    PATH "Path to userspace build-system sysroot"
+)
+
+add_config(BUILD_SYSROOT_VMM
+    ${BF_BUILD_INSTALL_DIR}/VMM-${BUILD_TARGET_ARCH}-${BUILD_TYPE}
+    PATH "Path to vmm build-system sysroot"
+)
 # ------------------------------------------------------------------------------
 # Developer Features
 # ------------------------------------------------------------------------------
-set(ENABLE_UNITTESTING OFF
-    CACHE BOOL
-    "Enable unit testing"
+add_config(ENABLE_UNITTESTING OFF
+    BOOL "Enable unit testing"
 )
 
-set(ENABLE_COMPILER_WARNINGS OFF
-    CACHE BOOL
-    "Enable compiler warnings"
+add_config(ENABLE_COMPILER_WARNINGS OFF
+    BOOL "Enable compiler warnings"
 )
 
-set(ENABLE_ASAN OFF
-    CACHE BOOL
-    "Enable clang AddressSanitizer"
+add_config(ENABLE_ASAN OFF
+    BOOL "Enable clang AddressSanitizer"
 )
 
-set(ENABLE_USAN OFF
-    CACHE BOOL
-    "Enable clang UndefinedBehaviorSanitizer"
+add_config(ENABLE_USAN OFF
+    BOOL "Enable clang UndefinedBehaviorSanitizer"
 )
 
-set(ENABLE_COVERITY OFF
-    CACHE BOOL
-    "Enable coverity static analysis"
+add_config(ENABLE_COVERITY OFF
+    BOOL "Enable coverity static analysis"
 )
 
-set(ENABLE_TIDY OFF
-    CACHE BOOL
-    "Enable clang-tidy"
+add_config(ENABLE_TIDY OFF
+    BOOL "Enable clang-tidy"
 )
 
-set(ENABLE_ASTYLE OFF
-    CACHE BOOL
-    "Enable astyle formatting"
+add_config(ENABLE_ASTYLE OFF
+    BOOL "Enable astyle formatting"
 )
 
-set(ENABLE_DEPEND_UPDATES OFF
-    CACHE BOOL
-    "Check dependencies for updates on every build"
+add_config(ENABLE_DEPEND_UPDATES OFF
+    BOOL "Check dependencies for updates on every build"
 )
 
 # ------------------------------------------------------------------------------
 # High-level cmake toolchains
 # ------------------------------------------------------------------------------
-set(TOOLCHAIN_PATH_USERSPACE "${BF_TOOLCHAIN_DIR}/default.cmake"
-    CACHE PATH
-    "Path to the default cmake toolchain file for building userspace components"
+add_config(TOOLCHAIN_PATH_USERSPACE "${BF_TOOLCHAIN_DIR}/default.cmake"
+    PATH "Path to the default cmake toolchain file for building userspace components"
 )
 
-set(TOOLCHAIN_PATH_KERNEL "${BF_TOOLCHAIN_DIR}/default_kernel.cmake"
-    CACHE PATH
-    "Path to the default cmake toolchain file for building kernel components"
+add_config(TOOLCHAIN_PATH_KERNEL "${BF_TOOLCHAIN_DIR}/default_kernel.cmake"
+    PATH "Path to the default cmake toolchain file for building kernel components"
 )
 
-set(TOOLCHAIN_PATH_VMM "${BF_TOOLCHAIN_DIR}/default_vmm.cmake"
-    CACHE PATH
-    "Path to the default cmake toolchain file for building vmm components"
+add_config(TOOLCHAIN_PATH_VMM "${BF_TOOLCHAIN_DIR}/default_vmm.cmake"
+    PATH "Path to the default cmake toolchain file for building vmm components"
 )
 
 # ------------------------------------------------------------------------------
 # Advanced (granular) cmake toolchains
 # ------------------------------------------------------------------------------
-set(TOOLCHAIN_PATH_ASTYLE ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building astyle"
+add_config(TOOLCHAIN_PATH_ASTYLE ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building astyle"
 )
 mark_as_advanced(TOOLCHAIN_PATH_ASTYLE)
 
-set(TOOLCHAIN_PATH_BINUTILS ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building GNU binutils"
+add_config(TOOLCHAIN_PATH_BINUTILS ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building GNU binutils"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BINUTILS)
 
-set(TOOLCHAIN_PATH_CATCH ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building catch"
+add_config(TOOLCHAIN_PATH_CATCH ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building catch"
 )
 mark_as_advanced(TOOLCHAIN_PATH_CATCH)
 
-set(TOOLCHAIN_PATH_EXTENDED_APIS ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building the bareflank extended apis"
+add_config(TOOLCHAIN_PATH_EXTENDED_APIS ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building the bareflank extended apis"
 )
 mark_as_advanced(TOOLCHAIN_PATH_EXTENDED_APIS)
 
-set(TOOLCHAIN_PATH_GSL ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building C++ guidelines support library"
+add_config(TOOLCHAIN_PATH_GSL ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building C++ guidelines support library"
 )
 mark_as_advanced(TOOLCHAIN_PATH_GSL)
 
-set(TOOLCHAIN_PATH_HIPPOMOCKS ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building hippomocks"
+add_config(TOOLCHAIN_PATH_HIPPOMOCKS ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building hippomocks"
 )
 mark_as_advanced(TOOLCHAIN_PATH_HIPPOMOCKS)
 
-set(TOOLCHAIN_PATH_JSON ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building JSON"
+add_config(TOOLCHAIN_PATH_JSON ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building JSON"
 )
 mark_as_advanced(TOOLCHAIN_PATH_JSON)
 
-set(TOOLCHAIN_PATH_LIBCXX ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building libc++"
+add_config(TOOLCHAIN_PATH_LIBCXX ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building libc++"
 )
 mark_as_advanced(TOOLCHAIN_PATH_LIBCXX)
 
-set(TOOLCHAIN_PATH_LIBCXXABI ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building libc++abi"
+add_config(TOOLCHAIN_PATH_LIBCXXABI ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building libc++abi"
 )
 mark_as_advanced(TOOLCHAIN_PATH_LIBCXXABI)
 
-set(TOOLCHAIN_PATH_BFDRIVER ${TOOLCHAIN_PATH_KERNEL}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfdriver"
+add_config(TOOLCHAIN_PATH_BFDRIVER ${TOOLCHAIN_PATH_KERNEL}
+    PATH "Path to a cmake toolchain file for building bfdriver"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFDRIVER)
 
-set(TOOLCHAIN_PATH_BFELF_LOADER ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfelf_loader"
+add_config(TOOLCHAIN_PATH_BFELF_LOADER ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building bfelf_loader"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFELF_LOADER)
 
-set(TOOLCHAIN_PATH_BFM ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfm"
+add_config(TOOLCHAIN_PATH_BFM ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building bfm"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFM)
 
-set(TOOLCHAIN_PATH_BFSDK ${TOOLCHAIN_PATH_USERSPACE}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfsdk"
+add_config(TOOLCHAIN_PATH_BFSDK ${TOOLCHAIN_PATH_USERSPACE}
+    PATH "Path to a cmake toolchain file for building bfsdk"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFSDK)
 
-set(TOOLCHAIN_PATH_BFSYSROOT ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfsysroot"
+add_config(TOOLCHAIN_PATH_BFSYSROOT ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building bfsysroot"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFSYSROOT)
 
-set(TOOLCHAIN_PATH_BFSUPPORT ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfsupport"
+add_config(TOOLCHAIN_PATH_BFSUPPORT ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building bfsupport"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFSUPPORT)
 
-set(TOOLCHAIN_PATH_BFUNWIND ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfunwind"
+add_config(TOOLCHAIN_PATH_BFUNWIND ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building bfunwind"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFUNWIND)
 
-set(TOOLCHAIN_PATH_BFVMM ${TOOLCHAIN_PATH_VMM}
-    CACHE PATH
-    "Path to a cmake toolchain file for building bfvmm"
+add_config(TOOLCHAIN_PATH_BFVMM ${TOOLCHAIN_PATH_VMM}
+    PATH "Path to a cmake toolchain file for building bfvmm"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFVMM)
 
 # ------------------------------------------------------------------------------
 # Non-cmake toolchains
 # ------------------------------------------------------------------------------
-set(TOOLCHAIN_NEWLIB_CC ${BF_BUILD_INSTALL_DIR}/bin/${BUILD_TARGET_ARCH}-vmm-clang
-    CACHE PATH
-    "Path to a compiler for building newlib"
+add_config(TOOLCHAIN_NEWLIB_CC
+    ${BUILD_SYSROOT_VMM}/bin/${BUILD_TARGET_ARCH}-vmm-clang
+    PATH "Path to a compiler for building newlib"
 )
 mark_as_advanced(TOOLCHAIN_NEWLIB_CC)
 
-set(TOOLCHAIN_NEWLIB_AS ${BF_BUILD_INSTALL_DIR}/bin/${BUILD_TARGET_ARCH}-vmm-elf-as
-    CACHE PATH
-    "Path to an assembler for building newlib"
+add_config(TOOLCHAIN_NEWLIB_AS
+    ${BUILD_SYSROOT_VMM}/bin/${BUILD_TARGET_ARCH}-vmm-elf-as
+    PATH "Path to an assembler for building newlib"
 )
 mark_as_advanced(TOOLCHAIN_NEWLIB_AS)
 
-set(TOOLCHAIN_NEWLIB_AR ${BF_BUILD_INSTALL_DIR}/bin/${BUILD_TARGET_ARCH}-vmm-elf-ar
-    CACHE PATH
-    "Path to binutils archiver for building newlib"
+add_config(TOOLCHAIN_NEWLIB_AR
+    ${BUILD_SYSROOT_VMM}/bin/${BUILD_TARGET_ARCH}-vmm-elf-ar
+    PATH "Path to binutils archiver for building newlib"
 )
 mark_as_advanced(TOOLCHAIN_NEWLIB_AR)
 
-set(TOOLCHAIN_NEWLIB_RANLIB ${BF_BUILD_INSTALL_DIR}/bin/${BUILD_TARGET_ARCH}-vmm-elf-ranlib
-    CACHE PATH
-    "Path to binutils ranlib for building newlib"
+add_config(TOOLCHAIN_NEWLIB_RANLIB
+    ${BUILD_SYSROOT_VMM}/bin/${BUILD_TARGET_ARCH}-vmm-elf-ranlib
+    PATH "Path to binutils ranlib for building newlib"
 )
 mark_as_advanced(TOOLCHAIN_NEWLIB_RANLIB)
 
@@ -266,22 +261,18 @@ mark_as_advanced(TOOLCHAIN_NEWLIB_RANLIB)
 # Compiler Flags
 # ------------------------------------------------------------------------------
 include(${BF_FLAGS_DIR}/flags.cmake)
-set(C_FLAGS_VMM "${DEFAULT_C_FLAGS_VMM}"
-    CACHE STRING
-    "C compiler flags for VMM components"
+add_config(C_FLAGS_VMM "${DEFAULT_C_FLAGS_VMM}"
+    STRING "C compiler flags for VMM components"
 )
 
-set(CXX_FLAGS_VMM "${DEFAULT_CXX_FLAGS_VMM}"
-    CACHE STRING
-    "C++ compiler flags for VMM components"
+add_config(CXX_FLAGS_VMM "${DEFAULT_CXX_FLAGS_VMM}"
+    STRING "C++ compiler flags for VMM components"
 )
 
-set(C_FLAGS_WARNING "${DEFAULT_C_FLAGS_WARNING}"
-    CACHE STRING
-    "C compiler flags to be used when compiler warnings are enabled"
+add_config(C_FLAGS_WARNING "${DEFAULT_C_FLAGS_WARNING}"
+    STRING "C compiler flags to be used when compiler warnings are enabled"
 )
 
-set(CXX_FLAGS_WARNING "${DEFAULT_CXX_FLAGS_WARNING}"
-    CACHE STRING
-    "C++ compiler flags to be used when compiler warnings are enabled"
+add_config(CXX_FLAGS_WARNING "${DEFAULT_CXX_FLAGS_WARNING}"
+    STRING "C++ compiler flags to be used when compiler warnings are enabled"
 )

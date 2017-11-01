@@ -58,3 +58,18 @@ macro(add_subproject path target toolchain depends)
     )
 endmacro(add_subproject)
 
+# Add a build configuration to the build system
+# @arg name: The name of the build configuration variable
+# @arg default: The default value for the configuration, if the variable 'name'
+#       is not already set
+# @arg type: A cmake cache variable type, to be used by cmake-gui/ccmake
+#       Accepted values: BOOL, PATH, FILEPATH, STRING
+# @arg description: A description of this configuration to be displayed in
+#       cmake-gui and ccmake
+macro(add_config name default type description)
+    if(${name})
+        set(${name} ${${name}} CACHE ${type} ${description})
+    else()
+        set(${name} ${default} CACHE ${type} ${description})
+    endif()
+endmacro(add_config)
