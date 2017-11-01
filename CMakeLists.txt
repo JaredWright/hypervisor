@@ -149,12 +149,12 @@ add_subproject(
     "bfsdk binutils bfunwind bfsupport"
 )
 
-# add_subproject(
-#     ${BF_SOURCE_DIR}/bfdriver
-#     bfdriver
-#     ${TOOLCHAIN_PATH_BFDRIVER}
-#     "bfsdk"
-# )
+add_subproject(
+    ${BF_SOURCE_DIR}/bfdriver
+    bfdriver
+    ${TOOLCHAIN_PATH_BFDRIVER}
+    "bfsdk"
+)
 
 add_subproject(
     ${BF_SOURCE_DIR}/bfm
