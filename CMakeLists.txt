@@ -132,7 +132,7 @@ add_subproject(
     ${BF_SOURCE_DIR}/bfsysroot/bfsupport
     bfsupport
     ${TOOLCHAIN_PATH_BFSUPPORT}
-    "bfsdk binutils newlib gsl"
+    "bfsdk binutils libcxx libcxxabi newlib gsl"
 )
 
 add_subproject(
