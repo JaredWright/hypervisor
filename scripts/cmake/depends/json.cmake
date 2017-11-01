@@ -17,6 +17,7 @@ ExternalProject_Add(
 ExternalProject_Add_Step(
     json
     sysroot_install
+    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${JSON_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_OS}/include
     COMMAND 			${CMAKE_COMMAND} -E copy_directory ${JSON_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_VMM}/include
     DEPENDEES          	install
 )

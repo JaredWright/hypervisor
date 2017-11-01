@@ -83,13 +83,31 @@ add_config(BUILD_VERBOSE ${CMAKE_VERBOSE_MAKEFILE}
     BOOL "Display verbose output during build"
 )
 
+STRING(TOLOWER "${BF_BUILD_INSTALL_DIR}/${BUILD_TARGET_OS}-${BUILD_TARGET_ARCH}-${BUILD_TYPE}" _BUILD_SYSROOT_OS)
+set(_BUILD_SYSROOT_OS ${_BUILD_SYSROOT_OS} CACHE INTERNAL "")
 add_config(BUILD_SYSROOT_OS
-    ${BF_BUILD_INSTALL_DIR}/${BUILD_TARGET_OS}-${BUILD_TARGET_ARCH}-${BUILD_TYPE}
+    ${_BUILD_SYSROOT_OS}
     PATH "Path to userspace build-system sysroot"
 )
 
+STRING(TOLOWER "${BF_BUILD_INSTALL_DIR}/vmm-${BUILD_TARGET_ARCH}-${BUILD_TYPE}" _BUILD_SYSROOT_VMM)
+set(_BUILD_SYSROOT_VMM ${_BUILD_SYSROOT_VMM} CACHE INTERNAL "")
 add_config(BUILD_SYSROOT_VMM
-    ${BF_BUILD_INSTALL_DIR}/VMM-${BUILD_TARGET_ARCH}-${BUILD_TYPE}
+    ${_BUILD_SYSROOT_VMM}
+    PATH "Path to vmm build-system sysroot"
+)
+
+STRING(TOLOWER "${BF_BUILD_INSTALL_DIR}/${BUILD_TARGET_OS}-${BUILD_TARGET_ARCH}-test" _BUILD_SYSROOT_OS_TEST)
+set(_BUILD_SYSROOT_OS_TEST ${_BUILD_SYSROOT_OS_TEST} CACHE INTERNAL "")
+add_config(BUILD_SYSROOT_OS_TEST
+    ${_BUILD_SYSROOT_OS_TEST}
+    PATH "Path to vmm build-system sysroot"
+)
+
+STRING(TOLOWER "${BF_BUILD_INSTALL_DIR}/vmm-${BUILD_TARGET_ARCH}-test" _BUILD_SYSROOT_VMM_TEST)
+set(_BUILD_SYSROOT_VMM_TEST ${_BUILD_SYSROOT_VMM_TEST} CACHE INTERNAL "")
+add_config(BUILD_SYSROOT_VMM_TEST
+    ${_BUILD_SYSROOT_VMM_TEST}
     PATH "Path to vmm build-system sysroot"
 )
 # ------------------------------------------------------------------------------
@@ -267,6 +285,14 @@ add_config(C_FLAGS_VMM "${DEFAULT_C_FLAGS_VMM}"
 
 add_config(CXX_FLAGS_VMM "${DEFAULT_CXX_FLAGS_VMM}"
     STRING "C++ compiler flags for VMM components"
+)
+
+add_config(C_FLAGS_HOST "${DEFAULT_C_FLAGS_HOST}"
+    STRING "C compiler flags for host OS components"
+)
+
+add_config(CXX_FLAGS_HOST "${DEFAULT_CXX_FLAGS_HOST}"
+    STRING "C++ compiler flags for host OS components"
 )
 
 add_config(C_FLAGS_WARNING "${DEFAULT_C_FLAGS_WARNING}"

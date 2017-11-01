@@ -24,4 +24,5 @@ elseif(ENABLE_USAN)
 endif()
 
 include(${BF_FLAGS_DIR}/vmm_flags.cmake)
+include(${BF_FLAGS_DIR}/host_flags.cmake)
 include(${BF_FLAGS_DIR}/warning_flags.cmake)

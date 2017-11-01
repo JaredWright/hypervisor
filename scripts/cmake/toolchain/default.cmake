@@ -26,5 +26,6 @@
 
 # TODO: Use the configured target platform/OS to determine a sensible default
 # if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
-    include(${CMAKE_CURRENT_LIST_DIR}/clang_host.cmake)
+    # include(${CMAKE_CURRENT_LIST_DIR}/clang_host.cmake)
+    include(${CMAKE_CURRENT_LIST_DIR}/gcc_host.cmake)
 # endif()

@@ -155,13 +155,13 @@ add_subproject(
 #     ${TOOLCHAIN_PATH_BFDRIVER}
 #     "bfsdk"
 # )
-#
-# add_subproject(
-#     ${BF_SOURCE_DIR}/bfm
-#     bfm
-#     ${TOOLCHAIN_PATH_BFM}
-#     "bfsdk"
-# )
+
+add_subproject(
+    ${BF_SOURCE_DIR}/bfm
+    bfm
+    ${TOOLCHAIN_PATH_BFM}
+    "bfsdk bfelf_loader gsl json"
+)
 
 # add_subproject(
 #     ${BF_SOURCE_DIR}/extended_apis

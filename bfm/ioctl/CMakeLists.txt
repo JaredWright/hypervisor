@@ -48,4 +48,4 @@ endif()
 # Install
 # ------------------------------------------------------------------------------
 
-install(TARGETS bf_ioctl DESTINATION lib)
+install(TARGETS bf_ioctl DESTINATION ${BUILD_SYSROOT_OS}/lib)

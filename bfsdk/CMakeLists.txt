@@ -19,8 +19,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfsdk C CXX)
 
-include(${CMAKE_SOURCE_DIR}/../scripts/cmake/macros.cmake)
-
 if(ENABLE_UNITTESTING)
     include(CTest)
     enable_testing(true)
@@ -29,7 +27,6 @@ endif()
 
 install(DIRECTORY include DESTINATION ${BUILD_SYSROOT_OS})
 install(DIRECTORY include DESTINATION ${BUILD_SYSROOT_VMM})
-# install(FILES src/bfvmcall_intel_x64.asm DESTINATION ${BUILD_SYSROOT_VMM}/src)
 install(
     PROGRAMS ${BF_SCRIPTS_DIR}/util/compiler_wrapper.sh
     DESTINATION ${BUILD_SYSROOT_VMM}/bin RENAME x86_64-vmm-clang

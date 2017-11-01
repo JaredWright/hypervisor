@@ -30,4 +30,4 @@ if(NOT WIN32 AND ENABLE_UNITTESTING AND BUILD_SHARED_LIBS)
     add_subdirectory(tests)
 endif()
 
-install(FILES include/bfelf_loader.h DESTINATION ${BUILD_SYSROOT_VMM}/include)
+install(FILES include/bfelf_loader.h DESTINATION ${BUILD_SYSROOT_OS}/include)
