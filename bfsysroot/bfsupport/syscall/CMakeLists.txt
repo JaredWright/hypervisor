@@ -32,4 +32,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfsyscall PUBLIC STATIC_SYSCALL)
 endif()
 
-install(TARGETS bfsyscall DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfsyscall DESTINATION ${BUILD_SYSROOT_VMM}/lib)

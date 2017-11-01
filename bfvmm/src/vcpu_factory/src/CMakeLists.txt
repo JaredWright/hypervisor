@@ -41,4 +41,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_vcpu_factory PUBLIC STATIC_EXIT_HANDLER)
 endif()
 
-install(TARGETS bfvmm_vcpu_factory DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfvmm_vcpu_factory DESTINATION ${BUILD_SYSROOT_VMM}/lib)

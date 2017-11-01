@@ -32,4 +32,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(pthread PUBLIC STATIC_PTHREAD)
 endif()
 
-install(TARGETS pthread DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS pthread DESTINATION ${BUILD_SYSROOT_VMM}/lib)

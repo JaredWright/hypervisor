@@ -32,4 +32,4 @@ if(BUILD_STATIC_LIBS)
     add_library(bfvmm_support STATIC ${SOURCES})
 endif()
 
-install(TARGETS bfvmm_support DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfvmm_support DESTINATION ${BUILD_SYSROOT_VMM}/lib)

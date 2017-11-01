@@ -74,5 +74,5 @@ target_link_libraries(bfvmm bfsyscall)
 # Install
 # ------------------------------------------------------------------------------
 
-install(TARGETS bfvmm DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
-install(TARGETS bfvmm_main DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfvmm DESTINATION ${BUILD_SYSROOT_VMM}/bin)
+install(TARGETS bfvmm_main DESTINATION ${BUILD_SYSROOT_VMM}/lib)

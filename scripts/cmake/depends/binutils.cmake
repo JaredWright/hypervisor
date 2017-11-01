@@ -25,7 +25,7 @@ ExternalProject_Add(
 
 ExternalProject_Add_Step(
     binutils
-    prefix_install
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${BINUTILS_INTERM_INSTALL_DIR}/bin ${BF_BUILD_INSTALL_DIR}/bin
+    sysroot_install
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${BINUTILS_INTERM_INSTALL_DIR}/bin ${BUILD_SYSROOT_VMM}/bin
     DEPENDEES install
 )

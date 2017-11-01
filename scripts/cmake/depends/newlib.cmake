@@ -44,7 +44,7 @@ ExternalProject_Add(
 ExternalProject_Add_Step(
     newlib
     sysroot_install
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/ ${BF_BUILD_INSTALL_DIR}
+    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/ ${BUILD_SYSROOT_VMM}
     DEPENDEES          	install
 )
 

@@ -23,4 +23,4 @@ if(NOT WIN64)
     set(CMAKE_SHARED_LINKER_FLAGS "--fuse-ld=gold")
 endif()
 
-install(TARGETS dummy_lib1 DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS dummy_lib1 DESTINATION ${BUILD_SYSROOT_VMM}/lib)

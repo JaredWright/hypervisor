@@ -30,4 +30,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_debug_ring PUBLIC STATIC_DEBUG_RING)
 endif()
 
-install(TARGETS bfvmm_debug_ring DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfvmm_debug_ring DESTINATION ${BUILD_SYSROOT_VMM}/lib)

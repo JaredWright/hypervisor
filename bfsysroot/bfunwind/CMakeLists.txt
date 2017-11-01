@@ -29,7 +29,7 @@ endif()
 
 set(TIDY_EXCLUSIONS ,-cppcoreguidelines-pro*)
 
-include_directories(${BF_BUILD_INSTALL_DIR}/include)
+include_directories(${BUILD_SYSROOT_VMM}/include)
 include_directories(${BF_SOURCE_DIR}/bfsdk/include)
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
@@ -38,5 +38,5 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS_VMM}")
 
 add_subdirectory(src)
 
-install(FILES include/ia64_cxx_abi.h DESTINATION ${BF_BUILD_INSTALL_DIR}/include RENAME unwind.h)
+install(FILES include/ia64_cxx_abi.h DESTINATION ${BUILD_SYSROOT_VMM}/include RENAME unwind.h)
 

@@ -38,4 +38,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_serial PUBLIC STATIC_INTRINSICS)
 endif()
 
-install(TARGETS bfvmm_serial DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfvmm_serial DESTINATION ${BUILD_SYSROOT_VMM}/lib)

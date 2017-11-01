@@ -79,10 +79,7 @@ set(BF_BUILD_DEPENDS_DIR ${BF_BUILD_DIR}/depends
     "Build directory for external dependencies"
 )
 
-# TODO: The path to a directory named "bfprefix" is currently dictated
-# by the env.sh script. Remove that requirement and make this path configurable
-# set(BF_BUILD_INSTALL_DIR ${BF_BUILD_DIR}/install
-set(BF_BUILD_INSTALL_DIR ${BF_BUILD_DIR}/bfprefix
+set(BF_BUILD_INSTALL_DIR "${BF_BUILD_DIR}/install"
     CACHE INTERNAL
     "Intermediate build installation directory"
 )

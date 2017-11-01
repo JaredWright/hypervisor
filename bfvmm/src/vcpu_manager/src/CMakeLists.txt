@@ -42,4 +42,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_vcpu_manager PUBLIC STATIC_INTRINSICS)
 endif()
 
-install(TARGETS bfvmm_vcpu_manager DESTINATION ${BF_BUILD_INSTALL_DIR})
+install(TARGETS bfvmm_vcpu_manager DESTINATION ${BUILD_SYSROOT_VMM}/lib)

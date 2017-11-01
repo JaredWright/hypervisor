@@ -32,13 +32,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS_VMM} -fvisibility-inlines-hi
 
 list(APPEND BFSUPPORT_INCLUDE_DIRS
     "${CMAKE_CURRENT_LIST_DIR}/include"
-    "${BF_BUILD_INSTALL_DIR}/include/c++/v1"
-    "${BF_BUILD_INSTALL_DIR}/include"
+    "${BUILD_SYSROOT_VMM}/include/c++/v1"
+    "${BUILD_SYSROOT_VMM}/include"
 )
 include_directories(${BFSUPPORT_INCLUDE_DIRS})
 
 list(APPEND BFSUPPORT_LINK_DIRS
-    "${BF_BUILD_INSTALL_DIR}/lib"
+    "${BUILD_SYSROOT_VMM}/lib"
 )
 link_directories(${BFSUPPORT_LINK_DIRS})
 
@@ -49,12 +49,4 @@ link_directories(${BFSUPPORT_LINK_DIRS})
 
 add_subdirectory(src)
 
-install(DIRECTORY include/debug_ring DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(DIRECTORY include/exit_handler DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(DIRECTORY include/intrinsics DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(DIRECTORY include/memory_manager DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(DIRECTORY include/serial DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(DIRECTORY include/vcpu DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(DIRECTORY include/vmcs DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(DIRECTORY include/vmxon DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
-install(FILES include/user_data.h DESTINATION ${BF_BUILD_INSTALL_DIR}/include)
+install(DIRECTORY include/ DESTINATION ${BUILD_SYSROOT_VMM}/include)

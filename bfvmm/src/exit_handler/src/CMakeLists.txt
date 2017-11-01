@@ -40,4 +40,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfvmm_exit_handler PUBLIC STATIC_INTRINSICS)
 endif()
 
-install(TARGETS bfvmm_exit_handler DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfvmm_exit_handler DESTINATION ${BUILD_SYSROOT_VMM}/lib)

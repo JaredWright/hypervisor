@@ -31,4 +31,4 @@ list(APPEND SOURCES
 
 add_library(bfcrt STATIC ${SOURCES})
 target_compile_definitions(bfcrt PUBLIC STATIC_CRT)
-install(TARGETS bfcrt DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfcrt DESTINATION ${BUILD_SYSROOT_VMM}/lib)

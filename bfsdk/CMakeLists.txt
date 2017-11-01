@@ -27,9 +27,10 @@ if(ENABLE_UNITTESTING)
     add_subdirectory(tests)
 endif()
 
-install(DIRECTORY include DESTINATION ${BF_BUILD_INSTALL_DIR})
-# install(FILES src/bfvmcall_intel_x64.asm DESTINATION ${BF_BUILD_INSTALL_DIR}/src)
+install(DIRECTORY include DESTINATION ${BUILD_SYSROOT_OS})
+install(DIRECTORY include DESTINATION ${BUILD_SYSROOT_VMM})
+# install(FILES src/bfvmcall_intel_x64.asm DESTINATION ${BUILD_SYSROOT_VMM}/src)
 install(
     PROGRAMS ${BF_SCRIPTS_DIR}/util/compiler_wrapper.sh
-    DESTINATION ${BF_BUILD_INSTALL_DIR}/bin RENAME x86_64-vmm-clang
+    DESTINATION ${BUILD_SYSROOT_VMM}/bin RENAME x86_64-vmm-clang
 )

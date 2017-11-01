@@ -31,13 +31,13 @@ set(TIDY_EXCLUSIONS ,-cert-err34-c,-misc-misplaced-widening-cast,-cppcoreguideli
 
 list(APPEND BFSUPPORT_INCLUDE_DIRS
     "${CMAKE_CURRENT_LIST_DIR}/include"
-    "${BF_BUILD_INSTALL_DIR}/include/c++/v1"
-    "${BF_BUILD_INSTALL_DIR}/include"
+    "${BUILD_SYSROOT_VMM}/include/c++/v1"
+    "${BUILD_SYSROOT_VMM}/include"
 )
 include_directories(${BFSUPPORT_INCLUDE_DIRS})
 
 list(APPEND BFSUPPORT_LINK_DIRS
-    "${BF_BUILD_INSTALL_DIR}/lib"
+    "${BUILD_SYSROOT_VMM}/lib"
 )
 link_directories(${BFSUPPORT_LINK_DIRS})
 

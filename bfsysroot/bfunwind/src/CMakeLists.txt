@@ -33,4 +33,4 @@ if(BUILD_STATIC_LIBS)
     target_compile_definitions(bfunwind PUBLIC STATIC_SYSCALL)
 endif()
 
-install(TARGETS bfunwind DESTINATION ${BF_BUILD_INSTALL_DIR}/lib)
+install(TARGETS bfunwind DESTINATION ${BUILD_SYSROOT_VMM}/lib)
