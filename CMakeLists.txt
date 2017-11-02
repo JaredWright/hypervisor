@@ -67,6 +67,7 @@ endif()
 if(ENABLE_UNITTESTING)
 	include(${BF_DEPENDS_DIR}/catch.cmake)
 	include(${BF_DEPENDS_DIR}/hippomocks.cmake)
+    add_dependencies(bfsdk catch hippomocks)
 endif()
 
 # ------------------------------------------------------------------------------

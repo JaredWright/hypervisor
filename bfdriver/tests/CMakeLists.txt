@@ -16,12 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_INSTALL_PREFIX}/cmake/CMakeGlobal_Includes.txt)
-
-# ------------------------------------------------------------------------------
-# Targets
-# ------------------------------------------------------------------------------
-
 add_library(test_support STATIC test_support.cpp)
 
 macro(do_test str)
@@ -30,6 +24,7 @@ macro(do_test str)
     target_link_libraries(test_${str} test_support)
     target_link_libraries(test_${str} test_catch)
     add_test(bfelf_${str} test_${str})
+    install(TARGETS test_${str} DESTINATION ${BUILD_SYSROOT_OS_TEST}/bin/bfdriver)
 endmacro(do_test)
 
 do_test(common_add_module)

@@ -22,12 +22,14 @@ project(bfelf_loader C CXX)
 if(ENABLE_UNITTESTING)
     include(CTest)
     enable_testing(true)
+    include_directories("tests")
+    include_directories("${BUILD_SYSROOT_OS_TEST}/include")
+    include_directories("${BUILD_SYSROOT_OS}/include")
+    link_directories("${BUILD_SYSROOT_OS_TEST}/lib")
+    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DBAREFLANK_SYSROOT_PATH='\"${BUILD_SYSROOT_VMM}\"'")
+    add_subdirectory(tests)
 endif()
 
 set(TIDY_EXCLUSIONS ,-cppcoreguidelines-pro-type-const-cast)
-
-if(NOT WIN32 AND ENABLE_UNITTESTING AND BUILD_SHARED_LIBS)
-    add_subdirectory(tests)
-endif()
 
 install(FILES include/bfelf_loader.h DESTINATION ${BUILD_SYSROOT_OS}/include)

@@ -19,12 +19,16 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfdrivers C CXX)
 
+include_directories("include")
+
 if(ENABLE_UNITTESTING)
     include(CTest)
     enable_testing(true)
-endif()
-
-if(NOT WIN32 AND ENABLE_UNITTESTING AND BUILD_SHARED_LIBS)
+    include_directories("tests")
+    include_directories("${BUILD_SYSROOT_OS}/include")
+    include_directories("${BUILD_SYSROOT_OS_TEST}/include")
+    link_directories("${BUILD_SYSROOT_OS_TEST}/lib")
+    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DBAREFLANK_SYSROOT_PATH='\"${BUILD_SYSROOT_VMM}\"'")
     add_subdirectory(src)
     add_subdirectory(tests)
 endif()

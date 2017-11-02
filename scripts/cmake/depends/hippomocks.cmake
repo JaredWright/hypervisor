@@ -13,10 +13,9 @@ ExternalProject_Add(
 	CMAKE_ARGS          ${HIPPOMOCKS_CMAKE_ARGS}
 )
 
-# TODO: Install to the appropirate sysroot in the build tree
-# ExternalProject_Add_Step(
-#     hippomocks
-#     sysroot_install
-#     COMMAND 			${CMAKE_COMMAND} -E copy_directory /path/to/build/artifacts /path/to/appropriate/sysroot
-#     DEPENDEES          	install
-#     )
+ExternalProject_Add_Step(
+    hippomocks
+    sysroot_install
+    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${HIPPOMOCKS_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_OS_TEST}/include
+    DEPENDEES          	install
+)

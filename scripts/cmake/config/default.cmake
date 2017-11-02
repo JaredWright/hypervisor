@@ -213,7 +213,7 @@ add_config(TOOLCHAIN_PATH_BFDRIVER ${TOOLCHAIN_PATH_KERNEL}
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFDRIVER)
 
-add_config(TOOLCHAIN_PATH_BFELF_LOADER ${TOOLCHAIN_PATH_VMM}
+add_config(TOOLCHAIN_PATH_BFELF_LOADER ${TOOLCHAIN_PATH_USERSPACE}
     PATH "Path to a cmake toolchain file for building bfelf_loader"
 )
 mark_as_advanced(TOOLCHAIN_PATH_BFELF_LOADER)
