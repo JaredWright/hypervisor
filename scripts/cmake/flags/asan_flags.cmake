@@ -16,9 +16,10 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-set(ASAN_FLAGS "" CACHE INTERNAL "")
-set(ASAN_FLAGS "${ASAN_FLAGS} -g")
-set(ASAN_FLAGS "${ASAN_FLAGS} -fuse-ld=gold")
-set(ASAN_FLAGS "${ASAN_FLAGS} -fno-omit-frame-pointer")
-set(ASAN_FLAGS "${ASAN_FLAGS} -fsanitize=address")
-set(ASAN_FLAGS "${ASAN_FLAGS} -fsanitize=leak")
+list(APPEND BFFLAGS_ASAN
+    "-g"
+    "-fuse-ld=gold"
+    "-fno-omit-frame-pointer"
+    "-fsanitize=address"
+    "-fsanitize=leak"
+)

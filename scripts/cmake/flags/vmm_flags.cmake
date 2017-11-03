@@ -9,11 +9,8 @@ else()
     set(ABITYPE "SYSV" CACHE INTERNAL "")
 endif()
 
-list(APPEND COMMON_FLAGS_VMM 
+list(APPEND BFFLAGS_VMM 
     "-fpic"
-    "-msse"
-    "-msse2"
-    "-msse3"
     "-mno-red-zone"
     "-mstackrealign"
     "-fstack-protector-strong"
@@ -31,17 +28,23 @@ list(APPEND COMMON_FLAGS_VMM
     "-DCLOCK_MONOTONIC"
 )
 
-list(APPEND DEFAULT_C_FLAGS_VMM 
+list(APPEND BFFLAGS_VMM_C
     "-std=c11"
-    ${COMMON_FLAGS_VMM}
 )
 
-list(APPEND DEFAULT_CXX_FLAGS_VMM 
+list(APPEND BFFLAGS_VMM_CXX
     "-x c++"
     "-std=c++1z"
     "-DNOSTDINC_CXX"
-    ${COMMON_FLAGS_VMM}
 )
 
-string(REPLACE ";" " " DEFAULT_C_FLAGS_VMM "${DEFAULT_C_FLAGS_VMM}")
-string(REPLACE ";" " " DEFAULT_CXX_FLAGS_VMM "${DEFAULT_CXX_FLAGS_VMM}")
+list(APPEND BFFLAGS_VMM_X86_64
+    "-msse"
+    "-msse2"
+    "-msse3"
+)
+
+list(APPEND BFFLAGS_VMM_AARCH64
+    ""
+)
+

@@ -18,6 +18,7 @@
 
 cmake_minimum_required(VERSION 3.6)
 project(bfvmm C CXX)
+include(${BF_FLAGS_DIR}/flags.cmake)
 
 set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
 enable_language(ASM_NASM)
@@ -27,8 +28,20 @@ if(ENABLE_UNITTESTING)
     enable_testing(true)
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_FLAGS_VMM} -fvisibility=hidden")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS_VMM} -fvisibility-inlines-hidden -fvisibility=hidden")
+list(APPEND VMM_C_FLAGS
+    "-fvisibility=hidden"
+)
+
+list(APPEND VMM_CXX_FLAGS
+    "-fvisibility=hidden"
+    "-fvisibility-inlines-hidden"
+)
+
+generate_flags(
+    VMM
+    ADD_C_FLAGS ${VMM_C_FLAGS}
+    ADD_CXX_FLAGS ${VMM_CXX_FLAGS}
+)
 
 list(APPEND BFSUPPORT_INCLUDE_DIRS
     "${CMAKE_CURRENT_LIST_DIR}/include"

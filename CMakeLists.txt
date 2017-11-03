@@ -25,6 +25,7 @@ project(hypervisor)
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/global_vars.cmake)
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/macros.cmake)
 include(${BF_CONFIG_DIR}/default.cmake)
+include(${BF_FLAGS_DIR}/flags.cmake)
 
 include(ExternalProject)
 set_property(GLOBAL PROPERTY EP_PREFIX ${BF_BUILD_DEPENDS_DIR})

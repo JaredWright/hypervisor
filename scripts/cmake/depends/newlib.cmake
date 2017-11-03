@@ -2,17 +2,20 @@ set(NEWLIB_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib)
 set(NEWLIB_INTERM_INSTALL_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib-install)
 set(NEWLIB_TARGET "${BUILD_TARGET_ARCH}-vmm-elf")
 
-list(APPEND NEWLIB_C_FLAGS
-    ${C_FLAGS_VMM}
-)
-
 if(BUILD_TYPE STREQUAL "Release")
     list(APPEND NEWLIB_C_FLAGS
 		"-O3"
         "-DNDEBUG"
 	)
 endif()
-string(REPLACE ";" " " NEWLIB_C_FLAGS "${NEWLIB_C_FLAGS}")
+
+generate_flags(
+    VMM
+    ADD_C_FLAGS ${NEWLIB_C_FLAGS}
+    C_FLAGS_OUT NEWLIB_C_FLAGS
+    CXX_FLAGS_OUT NEWLIB_CXX_FLAGS
+    SILENT
+)
 
 list(APPEND NEWLIB_ARGS
 	"--disable-libgloss"

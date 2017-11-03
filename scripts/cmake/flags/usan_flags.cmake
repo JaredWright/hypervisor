@@ -16,6 +16,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-set(USAN_FLAGS "" CACHE INTERNAL "")
-set(USAN_FLAGS "${USAN_FLAGS} -fuse-ld=gold")
-set(USAN_FLAGS "${USAN_FLAGS} -fsanitize=undefined")
+list(APPEND BFFLAGS_USAN
+    "-fuse-ld=gold"
+    "-fsanitize=undefined"
+)

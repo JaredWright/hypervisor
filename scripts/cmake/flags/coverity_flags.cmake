@@ -16,21 +16,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-set(GCC_COVERAGE_C_FLAGS "" CACHE INTERNAL "")
-list(APPEND GCC_COVERAGE_C_FLAGS
+list(APPEND BFFLAGS_COVERITY_C
     "-g"
     "-O0"
     "-fprofile-arcs"
     "-ftest-coverage"
 )
 
-set(GCC_COVERAGE_CXX_FLAGS "" CACHE INTERNAL "")
-list(APPEND GCC_COVERAGE_CXX_FLAGS
-    ${GCC_COVERAGE_C_FLAGS}
+list(APPEND BFFLAGS_COVERITY_CXX
+    ${BFFLAGS_COVERITY_C}
 )
 
-set(GCC_COVERAGE_LINKER_FLAGS "" CACHE INTERNAL "")
-list(APPEND GCC_COVERAGE_LINKER_FLAGS
+list(APPEND BFFLAGS_COVERITY_LINKER
     "--coverage"
 )
-

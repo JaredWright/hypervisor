@@ -28,10 +28,11 @@
 # Import user configuration file (if specified)
 # ------------------------------------------------------------------------------
 if(BFCONFIG)
-    find_file(BFCONFIG_PATH ${BFCONFIG} ${CMAKE_BINARY_DIR})
-    if(EXISTS ${BFCONFIG_PATH})
-        message(STATUS "Configuring Bareflank using: ${BFCONFIG_PATH}")
-        include(${BFCONFIG_PATH})
+    find_file(_BFCONFIG_PATH ${BFCONFIG} ${BF_CONFIG_DIR})
+    set(_BFCONFIG_PATH ${_BFCONFIG_PATH} CACHE INTERNAL "")
+    if(EXISTS ${_BFCONFIG_PATH})
+        message(STATUS "Configuring Bareflank using: ${_BFCONFIG_PATH}")
+        include(${_BFCONFIG_PATH})
     else()
         message(FATAL_ERROR "Configuration file ${BFCONFIG} not found")
     endif()
@@ -278,27 +279,18 @@ mark_as_advanced(TOOLCHAIN_NEWLIB_RANLIB)
 # ------------------------------------------------------------------------------
 # Compiler Flags
 # ------------------------------------------------------------------------------
-include(${BF_FLAGS_DIR}/flags.cmake)
-add_config(C_FLAGS_VMM "${DEFAULT_C_FLAGS_VMM}"
-    STRING "C compiler flags for VMM components"
+add_config(C_FLAGS_VMM ""
+    STRING "Additional C compiler flags for VMM components"
 )
 
-add_config(CXX_FLAGS_VMM "${DEFAULT_CXX_FLAGS_VMM}"
-    STRING "C++ compiler flags for VMM components"
+add_config(CXX_FLAGS_VMM ""
+    STRING "Additional C++ compiler flags for VMM components"
 )
 
-add_config(C_FLAGS_HOST "${DEFAULT_C_FLAGS_HOST}"
-    STRING "C compiler flags for host OS components"
+add_config(C_FLAGS_USERSPACE ""
+    STRING "Additional C compiler flags for userspace components"
 )
 
-add_config(CXX_FLAGS_HOST "${DEFAULT_CXX_FLAGS_HOST}"
-    STRING "C++ compiler flags for host OS components"
-)
-
-add_config(C_FLAGS_WARNING "${DEFAULT_C_FLAGS_WARNING}"
-    STRING "C compiler flags to be used when compiler warnings are enabled"
-)
-
-add_config(CXX_FLAGS_WARNING "${DEFAULT_CXX_FLAGS_WARNING}"
-    STRING "C++ compiler flags to be used when compiler warnings are enabled"
+add_config(CXX_FLAGS_USERSPACE ""
+    STRING "Additional C++ compiler flags for userspace components"
 )

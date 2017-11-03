@@ -1,4 +1,4 @@
-list(APPEND DEFAULT_C_FLAGS_WARNING 
+list(APPEND BFFLAGS_WARNING_C
     "-Wall"
     "-Wextra"
     "-Wpedantic"
@@ -8,19 +8,10 @@ list(APPEND DEFAULT_C_FLAGS_WARNING
     "-Wsign-conversion"
 )
 
-list(APPEND DEFAULT_CXX_FLAGS_WARNING 
-    "-Wall"
-    "-Wextra"
-    "-Wpedantic"
+list(APPEND BFFLAGS_WARNING_CXX 
+    ${BFFLAGS_WARNING_C}
     "-Wctor-dtor-privacy"
-    "-Wshadow"
     "-Wnon-virtual-dtor"
     "-Wold-style-cast"
-    "-Wcast-align"
     "-Woverloaded-virtual"
-    "-Wconversion"
-    "-Wsign-conversion"
 )
-
-string(REPLACE ";" " " DEFAULT_C_FLAGS_WARNING "${DEFAULT_C_FLAGS_WARNING}")
-string(REPLACE ";" " " DEFAULT_CXX_FLAGS_WARNING "${DEFAULT_CXX_FLAGS_WARNING}")

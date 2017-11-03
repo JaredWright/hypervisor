@@ -18,38 +18,42 @@
 
 cmake_minimum_required(VERSION 3.6)
 project(bfsupport C CXX)
+include(${BF_FLAGS_DIR}/flags.cmake)
+set(TIDY_EXCLUSIONS ,-cert-err34-c,-misc-misplaced-widening-cast,-cppcoreguidelines-no-malloc)
 
 set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
 enable_language(ASM_NASM)
 
-if(ENABLE_UNITTESTING)
-    include(CTest)
-    enable_testing(true)
-endif()
-
-set(TIDY_EXCLUSIONS ,-cert-err34-c,-misc-misplaced-widening-cast,-cppcoreguidelines-no-malloc)
-
-list(APPEND BFSUPPORT_INCLUDE_DIRS
-    "${CMAKE_CURRENT_LIST_DIR}/include"
-    "${BUILD_SYSROOT_VMM}/include/c++/v1"
-    "${BUILD_SYSROOT_VMM}/include"
+include_directories(
+    ${CMAKE_CURRENT_LIST_DIR}/include
+    ${BUILD_SYSROOT_VMM}/include/c++/v1
+    ${BUILD_SYSROOT_VMM}/include
 )
-include_directories(${BFSUPPORT_INCLUDE_DIRS})
 
-list(APPEND BFSUPPORT_LINK_DIRS
-    "${BUILD_SYSROOT_VMM}/lib"
+link_directories(
+    ${BUILD_SYSROOT_VMM}/lib
 )
-link_directories(${BFSUPPORT_LINK_DIRS})
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${C_FLAGS_VMM}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAGS_VMM} -fno-stack-protector")
+generate_flags(VMM ADD_CXX_FLAGS "-fno-stack-protector")
 
 add_subdirectory(crt)
 add_subdirectory(syscall)
 add_subdirectory(pthread)
+add_subdirectory(dummy_lib1)
+add_subdirectory(dummy_lib2)
+add_subdirectory(dummy_main)
 
+# Temp hack until we can restructure unit tests
 if(ENABLE_UNITTESTING)
-    add_subdirectory(dummy_lib1)
-    add_subdirectory(dummy_lib2)
-    add_subdirectory(dummy_main)
+    include(CTest)
+    enable_testing(true)
+    include(${BF_SCRIPTS_DIR}/cmake/macros.cmake)
+    include(ExternalProject)
+
+    add_subproject(
+        ${CMAKE_CURRENT_LIST_DIR}/crt/tests
+        bfsupport_test
+        ${TOOLCHAIN_PATH_USERSPACE}
+        " "
+    )
 endif()

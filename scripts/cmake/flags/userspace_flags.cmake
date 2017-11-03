@@ -9,11 +9,8 @@ else()
     set(ABITYPE "SYSV" CACHE INTERNAL "")
 endif()
 
-list(APPEND COMMON_FLAGS_HOST 
+list(APPEND BFFLAGS_USERSPACE 
     "-fpic"
-    "-msse"
-    "-msse2"
-    "-msse3"
     "-fstack-protector-strong"
     "-Wl,--no-undefined"
     "-fvisibility=hidden"
@@ -23,16 +20,21 @@ list(APPEND COMMON_FLAGS_HOST
     "-D${ABITYPE}"
 )
 
-list(APPEND DEFAULT_C_FLAGS_HOST 
+list(APPEND BFFLAGS_USERSPACE_C 
     "-std=c11"
-    ${COMMON_FLAGS_HOST}
 )
 
-list(APPEND DEFAULT_CXX_FLAGS_HOST 
+list(APPEND BFFLAGS_USERSPACE_CXX 
     "-std=gnu++14"
     "-fvisibility-inlines-hidden"
-    ${COMMON_FLAGS_HOST}
 )
 
-string(REPLACE ";" " " DEFAULT_C_FLAGS_HOST "${DEFAULT_C_FLAGS_HOST}")
-string(REPLACE ";" " " DEFAULT_CXX_FLAGS_HOST "${DEFAULT_CXX_FLAGS_HOST}")
+list(APPEND BFFLAGS_USERSPACE_X86_64
+    "-msse"
+    "-msse2"
+    "-msse3"
+)
+
+list(APPEND BFFLAGS_USERSPACE_AARCH64
+    ""
+)
