@@ -16,11 +16,12 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-add_library(test_support STATIC test_real_elf.cpp test_fake_elf.cpp)
+add_library(test_elf_support STATIC test_real_elf.cpp test_fake_elf.cpp)
+install(TARGETS test_elf_support DESTINATION ${BUILD_SYSROOT_OS_TEST}/lib)
 
 macro(do_test str)
     add_executable(test_${str} test_${str}.cpp)
-    target_link_libraries(test_${str} test_support)
+    target_link_libraries(test_${str} test_elf_support)
     target_link_libraries(test_${str} test_catch)
     add_test(bfelf_${str} test_${str})
     install(TARGETS test_${str} DESTINATION ${BUILD_SYSROOT_OS_TEST}/bin/bfelf_loader)

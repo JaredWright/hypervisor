@@ -16,38 +16,42 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-add_library(test_catch STATIC test.cpp)
-install(TARGETS test_catch DESTINATION ${BUILD_SYSROOT_OS_TEST}/lib)
+cmake_minimum_required(VERSION 3.6)
+project(bfvmm_test C CXX)
+include(${BF_FLAGS_DIR}/flags.cmake)
+
+set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
+enable_language(ASM_NASM)
+
+list(APPEND VMM_TEST_C_FLAGS
+    "-fvisibility=hidden"
+    "-DDEBUG_LEVEL=1"
+)
+
+list(APPEND VMM_TEST_CXX_FLAGS
+    "-fvisibility=hidden"
+    "-fvisibility-inlines-hidden"
+    "-DDEBUG_LEVEL=1"
+)
+
+generate_flags(
+    USERSPACE
+    ADD_C_FLAGS ${VMM_TEST_C_FLAGS}
+    ADD_CXX_FLAGS ${VMM_TEST_CXX_FLAGS}
+)
 
 include_directories(
     ${CMAKE_CURRENT_LIST_DIR}/../include
-    ${BUILD_SYSROOT_OS_TEST}/include
     ${BUILD_SYSROOT_OS}/include
+    ${BUILD_SYSROOT_OS_TEST}/include
 )
 
-macro(do_test str)
-    add_executable(test_${str} test_${str}.cpp)
-    target_link_libraries(test_${str} test_catch)
-    add_test(test_${str} test_${str})
-    install(TARGETS test_${str} DESTINATION ${BUILD_SYSROOT_OS_TEST}/bin/bfsdk)
-endmacro(do_test)
+link_directories(
+    ${BUILD_SYSROOT_OS}/lib
+    ${BUILD_SYSROOT_OS_TEST}/lib
+    ${BUILD_SYSROOT_VMM}/lib
+)
 
-do_test(affinity)
-do_test(benchmark)
-do_test(bitmanip)
-do_test(buffer)
-do_test(debug)
-do_test(debugringinterface)
-do_test(errorcodes)
-do_test(exceptions)
-do_test(file)
-do_test(gsl)
-do_test(json)
-do_test(newdelete)
-do_test(shuffle)
-do_test(string)
-do_test(types)
-do_test(upperlower)
-do_test(vector)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
-install(TARGETS test_catch DESTINATION ${BUILD_SYSROOT_OS_TEST}/lib)
+install(DIRECTORY include/ DESTINATION ${BUILD_SYSROOT_VMM}/include)

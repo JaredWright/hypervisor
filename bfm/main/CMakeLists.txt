@@ -49,8 +49,5 @@ if(CYGWIN OR WIN32)
     target_link_libraries(bfm_static setupapi)
 endif()
 
-# ------------------------------------------------------------------------------
-# Install
-# ------------------------------------------------------------------------------
-
 install(TARGETS bfm DESTINATION ${BUILD_SYSROOT_OS}/bin)
+install(TARGETS bfm_static DESTINATION ${BUILD_SYSROOT_OS}/lib)

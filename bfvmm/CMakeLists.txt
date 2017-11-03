@@ -23,11 +23,6 @@ include(${BF_FLAGS_DIR}/flags.cmake)
 set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
 enable_language(ASM_NASM)
 
-if(ENABLE_UNITTESTING)
-    include(CTest)
-    enable_testing(true)
-endif()
-
 list(APPEND VMM_C_FLAGS
     "-fvisibility=hidden"
 )
@@ -43,22 +38,15 @@ generate_flags(
     ADD_CXX_FLAGS ${VMM_CXX_FLAGS}
 )
 
-list(APPEND BFSUPPORT_INCLUDE_DIRS
-    "${CMAKE_CURRENT_LIST_DIR}/include"
-    "${BUILD_SYSROOT_VMM}/include/c++/v1"
-    "${BUILD_SYSROOT_VMM}/include"
+include_directories(
+    ${CMAKE_CURRENT_LIST_DIR}/include
+    ${BUILD_SYSROOT_VMM}/include/c++/v1
+    ${BUILD_SYSROOT_VMM}/include
 )
-include_directories(${BFSUPPORT_INCLUDE_DIRS})
 
-list(APPEND BFSUPPORT_LINK_DIRS
-    "${BUILD_SYSROOT_VMM}/lib"
+link_directories(
+    ${BUILD_SYSROOT_VMM}/lib
 )
-link_directories(${BFSUPPORT_LINK_DIRS})
-
-# if(NOT CMAKE_TOOLCHAIN_FILE)
-#     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DDEBUG_LEVEL=1")
-#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DDEBUG_LEVEL=1")
-# endif()
 
 add_subdirectory(src)
 

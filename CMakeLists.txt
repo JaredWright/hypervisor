@@ -68,7 +68,7 @@ endif()
 if(ENABLE_UNITTESTING)
 	include(${BF_DEPENDS_DIR}/catch.cmake)
 	include(${BF_DEPENDS_DIR}/hippomocks.cmake)
-    add_dependencies(bfsdk catch hippomocks)
+    add_dependencies(bfsdk catch hippomocks gsl json)
 endif()
 
 # ------------------------------------------------------------------------------
@@ -150,6 +150,16 @@ add_subproject(
     ${TOOLCHAIN_PATH_BFVMM}
     "bfsdk binutils bfunwind bfsupport"
 )
+
+# Temp hack until we can restructure unit tests
+if(ENABLE_UNITTESTING)
+    add_subproject(
+        ${BF_SOURCE_DIR}/bfvmm/test
+        bfvmm_test
+        ${TOOLCHAIN_PATH_USERSPACE}
+        "bfvmm"
+    )
+endif()
 
 add_subproject(
     ${BF_SOURCE_DIR}/bfdriver

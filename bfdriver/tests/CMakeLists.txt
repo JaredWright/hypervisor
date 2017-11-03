@@ -16,12 +16,13 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-add_library(test_support STATIC test_support.cpp)
+add_library(test_bfdriver_support STATIC test_support.cpp)
+install(TARGETS test_bfdriver_support DESTINATION ${BUILD_SYSROOT_OS_TEST}/lib)
 
 macro(do_test str)
     add_executable(test_${str} test_${str}.cpp)
     target_link_libraries(test_${str} bfdriver)
-    target_link_libraries(test_${str} test_support)
+    target_link_libraries(test_${str} test_bfdriver_support)
     target_link_libraries(test_${str} test_catch)
     add_test(bfelf_${str} test_${str})
     install(TARGETS test_${str} DESTINATION ${BUILD_SYSROOT_OS_TEST}/bin/bfdriver)

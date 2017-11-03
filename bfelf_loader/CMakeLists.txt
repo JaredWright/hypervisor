@@ -22,10 +22,15 @@ project(bfelf_loader C CXX)
 if(ENABLE_UNITTESTING)
     include(CTest)
     enable_testing(true)
-    include_directories("tests")
-    include_directories("${BUILD_SYSROOT_OS_TEST}/include")
-    include_directories("${BUILD_SYSROOT_OS}/include")
-    link_directories("${BUILD_SYSROOT_OS_TEST}/lib")
+    include_directories(
+        tests
+        include
+        ${BUILD_SYSROOT_OS_TEST}/include
+        ${BUILD_SYSROOT_OS}/include
+    )
+    link_directories(
+        ${BUILD_SYSROOT_OS_TEST}/lib
+    )
     set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DBAREFLANK_SYSROOT_PATH='\"${BUILD_SYSROOT_VMM}\"'")
     add_subdirectory(tests)
 endif()
