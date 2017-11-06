@@ -21,21 +21,33 @@ macro(check_program_installed path name)
 endmacro(check_program_installed)
 
 # Add a project directory to be built with a new toolchain
-# @arg path: Path to a directory to be built with cmake
-# @arg target: The name of the cmake target to be created for this project
-# @arg toolchain: Path to a cmake toolchain file to use for compiling "project"
-# @arg depends: A list of other targets this project depends on
-macro(add_subproject path target toolchain depends)
-    if(NOT EXISTS ${path})
-        message(FATAL_ERROR "Unable to find project at path ${path}")
-    endif()
+# @arg SOURCE_DIR: Path to a source code directory to be built with cmake
+# @arg TARGET: The name of the cmake target to be created for this project
+# @arg TOOLCHAIN: Path to a cmake toolchain file to use for compiling "project"
+# @arg DEPENDS: A list of other targets this project depends on
+# @arg VERBOSE: Display debug messages
+function(add_subproject)
+    set(options VERBOSE)
+    set(oneVal SOURCE_DIR TARGET TOOLCHAIN)
+    set(multiVal DEPENDS)
+    cmake_parse_arguments(ADD_SUBPROJECT "${options}" "${oneVal}" "${multiVal}" ${ARGN})
 
-    if(NOT EXISTS ${toolchain})
-        message(FATAL_ERROR "Unable to find toolchain file ${toolchain}")
+    if(NOT EXISTS ${ADD_SUBPROJECT_SOURCE_DIR})
+        message(FATAL_ERROR "Unable to find project at path ${ADD_SUBPROJECT_SOURCE_DIR}")
+    endif()
+    if(NOT EXISTS ${ADD_SUBPROJECT_TOOLCHAIN})
+        message(FATAL_ERROR "Unable to find toolchain file ${ADD_SUBPROJECT_TOOLCHAIN}")
     endif()
     list(APPEND _PROJECT_CMAKE_ARGS
-        -DCMAKE_TOOLCHAIN_FILE=${toolchain}
+        -DCMAKE_TOOLCHAIN_FILE=${ADD_SUBPROJECT_TOOLCHAIN}
     )
+
+    if(${ADD_SUBPROJECT_VERBOSE})
+        message(STATUS "Adding subproject: ${ADD_SUBPROJECT_TARGET}")
+        message(STATUS "\t${ADD_SUBPROJECT_TARGET} source path: ${ADD_SUBPROJECT_SOURCE_DIR}")
+        message(STATUS "\t${ADD_SUBPROJECT_TARGET} toolchain file: ${ADD_SUBPROJECT_TOOLCHAIN}")
+        message(STATUS "\t${ADD_SUBPROJECT_TARGET} dependencies: ${ADD_SUBPROJECT_DEPENDS}")
+    endif()
 
     # Copy all non-built-in cmake cache variables to the new project scope
     get_cmake_property(_vars CACHE_VARIABLES)
@@ -46,17 +58,16 @@ macro(add_subproject path target toolchain depends)
         endif()
     endforeach()
 
-    string(REPLACE " " ";" depends_list ${depends})
     ExternalProject_Add(
-        ${target}
+        ${ADD_SUBPROJECT_TARGET}
         CMAKE_ARGS ${_PROJECT_CMAKE_ARGS}
-        SOURCE_DIR ${path}
-        PREFIX ${BF_BUILD_DIR}/${target}
+        SOURCE_DIR ${ADD_SUBPROJECT_SOURCE_DIR}
+        PREFIX ${BF_BUILD_DIR}/${ADD_SUBPROJECT_TARGET}
         UPDATE_DISCONNECTED 0
         UPDATE_COMMAND ""
-        DEPENDS ${depends_list}
+        DEPENDS ${ADD_SUBPROJECT_DEPENDS}
     )
-endmacro(add_subproject)
+endfunction(add_subproject)
 
 # Add a build configuration to the build system
 # @arg name: The name of the build configuration variable
