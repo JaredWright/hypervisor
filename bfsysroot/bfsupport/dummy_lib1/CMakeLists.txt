@@ -19,9 +19,9 @@
 # include_directories(
 #     "${CMAKE_CURRENT_LIST_DIR}/../include"
 #     "${BUILD_SYSROOT_OS}/include"
-#     "${BUILD_SYSROOT_OS_TEST}/include"
+#     "${BUILD_SYSROOT_TEST}/include"
 # )
-# link_directories(${BUILD_SYSROOT_OS_TEST}/include)
+# link_directories(${BUILD_SYSROOT_TEST}/include)
 
 add_library(dummy_lib1 SHARED dummy_lib1.cpp)
 target_compile_definitions(dummy_lib1 PRIVATE SHARED_DUMMY)

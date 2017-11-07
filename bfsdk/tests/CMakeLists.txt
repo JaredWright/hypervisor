@@ -17,11 +17,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 add_library(test_catch STATIC test.cpp)
-install(TARGETS test_catch DESTINATION ${BUILD_SYSROOT_OS_TEST}/lib)
+install(TARGETS test_catch DESTINATION ${BUILD_SYSROOT_TEST}/lib)
 
 include_directories(
     ${CMAKE_CURRENT_LIST_DIR}/../include
-    ${BUILD_SYSROOT_OS_TEST}/include
+    ${BUILD_SYSROOT_TEST}/include
     ${BUILD_SYSROOT_OS}/include
 )
 
@@ -29,7 +29,7 @@ macro(do_test str)
     add_executable(test_${str} test_${str}.cpp)
     target_link_libraries(test_${str} test_catch)
     add_test(test_${str} test_${str})
-    install(TARGETS test_${str} DESTINATION ${BUILD_SYSROOT_OS_TEST}/bin/bfsdk)
+    install(TARGETS test_${str} DESTINATION ${BUILD_SYSROOT_TEST}/bin/bfsdk)
 endmacro(do_test)
 
 do_test(affinity)
@@ -50,4 +50,4 @@ do_test(types)
 do_test(upperlower)
 do_test(vector)
 
-install(TARGETS test_catch DESTINATION ${BUILD_SYSROOT_OS_TEST}/lib)
+install(TARGETS test_catch DESTINATION ${BUILD_SYSROOT_TEST}/lib)

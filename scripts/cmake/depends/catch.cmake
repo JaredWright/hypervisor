@@ -16,6 +16,6 @@ ExternalProject_Add(
 ExternalProject_Add_Step(
     catch
     sysroot_install
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${CATCH_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_OS_TEST}/include
+    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${CATCH_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_TEST}/include
     DEPENDEES          	install
 )

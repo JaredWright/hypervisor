@@ -43,12 +43,12 @@ generate_flags(
 include_directories(
     ${CMAKE_CURRENT_LIST_DIR}/../include
     ${BUILD_SYSROOT_OS}/include
-    ${BUILD_SYSROOT_OS_TEST}/include
+    ${BUILD_SYSROOT_TEST}/include
 )
 
 link_directories(
     ${BUILD_SYSROOT_OS}/lib
-    ${BUILD_SYSROOT_OS_TEST}/lib
+    ${BUILD_SYSROOT_TEST}/lib
     ${BUILD_SYSROOT_VMM}/lib
 )
 

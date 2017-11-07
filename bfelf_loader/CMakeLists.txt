@@ -25,11 +25,11 @@ if(ENABLE_UNITTESTING)
     include_directories(
         tests
         include
-        ${BUILD_SYSROOT_OS_TEST}/include
+        ${BUILD_SYSROOT_TEST}/include
         ${BUILD_SYSROOT_OS}/include
     )
     link_directories(
-        ${BUILD_SYSROOT_OS_TEST}/lib
+        ${BUILD_SYSROOT_TEST}/lib
     )
     set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DBAREFLANK_SYSROOT_PATH='\"${BUILD_SYSROOT_VMM}\"'")
     add_subdirectory(tests)
