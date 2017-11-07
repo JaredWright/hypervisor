@@ -14,6 +14,7 @@ ExternalProject_Add(
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
+    DEPENDS bfsdk
 )
 
 ExternalProject_Add(
@@ -29,4 +30,5 @@ ExternalProject_Add(
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
     INSTALL_COMMAND ""
+    DEPENDS bfsdk
 )

@@ -26,6 +26,7 @@ include(${CMAKE_SOURCE_DIR}/scripts/cmake/global_vars.cmake)
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/macros.cmake)
 include(${BF_CONFIG_DIR}/default.cmake)
 include(${BF_FLAGS_DIR}/flags.cmake)
+include(${CMAKE_SOURCE_DIR}/scripts/cmake/validator.cmake)
 
 include(ExternalProject)
 set_property(GLOBAL PROPERTY EP_PREFIX ${BF_BUILD_DEPENDS_DIR})
@@ -37,12 +38,24 @@ endif()
 set(CMAKE_PREFIX_PATH ${BF_BUILD_INSTALL_DIR})
 
 # ------------------------------------------------------------------------------
+# Validate the build configuration at build time
+# ------------------------------------------------------------------------------
+add_custom_target(
+    validate_build
+    COMMAND ${CMAKE_COMMAND}
+        -P ${CMAKE_SOURCE_DIR}/scripts/cmake/validator.cmake
+        -C ${CMAKE_BINARY_DIR}/CMakeCache.txt
+    COMMENT "Validating build configuration..."
+)
+
+# ------------------------------------------------------------------------------
 # Toolchain components
 # ------------------------------------------------------------------------------
 add_subproject(
     SOURCE_DIR ${BF_SOURCE_DIR}/bfsdk
     TARGET bfsdk
     TOOLCHAIN ${TOOLCHAIN_PATH_BFSDK}
+    DEPENDS validate_build
 )
 include(${BF_DEPENDS_DIR}/binutils.cmake)
 

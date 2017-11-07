@@ -1,0 +1,36 @@
+set(_validator_expressions "" CACHE INTERNAL "")
+set(_validator_messages "" CACHE INTERNAL "")
+
+function(add_build_rule)
+    set(oneVal FAIL_MSG)
+    set(multiVal EXPRESSION)
+    cmake_parse_arguments(ADD_BUILD_RULE "" "${oneVal}" "${multiVal}" ${ARGN})
+
+    string(REPLACE ";" " " ADD_BUILD_RULE_EXPRESSION "${ADD_BUILD_RULE_EXPRESSION}")
+    list(APPEND _validator_expressions "${ADD_BUILD_RULE_EXPRESSION}")
+    list(APPEND _validator_messages "${ADD_BUILD_RULE_FAIL_MSG}")
+    set(_validator_expressions ${_validator_expressions} PARENT_SCOPE)
+    set(_validator_messages ${_validator_messages} PARENT_SCOPE)
+endfunction(add_build_rule)
+
+function(validate_build)
+    list(LENGTH _validator_expressions count)
+    math(EXPR count "${count} - 1")
+
+    foreach(i RANGE ${count})
+        list(GET _validator_expressions ${i} e)
+        list(GET _validator_messages ${i} m)
+        string(REPLACE " " ";" e "${e}")
+        if(${e})
+            message(SEND_ERROR "ERROR - Build validation failed: ${m}")
+            set(BUILD_VALIDATOR_ERROR ON)
+        endif()
+    endforeach()
+
+    if(BUILD_VALIDATOR_ERROR)
+        message(FATAL_ERROR "Build validation failed")
+    endif()
+endfunction(validate_build)
+
+include(${BF_SCRIPTS_DIR}/cmake/validator_rules.cmake)
+validate_build()
