@@ -84,37 +84,52 @@ set(BF_BUILD_INSTALL_DIR "${BF_BUILD_DIR}/install"
     "Intermediate build installation directory"
 )
 
-set(BFDRIVER_BUILD_DIR "${BF_BUILD_DIR}/bfdriver/src/bfdriver-build"
+set(BF_BUILD_DIR_BFDRIVER "${BF_BUILD_DIR}/bfdriver/src/bfdriver-build"
     CACHE INTERNAL
     "Build directory for bfdriver"
 )
 
-set(BFELF_LOADER_BUILD_DIR "${BF_BUILD_DIR}/bfelf_loader/src/bfelf_loader-build"
+set(BF_BUILD_DIR_BFELF_LOADER "${BF_BUILD_DIR}/bfelf_loader/src/bfelf_loader-build"
     CACHE INTERNAL
     "Build directory for bfelf_loader"
 )
 
-set(BFM_BUILD_DIR "${BF_BUILD_DIR}/bfm/src/bfm-build"
+set(BF_BUILD_DIR_BFM "${BF_BUILD_DIR}/bfm/src/bfm-build"
     CACHE INTERNAL
     "Build directory for bfm"
 )
 
-set(BFSDK_BUILD_DIR "${BF_BUILD_DIR}/bfsdk/src/bfsdk-build"
+set(BF_BUILD_DIR_BFSDK "${BF_BUILD_DIR}/bfsdk/src/bfsdk-build"
     CACHE INTERNAL
     "Build directory for bfsdk"
 )
 
-set(BFSUPPORT_BUILD_DIR "${BF_BUILD_DIR}/bfsupport/src/bfsupport-build"
+set(BF_BUILD_DIR_BFSUPPORT "${BF_BUILD_DIR}/bfsupport/src/bfsupport-build"
     CACHE INTERNAL
     "Build directory for bfsupport"
 )
 
-set(BFUNWIND_BUILD_DIR "${BF_BUILD_DIR}/bfunwind/src/bfunwind-build"
+set(BF_BUILD_DIR_BFSUPPORT_TEST "${BF_BUILD_DIR}/bfsupport_test/src/bfsupport_test-build"
+    CACHE INTERNAL
+    "Build directory for bfsupport tests"
+)
+
+set(BF_BUILD_DIR_BFUNWIND "${BF_BUILD_DIR}/bfunwind/src/bfunwind-build"
     CACHE INTERNAL
     "Build directory for bfunwind"
 )
 
-set(BFVMM_BUILD_DIR "${BF_BUILD_DIR}/bfvmm/src/bfvmm-build"
+set(BF_BUILD_DIR_BFVMM "${BF_BUILD_DIR}/bfvmm/src/bfvmm-build"
     CACHE INTERNAL
     "Build directory for bfvmm"
+)
+
+set(BF_BUILD_DIR_BFVMM_TEST "${BF_BUILD_DIR}/bfvmm_test/src/bfvmm_test-build"
+    CACHE INTERNAL
+    "Build directory for bfvmm tests"
+)
+
+set(BF_BUILD_DIR_EXTENDED_APIS "${BF_BUILD_DIR}/extended_apis/src/extended_apis-build"
+    CACHE INTERNAL
+    "Build directory for bareflank Extended APIs"
 )

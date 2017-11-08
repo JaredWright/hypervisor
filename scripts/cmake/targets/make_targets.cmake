@@ -1,8 +1,3 @@
-
-
-
-# TODO: add_custom_target(help ... )
-
 # ------------------------------------------------------------------------------
 # Clean
 # ------------------------------------------------------------------------------
@@ -46,30 +41,6 @@ if(ENABLE_EXTENDED_APIS)
 
 endif()
 
-# ------------------------------------------------------------------------------
-# Test
-# ------------------------------------------------------------------------------
-
-if(ENABLE_UNITTESTING)
-
-    if(POLICY CMP0037)
-        cmake_policy(SET CMP0037 OLD)
-    endif()
-
-    add_custom_target(test
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/bfdriver/build ctest
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/bfelf_loader/build ctest
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/bfm/build ctest
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/bfsdk/build ctest
-        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/test_bfvmm/build ctest
-        COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/test_bfsysroot/build --target test
-    )
-
-    if(ENABLE_EXTENDED_APIS)
-        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/test_extended_apis/build ctest)
-    endif()
-
-endif()
 
 # ------------------------------------------------------------------------------
 # Tidy
@@ -138,37 +109,85 @@ endif()
 # ENDIF()
 
 # ------------------------------------------------------------------------------
-# BFM Shortcuts
+# BFM
 # ------------------------------------------------------------------------------
+add_custom_target(
+    quick
+    COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm quick
+    COMMENT "Stopping, unloading, loading, and starting the VMM"
+)
 
-if(NOT WIN32)
-    add_custom_target(quick COMMAND ${SUDO} ${BF_BUILD_INSTALL_DIR}/bin/bfm quick)
-    add_custom_target(stop COMMAND ${SUDO} ${BF_BUILD_INSTALL_DIR}/bin/bfm stop)
-    add_custom_target(unload COMMAND ${SUDO} ${BF_BUILD_INSTALL_DIR}/bin/bfm unload)
-    add_custom_target(dump COMMAND ${SUDO} ${BF_BUILD_INSTALL_DIR}/bin/bfm dump)
-    add_custom_target(status COMMAND ${SUDO} ${BF_BUILD_INSTALL_DIR}/bin/bfm status)
-endif()
+add_custom_target(
+    stop
+    COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm stop
+    COMMENT "Stopping the currently loaded VMM"
+)
+
+add_custom_target(
+    unload
+    COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm unload
+    COMMENT "Unloading the currently loaded VMM"
+)
+
+add_custom_target(
+    dump
+    COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm dump
+    COMMENT "Dumping debug output from the VMM"
+)
+
+add_custom_target(
+    status
+    COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm status
+    COMMENT "Displaying status of the current VMM"
+)
 
 # ------------------------------------------------------------------------------
-# Driver Targets
+# Driver
 # ------------------------------------------------------------------------------
 add_custom_target(
     driver_quick
-    COMMAND ${CMAKE_COMMAND} --build ${BFDRIVER_BUILD_DIR} --target bfdriver_quick
+    COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFDRIVER} --target bfdriver_quick
     DEPENDS bfdriver
     COMMENT "Unloading, cleaning, building, and reloading bfdriver"
 )
 
 add_custom_target(
     driver_load
-    COMMAND ${CMAKE_COMMAND} --build ${BFDRIVER_BUILD_DIR} --target bfdriver_load
+    COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFDRIVER} --target bfdriver_load
     DEPENDS bfdriver
     COMMENT "Loading bfdriver to the local OS"
 )
 
 add_custom_target(
     driver_unload
-    COMMAND ${CMAKE_COMMAND} --build ${BFDRIVER_BUILD_DIR} --target bfdriver_unload
+    COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFDRIVER} --target bfdriver_unload
     DEPENDS bfdriver
     COMMENT "Unloading bfdriver from the local OS"
 )
+
+# ------------------------------------------------------------------------------
+# Test
+# ------------------------------------------------------------------------------
+if(ENABLE_UNITTESTING)
+    if(POLICY CMP0037)
+        cmake_policy(SET CMP0037 OLD)
+    endif()
+
+    add_custom_target(
+        test
+        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFDRIVER} ctest
+        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFELF_LOADER} ctest
+        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFM} ctest
+        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK} ctest
+        COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFSUPPORT_TEST} --target test
+        # COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFVMM_TEST} ctest
+        COMMENT "Running unit tests"
+    )
+
+    if(ENABLE_EXTENDED_APIS)
+        add_custom_command(
+            TARGET test
+            COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_EXTENDED_APIS} ctest
+        )
+    endif()
+endif()

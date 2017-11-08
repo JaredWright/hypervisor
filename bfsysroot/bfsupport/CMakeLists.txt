@@ -45,15 +45,12 @@ add_subdirectory(dummy_main)
 
 # Temp hack until we can restructure unit tests
 if(ENABLE_UNITTESTING)
-    include(CTest)
-    enable_testing(true)
     include(${BF_SCRIPTS_DIR}/cmake/macros.cmake)
     include(ExternalProject)
 
     add_subproject(
-        ${CMAKE_CURRENT_LIST_DIR}/crt/tests
-        bfsupport_test
-        ${TOOLCHAIN_PATH_USERSPACE}
-        " "
+        SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/crt/tests
+        TARGET bfsupport_test
+        TOOLCHAIN ${TOOLCHAIN_PATH_USERSPACE}
     )
 endif()
