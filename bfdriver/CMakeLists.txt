@@ -33,8 +33,21 @@ if(ENABLE_UNITTESTING)
     add_subdirectory(tests)
 endif()
 
-execute_process(
-    COMMAND ${CMAKE_SOURCE_DIR}/scripts/driver_build.sh ${CMAKE_SOURCE_DIR}
+set(DRIVER_BUILD_CMD ${BF_SCRIPTS_DIR}/util/driver_build.sh ${CMAKE_SOURCE_DIR})
+set(DRIVER_CLEAN_CMD ${BF_SCRIPTS_DIR}/util/driver_clean.sh ${CMAKE_SOURCE_DIR})
+set(DRIVER_LOAD_CMD ${BF_SCRIPTS_DIR}/util/driver_load.sh ${CMAKE_SOURCE_DIR})
+set(DRIVER_UNLOAD_CMD ${BF_SCRIPTS_DIR}/util/driver_unload.sh ${CMAKE_SOURCE_DIR})
+
+add_custom_target(bfdriver_build COMMAND ${DRIVER_BUILD_CMD} ALL)
+add_custom_target(bfdriver_clean COMMAND ${DRIVER_CLEAN_CMD})
+add_custom_target(bfdriver_load COMMAND ${DRIVER_LOAD_CMD})
+add_custom_target(bfdriver_unload COMMAND ${DRIVER_UNLOAD_CMD})
+add_custom_target(
+    bfdriver_quick
+    COMMAND ${DRIVER_UNLOAD_CMD}
+    COMMAND ${DRIVER_CLEAN_CMD}
+    COMMAND ${DRIVER_BUILD_CMD}
+    COMMAND ${DRIVER_LOAD_CMD}
 )
 
 if(${BUILD_TARGET_OS} STREQUAL "Linux")

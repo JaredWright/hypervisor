@@ -1,14 +1,18 @@
 
+
+
+# TODO: add_custom_target(help ... )
+
 # ------------------------------------------------------------------------------
 # Clean
 # ------------------------------------------------------------------------------
 
 add_custom_target(distclean
     COMMAND ${CMAKE_COMMAND} --build . --target clean
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/bfdriver/build --target clean
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/bfelf_loader/build --target clean
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/bfm/build --target clean
-    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/bfsdk/build --target clean
+    COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR}/bfdriver/build --target clean
+    COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR}/bfelf_loader/build --target clean
+    COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR}/bfm/build --target clean
+    COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR}/bfsdk/build --target clean
 
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${BF_BUILD_INSTALL_DIR}/include
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${BF_BUILD_INSTALL_DIR}/lib
@@ -146,22 +150,25 @@ if(NOT WIN32)
 endif()
 
 # ------------------------------------------------------------------------------
-# Driver Shortcuts
+# Driver Targets
 # ------------------------------------------------------------------------------
+add_custom_target(
+    driver_quick
+    COMMAND ${CMAKE_COMMAND} --build ${BFDRIVER_BUILD_DIR} --target bfdriver_quick
+    DEPENDS bfdriver
+    COMMENT "Unloading, cleaning, building, and reloading bfdriver"
+)
 
-if(NOT WIN32)
-    add_custom_target(driver_build COMMAND make driver_build > /dev/null VERBATIM WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bfdriver/build)
-    add_custom_target(driver_load COMMAND make driver_load > /dev/null VERBATIM WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bfdriver/build)
-    add_custom_target(driver_unload COMMAND make driver_unload > /dev/null VERBATIM WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bfdriver/build)
-    add_custom_target(driver_clean COMMAND make driver_clean > /dev/null VERBATIM WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bfdriver/build)
-    # add_custom_target(driver_build COMMAND ${CMAKE_SOURCE_DIR}/scripts/driver_build.sh ${CMAKE_SOURCE_DIR})
-    # add_custom_target(driver_clean COMMAND ${CMAKE_SOURCE_DIR}/scripts/driver_clean.sh ${CMAKE_SOURCE_DIR})
-    # add_custom_target(driver_load COMMAND ${CMAKE_SOURCE_DIR}/scripts/driver_load.sh ${CMAKE_SOURCE_DIR})
-    # add_custom_target(driver_unload COMMAND ${CMAKE_SOURCE_DIR}/scripts/driver_unload.sh ${CMAKE_SOURCE_DIR})
+add_custom_target(
+    driver_load
+    COMMAND ${CMAKE_COMMAND} --build ${BFDRIVER_BUILD_DIR} --target bfdriver_load
+    DEPENDS bfdriver
+    COMMENT "Loading bfdriver to the local OS"
+)
 
-    add_custom_target(driver_quick)
-    add_custom_command(TARGET driver_quick COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target driver_unload)
-    add_custom_command(TARGET driver_quick COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target driver_clean)
-    add_custom_command(TARGET driver_quick COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target driver_build)
-    add_custom_command(TARGET driver_quick COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target driver_load)
-endif()
+add_custom_target(
+    driver_unload
+    COMMAND ${CMAKE_COMMAND} --build ${BFDRIVER_BUILD_DIR} --target bfdriver_unload
+    DEPENDS bfdriver
+    COMMENT "Unloading bfdriver from the local OS"
+)
