@@ -36,14 +36,14 @@ list(APPEND SOURCES
 #     list(APPEND SOURCES vmcs_intel_x64_resume_mock.cpp)
 # endif()
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_vmcs SHARED ${SOURCES})
     target_compile_definitions(bfvmm_vmcs PRIVATE SHARED_VMCS)
     target_link_libraries(bfvmm_vmcs bfvmm_memory_manager)
     target_link_libraries(bfvmm_vmcs bfvmm_intrinsics)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_vmcs STATIC ${SOURCES})
     target_compile_definitions(bfvmm_vmcs PUBLIC STATIC_VMCS)
     target_compile_definitions(bfvmm_vmcs PUBLIC STATIC_MEMORY_MANAGER)

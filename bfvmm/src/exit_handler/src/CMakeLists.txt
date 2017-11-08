@@ -27,12 +27,12 @@ list(APPEND SOURCES
 #     list(APPEND SOURCES exit_handler_intel_x64_support_mock.cpp)
 # endif()
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_exit_handler SHARED ${SOURCES})
     target_compile_definitions(bfvmm_exit_handler PRIVATE SHARED_EXIT_HANDLER)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_exit_handler STATIC ${SOURCES})
     target_compile_definitions(bfvmm_exit_handler PUBLIC STATIC_EXIT_HANDLER)
     target_compile_definitions(bfvmm_exit_handler PUBLIC STATIC_VMCS)

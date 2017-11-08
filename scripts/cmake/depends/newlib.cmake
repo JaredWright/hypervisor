@@ -1,4 +1,5 @@
 set(NEWLIB_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib)
+set(NEWLIB_BUILD_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib-build)
 set(NEWLIB_INTERM_INSTALL_DIR ${BF_BUILD_DEPENDS_DIR}/src/newlib-install)
 set(NEWLIB_TARGET "${BUILD_TARGET_ARCH}-vmm-elf")
 
@@ -44,20 +45,21 @@ ExternalProject_Add(
     DEPENDS             bfsdk binutils
 )
 
+if(BUILD_VMM_SHARED)
+    ExternalProject_Add_Step(
+        newlib
+        build_shared_lib
+        COMMAND cd ${NEWLIB_BUILD_DIR}/${NEWLIB_TARGET}/newlib && ${TOOLCHAIN_NEWLIB_AR} x libc.a
+        COMMAND cd ${NEWLIB_BUILD_DIR}/${NEWLIB_TARGET}/newlib && ${TOOLCHAIN_NEWLIB_CC} -shared *.o -o ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/lib/libc.so
+        DEPENDEES install
+        )
+    list(APPEND NEWLIB_INSTALL_DEPENDEES build_shared_lib)
+endif()
+
+list(APPEND NEWLIB_INSTALL_DEPENDEES install)
 ExternalProject_Add_Step(
     newlib
     sysroot_install
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/ ${BUILD_SYSROOT_VMM}
-    DEPENDEES          	install
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/ ${BUILD_SYSROOT_VMM}
+    DEPENDEES "${NEWLIB_INSTALL_DEPENDEES}"
 )
-
-# if(BUILD_SHARED_LIBS)
-#     ExternalProject_Add_Step(
-#         newlib
-#         link_shared_lib
-#         COMMAND             ${CMAKE_COMMAND} -E copy ${CMAKE_INSTALL_PREFIX}/sysroots/${BAREFLANK_TARGET}/lib/libc.a libc.a
-#         COMMAND             ${CMAKE_AR} x libc.a
-#         COMMAND             ${CMAKE_C_COMPILER} -shared *.o -o ${CMAKE_INSTALL_PREFIX}/sysroots/${BAREFLANK_TARGET}/lib/libc.so
-#         DEPENDEES           prefix_install
-#         )
-# endif()

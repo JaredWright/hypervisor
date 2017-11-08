@@ -23,6 +23,17 @@ include(${BF_FLAGS_DIR}/warning_flags.cmake)
 include(${BF_FLAGS_DIR}/asan_flags.cmake)
 include(${BF_FLAGS_DIR}/usan_flags.cmake)
 
+# Generates the appropriate C and C++ compiler flags for the current build
+# configuruation, and the given environment (VMM or USERSPACE)
+# @arg VMM: Set to generate flags for vmm components
+# @arg USERSPACE: Set to generate flags for userspace components
+# @arg SILENT: Set to silence flag debug output
+# @arg C_FLAGS_OUT: Name of a cmake variable to contain C compiler flags as
+#       output from this function. If not specified, CMAKE_C_FLAGS is used
+# @arg CXX_FLAGS_OUT: Name of a cmake variable to contain C++ compiler flags as
+#       output from this function. If not specified, CMAKE_CXX_FLAGS is used
+# @arg ADD_C_FLAGS: Additional C flags added to the generated flags
+# @arg ADD_CXX_FLAGS: Additional C++ flags added to the generated flags
 function(generate_flags)
     set(options VMM USERSPACE SILENT)
     set(oneVal C_FLAGS_OUT CXX_FLAGS_OUT)

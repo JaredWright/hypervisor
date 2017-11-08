@@ -23,12 +23,12 @@ list(APPEND SOURCES
     registers_intel_x64.asm
 )
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfunwind SHARED ${SOURCES})
     target_compile_definitions(bfunwind PRIVATE SHARED_SYSCALL)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfunwind STATIC ${SOURCES})
     target_compile_definitions(bfunwind PUBLIC STATIC_SYSCALL)
 endif()

@@ -2,13 +2,13 @@
 # Developer feature build rules
 # ------------------------------------------------------------------------------
 add_build_rule(
-    FAIL_ON ${BUILD_SHARED_LIBS} AND ${BUILD_STATIC_LIBS}
-    FAIL_MSG "Cannot build both static and shared libraries in the same build"
+    FAIL_ON ${BUILD_VMM_SHARED} AND ${BUILD_VMM_STATIC}
+    FAIL_MSG "Cannot build VMM components as both static and shared in the same build"
 )
 
 add_build_rule(
-    FAIL_ON NOT ${BUILD_SHARED_LIBS} AND NOT ${BUILD_STATIC_LIBS}
-    FAIL_MSG "Must specify either static or shared libraries"
+    FAIL_ON NOT ${BUILD_VMM_SHARED} AND NOT ${BUILD_VMM_STATIC}
+    FAIL_MSG "Must enable either BUILD_VMM_STATIC or BUILD_VMM_SHARED"
 )
 
 # ------------------------------------------------------------------------------

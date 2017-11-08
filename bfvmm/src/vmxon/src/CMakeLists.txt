@@ -20,14 +20,14 @@ list(APPEND SOURCES
     vmxon_intel_x64.cpp
 )
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_vmxon SHARED ${SOURCES})
     target_compile_definitions(bfvmm_vmxon PRIVATE SHARED_VMXON)
     target_link_libraries(bfvmm_vmxon bfvmm_memory_manager)
     target_link_libraries(bfvmm_vmxon bfvmm_intrinsics)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_vmxon STATIC ${SOURCES})
     target_compile_definitions(bfvmm_vmxon PUBLIC STATIC_VMXON)
     target_compile_definitions(bfvmm_vmxon PUBLIC STATIC_MEMORY_MANAGER)

@@ -73,17 +73,17 @@ add_config(
 )
 
 add_config(
-    CONFIG_NAME BUILD_SHARED_LIBS
+    CONFIG_NAME BUILD_VMM_SHARED
     CONFIG_TYPE BOOL
     DEFAULT_VAL OFF
-    DESCRIPTION "Build libraries as shared libraries"
+    DESCRIPTION "Build VMM components as shared libraries"
 )
 
 add_config(
-    CONFIG_NAME BUILD_STATIC_LIBS
+    CONFIG_NAME BUILD_VMM_STATIC
     CONFIG_TYPE BOOL
     DEFAULT_VAL ON
-    DESCRIPTION "Build libraries as static libraries"
+    DESCRIPTION "Build VMM components as static libraries"
 )
 
 if(${CMAKE_VERBOSE_MAKEFILE})

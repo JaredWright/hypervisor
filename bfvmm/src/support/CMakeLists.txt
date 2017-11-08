@@ -24,11 +24,11 @@ list(APPEND SOURCES
     unistd.cpp
 )
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_support SHARED ${SOURCES})
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_support STATIC ${SOURCES})
 endif()
 

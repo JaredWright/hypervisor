@@ -31,7 +31,7 @@ list(APPEND SOURCES
 add_library(bfvmm_main STATIC ${SOURCES})
 add_executable(bfvmm ${CMAKE_BINARY_DIR}/null.cpp)
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     target_link_libraries(bfvmm -Wl,--whole-archive bfvmm_main -Wl,--no-whole-archive)
     target_link_libraries(bfvmm bfvmm_vcpu_factory)
     target_link_libraries(bfvmm bfvmm_vcpu)
@@ -46,7 +46,7 @@ if(BUILD_SHARED_LIBS)
     target_link_libraries(bfvmm bfvmm_intrinsics)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     target_link_libraries(bfvmm -Wl,--whole-archive bfvmm_main -Wl,--no-whole-archive)
     target_link_libraries(bfvmm -Wl,--whole-archive bfvmm_vcpu_factory -Wl,--no-whole-archive)
     target_link_libraries(bfvmm -Wl,--whole-archive bfvmm_vcpu -Wl,--no-whole-archive)

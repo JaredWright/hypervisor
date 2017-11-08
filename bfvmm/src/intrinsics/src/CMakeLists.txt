@@ -58,13 +58,13 @@
 
 # endif()
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_intrinsics SHARED ${SOURCES})
     set_target_properties(bfvmm_intrinsics PROPERTIES LINKER_LANGUAGE C)
     target_compile_definitions(bfvmm_intrinsics PRIVATE SHARED_INTRINSICS)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_intrinsics STATIC ${SOURCES})
     set_target_properties(bfvmm_intrinsics PROPERTIES LINKER_LANGUAGE C)
     target_compile_definitions(bfvmm_intrinsics PUBLIC STATIC_INTRINSICS)

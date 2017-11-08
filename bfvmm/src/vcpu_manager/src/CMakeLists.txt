@@ -20,7 +20,7 @@ list(APPEND SOURCES
     vcpu_manager.cpp
 )
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_vcpu_manager SHARED ${SOURCES})
     target_compile_definitions(bfvmm_vcpu_manager PRIVATE SHARED_VCPU)
     target_link_libraries(bfvmm_vcpu_manager bfvmm_vcpu)
@@ -32,7 +32,7 @@ if(BUILD_SHARED_LIBS)
     target_link_libraries(bfvmm_vcpu_manager bfvmm_intrinsics)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_vcpu_manager STATIC ${SOURCES})
     target_compile_definitions(bfvmm_vcpu_manager PUBLIC STATIC_VCPU)
     target_compile_definitions(bfvmm_vcpu_manager PUBLIC STATIC_VMXON)

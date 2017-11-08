@@ -24,13 +24,13 @@ list(APPEND SOURCES
     root_page_table_x64.cpp
 )
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_memory_manager SHARED ${SOURCES})
     target_compile_definitions(bfvmm_memory_manager PRIVATE SHARED_MEMORY_MANAGER)
     target_link_libraries(bfvmm_memory_manager bfvmm_intrinsics)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_memory_manager STATIC ${SOURCES})
     target_compile_definitions(bfvmm_memory_manager PUBLIC STATIC_MEMORY_MANAGER)
     target_compile_definitions(bfvmm_memory_manager PUBLIC STATIC_INTRINSICS)

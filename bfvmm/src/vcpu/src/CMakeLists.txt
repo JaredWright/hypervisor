@@ -21,7 +21,7 @@ list(APPEND SOURCES
     vcpu_intel_x64.cpp
 )
 
-if(BUILD_SHARED_LIBS)
+if(BUILD_VMM_SHARED)
     add_library(bfvmm_vcpu SHARED ${SOURCES})
     target_compile_definitions(bfvmm_vcpu PRIVATE SHARED_VCPU)
     target_link_libraries(bfvmm_vcpu bfvmm_vmxon)
@@ -31,7 +31,7 @@ if(BUILD_SHARED_LIBS)
     target_link_libraries(bfvmm_vcpu bfvmm_intrinsics)
 endif()
 
-if(BUILD_STATIC_LIBS)
+if(BUILD_VMM_STATIC)
     add_library(bfvmm_vcpu STATIC ${SOURCES})
     target_compile_definitions(bfvmm_vcpu PUBLIC STATIC_VCPU)
     target_compile_definitions(bfvmm_vcpu PUBLIC STATIC_VMXON)
