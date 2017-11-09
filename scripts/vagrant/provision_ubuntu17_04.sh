@@ -23,7 +23,7 @@ VAGRANT_HOME_DIR="/home/ubuntu"
 sudo apt-get update
 sudo apt-get install -y git build-essential linux-headers-$(uname -r) clang \
     binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu nasm cmake clang-tidy-4.0 \
-    cmake-curses-gui
+    cmake-curses-gui astyle
 
 # Have 'vagrant ssh' bring you straight to a build directory
 echo "mkdir -p $VAGRANT_BUILD_DIR && cd $VAGRANT_BUILD_DIR" >> $VAGRANT_HOME_DIR/.profile

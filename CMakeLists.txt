@@ -26,7 +26,8 @@ include(${CMAKE_SOURCE_DIR}/scripts/cmake/global_vars.cmake)
 include(${CMAKE_SOURCE_DIR}/scripts/cmake/macros.cmake)
 include(${BF_CONFIG_DIR}/default.cmake)
 include(${BF_FLAGS_DIR}/flags.cmake)
-include(${CMAKE_SOURCE_DIR}/scripts/cmake/build_rules.cmake)
+include(${BF_SCRIPTS_DIR}/cmake/build_rules.cmake)
+include(${BF_SCRIPTS_DIR}/cmake/targets.cmake)
 validate_build()
 
 include(ExternalProject)
@@ -166,7 +167,7 @@ add_subproject(
     SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver
     TARGET bfdriver
     TOOLCHAIN ${TOOLCHAIN_PATH_BFDRIVER}
-    DEPENDS bfsdk
+    DEPENDS bfsdk bfelf_loader
 )
 
 add_subproject(
@@ -182,8 +183,3 @@ add_subproject(
 #     TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
 #     DEPENDS bfsdk binutils bfvmm
 # )
-
-# ------------------------------------------------------------------------------
-# Custom build system targets
-# ------------------------------------------------------------------------------
-include(${BF_TARGETS_DIR}/targets.cmake)

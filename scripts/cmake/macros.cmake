@@ -58,6 +58,11 @@ function(add_subproject)
         endif()
     endforeach()
 
+    # If clang-tidy is enabled, each project must generate compile_commands.json
+    if(ENABLE_TIDY)
+        list(APPEND _PROJECT_CMAKE_ARGS -DCMAKE_EXPORT_COMPILE_COMMANDS=ON)
+    endif()
+
     ExternalProject_Add(
         ${ADD_SUBPROJECT_TARGET}
         CMAKE_ARGS ${_PROJECT_CMAKE_ARGS}

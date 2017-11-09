@@ -55,11 +55,6 @@ set(BF_FLAGS_DIR "${BF_SCRIPTS_DIR}/cmake/flags"
     "Cmake compiler flags directory"
 )
 
-set(BF_TARGETS_DIR "${BF_SCRIPTS_DIR}/cmake/targets"
-    CACHE INTERNAL
-    "Cmake custom build targets directory"
-)
-
 set(BF_TOOLCHAIN_DIR "${BF_SCRIPTS_DIR}/cmake/toolchain"
     CACHE INTERNAL
     "Cmake toolchain files directory"
@@ -132,4 +127,9 @@ set(BF_BUILD_DIR_BFVMM_TEST "${BF_BUILD_DIR}/bfvmm_test/src/bfvmm_test-build"
 set(BF_BUILD_DIR_EXTENDED_APIS "${BF_BUILD_DIR}/extended_apis/src/extended_apis-build"
     CACHE INTERNAL
     "Build directory for bareflank Extended APIs"
+)
+
+set(BF_BUILD_DIR_EXTENDED_APIS_TEST "${BF_BUILD_DIR}/extended_apis/src/extended_apis_test-build"
+    CACHE INTERNAL
+    "Build directory for bareflank Extended APIs tests"
 )
