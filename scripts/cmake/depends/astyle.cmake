@@ -12,7 +12,7 @@ ExternalProject_Add(
 	GIT_TAG             v1.2
 	GIT_SHALLOW         1
 	CMAKE_ARGS          ${ASTYLE_CMAKE_ARGS}
-    DEPENDS             bfsdk binutils
+    DEPENDS             bfsdk
 )
 
 # TODO: Install to the appropirate sysroot in the build tree

@@ -47,17 +47,11 @@ add_subproject(
     TARGET bfsdk
     TOOLCHAIN ${TOOLCHAIN_PATH_BFSDK}
 )
-include(${BF_DEPENDS_DIR}/binutils.cmake)
 
-# ------------------------------------------------------------------------------
-# External dependencies
-# ------------------------------------------------------------------------------
 include(${BF_DEPENDS_DIR}/python.cmake)
 include(${BF_DEPENDS_DIR}/git.cmake)
 include(${BF_DEPENDS_DIR}/gsl.cmake)
 include(${BF_DEPENDS_DIR}/json.cmake)
-include(${BF_DEPENDS_DIR}/newlib.cmake)
-include(${BF_DEPENDS_DIR}/llvm.cmake)
 if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
     include(${BF_DEPENDS_DIR}/nasm.cmake)
 endif()
@@ -118,41 +112,42 @@ if(ENABLE_UNITTESTING)
 endif()
 
 # ------------------------------------------------------------------------------
-# Bareflank sub-projects
+# VMM Components
 # ------------------------------------------------------------------------------
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfunwind
-    TARGET bfunwind
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFUNWIND}
-    DEPENDS bfsdk binutils newlib
-)
+if(${BUILD_VMM_SHARED} OR ${BUILD_VMM_STATIC})
+    include(${BF_DEPENDS_DIR}/binutils.cmake)
+    include(${BF_DEPENDS_DIR}/newlib.cmake)
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfunwind
+        TARGET bfunwind
+        TOOLCHAIN ${TOOLCHAIN_PATH_BFUNWIND}
+        DEPENDS bfsdk binutils newlib
+    )
 
-# C++ support relies on the above bareflank sub-projects
-include(${BF_DEPENDS_DIR}/libcxx_download.cmake)
-include(${BF_DEPENDS_DIR}/libcxxabi.cmake)
-include(${BF_DEPENDS_DIR}/libcxx.cmake)
+    # C++ support relies on the above bareflank sub-projects
+    include(${BF_DEPENDS_DIR}/llvm.cmake)
+    include(${BF_DEPENDS_DIR}/libcxx_download.cmake)
+    include(${BF_DEPENDS_DIR}/libcxxabi.cmake)
+    include(${BF_DEPENDS_DIR}/libcxx.cmake)
 
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfsupport
-    TARGET bfsupport
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFSUPPORT}
-    DEPENDS bfsdk binutils libcxx libcxxabi newlib gsl
-)
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfsupport
+        TARGET bfsupport
+        TOOLCHAIN ${TOOLCHAIN_PATH_BFSUPPORT}
+        DEPENDS bfsdk binutils libcxx libcxxabi newlib gsl
+    )
 
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader
-    TARGET bfelf_loader
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFELF_LOADER}
-    DEPENDS bfsdk binutils
-)
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfvmm
+        TARGET bfvmm
+        TOOLCHAIN ${TOOLCHAIN_PATH_BFVMM}
+        DEPENDS bfsdk binutils bfunwind bfsupport
+    )
+endif()
 
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfvmm
-    TARGET bfvmm
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFVMM}
-    DEPENDS bfsdk binutils bfunwind bfsupport
-)
-
+# ------------------------------------------------------------------------------
+# VMM Unit Tests
+# ------------------------------------------------------------------------------
 # Temp hack until we can restructure unit tests
 if(ENABLE_UNITTESTING)
     add_subproject(
@@ -163,23 +158,40 @@ if(ENABLE_UNITTESTING)
     )
 endif()
 
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver
-    TARGET bfdriver
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFDRIVER}
-    DEPENDS bfsdk bfelf_loader
-)
+# ------------------------------------------------------------------------------
+# OS Components
+# ------------------------------------------------------------------------------
+if(NOT ${BUILD_TARGET_OS} STREQUAL None)
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader
+        TARGET bfelf_loader
+        TOOLCHAIN ${TOOLCHAIN_PATH_BFELF_LOADER}
+        DEPENDS bfsdk
+    )
 
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfm
-    TARGET bfm
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFM}
-    DEPENDS bfsdk bfelf_loader gsl json
-)
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver
+        TARGET bfdriver
+        TOOLCHAIN ${TOOLCHAIN_PATH_BFDRIVER}
+        DEPENDS bfsdk bfelf_loader
+    )
 
-# add_subproject(
-#     SOURCE_DIR ${BF_SOURCE_DIR}/extended_apis
-#     TARGET extended_apis
-#     TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
-#     DEPENDS bfsdk binutils bfvmm
-# )
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfm
+        TARGET bfm
+        TOOLCHAIN ${TOOLCHAIN_PATH_BFM}
+        DEPENDS bfsdk bfelf_loader gsl json
+    )
+endif()
+
+# ------------------------------------------------------------------------------
+# Extended APIs
+# ------------------------------------------------------------------------------
+if(${ENABLE_EXTENDED_APIS})
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/extended_apis
+        TARGET extended_apis
+        TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
+        DEPENDS bfsdk binutils bfvmm
+    )
+endif()

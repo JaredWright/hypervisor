@@ -11,7 +11,6 @@ ExternalProject_Add(
     GIT_TAG             v1.2
     GIT_SHALLOW         1
     CMAKE_ARGS          ${JSON_CMAKE_ARGS}
-    DEPENDS             binutils
 )
 
 ExternalProject_Add_Step(

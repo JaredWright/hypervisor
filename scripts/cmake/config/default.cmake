@@ -56,20 +56,29 @@ add_config(
     OPTIONS Release Debug
 )
 
+set(_TARGET_ARCH_DEFAULT ${CMAKE_HOST_SYSTEM_PROCESSOR} CACHE INTERNAL "")
+# Cmake + Windows sets CMAKE_HOST_SYSTEM_PROCESSOR to 'AMD64' instead of 'x86_64'
+if(${_TARGET_ARCH_DEFAULT} STREQUAL "AMD64")
+    set(_TARGET_ARCH_DEFAULT "x86_64")
+endif()
 add_config(
     CONFIG_NAME BUILD_TARGET_ARCH
     CONFIG_TYPE STRING
-    DEFAULT_VAL ${CMAKE_HOST_SYSTEM_PROCESSOR}
+    DEFAULT_VAL ${_TARGET_ARCH_DEFAULT}
     DESCRIPTION "The target architecture for the build"
     OPTIONS x86_64 aarch64
 )
 
+set(_TARGET_OS_DEFAULT ${CMAKE_HOST_SYSTEM_NAME} CACHE INTERNAL "")
+if(_TARGET_OS_DEFAULT STREQUAL "CYGWIN") 
+    set(_TARGET_OS_DEFAULT "Windows")
+endif()
 add_config(
     CONFIG_NAME BUILD_TARGET_OS
     CONFIG_TYPE STRING
-    DEFAULT_VAL ${CMAKE_HOST_SYSTEM_NAME}
-    DESCRIPTION "The target operating system for the build"
-    OPTIONS Linux Windows
+    DEFAULT_VAL ${_TARGET_OS_DEFAULT}
+    DESCRIPTION "The target operating system for the build (\"None\" for VMM-only build)"
+    OPTIONS Linux Windows None
 )
 
 add_config(
@@ -133,6 +142,13 @@ add_config(
     CONFIG_TYPE BOOL
     DEFAULT_VAL OFF
     DESCRIPTION "Enable unit testing"
+)
+
+add_config(
+    CONFIG_NAME ENABLE_EXTENDED_APIS
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL OFF
+    DESCRIPTION "Build the Bareflank Extended APIs"
 )
 
 add_config(
