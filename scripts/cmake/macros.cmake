@@ -135,7 +135,7 @@ macro(add_config)
 
     # If this configuration has already been set, don't update the value, but
     # do update the cmake CACHE type and description
-    if(${_AC_CONFIG_NAME})
+    if(DEFINED ${_AC_CONFIG_NAME})
         set(${_AC_CONFIG_NAME} ${${_AC_CONFIG_NAME}} CACHE ${_AC_CONFIG_TYPE} ${_AC_DESCRIPTION})
         # Otherwise, use the specified DEFAULT value
     else()

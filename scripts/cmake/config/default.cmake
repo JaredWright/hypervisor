@@ -173,10 +173,10 @@ add_config(
 )
 
 add_config(
-    CONFIG_NAME ENABLE_COVERITY
+    CONFIG_NAME ENABLE_CODECOV
     CONFIG_TYPE BOOL
     DEFAULT_VAL OFF
-    DESCRIPTION "Enable coverity static analysis"
+    DESCRIPTION "Enable code coverage from codecov.io"
 )
 
 add_config(

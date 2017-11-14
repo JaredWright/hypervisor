@@ -20,6 +20,7 @@
 include(${BF_FLAGS_DIR}/vmm_flags.cmake)
 include(${BF_FLAGS_DIR}/userspace_flags.cmake)
 include(${BF_FLAGS_DIR}/warning_flags.cmake)
+include(${BF_FLAGS_DIR}/codecov_flags.cmake)
 include(${BF_FLAGS_DIR}/asan_flags.cmake)
 include(${BF_FLAGS_DIR}/usan_flags.cmake)
 
@@ -85,9 +86,9 @@ function(generate_flags)
         list(APPEND _CXX_FLAGS ${BFFLAGS_USAN})
     endif()
 
-    if(ENABLE_COVERITY)
-        list(APPEND _C_FLAGS ${BFFLAGS_COVERITY_C})
-        list(APPEND _CXX_FLAGS ${BFFLAGS_COVERITY_CXX})
+    if(ENABLE_CODECOV)
+        list(APPEND _C_FLAGS ${BFFLAGS_CODECOV_C})
+        list(APPEND _CXX_FLAGS ${BFFLAGS_CODECOV_CXX})
     endif()
 
     list(APPEND _C_FLAGS ${GENERATE_FLAGS_ADD_C_FLAGS})

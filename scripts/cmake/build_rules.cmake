@@ -26,8 +26,8 @@ add_build_rule(
 )
 
 add_build_rule(
-    FAIL_ON  ${_ON_WINDOWS} AND ${ENABLE_COVERITY}
-    FAIL_MSG "Coverity is not supported on Windows"
+    FAIL_ON  ${_ON_WINDOWS} AND ${ENABLE_CODECOV}
+    FAIL_MSG "Code coverage is not supported on Windows"
 )
 
 add_build_rule(
