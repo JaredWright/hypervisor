@@ -22,7 +22,7 @@ if(ENABLE_UNITTESTING)
     add_custom_command(TARGET distclean COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_VMM_TEST} --target clean)
 endif()
 
-if(ENABLE_EXTENDED_APIS)
+if(BUILD_EXTENDED_APIS)
     add_custom_command(TARGET distclean COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_EXTENDED_APIS} --target clean)
     if(ENABLE_UNITTESTING)
         add_custom_command(TARGET distclean COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_EXTENDED_APIS_TEST})
@@ -102,7 +102,7 @@ if(ENABLE_UNITTESTING)
         COMMENT "Running unit tests"
     )
 
-    if(ENABLE_EXTENDED_APIS)
+    if(BUILD_EXTENDED_APIS)
         add_custom_command(
             TARGET test
             COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_EXTENDED_APIS} ctest
@@ -123,16 +123,19 @@ if(ENABLE_TIDY)
     add_custom_target(tidy COMMENT "Running clang-tidy static analysis checks")
     add_custom_target(tidy-all COMMENT "Running all clang-tidy static analysis checks")
 
-    if(NOT ${BUILD_TARGET_OS} STREQUAL None)
-        add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFSDK} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfsdk)
-        add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFSDK} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfsdk)
+    if(${BUILD_BFDRIVER})
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFDRIVER} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfdriver)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFDRIVER} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfdriver)
+    endif()
+
+    if(${BUILD_BFM})
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFM} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfm)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFM} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfm)
     endif()
 
-    if(${BUILD_VMM_SHARED} OR ${BUILD_VMM_STATIC})
+    if(${BUILD_VMM})
+        add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFSDK} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfsdk)
+        add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFSDK} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfsdk)
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFSUPPORT} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfsysroot/bfsupport ${TIDY_EXCLUSIONS_BFSUPPORT})
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFSUPPORT} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfsysroot/bfsupport ${TIDY_EXCLUSIONS_BFSUPPORT})
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFVMM} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfvmm)
@@ -144,7 +147,7 @@ if(ENABLE_TIDY)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFELF_LOADER} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfelf_loader ${TIDY_EXCLUSIONS_BFELF_LOADER})
     endif()
 
-    if(ENABLE_EXTENDED_APIS)
+    if(BUILD_EXTENDED_APIS)
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_EXTENDED_APIS} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/extended_apis)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_EXTENDED_APIS} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/extended_apis)
     endif()
@@ -181,7 +184,7 @@ if(ENABLE_ASTYLE)
         COMMENT "Running all astyle code format checks"
     )
 
-    if(ENABLE_EXTENDED_APIS)
+    if(BUILD_EXTENDED_APIS)
         add_custom_command(TARGET format COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/extended_apis)
         add_custom_command(TARGET format-all COMMAND ${ASTYLE_SCRIPT} all ${BF_SOURCE_DIR}/extended_apis)
     endif()

@@ -177,7 +177,7 @@ matrix:
     env:
       - TEST="Codecov"
     script:
-      - cmake -DBFCONFIG=travis_coverage.cmake ..
+      - cmake -DBFCONFIG=travis_codecov.cmake ..
       - make -j3
       - make test
       - rm -Rf depends
@@ -369,7 +369,7 @@ matrix:
     env:
       - TEST="Clang 4.0  (No Tests / Static Libraries)"
     script:
-      - cmake ..
+      - cmake -DBFCONFIG=travis_static_no_test.cmake ..
       - make -j3
 
   #
@@ -389,5 +389,5 @@ matrix:
     env:
       - TEST="Clang 4.0 (No Tests / Shared Libraries)"
     script:
-      - cmake -DBUILD_VMM_SHARED=ON -DBUILD_VMM_STATIC=OFF ..
+      - cmake -DBFCONFIG=travis_shared_no_test.cmake ..
       - make -j3

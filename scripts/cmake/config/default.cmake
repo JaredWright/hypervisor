@@ -78,7 +78,14 @@ add_config(
     CONFIG_TYPE STRING
     DEFAULT_VAL ${_TARGET_OS_DEFAULT}
     DESCRIPTION "The target operating system for the build (\"None\" for VMM-only build)"
-    OPTIONS Linux Windows None
+    OPTIONS Linux Windows
+)
+
+add_config(
+    CONFIG_NAME BUILD_VMM
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ON
+    DESCRIPTION "Include VMM components in this build"
 )
 
 add_config(
@@ -94,6 +101,28 @@ add_config(
     DEFAULT_VAL ON
     DESCRIPTION "Build VMM components as static libraries"
 )
+
+add_config(
+    CONFIG_NAME BUILD_BFDRIVER
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ON
+    DESCRIPTION "Include the Bareflank driver in this build"
+)
+
+add_config(
+    CONFIG_NAME BUILD_BFM
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ON
+    DESCRIPTION "Include the Bareflank Manager utility in this build"
+)
+
+add_config(
+    CONFIG_NAME BUILD_EXTENDED_APIS
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL OFF
+    DESCRIPTION "Include the Bareflank Extended APIs in this build"
+)
+
 
 if(${CMAKE_VERBOSE_MAKEFILE})
     set(_BUILD_VERBOSE ON CACHE INTERNAL "")
@@ -142,13 +171,6 @@ add_config(
     CONFIG_TYPE BOOL
     DEFAULT_VAL OFF
     DESCRIPTION "Enable unit testing"
-)
-
-add_config(
-    CONFIG_NAME ENABLE_EXTENDED_APIS
-    CONFIG_TYPE BOOL
-    DEFAULT_VAL OFF
-    DESCRIPTION "Build the Bareflank Extended APIs"
 )
 
 add_config(

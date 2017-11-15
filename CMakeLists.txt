@@ -48,6 +48,13 @@ add_subproject(
     TOOLCHAIN ${TOOLCHAIN_PATH_BFSDK}
 )
 
+add_subproject(
+    SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader
+    TARGET bfelf_loader
+    TOOLCHAIN ${TOOLCHAIN_PATH_BFELF_LOADER}
+    DEPENDS bfsdk
+)
+
 include(${BF_DEPENDS_DIR}/python.cmake)
 include(${BF_DEPENDS_DIR}/git.cmake)
 include(${BF_DEPENDS_DIR}/gsl.cmake)
@@ -114,7 +121,7 @@ endif()
 # ------------------------------------------------------------------------------
 # VMM Components
 # ------------------------------------------------------------------------------
-if(${BUILD_VMM_SHARED} OR ${BUILD_VMM_STATIC})
+if(${BUILD_VMM})
     include(${BF_DEPENDS_DIR}/binutils.cmake)
     include(${BF_DEPENDS_DIR}/newlib.cmake)
     add_subproject(
@@ -161,21 +168,17 @@ endif()
 # ------------------------------------------------------------------------------
 # OS Components
 # ------------------------------------------------------------------------------
-if(NOT ${BUILD_TARGET_OS} STREQUAL None)
-    add_subproject(
-        SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader
-        TARGET bfelf_loader
-        TOOLCHAIN ${TOOLCHAIN_PATH_BFELF_LOADER}
-        DEPENDS bfsdk
-    )
 
+if(${BUILD_BFDRIVER})
     add_subproject(
         SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver
         TARGET bfdriver
         TOOLCHAIN ${TOOLCHAIN_PATH_BFDRIVER}
         DEPENDS bfsdk bfelf_loader
     )
+endif()
 
+if(${BUILD_BFM})
     add_subproject(
         SOURCE_DIR ${BF_SOURCE_DIR}/bfm
         TARGET bfm
@@ -187,11 +190,11 @@ endif()
 # ------------------------------------------------------------------------------
 # Extended APIs
 # ------------------------------------------------------------------------------
-if(${ENABLE_EXTENDED_APIS})
-    add_subproject(
-        SOURCE_DIR ${BF_SOURCE_DIR}/extended_apis
-        TARGET extended_apis
-        TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
-        DEPENDS bfsdk binutils bfvmm
-    )
+if(${BUILD_EXTENDED_APIS})
+    # add_subproject(
+    #     SOURCE_DIR ${BF_SOURCE_DIR}/extended_apis
+    #     TARGET extended_apis
+    #     TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
+    #     DEPENDS bfsdk binutils bfvmm
+    # )
 endif()
