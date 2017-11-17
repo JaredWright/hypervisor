@@ -13,9 +13,11 @@ ExternalProject_Add(
 	CMAKE_ARGS          ${HIPPOMOCKS_CMAKE_ARGS}
 )
 
-ExternalProject_Add_Step(
-    hippomocks
-    sysroot_install
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${HIPPOMOCKS_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_TEST}/include
-    DEPENDEES          	install
-)
+if(NOT EXISTS ${BUILD_SYSROOT_TEST}/include/hippomocks.h)
+    ExternalProject_Add_Step(
+        hippomocks
+        hippomocks_sysroot_install
+        COMMAND 			${CMAKE_COMMAND} -E copy_directory ${HIPPOMOCKS_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_TEST}/include
+        DEPENDEES          	install
+    )
+endif()

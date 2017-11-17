@@ -13,10 +13,20 @@ ExternalProject_Add(
     CMAKE_ARGS          ${GSL_CMAKE_ARGS}
 )
 
-ExternalProject_Add_Step(
-    gsl
-    sysroot_install
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${GSL_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_OS}/include
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${GSL_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_VMM}/include
-    DEPENDEES          	install
-)
+if(NOT EXISTS ${BUILD_SYSROOT_OS}/include/gsl)
+    ExternalProject_Add_Step(
+        gsl
+        gsl_os_sysroot_install
+        COMMAND 			${CMAKE_COMMAND} -E copy_directory ${GSL_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_OS}/include
+        DEPENDEES install
+    )
+endif()
+
+if(NOT EXISTS ${BUILD_SYSROOT_VMM}/include/gsl AND ${BUILD_VMM})
+    ExternalProject_Add_Step(
+        gsl
+        gsl_vmm_sysroot_install
+        COMMAND 			${CMAKE_COMMAND} -E copy_directory ${GSL_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_VMM}/include
+        DEPENDEES install
+    )
+endif()

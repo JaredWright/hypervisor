@@ -11,12 +11,22 @@ ExternalProject_Add(
     GIT_TAG             v1.2
     GIT_SHALLOW         1
     CMAKE_ARGS          ${JSON_CMAKE_ARGS}
-)
+) 
 
-ExternalProject_Add_Step(
-    json
-    sysroot_install
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${JSON_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_OS}/include
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${JSON_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_VMM}/include
-    DEPENDEES          	install
-)
+if(NOT EXISTS ${BUILD_SYSROOT_OS}/include/nlohmann/json.hpp)
+    ExternalProject_Add_Step(
+        json
+        json_os_sysroot_install
+        COMMAND	${CMAKE_COMMAND} -E copy_directory ${JSON_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_OS}/include
+        DEPENDEES install
+    )
+endif()
+
+if(NOT EXISTS ${BUILD_SYSROOT_VMM}/include/nlohmann/json.hpp AND ${BUILD_VMM})
+    ExternalProject_Add_Step(
+        json
+        json_vmm_sysroot_install
+        COMMAND	${CMAKE_COMMAND} -E copy_directory ${JSON_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_VMM}/include
+        DEPENDEES install
+    )
+endif()

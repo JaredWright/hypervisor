@@ -13,9 +13,11 @@ ExternalProject_Add(
 	CMAKE_ARGS          ${CATCH_CMAKE_ARGS}
 )
 
-ExternalProject_Add_Step(
-    catch
-    sysroot_install
-    COMMAND 			${CMAKE_COMMAND} -E copy_directory ${CATCH_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_TEST}/include
-    DEPENDEES          	install
-)
+if(NOT EXISTS ${BUILD_SYSROOT_TEST}/include/catch)
+    ExternalProject_Add_Step(
+        catch
+        catch_sysroot_install
+        COMMAND 			${CMAKE_COMMAND} -E copy_directory ${CATCH_INTERM_INSTALL_DIR}/include ${BUILD_SYSROOT_TEST}/include
+        DEPENDEES          	install
+    )
+endif()
