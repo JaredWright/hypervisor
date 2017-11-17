@@ -95,10 +95,14 @@ add_config(
     DESCRIPTION "Build VMM components as shared libraries"
 )
 
+set(_DEFAULT_BUILD_VMM_STATIC ON CACHE INTERNAL "")
+if(${BUILD_VMM_SHARED}) 
+    set(_DEFAULT_BUILD_VMM_STATIC OFF)
+endif()
 add_config(
     CONFIG_NAME BUILD_VMM_STATIC
     CONFIG_TYPE BOOL
-    DEFAULT_VAL ON
+    DEFAULT_VAL ${_DEFAULT_BUILD_VMM_STATIC} 
     DESCRIPTION "Build VMM components as static libraries"
 )
 
@@ -233,7 +237,7 @@ add_config(
 # Unit Testing
 # ------------------------------------------------------------------------------
 set(_DEFAULT_UNITTEST_VMM OFF CACHE INTERNAL "")
-if(${ENABLE_UNITTESTING} AND ${BUILD_VMM})
+if(${ENABLE_UNITTESTING} AND ${BUILD_VMM} AND ${BUILD_VMM_STATIC})
     set(_DEFAULT_UNITTEST_VMM ON)
 endif()
 add_config(
@@ -244,7 +248,7 @@ add_config(
 )
 
 set(_DEFAULT_UNITTEST_BFDRIVER OFF CACHE INTERNAL "")
-if(${ENABLE_UNITTESTING} AND ${BUILD_BFDRIVER})
+if(${ENABLE_UNITTESTING} AND ${BUILD_BFDRIVER} AND ${BUILD_VMM} AND ${BUILD_VMM_SHARED})
     set(_DEFAULT_UNITTEST_BFDRIVER ON)
 endif()
 add_config(
@@ -255,7 +259,7 @@ add_config(
 )
 
 set(_DEFAULT_UNITTEST_BFELF_LOADER OFF CACHE INTERNAL "")
-if(${ENABLE_UNITTESTING} AND ${BUILD_BFELF_LOADER})
+if(${ENABLE_UNITTESTING} AND ${BUILD_BFELF_LOADER} AND ${BUILD_VMM} AND ${BUILD_VMM_SHARED})
     set(_DEFAULT_UNITTEST_BFELF_LOADER ON)
 endif()
 add_config(

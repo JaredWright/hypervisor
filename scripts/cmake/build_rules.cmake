@@ -60,7 +60,12 @@ add_build_rule(
 )
 
 add_build_rule(
-    FAIL_ON ${UNITTEST_BFELF_LOADER} AND NOT ${BUILD_VMM} AND NOT ${BUILD_VMM_SHARED}
+    FAIL_ON ${UNITTEST_BFELF_LOADER} AND NOT ${BUILD_VMM}
+    FAIL_MSG "Shared library VMM components are required for elf loader unit tests, please enable BUILD_VMM and BUILD_VMM_SHARED"
+)
+
+add_build_rule(
+    FAIL_ON ${UNITTEST_BFELF_LOADER} AND NOT ${BUILD_VMM_SHARED}
     FAIL_MSG "Shared library VMM components are required for elf loader unit tests, please enable BUILD_VMM and BUILD_VMM_SHARED"
 )
 

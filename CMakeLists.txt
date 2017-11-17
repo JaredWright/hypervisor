@@ -192,30 +192,6 @@ endif()
 # Unit Tests
 # ------------------------------------------------------------------------------
 if(ENABLE_UNITTESTING)
-    if(${UNITTEST_BFDRIVER})
-        add_subproject(
-            SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver/tests
-            TARGET bfdriver_test
-            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
-            DEPENDS bfsdk bfelf_loader bfvmm
-        )
-    endif()
-    if(${UNITTEST_BFELF_LOADER})
-        add_subproject(
-            SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader/tests
-            TARGET bfelf_loader_test
-            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
-            DEPENDS bfsdk bfvmm
-        )
-    endif()
-    if(${UNITTEST_BFM})
-        add_subproject(
-            SOURCE_DIR ${BF_SOURCE_DIR}/bfm/tests
-            TARGET bfm_test
-            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
-            DEPENDS bfsdk
-        )
-    endif()
     if(${UNITTEST_BFSDK})
         add_subproject(
             SOURCE_DIR ${BF_SOURCE_DIR}/bfsdk/tests
@@ -224,12 +200,36 @@ if(ENABLE_UNITTESTING)
             DEPENDS bfsdk
         )
     endif()
+    if(${UNITTEST_BFDRIVER})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver/tests
+            TARGET bfdriver_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk bfsdk_test bfelf_loader bfvmm
+        )
+    endif()
+    if(${UNITTEST_BFELF_LOADER})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader/tests
+            TARGET bfelf_loader_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk bfsdk_test bfvmm
+        )
+    endif()
+    if(${UNITTEST_BFM})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfm/tests
+            TARGET bfm_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk bfsdk_test 
+        )
+    endif()
     if(${UNITTEST_BFSUPPORT})
         add_subproject(
             SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfsupport/crt/tests
             TARGET bfsupport_test
             TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
-            DEPENDS bfsdk
+            DEPENDS bfsdk bfsdk_test 
         )
     endif()
     if(${UNITTEST_VMM})
