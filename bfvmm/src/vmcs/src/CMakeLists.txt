@@ -26,15 +26,15 @@ list(APPEND SOURCES
     vmcs_intel_x64_vmm_state.cpp
 )
 
-# if(CMAKE_TOOLCHAIN_FILE)
+if(${PROJECT_NAME} STREQUAL bfvmm_test)
+    list(APPEND SOURCES vmcs_intel_x64_launch_mock.cpp)
+    list(APPEND SOURCES vmcs_intel_x64_promote_mock.cpp)
+    list(APPEND SOURCES vmcs_intel_x64_resume_mock.cpp)
+else()
     list(APPEND SOURCES vmcs_intel_x64_launch.asm)
     list(APPEND SOURCES vmcs_intel_x64_promote.asm)
     list(APPEND SOURCES vmcs_intel_x64_resume.asm)
-# else()
-#     list(APPEND SOURCES vmcs_intel_x64_launch_mock.cpp)
-#     list(APPEND SOURCES vmcs_intel_x64_promote_mock.cpp)
-#     list(APPEND SOURCES vmcs_intel_x64_resume_mock.cpp)
-# endif()
+endif()
 
 if(BUILD_VMM_SHARED)
     add_library(bfvmm_vmcs SHARED ${SOURCES})

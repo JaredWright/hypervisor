@@ -42,15 +42,3 @@ add_subdirectory(pthread)
 add_subdirectory(dummy_lib1)
 add_subdirectory(dummy_lib2)
 add_subdirectory(dummy_main)
-
-# Temp hack until we can restructure unit tests
-if(ENABLE_UNITTESTING)
-    include(${BF_SCRIPTS_DIR}/cmake/macros.cmake)
-    include(ExternalProject)
-
-    add_subproject(
-        SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/crt/tests
-        TARGET bfsupport_test
-        TOOLCHAIN ${TOOLCHAIN_PATH_USERSPACE}
-    )
-endif()

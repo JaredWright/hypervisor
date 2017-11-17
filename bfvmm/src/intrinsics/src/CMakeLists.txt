@@ -16,27 +16,27 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-# if(NOT CMAKE_TOOLCHAIN_FILE)
-#
-#     list(APPEND SOURCES
-#         cache_x64_mock.cpp
-#         cpuid_x64_mock.cpp
-#         crs_intel_x64_mock.cpp
-#         debug_x64_mock.cpp
-#         gdt_x64_mock.cpp
-#         idt_x64_mock.cpp
-#         msrs_x64_mock.cpp
-#         pm_x64_mock.cpp
-#         portio_x64_mock.cpp
-#         rdtsc_x64_mock.cpp
-#         rflags_x64_mock.cpp
-#         srs_x64_mock.cpp
-#         thread_context_x64_mock.cpp
-#         tlb_x64_mock.cpp
-#         vmx_intel_x64_mock.cpp
-#     )
-#
-# else()
+if(${PROJECT_NAME} STREQUAL bfvmm_test)
+
+    list(APPEND SOURCES
+        cache_x64_mock.cpp
+        cpuid_x64_mock.cpp
+        crs_intel_x64_mock.cpp
+        debug_x64_mock.cpp
+        gdt_x64_mock.cpp
+        idt_x64_mock.cpp
+        msrs_x64_mock.cpp
+        pm_x64_mock.cpp
+        portio_x64_mock.cpp
+        rdtsc_x64_mock.cpp
+        rflags_x64_mock.cpp
+        srs_x64_mock.cpp
+        thread_context_x64_mock.cpp
+        tlb_x64_mock.cpp
+        vmx_intel_x64_mock.cpp
+    )
+
+else()
 
     list(APPEND SOURCES
         cache_x64.asm
@@ -56,7 +56,7 @@
         vmx_intel_x64.asm
     )
 
-# endif()
+endif()
 
 if(BUILD_VMM_SHARED)
     add_library(bfvmm_intrinsics SHARED ${SOURCES})

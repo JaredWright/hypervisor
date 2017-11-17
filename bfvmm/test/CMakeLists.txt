@@ -19,19 +19,25 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfvmm_test C CXX)
 include(${BF_FLAGS_DIR}/flags.cmake)
+include(CTest)
+enable_testing(true)
 
-set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
 enable_language(ASM_NASM)
+
+# Temp hack until we can restructure unit tests
+set(BUILD_SYSROOT_VMM ${BUILD_SYSROOT_TEST} CACHE PATH "")
 
 list(APPEND VMM_TEST_C_FLAGS
     "-fvisibility=hidden"
     "-DDEBUG_LEVEL=1"
+    "-DENABLE_UNITTESTING"
 )
 
 list(APPEND VMM_TEST_CXX_FLAGS
     "-fvisibility=hidden"
     "-fvisibility-inlines-hidden"
     "-DDEBUG_LEVEL=1"
+    "-DENABLE_UNITTESTING"
 )
 
 generate_flags(
@@ -49,9 +55,8 @@ include_directories(
 link_directories(
     ${BUILD_SYSROOT_OS}/lib
     ${BUILD_SYSROOT_TEST}/lib
-    ${BUILD_SYSROOT_VMM}/lib
 )
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../src ${CMAKE_CURRENT_BINARY_DIR}/src)
 
-install(DIRECTORY include/ DESTINATION ${BUILD_SYSROOT_VMM}/include)
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/../include/ DESTINATION ${BUILD_SYSROOT_VMM}/include)

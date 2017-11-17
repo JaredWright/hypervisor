@@ -17,21 +17,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 cmake_minimum_required(VERSION 3.6)
-project(bfdrivers C CXX)
+project(bfdriver C CXX)
 
 include_directories("include")
-
-if(ENABLE_UNITTESTING)
-    include(CTest)
-    enable_testing(true)
-    include_directories("tests")
-    include_directories("${BUILD_SYSROOT_OS}/include")
-    include_directories("${BUILD_SYSROOT_TEST}/include")
-    link_directories("${BUILD_SYSROOT_TEST}/lib")
-    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DBAREFLANK_SYSROOT_PATH='\"${BUILD_SYSROOT_VMM}\"'")
-    add_subdirectory(src)
-    add_subdirectory(tests)
-endif()
 
 set(DRIVER_BUILD_CMD ${BF_SCRIPTS_DIR}/util/driver_build.sh ${CMAKE_SOURCE_DIR})
 set(DRIVER_CLEAN_CMD ${BF_SCRIPTS_DIR}/util/driver_clean.sh ${CMAKE_SOURCE_DIR})

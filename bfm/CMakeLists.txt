@@ -28,9 +28,7 @@ list(APPEND BFM_CXX_FLAGS
     -DBAREFLANK_VMM_BIN_PATH="${BUILD_SYSROOT_VMM}/bin/"
     -DBAREFLANK_VMM_LIB_PATH="${BUILD_SYSROOT_VMM}/lib/"
 )
-if(ENABLE_UNITTESTING)
-    list(APPEND BFM_CXX_FLAGS "-DENABLE_UNITTESTING=1")
-endif()
+
 if(BUILD_EXTENDED_APIS)
     list(APPEND BFM_CXX_FLAGS "-DBFM_DEFAULT_VMM=eapis")
 endif()
@@ -45,12 +43,3 @@ include_directories(
 add_subdirectory(ioctl)
 add_subdirectory(src)
 add_subdirectory(main)
-
-if(ENABLE_UNITTESTING)
-    include(CTest)
-    enable_testing(true)
-    include_directories("${BUILD_SYSROOT_TEST}/include")
-    link_directories("${BUILD_SYSROOT_TEST}/lib")
-    add_subdirectory(tests)
-endif()
-

@@ -21,15 +21,17 @@ list(APPEND SOURCES
     exit_handler_intel_x64_entry.cpp
 )
 
-# if(CMAKE_TOOLCHAIN_FILE)
+if(${PROJECT_NAME} STREQUAL bfvmm_test)
+    list(APPEND SOURCES exit_handler_intel_x64_support_mock.cpp)
+else()
     list(APPEND SOURCES exit_handler_intel_x64_support.asm)
-# else()
-#     list(APPEND SOURCES exit_handler_intel_x64_support_mock.cpp)
-# endif()
+endif()
 
 if(BUILD_VMM_SHARED)
     add_library(bfvmm_exit_handler SHARED ${SOURCES})
     target_compile_definitions(bfvmm_exit_handler PRIVATE SHARED_EXIT_HANDLER)
+    target_link_libraries(bfvmm_exit_handler bfvmm_intrinsics)
+    target_link_libraries(bfvmm_exit_handler bfvmm_vmcs)
 endif()
 
 if(BUILD_VMM_STATIC)

@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 3.6)
 project(bfvmm C CXX)
 include(${BF_FLAGS_DIR}/flags.cmake)
 
-set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
+# set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
 enable_language(ASM_NASM)
 
 list(APPEND VMM_C_FLAGS

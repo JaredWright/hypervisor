@@ -15,15 +15,32 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+cmake_minimum_required(VERSION 3.6)
+project(bfm_test C CXX)
+include(${BF_SCRIPTS_DIR}/cmake/flags/flags.cmake)
+include(CTest)
+enable_testing(true)
+enable_language(ASM_NASM)
+
+set(PROJECT_SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/../src)
+set(PROJECT_TEST_DIR ${CMAKE_CURRENT_LIST_DIR}/../tests)
+set(PROJECT_INC_DIR ${CMAKE_CURRENT_LIST_DIR}/../include)
+
+include_directories(
+    ${PROJECT_INC_DIR} 
+    ${BUILD_SYSROOT_TEST}/include
+    ${BUILD_SYSROOT_OS}/include
+)
+
+link_directories(
+    ${BUILD_SYSROOT_TEST}/lib
+)
 
 add_library(test_catch STATIC test.cpp)
 install(TARGETS test_catch DESTINATION ${BUILD_SYSROOT_TEST}/lib)
 
-include_directories(
-    ${CMAKE_CURRENT_LIST_DIR}/../include
-    ${BUILD_SYSROOT_TEST}/include
-    ${BUILD_SYSROOT_OS}/include
-)
+set(BFSDK_TEST_FLAGS "-DENABLE_UNITTESTING")
+generate_flags(USERSPACE ADD_C_FLAGS ${BFSDK_TEST_FLAGS} ADD_CXX_FLAGS ${BFSDK_TEST_FLAGS})
 
 macro(do_test str)
     add_executable(test_${str} test_${str}.cpp)

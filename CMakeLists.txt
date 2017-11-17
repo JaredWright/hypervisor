@@ -48,13 +48,6 @@ add_subproject(
     TOOLCHAIN ${TOOLCHAIN_PATH_BFSDK}
 )
 
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader
-    TARGET bfelf_loader
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFELF_LOADER}
-    DEPENDS bfsdk
-)
-
 include(${BF_DEPENDS_DIR}/python.cmake)
 include(${BF_DEPENDS_DIR}/git.cmake)
 include(${BF_DEPENDS_DIR}/gsl.cmake)
@@ -69,8 +62,8 @@ if(ENABLE_TIDY)
     include(${BF_DEPENDS_DIR}/clang_tidy.cmake)
 endif()
 if(ENABLE_UNITTESTING)
-	include(${BF_DEPENDS_DIR}/catch.cmake)
-	include(${BF_DEPENDS_DIR}/hippomocks.cmake)
+    include(${BF_DEPENDS_DIR}/catch.cmake)
+    include(${BF_DEPENDS_DIR}/hippomocks.cmake)
     add_dependencies(bfsdk catch hippomocks gsl json)
 endif()
 
@@ -153,21 +146,17 @@ if(${BUILD_VMM})
 endif()
 
 # ------------------------------------------------------------------------------
-# VMM Unit Tests
-# ------------------------------------------------------------------------------
-# Temp hack until we can restructure unit tests
-if(ENABLE_UNITTESTING)
-    add_subproject(
-        SOURCE_DIR ${BF_SOURCE_DIR}/bfvmm/test
-        TARGET bfvmm_test
-        TOOLCHAIN ${TOOLCHAIN_PATH_USERSPACE}
-        DEPENDS bfvmm
-    )
-endif()
-
-# ------------------------------------------------------------------------------
 # OS Components
 # ------------------------------------------------------------------------------
+
+if(${BUILD_BFELF_LOADER})
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader
+        TARGET bfelf_loader
+        TOOLCHAIN ${TOOLCHAIN_PATH_BFELF_LOADER}
+        DEPENDS bfsdk
+    )
+endif()
 
 if(${BUILD_BFDRIVER})
     add_subproject(
@@ -197,4 +186,58 @@ if(${BUILD_EXTENDED_APIS})
     #     TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
     #     DEPENDS bfsdk binutils bfvmm
     # )
+endif()
+
+# ------------------------------------------------------------------------------
+# Unit Tests
+# ------------------------------------------------------------------------------
+if(ENABLE_UNITTESTING)
+    if(${UNITTEST_BFDRIVER})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver/tests
+            TARGET bfdriver_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk bfelf_loader bfvmm
+        )
+    endif()
+    if(${UNITTEST_BFELF_LOADER})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfelf_loader/tests
+            TARGET bfelf_loader_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk bfvmm
+        )
+    endif()
+    if(${UNITTEST_BFM})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfm/tests
+            TARGET bfm_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk
+        )
+    endif()
+    if(${UNITTEST_BFSDK})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfsdk/tests
+            TARGET bfsdk_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk
+        )
+    endif()
+    if(${UNITTEST_BFSUPPORT})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfsupport/crt/tests
+            TARGET bfsupport_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk
+        )
+    endif()
+    if(${UNITTEST_VMM})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfvmm/test
+            TARGET bfvmm_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk bfsdk_test
+        )
+    endif()
 endif()

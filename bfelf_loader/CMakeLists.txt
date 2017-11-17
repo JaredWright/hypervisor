@@ -19,22 +19,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfelf_loader C CXX)
 
-if(ENABLE_UNITTESTING)
-    include(CTest)
-    enable_testing(true)
-    include_directories(
-        tests
-        include
-        ${BUILD_SYSROOT_TEST}/include
-        ${BUILD_SYSROOT_OS}/include
-    )
-    link_directories(
-        ${BUILD_SYSROOT_TEST}/lib
-    )
-    set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-DBAREFLANK_SYSROOT_PATH='\"${BUILD_SYSROOT_VMM}\"'")
-    add_subdirectory(tests)
-endif()
-
 set(TIDY_EXCLUSIONS ,-cppcoreguidelines-pro-type-const-cast)
 
 install(FILES include/bfelf_loader.h DESTINATION ${BUILD_SYSROOT_OS}/include)

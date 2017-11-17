@@ -91,22 +91,28 @@ if(ENABLE_UNITTESTING)
         cmake_policy(SET CMP0037 OLD)
     endif()
 
-    add_custom_target(
-        test
-        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFDRIVER} ctest
-        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFELF_LOADER} ctest
-        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFM} ctest
-        COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK} ctest
-        COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFSUPPORT_TEST} --target test
-        # COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFVMM_TEST} ctest
-        COMMENT "Running unit tests"
-    )
+    add_custom_target(test COMMENT "Running unit tests")
 
-    if(BUILD_EXTENDED_APIS)
-        add_custom_command(
-            TARGET test
-            COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_EXTENDED_APIS} ctest
-        )
+    if(${UNITTEST_BFSDK})
+        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK_TEST} ctest)
+    endif()
+    if(${UNITTEST_BFSUPPORT})
+        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFSUPPORT_TEST} --target test)
+    endif()
+    if(${UNITTEST_BFDRIVER})
+        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFDRIVER_TEST} ctest)
+    endif()
+    if(${UNITTEST_BFELF_LOADER})
+        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFELF_LOADER_TEST} ctest)
+    endif()
+    if(${UNITTEST_BFM})
+        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFM_TEST} ctest)
+    endif()
+    if(${UNITTEST_VMM})
+        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFVMM_TEST} ctest)
+    endif()
+    if(${UNITTEST_EXTENDED_APIS})
+        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_EXTENDED_APIS_TEST} ctest)
     endif()
 endif()
 

@@ -84,9 +84,19 @@ set(BF_BUILD_DIR_BFDRIVER "${BF_BUILD_DIR}/bfdriver/src/bfdriver-build"
     "Build directory for bfdriver"
 )
 
+set(BF_BUILD_DIR_BFDRIVER_TEST "${BF_BUILD_DIR}/bfdriver_test/src/bfdriver_test-build"
+    CACHE INTERNAL
+    "Build directory for bfdriver unit tests"
+)
+
 set(BF_BUILD_DIR_BFELF_LOADER "${BF_BUILD_DIR}/bfelf_loader/src/bfelf_loader-build"
     CACHE INTERNAL
     "Build directory for bfelf_loader"
+)
+
+set(BF_BUILD_DIR_BFELF_LOADER_TEST "${BF_BUILD_DIR}/bfelf_loader_test/src/bfelf_loader_test-build"
+    CACHE INTERNAL
+    "Build directory for bfelf_loader unit tests"
 )
 
 set(BF_BUILD_DIR_BFM "${BF_BUILD_DIR}/bfm/src/bfm-build"
@@ -94,19 +104,24 @@ set(BF_BUILD_DIR_BFM "${BF_BUILD_DIR}/bfm/src/bfm-build"
     "Build directory for bfm"
 )
 
+set(BF_BUILD_DIR_BFM_TEST "${BF_BUILD_DIR}/bfm_test/src/bfm_test-build"
+    CACHE INTERNAL
+    "Build directory for bfm unit tests"
+)
+
 set(BF_BUILD_DIR_BFSDK "${BF_BUILD_DIR}/bfsdk/src/bfsdk-build"
     CACHE INTERNAL
     "Build directory for bfsdk"
 )
 
-set(BF_BUILD_DIR_BFSUPPORT "${BF_BUILD_DIR}/bfsupport/src/bfsupport-build"
+set(BF_BUILD_DIR_BFSDK_TEST "${BF_BUILD_DIR}/bfsdk_test/src/bfsdk_test-build"
     CACHE INTERNAL
-    "Build directory for bfsupport"
+    "Build directory for bfsdk unit tests"
 )
 
 set(BF_BUILD_DIR_BFSUPPORT_TEST "${BF_BUILD_DIR}/bfsupport_test/src/bfsupport_test-build"
     CACHE INTERNAL
-    "Build directory for bfsupport tests"
+    "Build directory for bfsupport unit tests"
 )
 
 set(BF_BUILD_DIR_BFUNWIND "${BF_BUILD_DIR}/bfunwind/src/bfunwind-build"
@@ -131,5 +146,5 @@ set(BF_BUILD_DIR_EXTENDED_APIS "${BF_BUILD_DIR}/extended_apis/src/extended_apis-
 
 set(BF_BUILD_DIR_EXTENDED_APIS_TEST "${BF_BUILD_DIR}/extended_apis/src/extended_apis_test-build"
     CACHE INTERNAL
-    "Build directory for bareflank Extended APIs tests"
+    "Build directory for bareflank Extended APIs unit tests"
 )

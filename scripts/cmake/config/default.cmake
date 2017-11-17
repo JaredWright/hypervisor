@@ -103,6 +103,13 @@ add_config(
 )
 
 add_config(
+    CONFIG_NAME BUILD_BFELF_LOADER
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ON
+    DESCRIPTION "Include the Bareflank elf loader in this build"
+)
+
+add_config(
     CONFIG_NAME BUILD_BFDRIVER
     CONFIG_TYPE BOOL
     DEFAULT_VAL ON
@@ -223,6 +230,78 @@ add_config(
 )
 
 # ------------------------------------------------------------------------------
+# Unit Testing
+# ------------------------------------------------------------------------------
+set(_DEFAULT_UNITTEST_VMM OFF CACHE INTERNAL "")
+if(${ENABLE_UNITTESTING} AND ${BUILD_VMM})
+    set(_DEFAULT_UNITTEST_VMM ON)
+endif()
+add_config(
+    CONFIG_NAME UNITTEST_VMM
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${_DEFAULT_UNITTEST_VMM}
+    DESCRIPTION "Build unit tests for the VMM"
+)
+
+set(_DEFAULT_UNITTEST_BFDRIVER OFF CACHE INTERNAL "")
+if(${ENABLE_UNITTESTING} AND ${BUILD_BFDRIVER})
+    set(_DEFAULT_UNITTEST_BFDRIVER ON)
+endif()
+add_config(
+    CONFIG_NAME UNITTEST_BFDRIVER
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${_DEFAULT_UNITTEST_BFDRIVER}
+    DESCRIPTION "Build driver unit tests"
+)
+
+set(_DEFAULT_UNITTEST_BFELF_LOADER OFF CACHE INTERNAL "")
+if(${ENABLE_UNITTESTING} AND ${BUILD_BFELF_LOADER})
+    set(_DEFAULT_UNITTEST_BFELF_LOADER ON)
+endif()
+add_config(
+    CONFIG_NAME UNITTEST_BFELF_LOADER
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${_DEFAULT_UNITTEST_BFELF_LOADER}
+    DESCRIPTION "Build elf loader unit tests"
+)
+
+set(_DEFAULT_UNITTEST_BFM OFF CACHE INTERNAL "")
+if(${ENABLE_UNITTESTING} AND ${BUILD_BFM})
+    set(_DEFAULT_UNITTEST_BFM ON)
+endif()
+add_config(
+    CONFIG_NAME UNITTEST_BFM
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${_DEFAULT_UNITTEST_BFM}
+    DESCRIPTION "Build bfm unit tests"
+)
+
+add_config(
+    CONFIG_NAME UNITTEST_BFSDK
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${ENABLE_UNITTESTING}
+    DESCRIPTION "Build sdk unit tests"
+)
+
+add_config(
+    CONFIG_NAME UNITTEST_BFSUPPORT
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${ENABLE_UNITTESTING}
+    DESCRIPTION "Build C runtime support unit tests"
+)
+
+set(_DEFAULT_UNITTEST_EAPIS OFF CACHE INTERNAL "")
+if(${ENABLE_UNITTESTING} AND ${BUILD_EXTENDED_APIS})
+    set(_DEFAULT_UNITTEST_EAPIS ON)
+endif()
+add_config(
+    CONFIG_NAME UNITTEST_EXTENDED_APIS
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${_DEFAULT_UNITTEST_EAPIS}
+    DESCRIPTION "Build Bareflank Extended APIs unit tests"
+)
+
+# ------------------------------------------------------------------------------
 # High-level cmake toolchains
 # ------------------------------------------------------------------------------
 add_config(
@@ -244,6 +323,13 @@ add_config(
     CONFIG_TYPE FILE
     DEFAULT_VAL ${BF_TOOLCHAIN_DIR}/default_vmm.cmake
     DESCRIPTION "Path to the default cmake toolchain file for building vmm components"
+)
+
+add_config(
+    CONFIG_NAME TOOLCHAIN_PATH_UNITTEST
+    CONFIG_TYPE FILE
+    DEFAULT_VAL ${TOOLCHAIN_PATH_USERSPACE}
+    DESCRIPTION "Path to the default cmake toolchain file for building unit tests"
 )
 
 # ------------------------------------------------------------------------------

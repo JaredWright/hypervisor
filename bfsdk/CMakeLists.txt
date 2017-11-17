@@ -19,12 +19,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(bfsdk C CXX)
 
-if(ENABLE_UNITTESTING)
-    include(CTest)
-    enable_testing(true)
-    add_subdirectory(tests)
-endif()
-
 install(DIRECTORY include DESTINATION ${BUILD_SYSROOT_OS})
 install(DIRECTORY include DESTINATION ${BUILD_SYSROOT_VMM})
 install(
