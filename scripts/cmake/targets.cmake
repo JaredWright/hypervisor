@@ -1,4 +1,46 @@
 # ------------------------------------------------------------------------------
+# Messages
+# ------------------------------------------------------------------------------
+
+# add_custom_command(
+        # OUTPUT success_message_completed
+        # COMMAND touch success_message_completed
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold "  ___                __ _           _   "
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold " | _ ) __ _ _ _ ___ / _| |__ _ _ _ | |__"
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold " | _ \\/ _` | '_/ -_)  _| / _` | ' \\| / /"
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold " |___/\\__,_|_| \\___|_| |_\\__,_|_||_|_\\_\\"
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green --bold --no-newline " Please give us a star on:"
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --white --bold --no-newline " https://github.com/Bareflank/hypervisor"
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
+        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
+        # VERBATIM
+# )
+#
+# add_custom_target(complete_once ALL
+#     DEPENDS success_message_completed
+# )
+#
+# add_custom_target(complete_always ALL
+#     COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Compilation was successful!!!"
+# )
+#
+# if(NOT WIN32)
+#     add_dependencies(complete_once bfsdk bfsysroot bfelf_loader bfm bfvmm bfdriver)
+#     add_dependencies(complete_always bfsdk bfsysroot bfelf_loader bfm bfvmm bfdriver complete_once)
+# else()
+#     add_dependencies(complete_once bfsdk bfelf_loader bfm bfdriver)
+#     add_dependencies(complete_always bfsdk bfelf_loader bfm bfdriver complete_once)
+# endif()
+#
+# if(ENABLE_UNITTESTING)
+#     add_dependencies(complete_once test_bfvmm test_bfsysroot)
+#     add_dependencies(complete_always test_bfvmm test_bfsysroot)
+# endif()
+
+# ------------------------------------------------------------------------------
 # Clean
 # ------------------------------------------------------------------------------
 
