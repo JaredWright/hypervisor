@@ -17,30 +17,30 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 cmake_minimum_required(VERSION 3.6)
-project(bfsupport C CXX)
+project(bfsupport_test C CXX)
+include(CTest)
+enable_testing(true)
 include(${BF_FLAGS_DIR}/flags.cmake)
-set(TIDY_EXCLUSIONS ,-cert-err34-c,-misc-misplaced-widening-cast,-cppcoreguidelines-no-malloc)
 
-set(CMAKE_ASM_NASM_OBJECT_FORMAT "elf64")
-enable_language(ASM_NASM)
+set(PROJECT_SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/../)
+set(PROJECT_TEST_DIR ${CMAKE_CURRENT_LIST_DIR}/../tests)
+set(PROJECT_INC_DIR ${CMAKE_CURRENT_LIST_DIR}/../include)
 
 include_directories(
-    ${CMAKE_CURRENT_LIST_DIR}/include
-    ${BUILD_SYSROOT_VMM}/include/c++/v1
-    ${BUILD_SYSROOT_VMM}/include
+    ${PROJECT_INC_DIR}
+    ${BUILD_SYSROOT_OS}/include
+    ${BUILD_SYSROOT_TEST}/include
 )
 
 link_directories(
-    ${BUILD_SYSROOT_VMM}/lib
+    ${BUILD_SYSROOT_TEST}/lib
 )
 
-generate_flags(VMM ADD_CXX_FLAGS "-fno-stack-protector")
+generate_flags(USERSPACE)
 
-add_subdirectory(crt)
-add_subdirectory(syscall)
-add_subdirectory(pthread)
-if(${UNITTEST_BFELF_LOADER} OR ${UNITTEST_BFDRIVER})
-    add_subdirectory(dummy_lib1)
-    add_subdirectory(dummy_lib2)
-    add_subdirectory(dummy_main)
-endif()
+add_library(bfcrt_userspace STATIC "${CMAKE_CURRENT_LIST_DIR}/../crt/src/crt.cpp")
+target_compile_definitions(bfcrt_userspace PUBLIC STATIC_CRT)
+target_compile_definitions(bfcrt_userspace PUBLIC ENABLE_UNITTESTING)
+install(TARGETS bfcrt_userspace DESTINATION "${BUILD_SYSROOT_TEST}/lib")
+
+add_subdirectory(${PROJECT_SRC_DIR}/crt/tests ${CMAKE_CURRENT_BINARY_DIR}/crt)

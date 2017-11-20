@@ -77,7 +77,7 @@ add_config(
     CONFIG_NAME BUILD_TARGET_OS
     CONFIG_TYPE STRING
     DEFAULT_VAL ${_TARGET_OS_DEFAULT}
-    DESCRIPTION "The target operating system for the build (\"None\" for VMM-only build)"
+    DESCRIPTION "The target operating system for the build"
     OPTIONS Linux Windows
 )
 
@@ -95,14 +95,10 @@ add_config(
     DESCRIPTION "Build VMM components as shared libraries"
 )
 
-set(_DEFAULT_BUILD_VMM_STATIC ON CACHE INTERNAL "")
-if(${BUILD_VMM_SHARED}) 
-    set(_DEFAULT_BUILD_VMM_STATIC OFF)
-endif()
 add_config(
     CONFIG_NAME BUILD_VMM_STATIC
     CONFIG_TYPE BOOL
-    DEFAULT_VAL ${_DEFAULT_BUILD_VMM_STATIC} 
+    DEFAULT_VAL ON
     DESCRIPTION "Build VMM components as static libraries"
 )
 

@@ -22,14 +22,12 @@ list(APPEND LIBRARIES
     dummy_lib1
     dummy_lib2
     -Wl,--whole-archive bfcrt -Wl,--no-whole-archive
-    bfsyscall
+    bfsyscall_shared
+    pthread_shared
     bfunwind
     c++
     c++abi
     c
-    pthread
-    bfsyscall
-    bfunwind
 )
 
 add_executable(dummy_main dummy_main.cpp)

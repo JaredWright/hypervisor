@@ -226,10 +226,10 @@ if(ENABLE_UNITTESTING)
     endif()
     if(${UNITTEST_BFSUPPORT})
         add_subproject(
-            SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfsupport/crt/tests
+            SOURCE_DIR ${BF_SOURCE_DIR}/bfsysroot/bfsupport/tests
             TARGET bfsupport_test
             TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
-            DEPENDS bfsdk bfsdk_test 
+            DEPENDS bfsdk bfsdk_test
         )
     endif()
     if(${UNITTEST_VMM})

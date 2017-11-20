@@ -46,16 +46,14 @@ if(NOT EXISTS "${BUILD_SYSROOT_VMM}/lib/libc.a")
         DEPENDS             bfsdk binutils
     )
 
-    if(BUILD_VMM_SHARED)
-        ExternalProject_Add_Step(
-            newlib
-            build_shared_lib
-            COMMAND cd ${NEWLIB_BUILD_DIR}/${NEWLIB_TARGET}/newlib && ${TOOLCHAIN_NEWLIB_AR} x libc.a
-            COMMAND cd ${NEWLIB_BUILD_DIR}/${NEWLIB_TARGET}/newlib && ${TOOLCHAIN_NEWLIB_CC} -shared *.o -o ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/lib/libc.so
-            DEPENDEES install
-            )
-        list(APPEND NEWLIB_INSTALL_DEPENDEES build_shared_lib)
-    endif()
+    ExternalProject_Add_Step(
+        newlib
+        build_shared_lib
+        COMMAND cd ${NEWLIB_BUILD_DIR}/${NEWLIB_TARGET}/newlib && ${TOOLCHAIN_NEWLIB_AR} x libc.a
+        COMMAND cd ${NEWLIB_BUILD_DIR}/${NEWLIB_TARGET}/newlib && ${TOOLCHAIN_NEWLIB_CC} -shared *.o -o ${NEWLIB_INTERM_INSTALL_DIR}/${NEWLIB_TARGET}/lib/libc.so
+        DEPENDEES install
+        )
+    list(APPEND NEWLIB_INSTALL_DEPENDEES build_shared_lib)
 
     list(APPEND NEWLIB_INSTALL_DEPENDEES install)
     ExternalProject_Add_Step(

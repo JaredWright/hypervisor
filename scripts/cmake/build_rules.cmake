@@ -1,10 +1,10 @@
 # ------------------------------------------------------------------------------
 # General build rules
 # ------------------------------------------------------------------------------
-add_build_rule(
-    FAIL_ON ${BUILD_VMM_SHARED} AND ${BUILD_VMM_STATIC}
-    FAIL_MSG "Cannot build VMM components as both static and shared in the same build"
-)
+# add_build_rule(
+#     FAIL_ON ${BUILD_VMM_SHARED} AND ${BUILD_VMM_STATIC}
+#     FAIL_MSG "Cannot build VMM components as both static and shared in the same build"
+# )
 
 add_build_rule(
     FAIL_ON ${BUILD_VMM} AND NOT ${BUILD_VMM_SHARED} AND NOT ${BUILD_VMM_STATIC}
@@ -35,7 +35,7 @@ add_build_rule(
 )
 
 add_build_rule(
-    FAIL_ON ${UNITTEST_VMM} AND ${BUILD_VMM_SHARED}
+    FAIL_ON ${UNITTEST_VMM} AND NOT ${BUILD_VMM_STATIC}
     FAIL_MSG "VMM unit testing is not supported for VMM shared library builds, disable BUILD_VMM_SHARED"
 )
 

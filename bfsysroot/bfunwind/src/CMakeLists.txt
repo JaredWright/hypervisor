@@ -24,13 +24,16 @@ list(APPEND SOURCES
 )
 
 if(BUILD_VMM_SHARED)
-    add_library(bfunwind SHARED ${SOURCES})
-    target_compile_definitions(bfunwind PRIVATE SHARED_SYSCALL)
+    add_library(bfunwind_shared SHARED ${SOURCES})
+    set_target_properties(bfunwind_shared PROPERTIES OUTPUT_NAME "bfunwind")
+    target_compile_definitions(bfunwind_shared PRIVATE SHARED_SYSCALL)
+    install(TARGETS bfunwind_shared DESTINATION ${BUILD_SYSROOT_VMM}/lib)
 endif()
 
 if(BUILD_VMM_STATIC)
-    add_library(bfunwind STATIC ${SOURCES})
-    target_compile_definitions(bfunwind PUBLIC STATIC_SYSCALL)
+    add_library(bfunwind_static STATIC ${SOURCES})
+    set_target_properties(bfunwind_static PROPERTIES OUTPUT_NAME "bfunwind")
+    target_compile_definitions(bfunwind_static PUBLIC STATIC_SYSCALL)
+    install(TARGETS bfunwind_static DESTINATION ${BUILD_SYSROOT_VMM}/lib)
 endif()
 
-install(TARGETS bfunwind DESTINATION ${BUILD_SYSROOT_VMM}/lib)
