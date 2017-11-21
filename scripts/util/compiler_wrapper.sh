@@ -219,8 +219,8 @@ do
         continue
         ;;
 
-    "--fuse-ld="*)
-        if [[ $ARG == "--fuse-ld=gold" ]]; then
+    "--fuse-ld="* | "-fuse-ld="*)
+        if [[ "$ARG" == --fuse-ld=gold ]] || [[ "$ARG" == -fuse-ld=gold ]]; then
             LINKER="ld.gold"
         else
             LINKER=$(echo $ARG | cut -d '=' -f 2)
@@ -228,7 +228,7 @@ do
         continue
         ;;
 
-    "--fuse-ld=lld")
+    "--fuse-ld=lld" | "-fuse-ld=lld")
         LINKER="ld.lld-$VERSION_NAME"
         continue
         ;;
