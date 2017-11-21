@@ -1,48 +1,56 @@
 # ------------------------------------------------------------------------------
-# Messages
+# Info
 # ------------------------------------------------------------------------------
+# Use this target along with the macros below to add entries to be displayed
+# when you run 'make info'
+add_custom_target(info)
 
-# add_custom_command(
-        # OUTPUT success_message_completed
-        # COMMAND touch success_message_completed
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold "  ___                __ _           _   "
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold " | _ ) __ _ _ _ ___ / _| |__ _ _ _ | |__"
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold " | _ \\/ _` | '_/ -_)  _| / _` | ' \\| / /"
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold " |___/\\__,_|_| \\___|_| |_\\__,_|_||_|_\\_\\"
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green --bold --no-newline " Please give us a star on:"
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --white --bold --no-newline " https://github.com/Bareflank/hypervisor"
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
-        # COMMAND ${CMAKE_COMMAND} -E cmake_echo_color ""
-        # VERBATIM
-# )
-#
-# add_custom_target(complete_once ALL
-#     DEPENDS success_message_completed
-# )
-#
-# add_custom_target(complete_always ALL
-#     COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan "Compilation was successful!!!"
-# )
-#
-# if(NOT WIN32)
-#     add_dependencies(complete_once bfsdk bfsysroot bfelf_loader bfm bfvmm bfdriver)
-#     add_dependencies(complete_always bfsdk bfsysroot bfelf_loader bfm bfvmm bfdriver complete_once)
-# else()
-#     add_dependencies(complete_once bfsdk bfelf_loader bfm bfdriver)
-#     add_dependencies(complete_always bfsdk bfelf_loader bfm bfdriver complete_once)
-# endif()
-#
-# if(ENABLE_UNITTESTING)
-#     add_dependencies(complete_once test_bfvmm test_bfsysroot)
-#     add_dependencies(complete_always test_bfvmm test_bfsysroot)
-# endif()
+# Add a new category heading to be displayed in 'make info'
+# @param text: The text to be displayed on a new category heading
+macro(add_info_category text)
+    add_custom_command(
+        TARGET info
+        COMMAND ${CMAKE_COMMAND} -E cmake_echo_color " "
+        COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --magenta --bold "${text}:"
+    )
+endmacro(add_info_category)
+
+# Add an informational description about a custom build target to be displayed
+# in 'make info'
+# @param TARGET: The name of the target this info message is about
+# @param INFO_COMMENT: The informational message to be displayed about TARGET
+macro(add_custom_target_info)
+    set(oneVal TARGET INFO_COMMENT)
+    cmake_parse_arguments(_INFO "" "${oneVal}" "" ${ARGN})
+
+    add_custom_command(
+        TARGET info
+        COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --green --bold --no-newline "    ${BF_BUILD_COMMAND} ${_INFO_TARGET}"
+        COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --red --no-newline " - "
+        COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --white "${_INFO_INFO_COMMENT}"
+    )
+endmacro(add_custom_target_info)
 
 # ------------------------------------------------------------------------------
-# Clean
+# Build/Clean
 # ------------------------------------------------------------------------------
+add_info_category("Build")
+add_custom_target_info(
+    TARGET ""
+    INFO_COMMENT "Build Bareflank"
+)
+
+if(${BF_BUILD_COMMAND} STREQUAL "make" OR ${BF_BUILD_COMMAND} STREQUAL "ninja")
+    add_custom_target_info(
+        TARGET " -j[# of jobs]"
+        INFO_COMMENT "Build Bareflank using [# of jobs] parallel jobs for faster builds"
+    )
+endif()
+
+add_custom_target_info(
+    TARGET clean
+    INFO_COMMENT "Clean the build tree"
+)
 
 add_custom_target(
     distclean
@@ -57,6 +65,10 @@ add_custom_target(
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${BF_BUILD_INSTALL_DIR}
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${BF_BUILD_DEPENDS_DIR}
     COMMENT "Cleaning build tree, removing all dependencies, and removing all build artifacts"
+)
+add_custom_target_info(
+    TARGET distclean
+    INFO_COMMENT "Clean the build tree, remove all dependencies, and remove all build artifacts"
 )
 
 if(ENABLE_UNITTESTING)
@@ -74,10 +86,16 @@ endif()
 # ------------------------------------------------------------------------------
 # BFM
 # ------------------------------------------------------------------------------
+add_info_category("Bareflank Manager")
+
 add_custom_target(
     quick
     COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm quick
     COMMENT "Stopping, unloading, loading, and starting the VMM"
+)
+add_custom_target_info(
+    TARGET quick
+    INFO_COMMENT "Stop, unload, load, and start the VMM"
 )
 
 add_custom_target(
@@ -85,11 +103,19 @@ add_custom_target(
     COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm stop
     COMMENT "Stopping the currently loaded VMM"
 )
+add_custom_target_info(
+    TARGET stop
+    INFO_COMMENT "Stop the curently loaded VMM"
+)
 
 add_custom_target(
     unload
     COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm unload
     COMMENT "Unloading the currently loaded VMM"
+)
+add_custom_target_info(
+    TARGET unload
+    INFO_COMMENT "Unload the curently loaded VMM"
 )
 
 add_custom_target(
@@ -97,20 +123,34 @@ add_custom_target(
     COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm dump
     COMMENT "Dumping debug output from the VMM"
 )
+add_custom_target_info(
+    TARGET dump
+    INFO_COMMENT "Dump debug output from the VMM"
+)
 
 add_custom_target(
     status
     COMMAND ${SUDO} ${BUILD_SYSROOT_OS}/bin/bfm status
     COMMENT "Displaying status of the current VMM"
 )
+add_custom_target_info(
+    TARGET status
+    INFO_COMMENT "Display status of the current VMM"
+)
 
 # ------------------------------------------------------------------------------
 # Driver
 # ------------------------------------------------------------------------------
+add_info_category("Bareflank Driver")
+
 add_custom_target(
     driver_quick
     COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFDRIVER} --target bfdriver_quick
     COMMENT "Unloading, cleaning, building, and reloading bfdriver"
+)
+add_custom_target_info(
+    TARGET driver_quick
+    INFO_COMMENT "Unload, clean, build, and reload the Bareflank driver"
 )
 
 add_custom_target(
@@ -118,23 +158,36 @@ add_custom_target(
     COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFDRIVER} --target bfdriver_load
     COMMENT "Loading bfdriver to the local OS"
 )
+add_custom_target_info(
+    TARGET driver_load
+    INFO_COMMENT "Load and start the Bareflank driver"
+)
 
 add_custom_target(
     driver_unload
     COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFDRIVER} --target bfdriver_unload
     COMMENT "Unloading bfdriver from the local OS"
 )
+add_custom_target_info(
+    TARGET driver_unload
+    INFO_COMMENT "Unload and stop the Bareflank driver"
+)
 
 # ------------------------------------------------------------------------------
 # Test
 # ------------------------------------------------------------------------------
 if(ENABLE_UNITTESTING)
+    add_info_category("Unit Testing")
     if(POLICY CMP0037)
         cmake_policy(SET CMP0037 OLD)
     endif()
 
     add_custom_target(test COMMENT "Running unit tests")
     add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK_TEST} ctest)
+    add_custom_target_info(
+        TARGET test
+        INFO_COMMENT "Run Bareflank unit tests configured for the current build"
+    )
 
     if(${UNITTEST_BFSUPPORT})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFSUPPORT_TEST} --target test)
@@ -160,6 +213,7 @@ endif()
 # Clang Tidy
 # ------------------------------------------------------------------------------
 if(ENABLE_TIDY)
+    add_info_category("Clang Tidy Static Analysis")
 
     set(TIDY_SCRIPT ${BF_SCRIPTS_DIR}/util/bareflank_clang_tidy.sh CACHE INTERNAL "")
     set(TIDY_EXCLUSIONS_BFELF_LOADER ,-cppcoreguidelines-pro-type-const-cast CACHE INTERNAL "") 
@@ -167,7 +221,15 @@ if(ENABLE_TIDY)
     set(TIDY_EXCLUSIONS_BFUNWIND ,-cppcoreguidelines-pro* CACHE INTERNAL "") 
 
     add_custom_target(tidy COMMENT "Running clang-tidy static analysis checks")
+    add_custom_target_info(
+        TARGET tidy
+        INFO_COMMENT "Run minimal clang-tidy static analysis checks"
+    )
     add_custom_target(tidy-all COMMENT "Running all clang-tidy static analysis checks")
+    add_custom_target_info(
+        TARGET tidy-all
+        INFO_COMMENT "Run detailed clang-tidy static analysis checks"
+    )
 
     if(${BUILD_BFDRIVER})
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFDRIVER} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfdriver)
@@ -203,8 +265,8 @@ endif()
 # ------------------------------------------------------------------------------
 # Astyle
 # ------------------------------------------------------------------------------
-
 if(ENABLE_ASTYLE)
+    add_info_category("Asyle Code Formatting")
 
     set(ASTYLE_SCRIPT ${BF_SCRIPTS_DIR}/util/bareflank_astyle_format.sh CACHE INTERNAL "")
 
@@ -218,6 +280,10 @@ if(ENABLE_ASTYLE)
         COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfvmm
         COMMENT "Running astyle code format checks"
     )
+    add_custom_target_info(
+        TARGET format
+        INFO_COMMENT "Run minimal astyle code format checks"
+    )
 
     add_custom_target(
         format-all
@@ -229,6 +295,10 @@ if(ENABLE_ASTYLE)
         COMMAND ${ASTYLE_SCRIPT} all ${BF_SOURCE_DIR}/bfvmm
         COMMENT "Running all astyle code format checks"
     )
+    add_custom_target_info(
+        TARGET format-all
+        INFO_COMMENT "Run detailed astyle code format checks"
+    )
 
     if(BUILD_EXTENDED_APIS)
         add_custom_command(TARGET format COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/extended_apis)
@@ -236,3 +306,6 @@ if(ENABLE_ASTYLE)
     endif()
 
 endif()
+
+# Add a newline after the last info message of 'make info'
+add_custom_command(TARGET info COMMAND ${CMAKE_COMMAND} -E cmake_echo_color " ")

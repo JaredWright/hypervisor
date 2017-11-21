@@ -148,3 +148,63 @@ set(BF_BUILD_DIR_EXTENDED_APIS_TEST "${BF_BUILD_DIR}/extended_apis_test/src/exte
     CACHE INTERNAL
     "Build directory for bareflank Extended APIs unit tests"
 )
+
+# ------------------------------------------------------------------------------
+# Console text color palette
+# ------------------------------------------------------------------------------
+if(NOT WIN32)
+    string(ASCII 27 Esc)
+    set(ColorReset "${Esc}[m")
+    set(ColorBold  "${Esc}[1m")
+    set(Red         "${Esc}[31m")
+    set(Green       "${Esc}[32m")
+    set(Yellow      "${Esc}[33m")
+    set(Blue        "${Esc}[34m")
+    set(Magenta     "${Esc}[35m")
+    set(Cyan        "${Esc}[36m")
+    set(White       "${Esc}[37m")
+    set(BoldRed     "${Esc}[1;31m")
+    set(BoldGreen   "${Esc}[1;32m")
+    set(BoldYellow  "${Esc}[1;33m")
+    set(BoldBlue    "${Esc}[1;34m")
+    set(BoldMagenta "${Esc}[1;35m")
+    set(BoldCyan    "${Esc}[1;36m")
+    set(BoldWhite   "${Esc}[1;37m")
+else()
+    set(ColorReset "")
+    set(ColorBold  "")
+    set(Red         "")
+    set(Green       "")
+    set(Yellow      "")
+    set(Blue        "")
+    set(Magenta     "")
+    set(Cyan        "")
+    set(White       "")
+    set(BoldRed     "")
+    set(BoldGreen   "")
+    set(BoldYellow  "")
+    set(BoldBlue    "")
+    set(BoldMagenta "")
+    set(BoldCyan    "")
+    set(BoldWhite   "")
+endif()
+
+# ------------------------------------------------------------------------------
+# Miscellaneous
+# ------------------------------------------------------------------------------
+STRING(FIND ${CMAKE_GENERATOR} "Makefile" is_make)
+STRING(FIND ${CMAKE_GENERATOR} "Ninja" is_ninja)
+STRING(FIND ${CMAKE_GENERATOR} "Visual Studio" is_vs)
+set(BF_BUILD_COMMAND ""
+    CACHE INTERNAL
+    "The name of the command-line tool to be used to build generated Cmake output (i.e. make, ninja, msbuild, etc)"
+)
+if(NOT is_make EQUAL -1)
+    set(BF_BUILD_COMMAND "make")
+elseif(NOT is_ninja EQUAL -1)
+    set(BF_BUILD_COMMAND "ninja")
+elseif(NOT is_vs EQUAL -1)
+    set(BF_BUILD_COMMAND "msbuild")
+else()
+    message(FATAL_ERROR "Unsupported cmake generator: ${CMAKE_GENERATOR}")
+endif()

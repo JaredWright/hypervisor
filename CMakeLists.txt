@@ -209,3 +209,6 @@ if(ENABLE_UNITTESTING)
         )
     endif()
 endif()
+
+print_banner()
+print_usage()
