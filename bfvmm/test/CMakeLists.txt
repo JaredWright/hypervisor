@@ -25,7 +25,7 @@ enable_testing(true)
 enable_language(ASM_NASM)
 
 # Temp hack until we can restructure unit tests
-set(BUILD_SYSROOT_VMM ${BUILD_SYSROOT_TEST} CACHE PATH "")
+set(BUILD_SYSROOT_VMM ${BUILD_SYSROOT_TEST})
 
 list(APPEND VMM_TEST_C_FLAGS
     "-fvisibility=hidden"

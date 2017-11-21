@@ -134,10 +134,8 @@ if(ENABLE_UNITTESTING)
     endif()
 
     add_custom_target(test COMMENT "Running unit tests")
+    add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK_TEST} ctest)
 
-    if(${UNITTEST_BFSDK})
-        add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK_TEST} ctest)
-    endif()
     if(${UNITTEST_BFSUPPORT})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFSUPPORT_TEST} --target test)
     endif()

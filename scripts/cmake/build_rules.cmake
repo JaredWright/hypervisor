@@ -40,11 +40,6 @@ add_build_rule(
 )
 
 add_build_rule(
-    FAIL_ON ${UNITTEST_VMM} AND NOT ${UNITTEST_BFSDK}
-    FAIL_MSG "Must enable UNITTEST_BFSDK when building unit tests for VMM components"
-)
-
-add_build_rule(
     FAIL_ON ${UNITTEST_BFDRIVER} AND NOT ${BUILD_VMM}
     FAIL_MSG "Shared library VMM components are required for driver unit tests, please enable BUILD_VMM and BUILD_VMM_SHARED"
 )
@@ -67,6 +62,11 @@ add_build_rule(
 add_build_rule(
     FAIL_ON ${UNITTEST_BFELF_LOADER} AND NOT ${BUILD_VMM_SHARED}
     FAIL_MSG "Shared library VMM components are required for elf loader unit tests, please enable BUILD_VMM and BUILD_VMM_SHARED"
+)
+
+add_build_rule(
+    FAIL_ON ${UNITTEST_EXTENDED_APIS} AND NOT ${UNITTEST_VMM}
+    FAIL_MSG "Extended APIs unit tests require VMM unit tests, please enable UNITTEST_VMM"
 )
 
 # ------------------------------------------------------------------------------

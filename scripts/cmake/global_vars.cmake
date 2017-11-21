@@ -144,7 +144,7 @@ set(BF_BUILD_DIR_EXTENDED_APIS "${BF_BUILD_DIR}/extended_apis/src/extended_apis-
     "Build directory for bareflank Extended APIs"
 )
 
-set(BF_BUILD_DIR_EXTENDED_APIS_TEST "${BF_BUILD_DIR}/extended_apis/src/extended_apis_test-build"
+set(BF_BUILD_DIR_EXTENDED_APIS_TEST "${BF_BUILD_DIR}/extended_apis_test/src/extended_apis_test-build"
     CACHE INTERNAL
     "Build directory for bareflank Extended APIs unit tests"
 )

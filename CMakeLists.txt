@@ -45,16 +45,19 @@ set(CMAKE_PREFIX_PATH ${BF_BUILD_INSTALL_DIR})
 # ------------------------------------------------------------------------------
 # Toolchain components
 # ------------------------------------------------------------------------------
-add_subproject(
-    SOURCE_DIR ${BF_SOURCE_DIR}/bfsdk
-    TARGET bfsdk
-    TOOLCHAIN ${TOOLCHAIN_PATH_BFSDK}
-)
 
 include(${BF_DEPENDS_DIR}/python.cmake)
 include(${BF_DEPENDS_DIR}/git.cmake)
 include(${BF_DEPENDS_DIR}/gsl.cmake)
 include(${BF_DEPENDS_DIR}/json.cmake)
+
+add_subproject(
+    SOURCE_DIR ${BF_SOURCE_DIR}/bfsdk
+    TARGET bfsdk
+    TOOLCHAIN ${TOOLCHAIN_PATH_BFSDK}
+    DEPENDS gsl json
+)
+
 if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
     include(${BF_DEPENDS_DIR}/nasm.cmake)
 endif()
@@ -67,7 +70,7 @@ endif()
 if(ENABLE_UNITTESTING)
     include(${BF_DEPENDS_DIR}/catch.cmake)
     include(${BF_DEPENDS_DIR}/hippomocks.cmake)
-    add_dependencies(bfsdk catch hippomocks gsl json)
+    add_dependencies(bfsdk catch hippomocks)
 endif()
 
 # ------------------------------------------------------------------------------
@@ -139,26 +142,24 @@ endif()
 # Extended APIs
 # ------------------------------------------------------------------------------
 if(${BUILD_EXTENDED_APIS})
-    # add_subproject(
-    #     SOURCE_DIR ${BF_SOURCE_DIR}/extended_apis
-    #     TARGET extended_apis
-    #     TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
-    #     DEPENDS bfsdk binutils bfvmm
-    # )
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/extended_apis
+        TARGET extended_apis
+        TOOLCHAIN ${TOOLCHAIN_PATH_EXTENDED_APIS}
+        DEPENDS bfsdk binutils bfvmm
+    )
 endif()
 
 # ------------------------------------------------------------------------------
 # Unit Tests
 # ------------------------------------------------------------------------------
 if(ENABLE_UNITTESTING)
-    if(${UNITTEST_BFSDK})
-        add_subproject(
-            SOURCE_DIR ${BF_SOURCE_DIR}/bfsdk/tests
-            TARGET bfsdk_test
-            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
-            DEPENDS bfsdk
-        )
-    endif()
+    add_subproject(
+        SOURCE_DIR ${BF_SOURCE_DIR}/bfsdk/tests
+        TARGET bfsdk_test
+        TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+        DEPENDS bfsdk
+    )
     if(${UNITTEST_BFDRIVER})
         add_subproject(
             SOURCE_DIR ${BF_SOURCE_DIR}/bfdriver/tests
@@ -197,6 +198,14 @@ if(ENABLE_UNITTESTING)
             TARGET bfvmm_test
             TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
             DEPENDS bfsdk bfsdk_test
+        )
+    endif()
+    if(${UNITTEST_EXTENDED_APIS})
+        add_subproject(
+            SOURCE_DIR ${BF_SOURCE_DIR}/extended_apis/tests
+            TARGET extended_apis_test
+            TOOLCHAIN ${TOOLCHAIN_PATH_UNITTEST}
+            DEPENDS bfsdk bfsdk_test bfvmm_test
         )
     endif()
 endif()
