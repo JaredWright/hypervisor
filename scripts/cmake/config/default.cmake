@@ -307,7 +307,7 @@ add_config(
 add_config(
     CONFIG_NAME TOOLCHAIN_PATH_USERSPACE
     CONFIG_TYPE FILE
-    DEFAULT_VAL ${BF_TOOLCHAIN_DIR}/default.cmake
+    DEFAULT_VAL ${BF_TOOLCHAIN_DIR}/gcc_host.cmake
     DESCRIPTION "Path to the default cmake toolchain file for building userspace components"
 )
 
@@ -321,7 +321,7 @@ add_config(
 add_config(
     CONFIG_NAME TOOLCHAIN_PATH_VMM
     CONFIG_TYPE FILE
-    DEFAULT_VAL ${BF_TOOLCHAIN_DIR}/default_vmm.cmake
+    DEFAULT_VAL ${BF_TOOLCHAIN_DIR}/clang_${BUILD_TARGET_ARCH}_vmm_elf.cmake
     DESCRIPTION "Path to the default cmake toolchain file for building vmm components"
 )
 

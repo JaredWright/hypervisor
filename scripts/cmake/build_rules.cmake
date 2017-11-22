@@ -21,6 +21,14 @@ add_build_rule(
     FAIL_MSG "Cannot build the Bareflank Extended APIs without building VMM components, enable BUILD_VMM"
 )
 
+# Allow advanced users to specify alternative VMM toolchains, but block
+# architecture-specific ones that do not match the target.
+add_build_rule(
+    FAIL_ON (${TOOLCHAIN_PATH_VMM} MATCHES "clang_.*vmm_elf.cmake$") AND NOT
+        (${TOOLCHAIN_PATH_VMM} MATCHES "clang_${BUILD_TARGET_ARCH}_vmm_elf.cmake")
+    FAIL_MSG "Cannot build bfvmm with a toolchain for the wrong architecture"
+)
+
 # ------------------------------------------------------------------------------
 # Unit testing build rules
 # ------------------------------------------------------------------------------
