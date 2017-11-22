@@ -119,6 +119,11 @@ set(BF_BUILD_DIR_BFSDK_TEST "${BF_BUILD_DIR}/bfsdk_test/src/bfsdk_test-build"
     "Build directory for bfsdk unit tests"
 )
 
+set(BF_BUILD_DIR_BFSUPPORT "${BF_BUILD_DIR}/bfsupport/src/bfsupport-build"
+    CACHE INTERNAL
+    "Build directory for bfsupport unit tests"
+)
+
 set(BF_BUILD_DIR_BFSUPPORT_TEST "${BF_BUILD_DIR}/bfsupport_test/src/bfsupport_test-build"
     CACHE INTERNAL
     "Build directory for bfsupport unit tests"

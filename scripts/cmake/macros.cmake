@@ -47,6 +47,11 @@ function(add_subproject)
         message(STATUS "\t${ADD_SUBPROJECT_TARGET} source path: ${ADD_SUBPROJECT_SOURCE_DIR}")
         message(STATUS "\t${ADD_SUBPROJECT_TARGET} toolchain file: ${ADD_SUBPROJECT_TOOLCHAIN}")
         message(STATUS "\t${ADD_SUBPROJECT_TARGET} dependencies: ${ADD_SUBPROJECT_DEPENDS}")
+    else()
+        list(APPEND _PROJECT_CMAKE_ARGS
+            -DCMAKE_TARGET_MESSAGES=OFF
+            -DCMAKE_INSTALL_MESSAGE=LAZY
+        )
     endif()
 
     # Copy all non-built-in cmake cache variables to the new project scope
@@ -187,10 +192,10 @@ endmacro(add_config)
 
 # Print the Bareflank ASCII-art banner
 macro(print_banner)
-    message(STATUS "${BoldMagenta}  ___                __ _           _   ")
-    message(STATUS " | _ ) __ _ _ _ ___ / _| |__ _ _ _ | |__")
-    message(STATUS " | _ \\/ _` | '_/ -_)  _| / _` | ' \\| / /")
-    message(STATUS " |___/\\__,_|_| \\___|_| |_\\__,_|_||_|_\\_\\${ColorReset}")
+    message(STATUS "${BoldMagenta}  ___                __ _           _   ${ColorReset}")
+    message(STATUS "${BoldMagenta} | _ ) __ _ _ _ ___ / _| |__ _ _ _ | |__${ColorReset}")
+    message(STATUS "${BoldMagenta} | _ \\/ _` | '_/ -_)  _| / _` | ' \\| / /${ColorReset}")
+    message(STATUS "${BoldMagenta} |___/\\__,_|_| \\___|_| |_\\__,_|_||_|_\\_\\${ColorReset}")
     message(STATUS "")
     message(STATUS "${Green} Please give us a star on:${White} https://github.com/Bareflank/hypervisor${ColorReset}")
     message(STATUS "")

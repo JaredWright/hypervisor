@@ -231,28 +231,16 @@ if(ENABLE_TIDY)
         INFO_COMMENT "Run detailed clang-tidy static analysis checks"
     )
 
-    if(${BUILD_BFDRIVER})
-        add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFDRIVER} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfdriver)
-        add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFDRIVER} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfdriver)
-    endif()
-
-    if(${BUILD_BFM})
+    if(BUILD_BFM)
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFM} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfm)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFM} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfm)
     endif()
 
-    if(${BUILD_VMM})
-        add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFSDK} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfsdk)
-        add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFSDK} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfsdk)
+    if(BUILD_VMM)
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFSUPPORT} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfsysroot/bfsupport ${TIDY_EXCLUSIONS_BFSUPPORT})
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFSUPPORT} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfsysroot/bfsupport ${TIDY_EXCLUSIONS_BFSUPPORT})
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFVMM} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfvmm)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFVMM} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfvmm)
-    endif()
-
-    if(BUILD_VMM_SHARED)
-        add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFELF_LOADER} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfelf_loader ${TIDY_EXCLUSIONS_BFELF_LOADER})
-        add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFELF_LOADER} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfelf_loader ${TIDY_EXCLUSIONS_BFELF_LOADER})
     endif()
 
     if(BUILD_EXTENDED_APIS)
