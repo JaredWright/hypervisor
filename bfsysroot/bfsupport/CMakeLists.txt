@@ -34,7 +34,12 @@ link_directories(
     ${BUILD_SYSROOT_VMM}/lib
 )
 
-generate_flags(VMM ADD_CXX_FLAGS "-fno-stack-protector")
+generate_flags(VMM ADD_CXX_FLAGS
+    "-fno-stack-protector"
+    "-fvisibility=hidden"
+    "-fvisibility-inlines-hidden"
+    "-DNOSTDLIB_C"
+    "-DNOSTDLIB_CXX")
 
 add_subdirectory(crt)
 add_subdirectory(syscall)
