@@ -174,9 +174,16 @@ add_config(
 # Developer Features
 # ------------------------------------------------------------------------------
 add_config(
-    CONFIG_NAME ENABLE_UNITTESTING
+    CONFIG_NAME ENABLE_DEVELOPER_MODE
     CONFIG_TYPE BOOL
     DEFAULT_VAL OFF
+    DESCRIPTION "Run unit tests, astyle format, and clang-tidy checks on every build"
+)
+
+add_config(
+    CONFIG_NAME ENABLE_UNITTESTING
+    CONFIG_TYPE BOOL
+    DEFAULT_VAL ${ENABLE_DEVELOPER_MODE}
     DESCRIPTION "Enable unit testing"
 )
 
@@ -211,14 +218,14 @@ add_config(
 add_config(
     CONFIG_NAME ENABLE_TIDY
     CONFIG_TYPE BOOL
-    DEFAULT_VAL OFF
+    DEFAULT_VAL ${ENABLE_DEVELOPER_MODE}
     DESCRIPTION "Enable clang-tidy"
 )
 
 add_config(
     CONFIG_NAME ENABLE_ASTYLE
     CONFIG_TYPE BOOL
-    DEFAULT_VAL OFF
+    DEFAULT_VAL ${ENABLE_DEVELOPER_MODE}
     DESCRIPTION "Enable astyle formatting"
 )
 

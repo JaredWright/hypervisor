@@ -1,11 +1,6 @@
 # ------------------------------------------------------------------------------
 # General build rules
 # ------------------------------------------------------------------------------
-# add_build_rule(
-#     FAIL_ON ${BUILD_VMM_SHARED} AND ${BUILD_VMM_STATIC}
-#     FAIL_MSG "Cannot build VMM components as both static and shared in the same build"
-# )
-
 add_build_rule(
     FAIL_ON ${BUILD_VMM} AND NOT ${BUILD_VMM_SHARED} AND NOT ${BUILD_VMM_STATIC}
     FAIL_MSG "Must enable either BUILD_VMM_SHARED or BUILD_VMM_STATIC when building VMM components"
@@ -67,6 +62,24 @@ add_build_rule(
 add_build_rule(
     FAIL_ON ${UNITTEST_EXTENDED_APIS} AND NOT ${UNITTEST_VMM}
     FAIL_MSG "Extended APIs unit tests require VMM unit tests, please enable UNITTEST_VMM"
+)
+
+# ------------------------------------------------------------------------------
+# Developer-mode build rules
+# ------------------------------------------------------------------------------
+add_build_rule(
+    FAIL_ON ${ENABLE_DEVELOPER_MODE} AND NOT ${ENABLE_UNITTESTING}
+    FAIL_MSG "Unit testing must be enabled while building in developer mode, please set ENABLE_UNITTESTING=ON or ENABLE_DEVELOPER_MODE=OFF"
+)
+
+add_build_rule(
+    FAIL_ON ${ENABLE_DEVELOPER_MODE} AND NOT ${ENABLE_ASTYLE}
+    FAIL_MSG "Astyle must be enabled while building in developer mode, please set ENABLE_ASTYLE=ON or ENABLE_DEVELOPER_MODE=OFF"
+)
+
+add_build_rule(
+    FAIL_ON ${ENABLE_DEVELOPER_MODE} AND NOT ${ENABLE_TIDY}
+    FAIL_MSG "Clang-tidy must be enabled while building in developer mode, please set ENABLE_TIDY=ON or ENABLE_DEVELOPER_MODE=OFF"
 )
 
 # ------------------------------------------------------------------------------

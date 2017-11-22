@@ -182,31 +182,54 @@ if(ENABLE_UNITTESTING)
         cmake_policy(SET CMP0037 OLD)
     endif()
 
-    add_custom_target(test COMMENT "Running unit tests")
-    add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK_TEST} ctest)
+    if(ENABLE_DEVELOPER_MODE)
+        add_custom_target(test ALL COMMENT "Running unit tests")
+    else()
+        add_custom_target(test COMMENT "Running unit tests")
+    endif()
     add_custom_target_info(
         TARGET test
         INFO_COMMENT "Run Bareflank unit tests configured for the current build"
     )
 
+    add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFSDK_TEST} ctest)
     if(${UNITTEST_BFSUPPORT})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} --build ${BF_BUILD_DIR_BFSUPPORT_TEST} --target test)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(test bfsupport)
+        endif()
     endif()
     if(${UNITTEST_BFDRIVER})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFDRIVER_TEST} ctest)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(test bfdriver)
+        endif()
     endif()
     if(${UNITTEST_BFELF_LOADER})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFELF_LOADER_TEST} ctest)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(test bfelf_loader)
+        endif()
     endif()
     if(${UNITTEST_BFM})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFM_TEST} ctest)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(test bfm)
+        endif()
     endif()
     if(${UNITTEST_VMM})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_BFVMM_TEST} ctest)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(test bfvmm)
+        endif()
     endif()
     if(${UNITTEST_EXTENDED_APIS})
         add_custom_command(TARGET test COMMAND ${CMAKE_COMMAND} -E chdir ${BF_BUILD_DIR_EXTENDED_APIS_TEST} ctest)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(test extended_apis)
+        endif()
     endif()
+
 endif()
 
 # ------------------------------------------------------------------------------
@@ -220,7 +243,11 @@ if(ENABLE_TIDY)
     set(TIDY_EXCLUSIONS_BFSUPPORT ,-cert-err34-c,-misc-misplaced-widening-cast,-cppcoreguidelines-no-malloc CACHE INTERNAL "") 
     set(TIDY_EXCLUSIONS_BFUNWIND ,-cppcoreguidelines-pro* CACHE INTERNAL "") 
 
-    add_custom_target(tidy COMMENT "Running clang-tidy static analysis checks")
+    if(ENABLE_DEVELOPER_MODE)
+        add_custom_target(tidy ALL COMMENT "Running clang-tidy static analysis checks")
+    else()
+        add_custom_target(tidy COMMENT "Running clang-tidy static analysis checks")
+    endif()
     add_custom_target_info(
         TARGET tidy
         INFO_COMMENT "Run minimal clang-tidy static analysis checks"
@@ -234,6 +261,9 @@ if(ENABLE_TIDY)
     if(BUILD_BFM)
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFM} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfm)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFM} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfm)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(tidy bfm)
+        endif()
     endif()
 
     if(BUILD_VMM)
@@ -241,11 +271,17 @@ if(ENABLE_TIDY)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFSUPPORT} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfsysroot/bfsupport ${TIDY_EXCLUSIONS_BFSUPPORT})
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_BFVMM} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/bfvmm)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_BFVMM} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/bfvmm)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(tidy bfvmm)
+        endif()
     endif()
 
     if(BUILD_EXTENDED_APIS)
         add_custom_command(TARGET tidy COMMAND cd ${BF_BUILD_DIR_EXTENDED_APIS} && ${TIDY_SCRIPT} diff ${BF_SOURCE_DIR}/extended_apis)
         add_custom_command(TARGET tidy-all COMMAND cd ${BF_BUILD_DIR_EXTENDED_APIS} && ${TIDY_SCRIPT} all ${BF_SOURCE_DIR}/extended_apis)
+        if(ENABLE_DEVELOPER_MODE)
+            add_dependencies(tidy extended_apis)
+        endif()
     endif()
 
 endif()
@@ -258,16 +294,29 @@ if(ENABLE_ASTYLE)
 
     set(ASTYLE_SCRIPT ${BF_SCRIPTS_DIR}/util/bareflank_astyle_format.sh CACHE INTERNAL "")
 
-    add_custom_target(
-        format
-        COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfdriver
-        COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfelf_loader
-        COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfm
-        COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfsdk
-        COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfsysroot
-        COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfvmm
-        COMMENT "Running astyle code format checks"
-    )
+    if(ENABLE_DEVELOPER_MODE)
+        add_custom_target(
+            format ALL
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfdriver
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfelf_loader
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfm
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfsdk
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfsysroot
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfvmm
+            COMMENT "Running astyle code format checks"
+        )
+    else()
+        add_custom_target(
+            format
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfdriver
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfelf_loader
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfm
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfsdk
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfsysroot
+            COMMAND ${ASTYLE_SCRIPT} diff ${BF_SOURCE_DIR}/bfvmm
+            COMMENT "Running astyle code format checks"
+        )
+    endif()
     add_custom_target_info(
         TARGET format
         INFO_COMMENT "Run minimal astyle code format checks"
