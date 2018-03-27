@@ -27,7 +27,7 @@
 #include <abort.h>
 #include <dwarf4.h>
 #include <eh_frame.h>
-#include <registers.h>
+#include <arch/intel_x64/registers_intel_x64.h>
 #include <ia64_cxx_abi.h>
 
 #include <bfexports.h>

@@ -20,8 +20,9 @@
 #define REGISTERS_H
 
 #include <stdint.h>
+#include <bfarch.h>
 
-#define MAX_NUM_REGISTERS 32
+#define MAX_NUM_REGISTERS 65
 
 /// Register State
 ///

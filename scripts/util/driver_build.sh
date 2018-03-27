@@ -17,8 +17,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-# $1 == CMAKE_SOURCE_DIR
-# $2 == CMAKE_INSTALL_PREFIX
+CMAKE_SOURCE_DIR="$1"
+CMAKE_INSTALL_PREFIX="$2"
+BUILD_TARGET_ARCH="$3"
 
 msbuild_2015="/cygdrive/c/Program Files (x86)/MSBuild/14.0/Bin/MSBuild.exe"
 msbuild_2017="/cygdrive/c/Program Files (x86)/Microsoft Visual Studio/2017/Community/MSBuild/15.0/bin/msbuild.exe"
@@ -56,8 +57,8 @@ CYGWIN_NT-10.0*)
     >&2 eval "'$msbuild' /m:3 /p:Configuration=Release /p:Platform=x64 /p:TargetVersion=Windows10 bareflank.sln"
     ;;
 Linux)
-    cd $1/src/platform/linux
-    make
+    cd "$CMAKE_SOURCE_DIR/src/platform/linux"
+    make BUILD_TARGET_ARCH="$BUILD_TARGET_ARCH"
     ;;
 *)
     >&2 echo "OS not supported"

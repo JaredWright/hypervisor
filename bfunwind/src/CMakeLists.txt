@@ -25,12 +25,21 @@ init_project(
     TIDY_EXCLUSIONS -cppcoreguidelines-pro*
 )
 
-list(APPEND SOURCES
-    dwarf4.cpp
-    eh_frame.cpp
-    ia64_cxx_abi.cpp
-    registers_intel_x64.asm
-)
+if(${BUILD_TARGET_ARCH} STREQUAL x86_64)
+    list(APPEND SOURCES
+        dwarf4.cpp
+        eh_frame.cpp
+        arch/intel_x64/ia64_cxx_abi.cpp
+        arch/intel_x64/registers_intel_x64.asm
+    )
+elseif(${BUILD_TARGET_ARCH} STREQUAL aarch64)
+    list(APPEND SOURCES
+        dwarf4.cpp
+        eh_frame.cpp
+        arch/aarch64/ia64_cxx_abi.cpp
+        arch/aarch64/registers_aarch64.s
+    )
+endif()
 
 add_shared_library(
     bfunwind

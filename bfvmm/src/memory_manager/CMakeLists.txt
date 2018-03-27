@@ -16,9 +16,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-list(APPEND SOURCES
-    memory_manager.cpp
-)
+if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
+    list(APPEND SOURCES
+        memory_manager.cpp
+    )
+elseif(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
+    message(WARNING "Unimplemented")
+    list(APPEND SOURCES
+        arch/aarch64/dummy.cpp
+    )
+else()
+    message(FATAL_ERROR "Unsupported archiecture")
+endif()
 
 add_shared_library(
     bfvmm_memory_manager

@@ -22,14 +22,30 @@ project(bfpthread C CXX)
 include(${SOURCE_CMAKE_DIR}/project.cmake)
 init_project()
 
+list(APPEND SOURCES
+    pthread.cpp
+)
+
+if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
+    list(APPEND SOURCES
+        threadcontext_x64.asm
+    )
+endif()
+
+if(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
+    list(APPEND SOURCES
+        threadcontext_aarch64.s
+    )
+endif()
+
 add_shared_library(
     bfpthread
-    SOURCES pthread.cpp threadcontext.asm
+    SOURCES ${SOURCES}
     DEFINES SHARED_PTHREAD
 )
 
 add_static_library(
     bfpthread
-    SOURCES pthread.cpp threadcontext.asm
+    SOURCES ${SOURCES}
     DEFINES STATIC_PTHREAD
 )

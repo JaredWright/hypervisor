@@ -31,6 +31,12 @@
 #endif
 
 #ifdef __cplusplus
+#define bfncast(a, b) (gsl::narrow_cast<a>(b))
+#else
+#define bfncast(a, b) ((a)(b))
+#endif
+
+#ifdef __cplusplus
 #define bfrcast(a, b) (reinterpret_cast<a>(b))
 #else
 #define bfrcast(a, b) ((a)(b))

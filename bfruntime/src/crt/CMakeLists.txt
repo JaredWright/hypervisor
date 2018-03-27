@@ -37,7 +37,7 @@ endif()
 
 if(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
     list(APPEND SOURCES
-        start_aarch64.S
+        start_aarch64.s
     )
 endif()
 

@@ -79,7 +79,6 @@
 #endif
 
 #ifdef BF_AARCH64
-#error "unimplemented"
 #endif
 
 #endif
