@@ -31,8 +31,6 @@ list(APPEND BFFLAGS_VMM
     --target=${BUILD_TARGET_ARCH}-vmm-elf
     --sysroot=${VMM_PREFIX_PATH}
     -fpic
-    -mno-red-zone
-    -mstackrealign
     -fstack-protector-strong
     -DVMM
     -D${OSTYPE}
@@ -67,4 +65,6 @@ list(APPEND BFFLAGS_VMM_X86_64
     -msse
     -msse2
     -msse3
+    -mno-red-zone
+    -mstackrealign
 )

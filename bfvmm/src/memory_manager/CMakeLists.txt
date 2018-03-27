@@ -16,12 +16,9 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-list(APPEND SOURCES
-    memory_manager.cpp
-)
-
 if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
     list(APPEND SOURCES
+        memory_manager.cpp
         arch/x64/map_ptr.cpp
         arch/x64/page_table_entry.cpp
         arch/x64/page_table.cpp
@@ -29,6 +26,9 @@ if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
     )
 elseif(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
     message(WARNING "Unimplemented")
+    list(APPEND SOURCES
+        arch/aarch64/dummy.cpp
+    )
 else()
     message(FATAL_ERROR "Unsupported archiecture")
 endif()

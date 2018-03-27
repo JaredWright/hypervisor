@@ -40,7 +40,9 @@ if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
         arch/intel_x64/vmx.asm
     )
 elseif(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
-    message(WARNING "Unimplemented")
+    list(APPEND SOURCES
+        arch/aarch64/dummy.cpp
+    )
 else()
     message(FATAL_ERROR "Unsupported archiecture")
 endif()

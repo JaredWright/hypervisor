@@ -246,11 +246,13 @@ private_relocate_symbol(
             break;
 
         case BFR_AARCH64_ABS32:
-            *(uint32_t *) ptr = bfrcast(uint32_t, found_ef->exec_virt + found_sym->st_value);
+            *(uint32_t *) ptr = bfncast(uint32_t,
+                bfrcast(uintptr_t, found_ef->exec_virt + found_sym->st_value));
             break;
 
         case BFR_AARCH64_ABS16:
-            *(uint16_t *) ptr = bfrcast(uint16_t, found_ef->exec_virt + found_sym->st_value);
+            *(uint16_t *) ptr = bfncast(uint16_t,
+                bfrcast(uintptr_t, found_ef->exec_virt + found_sym->st_value));
             break;
 
         default:

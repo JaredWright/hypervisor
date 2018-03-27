@@ -57,12 +57,19 @@ if((ENABLE_BUILD_VMM OR ENABLE_BUILD_TEST) AND NOT WIN32)
         "-nostdlib "
     )
 
-    if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -DNDEBUG")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -DNDEBUG")
     else()
         set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+    endif()
+
+    # newlib uses some nonstandard assembly formats on aarch64 and must be
+    # assembled using gas.
+    if(${BUILD_TARGET_ARCH} STREQUAL aarch64)
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -no-integrated-as -fasm")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-integrated-as -fasm")
     endif()
 
     list(APPEND NEWLIB_CONFIGURE_FLAGS

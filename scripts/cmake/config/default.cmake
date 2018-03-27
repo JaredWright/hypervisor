@@ -284,7 +284,7 @@ add_config(
     CONFIG_TYPE STRING
     DEFAULT_VAL ${HOST_SYSTEM_PROCESSOR}
     DESCRIPTION "The target architecture for the build"
-    OPTIONS x86_64 aarch64
+    OPTIONS x86_64 aarch64 ${HOST_SYSTEM_PROCESSOR}
 )
 
 add_config(

@@ -1,6 +1,6 @@
 #
 # Bareflank Hypervisor
-# Copyright (C) 2018 Assured Information Security, Inc.
+# Copyright (C) 2015 Assured Information Security, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -48,25 +48,25 @@ set(LD_FLAGS
 )
 
 set(CMAKE_C_LINK_EXECUTABLE
-	"${CMAKE_INSTALL_PREFIX}/bin/ld ${LD_FLAGS} -pie <OBJECTS> -o <TARGET> <LINK_LIBRARIES>"
+	"ld.gold ${LD_FLAGS} -pie <OBJECTS> -o <TARGET> <LINK_LIBRARIES>"
 )
 
 set(CMAKE_CXX_LINK_EXECUTABLE
-	"${CMAKE_INSTALL_PREFIX}/bin/ld ${LD_FLAGS} -pie <OBJECTS> -o <TARGET> <LINK_LIBRARIES>"
+	"ld.gold ${LD_FLAGS} -pie <OBJECTS> -o <TARGET> <LINK_LIBRARIES>"
 )
 
 set(CMAKE_C_ARCHIVE_CREATE
-    "${CMAKE_INSTALL_PREFIX}/bin/ar qc <TARGET> <OBJECTS>"
+    "ar qc <TARGET> <OBJECTS>"
 )
 
 set(CMAKE_CXX_ARCHIVE_CREATE
-    "${CMAKE_INSTALL_PREFIX}/bin/ar qc <TARGET> <OBJECTS>"
+    "ar qc <TARGET> <OBJECTS>"
 )
 
 set(CMAKE_C_CREATE_SHARED_LIBRARY
-    "${CMAKE_INSTALL_PREFIX}/bin/ld ${LD_FLAGS} -shared -o <TARGET> <OBJECTS>"
+    "ld.gold ${LD_FLAGS} -shared -o <TARGET> <OBJECTS>"
 )
 
 set(CMAKE_CXX_CREATE_SHARED_LIBRARY
-    "${CMAKE_INSTALL_PREFIX}/bin/ld ${LD_FLAGS} -shared -o <TARGET> <OBJECTS>"
+    "ld.gold ${LD_FLAGS} -shared -o <TARGET> <OBJECTS>"
 )

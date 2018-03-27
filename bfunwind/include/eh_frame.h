@@ -23,7 +23,7 @@
 #include <bfconstants.h>
 #include <bfehframelist.h>
 
-#include <registers_intel_x64.h>
+#include <registers.h>
 
 class common_entry;
 class ci_entry;

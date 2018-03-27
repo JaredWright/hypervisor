@@ -140,7 +140,7 @@ platform_memcpy(void *dst, const void *src, uint64_t num)
 void
 platform_start(void)
 {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,0,0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,0,0) && defined(__x86_64__)
     cr4_init_shadow();
 #endif
 }
@@ -148,7 +148,7 @@ platform_start(void)
 void
 platform_stop(void)
 {
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,0,0)
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,0,0) && defined(__x86_64__)
     cr4_init_shadow();
 #endif
 }

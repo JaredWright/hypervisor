@@ -23,6 +23,7 @@
 #include <bfexports.h>
 #include <bfsupport.h>
 #include <bfexception.h>
+#include <bfarch.h>
 
 #include <vcpu/vcpu_manager.h>
 #include <debug/debug_ring/debug_ring.h>
@@ -31,6 +32,7 @@
 extern "C" int64_t
 private_add_md(struct memory_descriptor *md) noexcept
 {
+#ifdef BF_X64
     return guard_exceptions(MEMORY_MANAGER_FAILURE, [&] {
 
         auto virt = static_cast<bfvmm::memory_manager::integer_pointer>(md->virt);
@@ -39,8 +41,12 @@ private_add_md(struct memory_descriptor *md) noexcept
 
         g_mm->add_md(virt, phys, type);
     });
+#else
+    return 0;
+#endif
 }
 
+#ifdef BF_X64
 bfobject *
 WEAK_SYM pre_create_vcpu(vcpuid::type id)
 { (void) id; return nullptr; }
@@ -48,10 +54,12 @@ WEAK_SYM pre_create_vcpu(vcpuid::type id)
 bfobject *
 WEAK_SYM pre_run_vcpu(vcpuid::type id)
 { (void) id; return nullptr; }
+#endif
 
 extern "C" int64_t
 private_init_vmm(uint64_t arg) noexcept
 {
+#ifdef BF_X64
     return guard_exceptions(ENTRY_ERROR_VMM_START_FAILED, [&]() {
 
         g_vcm->create_vcpu(arg, pre_create_vcpu(arg));
@@ -63,6 +71,9 @@ private_init_vmm(uint64_t arg) noexcept
 
         return ENTRY_SUCCESS;
     });
+#else
+    return 0;
+#endif
 }
 
 bfobject *
@@ -76,6 +87,7 @@ WEAK_SYM pre_delete_vcpu(vcpuid::type id)
 extern "C" int64_t
 private_fini_vmm(uint64_t arg) noexcept
 {
+#ifdef BF_X64
     return guard_exceptions(ENTRY_ERROR_VMM_STOP_FAILED, [&]() {
 
         g_vcm->hlt_vcpu(arg, pre_hlt_vcpu(arg));
@@ -83,6 +95,9 @@ private_fini_vmm(uint64_t arg) noexcept
 
         return ENTRY_SUCCESS;
     });
+#else
+    return 0;
+#endif
 }
 
 extern "C" int64_t

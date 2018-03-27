@@ -1,6 +1,6 @@
 //
 // Bareflank Unwind Library
-// Copyright (C) 2015 Assured Information Security, Inc.
+// Copyright (C) 2018 Assured Information Security, Inc.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
 #include <abort.h>
 #include <dwarf4.h>
 #include <eh_frame.h>
-#include <registers.h>
+#include <arch/aarch64/registers_aarch64.h>
 #include <ia64_cxx_abi.h>
 
 #include <bfexports.h>
@@ -150,13 +150,13 @@ _Unwind_RaiseException(_Unwind_Exception *exception_object)
 {
     auto ret = _URC_END_OF_STACK;
 
-    auto registers = registers_intel_x64_t();
-    __store_registers_intel_x64(&registers);
+    auto registers = registers_aarch64_t();
+    __store_registers_aarch64(&registers);
 
     exception_object->private_1 = 0;
     exception_object->private_2 = 0;
 
-    auto state = register_state_intel_x64(registers);
+    auto state = register_state_aarch64(registers);
     auto context = _Unwind_Context(&state, exception_object);
 
     ret = private_phase1(&context);
@@ -164,7 +164,7 @@ _Unwind_RaiseException(_Unwind_Exception *exception_object)
         return ret;
     }
 
-    state = register_state_intel_x64(registers);
+    state = register_state_aarch64(registers);
     context = _Unwind_Context(&state, exception_object);
 
     ret = private_phase2(&context);
@@ -178,10 +178,10 @@ _Unwind_RaiseException(_Unwind_Exception *exception_object)
 extern "C" EXPORT_SYM void
 _Unwind_Resume(_Unwind_Exception *exception_object)
 {
-    auto registers = registers_intel_x64_t();
-    __store_registers_intel_x64(&registers);
+    auto registers = registers_aarch64_t();
+    __store_registers_aarch64(&registers);
 
-    auto state = register_state_intel_x64(registers);
+    auto state = register_state_aarch64(registers);
     auto context = _Unwind_Context(&state, exception_object);
 
     private_phase2(&context);

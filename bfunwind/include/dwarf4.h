@@ -21,7 +21,7 @@
 
 #include <stdint.h>
 #include <eh_frame.h>
-#include <registers_intel_x64.h>
+#include <registers.h>
 
 #define MAX_ROWS 17
 

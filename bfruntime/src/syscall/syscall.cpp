@@ -465,3 +465,23 @@ WEAK_SYM _realloc_r(struct _reent *, void *, size_t)
 extern "C" EXPORT_SYM int
 WEAK_SYM write(int, const void *, size_t)
 { return 0; }
+
+extern "C" EXPORT_SYM long double
+__extenddftf2(double a)
+{
+    // UNHANDLED();
+    return a;
+}
+
+extern "C" EXPORT_SYM double
+__trunctfdf2(long double a)
+{
+    // UNHANDLED();
+    return static_cast<double>(a);
+}
+
+extern "C" EXPORT_SYM int
+__lttf2(long double a, long double b)
+{
+    return a < b ? -1 : 0;
+}

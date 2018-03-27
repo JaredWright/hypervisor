@@ -60,7 +60,7 @@ if(NOT WIN32)
     add_custom_target_category("Bareflank Driver")
 
     add_custom_target(driver_build
-        COMMAND ${SOURCE_UTIL_DIR}/driver_build.sh ${SOURCE_BFDRIVER_DIR}
+        COMMAND ${SOURCE_UTIL_DIR}/driver_build.sh ${SOURCE_BFDRIVER_DIR} ${CMAKE_INSTALL_PREFIX} ${BUILD_TARGET_ARCH}
         USES_TERMINAL
     )
     add_custom_target_info(

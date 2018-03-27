@@ -30,6 +30,7 @@
 
 #ifdef __cplusplus
 
+#include <bfarch.h>
 #include <bfgsl.h>
 #include <bfstring.h>
 
