@@ -17,6 +17,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 #include <debug/serial/serial_ns16550a.h>
+#include <bfsupport.h>
 
 namespace bfvmm
 {
@@ -229,8 +230,11 @@ serial_ns16550a::parity_bits() const noexcept
     }
 }
 
-int is_transmit_empty()
-{ return _inb(DEFAULT_COM_PORT + line_status_reg) & line_status_empty_transmitter; }
+bool
+serial_ns16550a::is_transmit_empty() const noexcept
+{
+    return (inb(line_status_reg) & line_status_empty_transmitter) != 0;
+}
 
 void
 serial_ns16550a::write(char c) const noexcept

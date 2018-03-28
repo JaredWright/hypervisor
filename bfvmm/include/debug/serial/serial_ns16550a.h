@@ -242,6 +242,7 @@ private:
 
     void enable_dlab() const noexcept;
     void disable_dlab() const noexcept;
+    bool is_transmit_empty() const noexcept;
 
     void init(uintptr_t port) noexcept;
 
