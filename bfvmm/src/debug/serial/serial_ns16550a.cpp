@@ -40,23 +40,35 @@ constexpr const uint8_t line_control_data_mask = 0x03;
 constexpr const uint8_t line_control_stop_mask = 0x04;
 constexpr const uint8_t line_control_parity_mask = 0x38;
 
-#define IN(addr)                                                                \
-    x64::portio::inb(static_cast<uint16_t>(addr + DEFAULT_COM_PORT))
-
-#define OUT(addr, data)                                                         \
-    x64::portio::outb(static_cast<uint16_t>(addr + DEFAULT_COM_PORT), static_cast<uint8_t>(data))
-
 serial_ns16550a::serial_ns16550a() noexcept
 {
+#ifdef BF_AARCH64
+    auto platform_info = get_platform_info();
+    init(platform_info->serial_address);
+#else
+    init(DEFAULT_COM_PORT);
+#endif
+}
+
+serial_ns16550a::serial_ns16550a(uintptr_t port) noexcept
+{
+    init(port);
+}
+
+void
+serial_ns16550a::init(uintptr_t port) noexcept
+{
+    m_addr = port;
+
     this->disable_dlab();
 
-    auto bits = 0U;
+    uint8_t bits = 0U;
     bits |= fifo_control_enable_fifos;
     bits |= fifo_control_clear_recieve_fifo;
     bits |= fifo_control_clear_transmit_fifo;
 
-    OUT(interrupt_en_reg, 0x00);
-    OUT(fifo_control_reg, bits);
+    outb(interrupt_en_reg, 0x00);
+    outb(fifo_control_reg, bits);
 
     this->set_baud_rate(DEFAULT_BAUD_RATE);
     this->set_data_bits(DEFAULT_DATA_BITS);
@@ -74,13 +86,13 @@ serial_ns16550a::instance() noexcept
 void
 serial_ns16550a::set_baud_rate(baud_rate_t rate) noexcept
 {
-    auto lsb = (rate & 0x000000FF) >> 0;
-    auto msb = (rate & 0x0000FF00) >> 8;
+    uint8_t lsb = (rate & 0x000000FF) >> 0;
+    uint8_t msb = (rate & 0x0000FF00) >> 8;
 
     this->enable_dlab();
 
-    OUT(baud_rate_lo_reg, lsb);
-    OUT(baud_rate_hi_reg, msb);
+    outb(baud_rate_lo_reg, lsb);
+    outb(baud_rate_hi_reg, msb);
 
     this->disable_dlab();
 }
@@ -90,8 +102,8 @@ serial_ns16550a::baud_rate() const noexcept
 {
     this->enable_dlab();
 
-    auto lsb = IN(baud_rate_lo_reg);
-    auto msb = IN(baud_rate_hi_reg);
+    auto lsb = inb(baud_rate_lo_reg);
+    auto msb = inb(baud_rate_hi_reg);
 
     this->disable_dlab();
 
@@ -138,18 +150,18 @@ serial_ns16550a::baud_rate() const noexcept
 void
 serial_ns16550a::set_data_bits(data_bits_t bits) noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
 
     reg = reg & static_cast<decltype(reg)>(~line_control_data_mask);
     reg = reg | static_cast<decltype(reg)>(bits & line_control_data_mask);
 
-    OUT(line_control_reg, reg);
+    outb(line_control_reg, reg);
 }
 
 serial_ns16550a::data_bits_t
 serial_ns16550a::data_bits() const noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
 
     switch (reg & line_control_data_mask) {
         case char_length_5:
@@ -166,18 +178,18 @@ serial_ns16550a::data_bits() const noexcept
 void
 serial_ns16550a::set_stop_bits(stop_bits_t bits) noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
 
     reg = reg & static_cast<decltype(reg)>(~line_control_stop_mask);
     reg = reg | static_cast<decltype(reg)>(bits & line_control_stop_mask);
 
-    OUT(line_control_reg, reg);
+    outb(line_control_reg, reg);
 }
 
 serial_ns16550a::stop_bits_t
 serial_ns16550a::stop_bits() const noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
 
     switch (reg & line_control_stop_mask) {
         case stop_bits_1:
@@ -190,18 +202,18 @@ serial_ns16550a::stop_bits() const noexcept
 void
 serial_ns16550a::set_parity_bits(parity_bits_t bits) noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
 
     reg = reg & static_cast<decltype(reg)>(~line_control_parity_mask);
     reg = reg | static_cast<decltype(reg)>(bits & line_control_parity_mask);
 
-    OUT(line_control_reg, reg);
+    outb(line_control_reg, reg);
 }
 
 serial_ns16550a::parity_bits_t
 serial_ns16550a::parity_bits() const noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
 
     switch (reg & line_control_parity_mask) {
         case parity_odd:
@@ -226,23 +238,23 @@ serial_ns16550a::write(char c) const noexcept
     while (is_transmit_empty() == 0)
     { }
 
-    OUT(0, c);
+    outb(0, static_cast<uint8_t>(c));
 }
 
 void
 serial_ns16550a::enable_dlab() const noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
     reg = reg | static_cast<decltype(reg)>(dlab);
-    OUT(line_control_reg, reg);
+    outb(line_control_reg, reg);
 }
 
 void
 serial_ns16550a::disable_dlab() const noexcept
 {
-    auto reg = IN(line_control_reg);
+    auto reg = inb(line_control_reg);
     reg = reg & static_cast<decltype(reg)>(~(dlab));
-    OUT(line_control_reg, reg);
+    outb(line_control_reg, reg);
 }
 
 }
