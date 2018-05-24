@@ -69,7 +69,7 @@ namespace ia32_platform_id
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -103,26 +103,26 @@ namespace ia32_feature_control
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -137,26 +137,26 @@ namespace ia32_feature_control
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -171,26 +171,26 @@ namespace ia32_feature_control
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -205,14 +205,14 @@ namespace ia32_feature_control
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -227,26 +227,26 @@ namespace ia32_feature_control
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -261,26 +261,26 @@ namespace ia32_feature_control
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -295,26 +295,26 @@ namespace ia32_feature_control
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -329,26 +329,26 @@ namespace ia32_feature_control
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -388,14 +388,14 @@ namespace ia32_tsc_adjust
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -434,14 +434,14 @@ namespace ia32_bios_sign_id
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -534,26 +534,26 @@ namespace ia32_smm_monitor_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -568,26 +568,26 @@ namespace ia32_smm_monitor_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -602,14 +602,14 @@ namespace ia32_smm_monitor_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -821,14 +821,14 @@ namespace ia32_perfevtsel0
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -843,14 +843,14 @@ namespace ia32_perfevtsel0
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -865,26 +865,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -899,26 +899,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -933,26 +933,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -967,26 +967,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1001,26 +1001,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1035,26 +1035,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1069,26 +1069,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1103,26 +1103,26 @@ namespace ia32_perfevtsel0
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1137,14 +1137,14 @@ namespace ia32_perfevtsel0
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -1229,7 +1229,7 @@ namespace ia32_perf_status
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1263,14 +1263,14 @@ namespace ia32_perf_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -1285,26 +1285,26 @@ namespace ia32_perf_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1338,26 +1338,26 @@ namespace ia32_clock_modulation
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1372,14 +1372,14 @@ namespace ia32_clock_modulation
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -1394,26 +1394,26 @@ namespace ia32_clock_modulation
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1448,26 +1448,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1482,26 +1482,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1516,26 +1516,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1550,26 +1550,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1584,26 +1584,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1618,14 +1618,14 @@ namespace ia32_therm_interrupt
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -1640,26 +1640,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1674,14 +1674,14 @@ namespace ia32_therm_interrupt
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -1696,26 +1696,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1730,26 +1730,26 @@ namespace ia32_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1788,13 +1788,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1810,26 +1810,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1844,13 +1844,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1866,26 +1866,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1900,13 +1900,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1922,26 +1922,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -1956,13 +1956,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1978,26 +1978,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2012,13 +2012,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2034,26 +2034,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2068,13 +2068,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2090,26 +2090,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2124,13 +2124,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2146,26 +2146,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2180,13 +2180,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2202,26 +2202,26 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2236,7 +2236,7 @@ namespace ia32_therm_status
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2252,7 +2252,7 @@ namespace ia32_therm_status
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2268,13 +2268,13 @@ namespace ia32_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2326,26 +2326,26 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2360,26 +2360,26 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2394,13 +2394,13 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2416,13 +2416,13 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2438,13 +2438,13 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2460,26 +2460,26 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2494,26 +2494,26 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2528,26 +2528,26 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2562,26 +2562,26 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2596,26 +2596,26 @@ namespace ia32_misc_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2657,14 +2657,14 @@ namespace ia32_energy_perf_bias
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -2694,13 +2694,13 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2716,26 +2716,26 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2750,13 +2750,13 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2772,26 +2772,26 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2806,13 +2806,13 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2828,26 +2828,26 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2862,13 +2862,13 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2884,26 +2884,26 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2918,13 +2918,13 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2940,26 +2940,26 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -2974,13 +2974,13 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -2996,26 +2996,26 @@ namespace ia32_package_therm_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3030,7 +3030,7 @@ namespace ia32_package_therm_status
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -3076,26 +3076,26 @@ namespace ia32_package_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3110,26 +3110,26 @@ namespace ia32_package_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3144,26 +3144,26 @@ namespace ia32_package_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3178,26 +3178,26 @@ namespace ia32_package_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3212,14 +3212,14 @@ namespace ia32_package_therm_interrupt
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -3234,26 +3234,26 @@ namespace ia32_package_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3268,14 +3268,14 @@ namespace ia32_package_therm_interrupt
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -3290,26 +3290,26 @@ namespace ia32_package_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3324,26 +3324,26 @@ namespace ia32_package_therm_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3384,26 +3384,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3418,26 +3418,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3452,26 +3452,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3486,26 +3486,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3520,26 +3520,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3554,26 +3554,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3588,26 +3588,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3622,26 +3622,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3656,26 +3656,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3690,26 +3690,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3724,26 +3724,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3758,26 +3758,26 @@ namespace ia32_debugctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3821,14 +3821,14 @@ namespace ia32_smrr_physbase
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -3843,14 +3843,14 @@ namespace ia32_smrr_physbase
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -3884,26 +3884,26 @@ namespace ia32_smrr_physmask
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -3918,14 +3918,14 @@ namespace ia32_smrr_physmask
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -3986,26 +3986,26 @@ namespace ia32_dca_0_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4020,14 +4020,14 @@ namespace ia32_dca_0_cap
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4042,14 +4042,14 @@ namespace ia32_dca_0_cap
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4064,14 +4064,14 @@ namespace ia32_dca_0_cap
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4086,14 +4086,14 @@ namespace ia32_dca_0_cap
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4108,26 +4108,26 @@ namespace ia32_dca_0_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4142,26 +4142,26 @@ namespace ia32_dca_0_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4572,14 +4572,14 @@ namespace ia32_mc0_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4594,26 +4594,26 @@ namespace ia32_mc0_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4647,14 +4647,14 @@ namespace ia32_mc1_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4669,26 +4669,26 @@ namespace ia32_mc1_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4722,14 +4722,14 @@ namespace ia32_mc2_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4744,26 +4744,26 @@ namespace ia32_mc2_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4797,14 +4797,14 @@ namespace ia32_mc3_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4819,26 +4819,26 @@ namespace ia32_mc3_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4872,14 +4872,14 @@ namespace ia32_mc4_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4894,26 +4894,26 @@ namespace ia32_mc4_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -4947,14 +4947,14 @@ namespace ia32_mc5_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -4969,26 +4969,26 @@ namespace ia32_mc5_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5022,14 +5022,14 @@ namespace ia32_mc6_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5044,26 +5044,26 @@ namespace ia32_mc6_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5097,14 +5097,14 @@ namespace ia32_mc7_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5119,26 +5119,26 @@ namespace ia32_mc7_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5172,14 +5172,14 @@ namespace ia32_mc8_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5194,26 +5194,26 @@ namespace ia32_mc8_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5247,14 +5247,14 @@ namespace ia32_mc9_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5269,26 +5269,26 @@ namespace ia32_mc9_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5322,14 +5322,14 @@ namespace ia32_mc10_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5344,26 +5344,26 @@ namespace ia32_mc10_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5397,14 +5397,14 @@ namespace ia32_mc11_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5419,26 +5419,26 @@ namespace ia32_mc11_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5472,14 +5472,14 @@ namespace ia32_mc12_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5494,26 +5494,26 @@ namespace ia32_mc12_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5547,14 +5547,14 @@ namespace ia32_mc13_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5569,26 +5569,26 @@ namespace ia32_mc13_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5622,14 +5622,14 @@ namespace ia32_mc14_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5644,26 +5644,26 @@ namespace ia32_mc14_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5697,14 +5697,14 @@ namespace ia32_mc15_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5719,26 +5719,26 @@ namespace ia32_mc15_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5772,14 +5772,14 @@ namespace ia32_mc16_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5794,26 +5794,26 @@ namespace ia32_mc16_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5847,14 +5847,14 @@ namespace ia32_mc17_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5869,26 +5869,26 @@ namespace ia32_mc17_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5922,14 +5922,14 @@ namespace ia32_mc18_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -5944,26 +5944,26 @@ namespace ia32_mc18_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -5997,14 +5997,14 @@ namespace ia32_mc19_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6019,26 +6019,26 @@ namespace ia32_mc19_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6072,14 +6072,14 @@ namespace ia32_mc20_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6094,26 +6094,26 @@ namespace ia32_mc20_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6147,14 +6147,14 @@ namespace ia32_mc21_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6169,26 +6169,26 @@ namespace ia32_mc21_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6222,14 +6222,14 @@ namespace ia32_mc22_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6244,26 +6244,26 @@ namespace ia32_mc22_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6297,14 +6297,14 @@ namespace ia32_mc23_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6319,26 +6319,26 @@ namespace ia32_mc23_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6372,14 +6372,14 @@ namespace ia32_mc24_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6394,26 +6394,26 @@ namespace ia32_mc24_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6447,14 +6447,14 @@ namespace ia32_mc25_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6469,26 +6469,26 @@ namespace ia32_mc25_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6522,14 +6522,14 @@ namespace ia32_mc26_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6544,26 +6544,26 @@ namespace ia32_mc26_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6597,14 +6597,14 @@ namespace ia32_mc27_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6619,26 +6619,26 @@ namespace ia32_mc27_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6672,14 +6672,14 @@ namespace ia32_mc28_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6694,26 +6694,26 @@ namespace ia32_mc28_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6747,14 +6747,14 @@ namespace ia32_mc29_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6769,26 +6769,26 @@ namespace ia32_mc29_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6822,14 +6822,14 @@ namespace ia32_mc30_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6844,26 +6844,26 @@ namespace ia32_mc30_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6897,14 +6897,14 @@ namespace ia32_mc31_ctl2
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6919,26 +6919,26 @@ namespace ia32_mc31_ctl2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -6972,14 +6972,14 @@ namespace ia32_mtrr_def_type
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -6994,26 +6994,26 @@ namespace ia32_mtrr_def_type
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7028,26 +7028,26 @@ namespace ia32_mtrr_def_type
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7124,7 +7124,7 @@ namespace ia32_perf_capabilities
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -7140,13 +7140,13 @@ namespace ia32_perf_capabilities
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -7162,13 +7162,13 @@ namespace ia32_perf_capabilities
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -7184,7 +7184,7 @@ namespace ia32_perf_capabilities
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -7200,13 +7200,13 @@ namespace ia32_perf_capabilities
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -7222,13 +7222,13 @@ namespace ia32_perf_capabilities
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -7267,26 +7267,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7301,26 +7301,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7335,26 +7335,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7369,26 +7369,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7403,26 +7403,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7437,26 +7437,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7471,26 +7471,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7505,26 +7505,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7539,26 +7539,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7573,26 +7573,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7607,26 +7607,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7641,26 +7641,26 @@ namespace ia32_fixed_ctr_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7701,26 +7701,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7735,26 +7735,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7769,26 +7769,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7803,26 +7803,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7837,26 +7837,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7871,26 +7871,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7905,26 +7905,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7939,26 +7939,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -7973,26 +7973,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8007,26 +8007,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8041,26 +8041,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8075,26 +8075,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8109,26 +8109,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8143,26 +8143,26 @@ namespace ia32_perf_global_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8208,26 +8208,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8242,26 +8242,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8276,26 +8276,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8310,26 +8310,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8344,26 +8344,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8378,26 +8378,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8412,26 +8412,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8446,26 +8446,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8480,26 +8480,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8514,26 +8514,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8548,26 +8548,26 @@ namespace ia32_perf_global_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8610,26 +8610,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8644,26 +8644,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8678,26 +8678,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8712,26 +8712,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8746,26 +8746,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8780,26 +8780,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8814,26 +8814,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8848,26 +8848,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8882,26 +8882,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8916,26 +8916,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8950,26 +8950,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -8984,26 +8984,26 @@ namespace ia32_perf_global_ovf_ctrl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9047,26 +9047,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9081,26 +9081,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9115,26 +9115,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9149,26 +9149,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9183,26 +9183,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9217,26 +9217,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9251,26 +9251,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9285,26 +9285,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9319,26 +9319,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9353,26 +9353,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9387,26 +9387,26 @@ namespace ia32_perf_global_status_set
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -9446,13 +9446,13 @@ namespace ia32_perf_global_inuse
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -9468,13 +9468,13 @@ namespace ia32_perf_global_inuse
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -9490,13 +9490,13 @@ namespace ia32_perf_global_inuse
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -9512,13 +9512,13 @@ namespace ia32_perf_global_inuse
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -9534,13 +9534,13 @@ namespace ia32_perf_global_inuse
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -9556,13 +9556,13 @@ namespace ia32_perf_global_inuse
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -9578,13 +9578,13 @@ namespace ia32_perf_global_inuse
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -9624,26 +9624,26 @@ namespace ia32_pebs_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -10777,7 +10777,7 @@ namespace ia32_vmx_basic
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10793,7 +10793,7 @@ namespace ia32_vmx_basic
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10809,13 +10809,13 @@ namespace ia32_vmx_basic
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10831,13 +10831,13 @@ namespace ia32_vmx_basic
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10853,7 +10853,7 @@ namespace ia32_vmx_basic
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10869,13 +10869,13 @@ namespace ia32_vmx_basic
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10891,13 +10891,13 @@ namespace ia32_vmx_basic
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10934,7 +10934,7 @@ namespace ia32_vmx_pinbased_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10950,7 +10950,7 @@ namespace ia32_vmx_pinbased_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10982,7 +10982,7 @@ namespace ia32_vmx_procbased_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -10998,7 +10998,7 @@ namespace ia32_vmx_procbased_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11030,7 +11030,7 @@ namespace ia32_vmx_exit_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11046,7 +11046,7 @@ namespace ia32_vmx_exit_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11078,7 +11078,7 @@ namespace ia32_vmx_entry_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11094,7 +11094,7 @@ namespace ia32_vmx_entry_ctls
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11126,7 +11126,7 @@ namespace ia32_vmx_misc
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11142,13 +11142,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11164,13 +11164,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11186,13 +11186,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11208,13 +11208,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11230,13 +11230,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11252,13 +11252,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11274,7 +11274,7 @@ namespace ia32_vmx_misc
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11290,7 +11290,7 @@ namespace ia32_vmx_misc
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11306,13 +11306,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11328,13 +11328,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11350,13 +11350,13 @@ namespace ia32_vmx_misc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11446,7 +11446,7 @@ namespace ia32_vmx_vmcs_enum
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -11483,13 +11483,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11511,13 +11511,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11539,13 +11539,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11567,13 +11567,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11595,13 +11595,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11623,13 +11623,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11651,13 +11651,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11679,13 +11679,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11707,13 +11707,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11735,13 +11735,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11763,13 +11763,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11791,13 +11791,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11819,13 +11819,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11847,13 +11847,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11875,13 +11875,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11903,13 +11903,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11931,13 +11931,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11959,13 +11959,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -11987,13 +11987,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12015,13 +12015,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12043,13 +12043,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12071,13 +12071,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12099,13 +12099,13 @@ namespace ia32_vmx_procbased_ctls2
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12164,13 +12164,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12186,13 +12186,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12208,13 +12208,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12230,13 +12230,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12252,13 +12252,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12274,13 +12274,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12296,13 +12296,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12318,13 +12318,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12340,13 +12340,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12362,13 +12362,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12384,13 +12384,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12406,13 +12406,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12428,13 +12428,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12450,13 +12450,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12472,13 +12472,13 @@ namespace ia32_vmx_ept_vpid_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -12529,13 +12529,13 @@ namespace ia32_vmx_true_pinbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12557,13 +12557,13 @@ namespace ia32_vmx_true_pinbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12585,13 +12585,13 @@ namespace ia32_vmx_true_pinbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12613,13 +12613,13 @@ namespace ia32_vmx_true_pinbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12641,13 +12641,13 @@ namespace ia32_vmx_true_pinbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12694,13 +12694,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12722,13 +12722,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12750,13 +12750,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12778,13 +12778,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12806,13 +12806,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12834,13 +12834,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12862,13 +12862,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12890,13 +12890,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12918,13 +12918,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12946,13 +12946,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -12974,13 +12974,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13002,13 +13002,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13030,13 +13030,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13058,13 +13058,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13086,13 +13086,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13114,13 +13114,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13142,13 +13142,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13170,13 +13170,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13198,13 +13198,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13226,13 +13226,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13254,13 +13254,13 @@ namespace ia32_vmx_true_procbased_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13323,13 +13323,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13351,13 +13351,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13379,13 +13379,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13407,13 +13407,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13435,13 +13435,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13463,13 +13463,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13491,13 +13491,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13519,13 +13519,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13547,13 +13547,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13575,13 +13575,13 @@ namespace ia32_vmx_true_exit_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13633,13 +13633,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13661,13 +13661,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13689,13 +13689,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13717,13 +13717,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13745,13 +13745,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13773,13 +13773,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13801,13 +13801,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13829,13 +13829,13 @@ namespace ia32_vmx_true_entry_ctls
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline auto is_allowed0() noexcept
@@ -13879,7 +13879,7 @@ namespace ia32_vmx_vmfunc
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_allowed1() noexcept
@@ -14036,26 +14036,26 @@ namespace ia32_mcg_ext_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14085,13 +14085,13 @@ namespace ia32_sgx_svn_sinit
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -14107,7 +14107,7 @@ namespace ia32_sgx_svn_sinit
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -14142,14 +14142,14 @@ namespace ia32_rtit_output_base
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14182,14 +14182,14 @@ namespace ia32_rtit_output_mask_ptrs
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14204,14 +14204,14 @@ namespace ia32_rtit_output_mask_ptrs
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14245,26 +14245,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14279,26 +14279,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14313,26 +14313,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14347,26 +14347,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14381,26 +14381,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14415,26 +14415,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14449,26 +14449,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14483,26 +14483,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14517,26 +14517,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14551,26 +14551,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14585,26 +14585,26 @@ namespace ia32_rtit_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14619,14 +14619,14 @@ namespace ia32_rtit_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14641,14 +14641,14 @@ namespace ia32_rtit_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14663,14 +14663,14 @@ namespace ia32_rtit_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14685,14 +14685,14 @@ namespace ia32_rtit_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14707,14 +14707,14 @@ namespace ia32_rtit_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14729,14 +14729,14 @@ namespace ia32_rtit_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14751,14 +14751,14 @@ namespace ia32_rtit_ctl
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14808,13 +14808,13 @@ namespace ia32_rtit_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -14830,13 +14830,13 @@ namespace ia32_rtit_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -14852,13 +14852,13 @@ namespace ia32_rtit_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -14874,26 +14874,26 @@ namespace ia32_rtit_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14908,26 +14908,26 @@ namespace ia32_rtit_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -14942,14 +14942,14 @@ namespace ia32_rtit_status
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -14987,14 +14987,14 @@ namespace ia32_rtit_cr3_match
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15027,14 +15027,14 @@ namespace ia32_rtit_addr0_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15049,14 +15049,14 @@ namespace ia32_rtit_addr0_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15090,14 +15090,14 @@ namespace ia32_rtit_addr0_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15112,14 +15112,14 @@ namespace ia32_rtit_addr0_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15153,14 +15153,14 @@ namespace ia32_rtit_addr1_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15175,14 +15175,14 @@ namespace ia32_rtit_addr1_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15216,14 +15216,14 @@ namespace ia32_rtit_addr1_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15238,14 +15238,14 @@ namespace ia32_rtit_addr1_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15279,14 +15279,14 @@ namespace ia32_rtit_addr2_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15301,14 +15301,14 @@ namespace ia32_rtit_addr2_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15342,14 +15342,14 @@ namespace ia32_rtit_addr2_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15364,14 +15364,14 @@ namespace ia32_rtit_addr2_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15405,14 +15405,14 @@ namespace ia32_rtit_addr3_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15427,14 +15427,14 @@ namespace ia32_rtit_addr3_a
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15468,14 +15468,14 @@ namespace ia32_rtit_addr3_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15490,14 +15490,14 @@ namespace ia32_rtit_addr3_b
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15561,26 +15561,26 @@ namespace ia32_pm_enable
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -15610,7 +15610,7 @@ namespace ia32_hwp_capabilities
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -15626,7 +15626,7 @@ namespace ia32_hwp_capabilities
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -15642,7 +15642,7 @@ namespace ia32_hwp_capabilities
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -15658,7 +15658,7 @@ namespace ia32_hwp_capabilities
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -15695,14 +15695,14 @@ namespace ia32_hwp_request_pkg
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15717,14 +15717,14 @@ namespace ia32_hwp_request_pkg
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15739,14 +15739,14 @@ namespace ia32_hwp_request_pkg
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15761,14 +15761,14 @@ namespace ia32_hwp_request_pkg
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15783,14 +15783,14 @@ namespace ia32_hwp_request_pkg
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15827,26 +15827,26 @@ namespace ia32_hwp_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -15861,26 +15861,26 @@ namespace ia32_hwp_interrupt
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -15914,14 +15914,14 @@ namespace ia32_hwp_request
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15936,14 +15936,14 @@ namespace ia32_hwp_request
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15958,14 +15958,14 @@ namespace ia32_hwp_request
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -15980,14 +15980,14 @@ namespace ia32_hwp_request
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16002,14 +16002,14 @@ namespace ia32_hwp_request
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16024,26 +16024,26 @@ namespace ia32_hwp_request
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16081,26 +16081,26 @@ namespace ia32_hwp_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16115,26 +16115,26 @@ namespace ia32_hwp_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16168,26 +16168,26 @@ namespace ia32_debug_interface
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16202,26 +16202,26 @@ namespace ia32_debug_interface
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16236,26 +16236,26 @@ namespace ia32_debug_interface
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16290,26 +16290,26 @@ namespace ia32_l3_qos_cfg
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16342,14 +16342,14 @@ namespace ia32_qm_evtsel
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16364,14 +16364,14 @@ namespace ia32_qm_evtsel
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16402,7 +16402,7 @@ namespace ia32_qm_ctr
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -16418,13 +16418,13 @@ namespace ia32_qm_ctr
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -16440,13 +16440,13 @@ namespace ia32_qm_ctr
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -16482,14 +16482,14 @@ namespace ia32_pqr_assoc
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16504,14 +16504,14 @@ namespace ia32_pqr_assoc
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16545,26 +16545,26 @@ namespace ia32_bndcfgs
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16579,26 +16579,26 @@ namespace ia32_bndcfgs
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16613,14 +16613,14 @@ namespace ia32_bndcfgs
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16655,26 +16655,26 @@ namespace ia32_xss
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16707,26 +16707,26 @@ namespace ia32_pkg_hdc_ctl
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16759,26 +16759,26 @@ namespace ia32_pm_ctl1
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16808,14 +16808,14 @@ namespace ia32_thread_stall
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -16848,26 +16848,26 @@ namespace ia32_efer
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16882,26 +16882,26 @@ namespace ia32_efer
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16916,26 +16916,26 @@ namespace ia32_efer
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -16950,26 +16950,26 @@ namespace ia32_efer
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }

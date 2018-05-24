@@ -74,26 +74,26 @@ namespace ia32_apic_base
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -108,26 +108,26 @@ namespace ia32_apic_base
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -142,26 +142,26 @@ namespace ia32_apic_base
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -185,32 +185,32 @@ namespace ia32_apic_base
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void enable_x2apic() noexcept
         { set(x2apic); }
 
         inline auto enable_x2apic(value_type msr) noexcept
-        { return set_bits(msr, mask, x2apic << from); }
+        { msr = set_bits(msr, mask, x2apic << from); }
 
         inline void enable_xapic() noexcept
         { set(xapic); }
 
         inline auto enable_xapic(value_type msr) noexcept
-        { return set_bits(msr, mask, xapic << from); }
+        { msr = set_bits(msr, mask, xapic << from); }
 
         inline void disable() noexcept
         { set(disabled); }
 
-        inline auto disable(value_type msr) noexcept
-        { return set_bits(msr, mask, disabled << from); }
+        inline void disable(value_type &msr) noexcept
+        { msr = set_bits(msr, mask, disabled << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         {
@@ -240,14 +240,14 @@ namespace ia32_apic_base
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask); }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask); }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -391,17 +391,17 @@ namespace xapic_unstable
     constexpr const auto from = 5U;
     constexpr const auto name = "xapic_unstable";
 
-    constexpr inline auto is_enabled(attr_t attr) noexcept
+    constexpr inline auto is_enabled(attr_t &attr) noexcept
     { return is_bit_set(attr, from); }
 
-    constexpr inline auto is_disabled(attr_t attr) noexcept
+    constexpr inline auto is_disabled(attr_t &attr) noexcept
     { return is_bit_cleared(attr, from); }
 
-    constexpr inline auto enable(attr_t attr) noexcept
-    { return set_bit(attr, from); }
+    constexpr inline void enable(attr_t &attr) noexcept
+    { attr = set_bit(attr, from); }
 
-    constexpr inline auto disable(attr_t attr) noexcept
-    { return clear_bit(attr, from); }
+    constexpr inline void disable(attr_t &attr) noexcept
+    { attr = clear_bit(attr, from); }
 
     inline void dump(int level, attr_t attr, std::string *msg = nullptr)
     { bfdebug_subbool(level, name, is_enabled(attr), msg); }
@@ -413,17 +413,17 @@ namespace x2apic_unstable
     constexpr const auto from = 4U;
     constexpr const auto name = "x2apic_unstable";
 
-    constexpr inline auto is_enabled(attr_t attr) noexcept
+    constexpr inline auto is_enabled(attr_t &attr) noexcept
     { return is_bit_set(attr, from); }
 
-    constexpr inline auto is_disabled(attr_t attr) noexcept
+    constexpr inline auto is_disabled(attr_t &attr) noexcept
     { return is_bit_cleared(attr, from); }
 
-    constexpr inline auto enable(attr_t attr) noexcept
-    { return set_bit(attr, from); }
+    constexpr inline void enable(attr_t &attr) noexcept
+    { attr = set_bit(attr, from); }
 
-    constexpr inline auto disable(attr_t attr) noexcept
-    { return clear_bit(attr, from); }
+    constexpr inline void disable(attr_t &attr) noexcept
+    { attr = clear_bit(attr, from); }
 
     inline void dump(int level, attr_t attr, std::string *msg = nullptr)
     { bfdebug_subbool(level, name, is_enabled(attr), msg); }
@@ -435,17 +435,17 @@ namespace xapic_readable
     constexpr const auto from = 3U;
     constexpr const auto name = "xapic_readable";
 
-    constexpr inline auto is_enabled(attr_t attr) noexcept
+    constexpr inline auto is_enabled(attr_t &attr) noexcept
     { return is_bit_set(attr, from); }
 
-    constexpr inline auto is_disabled(attr_t attr) noexcept
+    constexpr inline auto is_disabled(attr_t &attr) noexcept
     { return is_bit_cleared(attr, from); }
 
-    constexpr inline auto enable(attr_t attr) noexcept
-    { return set_bit(attr, from); }
+    constexpr inline void enable(attr_t &attr) noexcept
+    { attr = set_bit(attr, from); }
 
-    constexpr inline auto disable(attr_t attr) noexcept
-    { return clear_bit(attr, from); }
+    constexpr inline void disable(attr_t &attr) noexcept
+    { attr = clear_bit(attr, from); }
 
     inline void dump(int level, attr_t attr, std::string *msg = nullptr)
     { bfdebug_subbool(level, name, is_enabled(attr), msg); }
@@ -457,17 +457,17 @@ namespace xapic_writable
     constexpr const auto from = 2U;
     constexpr const auto name = "xapic_writable";
 
-    constexpr inline auto is_enabled(attr_t attr) noexcept
+    constexpr inline auto is_enabled(attr_t &attr) noexcept
     { return is_bit_set(attr, from); }
 
-    constexpr inline auto is_disabled(attr_t attr) noexcept
+    constexpr inline auto is_disabled(attr_t &attr) noexcept
     { return is_bit_cleared(attr, from); }
 
-    constexpr inline auto enable(attr_t attr) noexcept
-    { return set_bit(attr, from); }
+    constexpr inline void enable(attr_t &attr) noexcept
+    { attr = set_bit(attr, from); }
 
-    constexpr inline auto disable(attr_t attr) noexcept
-    { return clear_bit(attr, from); }
+    constexpr inline void disable(attr_t &attr) noexcept
+    { attr = clear_bit(attr, from); }
 
     inline void dump(int level, attr_t attr, std::string *msg = nullptr)
     { bfdebug_subbool(level, name, is_enabled(attr), msg); }
@@ -479,17 +479,17 @@ namespace x2apic_readable
     constexpr const auto from = 1U;
     constexpr const auto name = "x2apic_readable";
 
-    constexpr inline auto is_enabled(attr_t attr) noexcept
+    constexpr inline auto is_enabled(attr_t &attr) noexcept
     { return is_bit_set(attr, from); }
 
-    constexpr inline auto is_disabled(attr_t attr) noexcept
+    constexpr inline auto is_disabled(attr_t &attr) noexcept
     { return is_bit_cleared(attr, from); }
 
-    constexpr inline auto enable(attr_t attr) noexcept
-    { return set_bit(attr, from); }
+    constexpr inline void enable(attr_t &attr) noexcept
+    { attr = set_bit(attr, from); }
 
-    constexpr inline auto disable(attr_t attr) noexcept
-    { return clear_bit(attr, from); }
+    constexpr inline void disable(attr_t &attr) noexcept
+    { attr = clear_bit(attr, from); }
 
     inline void dump(int level, attr_t attr, std::string *msg = nullptr)
     { bfdebug_subbool(level, name, is_enabled(attr), msg); }
@@ -501,17 +501,17 @@ namespace x2apic_writable
     constexpr const auto from = 0U;
     constexpr const auto name = "x2apic_writable";
 
-    constexpr inline auto is_enabled(attr_t attr) noexcept
+    constexpr inline auto is_enabled(attr_t &attr) noexcept
     { return is_bit_set(attr, from); }
 
-    constexpr inline auto is_disabled(attr_t attr) noexcept
+    constexpr inline auto is_disabled(attr_t &attr) noexcept
     { return is_bit_cleared(attr, from); }
 
-    constexpr inline auto enable(attr_t attr) noexcept
-    { return set_bit(attr, from); }
+    constexpr inline void enable(attr_t &attr) noexcept
+    { attr = set_bit(attr, from); }
 
-    constexpr inline auto disable(attr_t attr) noexcept
-    { return clear_bit(attr, from); }
+    constexpr inline void disable(attr_t &attr) noexcept
+    { attr = clear_bit(attr, from); }
 
     inline void dump(int level, attr_t attr, std::string *msg = nullptr)
     { bfdebug_subbool(level, name, is_enabled(attr), msg); }
@@ -519,32 +519,32 @@ namespace x2apic_writable
 
 inline auto exists_in_x2apic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
     return x2apic_readable::is_enabled(attr) ||
            x2apic_writable::is_enabled(attr);
 }
 
 inline auto readable_in_x2apic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
     return x2apic_readable::is_enabled(attr);
 }
 
 inline auto writable_in_x2apic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
     return x2apic_writable::is_enabled(attr);
 }
 
 inline auto stable_in_x2apic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
     return x2apic_unstable::is_disabled(attr);
 }
 
 inline auto exists_in_xapic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
 
     return xapic_readable::is_enabled(attr) ||
            xapic_writable::is_enabled(attr);
@@ -552,19 +552,19 @@ inline auto exists_in_xapic(offset_t offset)
 
 inline auto readable_in_xapic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
     return xapic_readable::is_enabled(attr);
 }
 
 inline auto writable_in_xapic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
     return xapic_writable::is_enabled(attr);
 }
 
 inline auto stable_in_xapic(offset_t offset)
 {
-    const auto attr = attributes.at(offset);
+    auto attr = attributes.at(offset);
     return xapic_unstable::is_disabled(attr);
 }
 
@@ -584,11 +584,11 @@ namespace cmci
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -606,11 +606,11 @@ namespace cmci
         constexpr const auto init = 5U;
         constexpr const auto extint = 7U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_mode(lev, get(val), msg); }
@@ -625,11 +625,11 @@ namespace cmci
         constexpr const auto idle = 0U;
         constexpr const auto send_pending = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -641,17 +641,17 @@ namespace cmci
         constexpr const auto from = 16ULL;
         constexpr const auto name = "mask_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -677,11 +677,11 @@ namespace timer
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -696,11 +696,11 @@ namespace timer
         constexpr const auto idle = 0U;
         constexpr const auto send_pending = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -712,17 +712,17 @@ namespace timer
         constexpr const auto from = 16ULL;
         constexpr const auto name = "mask_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -738,11 +738,11 @@ namespace timer
         constexpr const auto periodic = 1U;
         constexpr const auto tsc_deadline = 2U;
 
-        inline auto get(value_type val)
+        inline auto get(value_type &val)
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val)
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val)
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -781,11 +781,11 @@ namespace thermal
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -803,11 +803,11 @@ namespace thermal
         constexpr const auto init = 5U;
         constexpr const auto extint = 7U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_mode(lev, get(val), msg); }
@@ -822,11 +822,11 @@ namespace thermal
         constexpr const auto idle = 0U;
         constexpr const auto send_pending = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -838,17 +838,17 @@ namespace thermal
         constexpr const auto from = 16ULL;
         constexpr const auto name = "mask_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -874,11 +874,11 @@ namespace pmi
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -896,11 +896,11 @@ namespace pmi
         constexpr const auto init = 5U;
         constexpr const auto extint = 7U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_mode(lev, get(val), msg); }
@@ -915,11 +915,11 @@ namespace pmi
         constexpr const auto idle = 0U;
         constexpr const auto send_pending = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -931,17 +931,17 @@ namespace pmi
         constexpr const auto from = 16ULL;
         constexpr const auto name = "mask_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -967,11 +967,11 @@ namespace lint0
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -989,11 +989,11 @@ namespace lint0
         constexpr const auto init = 5U;
         constexpr const auto extint = 7U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_mode(lev, get(val), msg); }
@@ -1008,11 +1008,11 @@ namespace lint0
         constexpr const auto idle = 0U;
         constexpr const auto send_pending = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -1027,11 +1027,11 @@ namespace lint0
         constexpr const auto active_high = 0U;
         constexpr const auto active_low = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -1050,7 +1050,7 @@ namespace lint0
         constexpr const auto from = 14ULL;
         constexpr const auto name = "remote_irr";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
@@ -1066,11 +1066,11 @@ namespace lint0
         constexpr const auto edge = 0U;
         constexpr const auto level = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -1089,17 +1089,17 @@ namespace lint0
         constexpr const auto from = 16ULL;
         constexpr const auto name = "mask_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -1127,11 +1127,11 @@ namespace lint1
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1149,11 +1149,11 @@ namespace lint1
         constexpr const auto init = 5U;
         constexpr const auto extint = 7U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_mode(lev, get(val), msg); }
@@ -1168,11 +1168,11 @@ namespace lint1
         constexpr const auto idle = 0U;
         constexpr const auto send_pending = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -1187,11 +1187,11 @@ namespace lint1
         constexpr const auto active_high = 0U;
         constexpr const auto active_low = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -1210,7 +1210,7 @@ namespace lint1
         constexpr const auto from = 14ULL;
         constexpr const auto name = "remote_irr";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
@@ -1226,11 +1226,11 @@ namespace lint1
         constexpr const auto edge = 0U;
         constexpr const auto level = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -1249,17 +1249,17 @@ namespace lint1
         constexpr const auto from = 16ULL;
         constexpr const auto name = "mask_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -1287,11 +1287,11 @@ namespace error
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1307,11 +1307,11 @@ namespace error
         constexpr const auto send_pending = 1U;
 
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -1323,17 +1323,17 @@ namespace error
         constexpr const auto from = 16ULL;
         constexpr const auto name = "mask_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -1360,11 +1360,11 @@ namespace icr
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1382,11 +1382,11 @@ namespace icr
         constexpr const auto init = 5U;
         constexpr const auto extint = 7U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_mode(lev, get(val), msg); }
@@ -1401,11 +1401,11 @@ namespace icr
         constexpr const auto physical = 0U;
         constexpr const auto logical = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -1427,11 +1427,11 @@ namespace icr
         constexpr const auto idle = 0U;
         constexpr const auto send_pending = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { dump_delivery_status(lev, get(val), msg); }
@@ -1443,17 +1443,17 @@ namespace icr
         constexpr const auto from = 14ULL;
         constexpr const auto name = "level";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, val, msg); }
@@ -1468,11 +1468,11 @@ namespace icr
         constexpr const auto edge = 0U;
         constexpr const auto level = 1U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -1496,11 +1496,11 @@ namespace icr
         constexpr const auto all_incl_self = 2U;
         constexpr const auto all_excl_self = 3U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         {
@@ -1532,11 +1532,11 @@ namespace icr
         constexpr const auto from = 32ULL;
         constexpr const auto name = "x2apic_destination";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1548,11 +1548,11 @@ namespace icr
         constexpr const auto from = 56ULL;
         constexpr const auto name = "xapic_destination";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1582,11 +1582,11 @@ namespace self_ipi
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1611,11 +1611,11 @@ namespace version
 
         constexpr const auto reset_value = 0x10U;
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1627,11 +1627,11 @@ namespace version
         constexpr const auto from = 16ULL;
         constexpr const auto name = "max_lvt_entry_minus_one";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1643,17 +1643,17 @@ namespace version
         constexpr const auto from = 24ULL;
         constexpr const auto name = "suppress_eoi_broadcast_supported";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -1679,11 +1679,11 @@ namespace svr
         constexpr const auto from = 0ULL;
         constexpr const auto name = "vector";
 
-        inline auto get(value_type val) noexcept
+        inline auto get(value_type &val) noexcept
         { return get_bits(val, mask) >> from; }
 
-        inline auto set(value_type reg, value_type val) noexcept
-        { return set_bits(reg, mask, val << from); }
+        inline void set(value_type &reg, value_type val) noexcept
+        { reg = set_bits(reg, mask, val << from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subnhex(lev, name, get(val), msg); }
@@ -1695,17 +1695,17 @@ namespace svr
         constexpr const auto from = 8ULL;
         constexpr const auto name = "apic_enable_bit";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -1717,17 +1717,17 @@ namespace svr
         constexpr const auto from = 9ULL;
         constexpr const auto name = "focus_checking";
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto disable(value_type val)
-        { return set_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto enable(value_type val)
-        { return clear_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -1739,17 +1739,17 @@ namespace svr
         constexpr const auto from = 12ULL;
         constexpr const auto name = "suppress_eoi_broadcast";
 
-        inline auto is_enabled(value_type val)
+        inline auto is_enabled(value_type &val)
         { return is_bit_set(val, from); }
 
-        inline auto is_disabled(value_type val)
+        inline auto is_disabled(value_type &val)
         { return is_bit_cleared(val, from); }
 
-        inline auto enable(value_type val)
-        { return set_bit(val, from); }
+        inline void enable(value_type &val)
+        { val = set_bit(val, from); }
 
-        inline auto disable(value_type val)
-        { return clear_bit(val, from); }
+        inline void disable(value_type &val)
+        { val = clear_bit(val, from); }
 
         inline void dump(int lev, value_type val, std::string *msg = nullptr)
         { bfdebug_subbool(lev, name, is_enabled(val), msg); }
@@ -1804,11 +1804,11 @@ inline void init_nonexistent(uint64_t offset) noexcept
 {
     attr_t attr = 0ULL;
 
-    attr = xapic_readable::disable(attr);
-    attr = xapic_writable::disable(attr);
+    xapic_readable::disable(attr);
+    xapic_writable::disable(attr);
 
-    attr = x2apic_readable::disable(attr);
-    attr = x2apic_writable::disable(attr);
+    x2apic_readable::disable(attr);
+    x2apic_writable::disable(attr);
 
     attributes.at(offset) = attr;
 }
@@ -1818,11 +1818,11 @@ inline void init_xapic_read_write(uint64_t offset) noexcept
 {
     attr_t attr = attributes.at(offset);
 
-    attr = x2apic_readable::disable(attr);
-    attr = x2apic_writable::disable(attr);
+    x2apic_readable::disable(attr);
+    x2apic_writable::disable(attr);
 
-    attr = xapic_readable::enable(attr);
-    attr = xapic_writable::enable(attr);
+    xapic_readable::enable(attr);
+    xapic_writable::enable(attr);
 
     attributes.at(offset) = attr;
 }
@@ -1831,11 +1831,11 @@ inline void init_x2apic_write_only(uint64_t offset) noexcept
 {
     attr_t attr = attributes.at(offset);
 
-    attr = x2apic_readable::disable(attr);
-    attr = x2apic_writable::enable(attr);
+    x2apic_readable::disable(attr);
+    x2apic_writable::enable(attr);
 
-    attr = xapic_readable::disable(attr);
-    attr = xapic_writable::disable(attr);
+    xapic_readable::disable(attr);
+    xapic_writable::disable(attr);
 
     attributes.at(offset) = attr;
 }
@@ -1844,11 +1844,11 @@ inline void init_both_write_only(uint64_t offset) noexcept
 {
     attr_t attr = attributes.at(offset);
 
-    attr = x2apic_readable::disable(attr);
-    attr = x2apic_writable::enable(attr);
+    x2apic_readable::disable(attr);
+    x2apic_writable::enable(attr);
 
-    attr = xapic_readable::disable(attr);
-    attr = xapic_writable::enable(attr);
+    xapic_readable::disable(attr);
+    xapic_writable::enable(attr);
 
     attributes.at(offset) = attr;
 }
@@ -1857,11 +1857,11 @@ inline void init_both_read_only(uint64_t offset) noexcept
 {
     attr_t attr = attributes.at(offset);
 
-    attr = x2apic_readable::enable(attr);
-    attr = x2apic_writable::disable(attr);
+    x2apic_readable::enable(attr);
+    x2apic_writable::disable(attr);
 
-    attr = xapic_readable::enable(attr);
-    attr = xapic_writable::disable(attr);
+    xapic_readable::enable(attr);
+    xapic_writable::disable(attr);
 
     attributes.at(offset) = attr;
 }
@@ -1870,11 +1870,11 @@ inline void init_both_read_write(uint64_t offset) noexcept
 {
     attr_t attr = attributes.at(offset);
 
-    attr = x2apic_readable::enable(attr);
-    attr = x2apic_writable::enable(attr);
+    x2apic_readable::enable(attr);
+    x2apic_writable::enable(attr);
 
-    attr = xapic_readable::enable(attr);
-    attr = xapic_writable::enable(attr);
+    xapic_readable::enable(attr);
+    xapic_writable::enable(attr);
 
     attributes.at(offset) = attr;
 }
@@ -1884,8 +1884,8 @@ inline void init_unstable(uint64_t offset) noexcept
 {
     attr_t attr = attributes.at(offset);
 
-    attr = x2apic_unstable::enable(attr);
-    attr = xapic_unstable::enable(attr);
+    x2apic_unstable::enable(attr);
+    xapic_unstable::enable(attr);
 
     attributes.at(offset) = attr;
 }

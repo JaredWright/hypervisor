@@ -82,25 +82,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -117,25 +117,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -151,25 +151,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -185,25 +185,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -219,25 +219,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -253,25 +253,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -287,25 +287,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -321,25 +321,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -355,25 +355,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -389,25 +389,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -423,25 +423,25 @@ namespace cr0
         inline auto is_enabled()
         { return is_bit_set(_read_cr0(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr0(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr0(set_bit(_read_cr0(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr0(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr0(clear_bit(_read_cr0(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr0(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -518,25 +518,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -552,25 +552,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -586,25 +586,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -620,25 +620,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -654,25 +654,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -688,25 +688,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -722,25 +722,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -756,25 +756,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -790,25 +790,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -824,25 +824,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -858,25 +858,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -892,25 +892,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -926,25 +926,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -960,25 +960,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -994,25 +994,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1028,25 +1028,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1062,25 +1062,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1096,25 +1096,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -1130,25 +1130,25 @@ namespace cr4
         inline auto is_enabled()
         { return is_bit_set(_read_cr4(), from); }
 
-        inline auto is_enabled(value_type cr)
+        inline auto is_enabled(value_type &cr)
         { return is_bit_set(cr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cr4(), from); }
 
-        inline auto is_disabled(value_type cr)
+        inline auto is_disabled(value_type &cr)
         { return is_bit_cleared(cr, from); }
 
         inline void enable()
         { _write_cr4(set_bit(_read_cr4(), from)); }
 
-        inline auto enable(value_type cr)
+        inline void enable(value_type &cr)
         { _write_cr4(set_bit(cr, from)); }
 
         inline void disable()
         { _write_cr4(clear_bit(_read_cr4(), from)); }
 
-        inline auto disable(value_type cr)
+        inline void disable(value_type &cr)
         { _write_cr4(clear_bit(cr, from)); }
 
         inline void dump(int level, std::string *msg = nullptr)

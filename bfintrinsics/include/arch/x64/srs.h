@@ -95,13 +95,13 @@ namespace es
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_es(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_es(gsl::narrow_cast<value_type>(set_bits(_read_es(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_es(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -117,25 +117,25 @@ namespace es
         inline auto is_enabled()
         { return is_bit_set(_read_es(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_es(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_es(gsl::narrow_cast<value_type>(set_bit(_read_es(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_es(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_es(gsl::narrow_cast<value_type>(clear_bit(_read_es(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_es(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -151,13 +151,13 @@ namespace es
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_es(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_es(gsl::narrow_cast<value_type>(set_bits(_read_es(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_es(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -192,13 +192,13 @@ namespace cs
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_cs(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_cs(gsl::narrow_cast<value_type>(set_bits(_read_cs(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_cs(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -214,25 +214,25 @@ namespace cs
         inline auto is_enabled()
         { return is_bit_set(_read_cs(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_cs(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_cs(gsl::narrow_cast<value_type>(set_bit(_read_cs(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_cs(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_cs(gsl::narrow_cast<value_type>(clear_bit(_read_cs(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_cs(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -248,13 +248,13 @@ namespace cs
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_cs(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_cs(gsl::narrow_cast<value_type>(set_bits(_read_cs(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_cs(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -289,13 +289,13 @@ namespace ss
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_ss(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_ss(gsl::narrow_cast<value_type>(set_bits(_read_ss(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_ss(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -311,25 +311,25 @@ namespace ss
         inline auto is_enabled()
         { return is_bit_set(_read_ss(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_ss(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_ss(gsl::narrow_cast<value_type>(set_bit(_read_ss(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_ss(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_ss(gsl::narrow_cast<value_type>(clear_bit(_read_ss(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_ss(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -345,13 +345,13 @@ namespace ss
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_ss(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_ss(gsl::narrow_cast<value_type>(set_bits(_read_ss(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_ss(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -386,13 +386,13 @@ namespace ds
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_ds(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_ds(gsl::narrow_cast<value_type>(set_bits(_read_ds(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_ds(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -408,25 +408,25 @@ namespace ds
         inline auto is_enabled()
         { return is_bit_set(_read_ds(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_ds(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_ds(gsl::narrow_cast<value_type>(set_bit(_read_ds(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_ds(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_ds(gsl::narrow_cast<value_type>(clear_bit(_read_ds(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_ds(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -442,13 +442,13 @@ namespace ds
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_ds(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_ds(gsl::narrow_cast<value_type>(set_bits(_read_ds(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_ds(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -483,13 +483,13 @@ namespace fs
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_fs(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_fs(gsl::narrow_cast<value_type>(set_bits(_read_fs(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_fs(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -505,25 +505,25 @@ namespace fs
         inline auto is_enabled()
         { return is_bit_set(_read_fs(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_fs(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_fs(gsl::narrow_cast<value_type>(set_bit(_read_fs(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_fs(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_fs(gsl::narrow_cast<value_type>(clear_bit(_read_fs(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_fs(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -539,13 +539,13 @@ namespace fs
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_fs(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_fs(gsl::narrow_cast<value_type>(set_bits(_read_fs(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_fs(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -580,13 +580,13 @@ namespace gs
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_gs(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_gs(gsl::narrow_cast<value_type>(set_bits(_read_gs(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_gs(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -602,25 +602,25 @@ namespace gs
         inline auto is_enabled()
         { return is_bit_set(_read_gs(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_gs(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_gs(gsl::narrow_cast<value_type>(set_bit(_read_gs(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_gs(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_gs(gsl::narrow_cast<value_type>(clear_bit(_read_gs(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_gs(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -636,13 +636,13 @@ namespace gs
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_gs(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_gs(gsl::narrow_cast<value_type>(set_bits(_read_gs(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_gs(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -677,13 +677,13 @@ namespace ldtr
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_ldtr(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_ldtr(gsl::narrow_cast<value_type>(set_bits(_read_ldtr(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_ldtr(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -699,25 +699,25 @@ namespace ldtr
         inline auto is_enabled()
         { return is_bit_set(_read_ldtr(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_ldtr(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_ldtr(gsl::narrow_cast<value_type>(set_bit(_read_ldtr(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_ldtr(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_ldtr(gsl::narrow_cast<value_type>(clear_bit(_read_ldtr(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_ldtr(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -733,13 +733,13 @@ namespace ldtr
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_ldtr(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_ldtr(gsl::narrow_cast<value_type>(set_bits(_read_ldtr(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_ldtr(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -774,13 +774,13 @@ namespace tr
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_tr(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_tr(gsl::narrow_cast<value_type>(set_bits(_read_tr(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_tr(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -796,25 +796,25 @@ namespace tr
         inline auto is_enabled()
         { return is_bit_set(_read_tr(), from); }
 
-        inline auto is_enabled(value_type sr)
+        inline auto is_enabled(value_type &sr)
         { return is_bit_set(sr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_tr(), from); }
 
-        inline auto is_disabled(value_type sr)
+        inline auto is_disabled(value_type &sr)
         { return is_bit_cleared(sr, from); }
 
         inline void enable()
         { _write_tr(gsl::narrow_cast<value_type>(set_bit(_read_tr(), from))); }
 
-        inline auto enable(value_type sr)
+        inline void enable(value_type &sr)
         { _write_tr(gsl::narrow_cast<value_type>(set_bit(sr, from))); }
 
         inline void disable()
         { _write_tr(gsl::narrow_cast<value_type>(clear_bit(_read_tr(), from))); }
 
-        inline auto disable(value_type sr)
+        inline void disable(value_type &sr)
         { _write_tr(gsl::narrow_cast<value_type>(clear_bit(sr, from))); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -830,13 +830,13 @@ namespace tr
         inline auto get()
         { return gsl::narrow_cast<value_type>(get_bits(_read_tr(), mask) >> from); }
 
-        inline auto get(value_type sr)
+        inline auto get(value_type &sr)
         { return gsl::narrow_cast<value_type>(get_bits(sr, mask) >> from); }
 
         inline void set(value_type val)
         { _write_tr(gsl::narrow_cast<value_type>(set_bits(_read_tr(), mask, gsl::narrow_cast<value_type>(val << from)))); }
 
-        inline auto set(value_type sr, value_type val)
+        inline void set(value_type &sr, value_type val)
         { _write_tr(gsl::narrow_cast<value_type>(set_bits(sr, mask, gsl::narrow_cast<value_type>(val << from)))); }
 
         inline void dump(int level, std::string *msg = nullptr)

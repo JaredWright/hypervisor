@@ -71,7 +71,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -80,7 +80,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -99,7 +99,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -108,7 +108,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -127,7 +127,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -136,7 +136,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -155,7 +155,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -164,7 +164,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -183,7 +183,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -202,7 +202,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -211,7 +211,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -230,7 +230,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -239,7 +239,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -295,7 +295,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -331,7 +331,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -350,7 +350,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -374,7 +374,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -678,7 +678,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -702,7 +702,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -724,7 +724,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -743,7 +743,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -779,7 +779,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -798,7 +798,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -840,7 +840,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -859,7 +859,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -881,7 +881,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -917,7 +917,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -960,7 +960,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -982,7 +982,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1001,7 +1001,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1010,7 +1010,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1029,7 +1029,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1038,7 +1038,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1060,7 +1060,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1079,7 +1079,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1098,7 +1098,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1154,7 +1154,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1178,7 +1178,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1197,7 +1197,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1238,7 +1238,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1257,7 +1257,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1294,7 +1294,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1303,7 +1303,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1322,7 +1322,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1331,7 +1331,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1350,7 +1350,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1359,7 +1359,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1378,7 +1378,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1387,7 +1387,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1406,7 +1406,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1415,7 +1415,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1434,7 +1434,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1443,7 +1443,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1462,7 +1462,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1481,7 +1481,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1490,7 +1490,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1509,7 +1509,7 @@ namespace exit_qualification
             inline auto is_enabled()
             { return is_bit_set(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_enabled(value_type field)
+            inline auto is_enabled(value_type &field)
             { return is_bit_set(field, from); }
 
             inline auto is_enabled_if_exists(bool verbose = false)
@@ -1518,7 +1518,7 @@ namespace exit_qualification
             inline auto is_disabled()
             { return is_bit_cleared(get_vmcs_field(addr, name, exists()), from); }
 
-            inline auto is_disabled(value_type field)
+            inline auto is_disabled(value_type &field)
             { return is_bit_cleared(field, from); }
 
             inline auto is_disabled_if_exists(bool verbose = false)
@@ -1562,7 +1562,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)
@@ -1598,7 +1598,7 @@ namespace exit_qualification
             inline auto get()
             { return get_bits(get_vmcs_field(addr, name, exists()), mask) >> from; }
 
-            inline auto get(value_type field)
+            inline auto get(value_type &field)
             { return get_bits(field, mask) >> from; }
 
             inline auto get_if_exists(bool verbose = false)

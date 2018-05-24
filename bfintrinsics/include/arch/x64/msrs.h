@@ -118,14 +118,14 @@ namespace ia32_mperf
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -158,14 +158,14 @@ namespace ia32_aperf
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -195,7 +195,7 @@ namespace ia32_mtrrcap
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -211,13 +211,13 @@ namespace ia32_mtrrcap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -233,13 +233,13 @@ namespace ia32_mtrrcap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -255,13 +255,13 @@ namespace ia32_mtrrcap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -298,14 +298,14 @@ namespace ia32_sysenter_cs
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -365,7 +365,7 @@ namespace ia32_mcg_cap
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -381,13 +381,13 @@ namespace ia32_mcg_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -403,13 +403,13 @@ namespace ia32_mcg_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -425,13 +425,13 @@ namespace ia32_mcg_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -447,13 +447,13 @@ namespace ia32_mcg_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -469,7 +469,7 @@ namespace ia32_mcg_cap
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -485,13 +485,13 @@ namespace ia32_mcg_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -507,13 +507,13 @@ namespace ia32_mcg_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -529,13 +529,13 @@ namespace ia32_mcg_cap
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -577,26 +577,26 @@ namespace ia32_mcg_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -611,26 +611,26 @@ namespace ia32_mcg_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -645,26 +645,26 @@ namespace ia32_mcg_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -679,26 +679,26 @@ namespace ia32_mcg_status
         inline auto is_enabled()
         { return is_bit_set(_read_msr(addr), from); }
 
-        inline auto is_enabled(value_type msr)
+        inline auto is_enabled(value_type &msr)
         { return is_bit_set(msr, from); }
 
         inline auto is_disabled()
         { return is_bit_cleared(_read_msr(addr), from); }
 
-        inline auto is_disabled(value_type msr)
+        inline auto is_disabled(value_type &msr)
         { return is_bit_cleared(msr, from); }
 
         inline void enable()
         { _write_msr(addr, set_bit(_read_msr(addr), from)); }
 
-        inline auto enable(value_type msr)
-        { return set_bit(msr, from); }
+        inline void enable(value_type &msr)
+        { msr = set_bit(msr, from); }
 
         inline void disable()
         { _write_msr(addr, clear_bit(_read_msr(addr), from)); }
 
-        inline auto disable(value_type msr)
-        { return clear_bit(msr, from); }
+        inline void disable(value_type &msr)
+        { msr = clear_bit(msr, from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subbool(level, name, is_enabled(), msg); }
@@ -749,14 +749,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -771,14 +771,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -793,14 +793,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -815,14 +815,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -837,14 +837,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -859,14 +859,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -881,14 +881,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -903,14 +903,14 @@ namespace ia32_pat
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }
@@ -1331,14 +1331,14 @@ namespace ia32_tsc_aux
         inline auto get() noexcept
         { return get_bits(_read_msr(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void set(value_type val) noexcept
         { _write_msr(addr, set_bits(_read_msr(addr), mask, val << from)); }
 
-        inline auto set(value_type msr, value_type val) noexcept
-        { return set_bits(msr, mask, val << from); }
+        inline void set(value_type &msr, value_type val) noexcept
+        { msr = set_bits(msr, mask, val << from); }
 
         inline void dump(int level, std::string *msg = nullptr)
         { bfdebug_subnhex(level, name, get(), msg); }

@@ -118,7 +118,7 @@ namespace addr_size
         inline auto get() noexcept
         { return get_bits(_cpuid_eax(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
@@ -134,7 +134,7 @@ namespace addr_size
         inline auto get() noexcept
         { return get_bits(_cpuid_eax(addr), mask) >> from; }
 
-        inline auto get(value_type msr) noexcept
+        inline auto get(value_type &msr) noexcept
         { return get_bits(msr, mask) >> from; }
 
         inline void dump(int level, std::string *msg = nullptr)
