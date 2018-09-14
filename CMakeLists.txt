@@ -23,8 +23,9 @@ project(hypervisor)
 # Config
 # ------------------------------------------------------------------------------
 
-include(${CMAKE_CURRENT_LIST_DIR}/scripts/cmake/config/default.cmake)
+include(${CMAKE_SOURCE_DIR}/scripts/cmake/macros.cmake)
 include_external_config()
+include(${CMAKE_CURRENT_LIST_DIR}/scripts/cmake/config/default.cmake)
 
 # ------------------------------------------------------------------------------
 # Project File

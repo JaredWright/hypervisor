@@ -16,8 +16,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-include(${CMAKE_SOURCE_DIR}/scripts/cmake/macros.cmake)
-
 # ------------------------------------------------------------------------------
 # Quirks
 # ------------------------------------------------------------------------------
@@ -43,6 +41,8 @@ if(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "x86_64")
     set(HOST_SYSTEM_PROCESSOR "x86_64" CACHE INTERNAL "")
 elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "AMD64")
     set(HOST_SYSTEM_PROCESSOR "x86_64" CACHE INTERNAL "")
+elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "aarch64")
+    set(HOST_SYSTEM_PROCESSOR "aarch64" CACHE INTERNAL "")
 else()
     set(HOST_SYSTEM_PROCESSOR "unknown" CACHE INTERNAL "")
 endif()
@@ -555,6 +555,7 @@ add_config(
     CONFIG_TYPE FILEPATH
     DEFAULT_VAL ${SOURCE_TOOLCHAIN_DIR}/clang_${BUILD_TARGET_ARCH}_efi.cmake
     DESCRIPTION "Path to the default cmake toolchain file for building EFI components"
+    SKIP_VALIDATION
     ADVANCED
 )
 
