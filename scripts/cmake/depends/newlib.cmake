@@ -25,8 +25,13 @@ if((ENABLE_BUILD_VMM OR ENABLE_BUILD_TEST) AND NOT WIN32)
         URL_MD5     ${NEWLIB_URL_MD5}
     )
 
-    set(CC_FOR_TARGET clang)
-    set(CXX_FOR_TARGET clang)
+    if(${BUILD_TARGET_ARCH} STREQUAL aarch64)
+        set(CC_FOR_TARGET aarch64-linux-gnu-gcc-8)
+        set(CXX_FOR_TARGET aarch64-linux-gnu-gcc-8)
+    else()
+        set(CC_FOR_TARGET clang)
+        set(CXX_FOR_TARGET clang)
+    endif()
 
     set(AR_FOR_TARGET ar)
     set(AS_FOR_TARGET as)
@@ -65,11 +70,23 @@ if((ENABLE_BUILD_VMM OR ENABLE_BUILD_TEST) AND NOT WIN32)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
     endif()
 
-    # newlib uses some nonstandard assembly formats on aarch64 and must be
-    # assembled using gas.
+    # newlib quirks for aarch64
     if(${BUILD_TARGET_ARCH} STREQUAL aarch64)
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -no-integrated-as -fasm")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -no-integrated-as -fasm")
+        # set(cmake_c_flags "${cmake_c_flags} -no-integrated-as -fasm")
+        # set(cmake_cxx_flags "${cmake_cxx_flags} -no-integrated-as -fasm")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -U_FORTIFY_SOURCE")
+        string(REPLACE
+            "--target=${BUILD_TARGET_ARCH}-vmm-elf "
+            ""
+            CMAKE_C_FLAGS
+            ${CMAKE_C_FLAGS}
+        )
+        string(REPLACE
+            "-std=c11 "
+            ""
+            CMAKE_C_FLAGS
+            ${CMAKE_C_FLAGS}
+        )
     endif()
 
     list(APPEND NEWLIB_CONFIGURE_FLAGS

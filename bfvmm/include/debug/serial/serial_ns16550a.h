@@ -112,15 +112,6 @@ public:
     ///
     serial_ns16550a(uintptr_t port = DEFAULT_COM_PORT) noexcept;
 
-    /// Specific constructor - accepts a target port address
-    ///
-    /// @expects none
-    /// @ensures none
-    ///
-    /// @param port the IO port or MMIO address (platform-dependent)
-    ///
-    serial_ns16550a(uintptr_t port) noexcept;
-
     /// Destructor
     ///
     /// @expects none
@@ -245,14 +236,6 @@ private:
     void enable_dlab() const noexcept;
     void disable_dlab() const noexcept;
     bool is_transmit_empty() const noexcept;
-
-    uint8_t inb(uint16_t addr) const noexcept;
-    void outb(uint16_t addr, uint8_t data) const noexcept;
-
-    /// MMIO address or IO port
-    uintptr_t m_addr;
-
-    void init(uintptr_t port) noexcept;
 
     uint8_t inb(uint16_t addr) const noexcept;
     void outb(uint16_t addr, uint8_t data) const noexcept;
