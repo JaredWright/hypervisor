@@ -50,6 +50,8 @@ private_add_md(struct memory_descriptor *md) noexcept
         g_mm->add_md(virt, phys, type);
     });
 #else
+    // AARCH64_TODO
+    bfignored(md);
     return 0;
 #endif
 }
@@ -80,6 +82,8 @@ private_init_vmm(uint64_t arg) noexcept
         return ENTRY_SUCCESS;
     });
 #else
+    // AARCH64_TODO
+    bfignored(arg);
     return 0;
 #endif
 }
@@ -104,6 +108,8 @@ private_fini_vmm(uint64_t arg) noexcept
         return ENTRY_SUCCESS;
     });
 #else
+    // AARCH64_TODO
+    bfignored(arg);
     return 0;
 #endif
 }

@@ -75,13 +75,19 @@ execve(const char *__path, char *const __argv[], char *const __envp[])
 }
 
 extern "C" EXPORT_SYM pid_t
-getpid(void)
+_getpid(void)
 {
     return 1;
 }
 
+extern "C" EXPORT_SYM pid_t
+getpid(void)
+{
+    return _getpid();
+}
+
 extern "C" EXPORT_SYM int
-isatty(int __fildes)
+_isatty(int __fildes)
 {
     bfignored(__fildes);
 
@@ -91,8 +97,14 @@ isatty(int __fildes)
     return -1;
 }
 
+extern "C" EXPORT_SYM int
+isatty(int __fildes)
+{
+    return _isatty(__fildes);
+}
+
 extern "C" EXPORT_SYM off_t
-lseek(int __fildes, off_t __offset, int __whence)
+_lseek(int __fildes, off_t __offset, int __whence)
 {
     bfignored(__fildes);
     bfignored(__offset);
@@ -104,12 +116,18 @@ lseek(int __fildes, off_t __offset, int __whence)
     return -1;
 }
 
+extern "C" EXPORT_SYM off_t
+lseek(int __fildes, off_t __offset, int __whence)
+{
+    return _lseek(__fildes, __offset, __whence);
+}
+
 extern "C" EXPORT_SYM void
 _init(void)
 { }
 
 extern "C" EXPORT_SYM int
-kill(pid_t _pid, int _sig)
+_kill(pid_t _pid, int _sig)
 {
     bfignored(_pid);
     bfignored(_sig);
@@ -118,6 +136,12 @@ kill(pid_t _pid, int _sig)
 
     errno = -ENOSYS;
     return -1;
+}
+
+extern "C" EXPORT_SYM int
+kill(pid_t _pid, int _sig)
+{
+    return _kill(_pid, _sig);
 }
 
 extern "C" EXPORT_SYM pid_t
@@ -132,7 +156,7 @@ wait(int *status)
 }
 
 extern "C" EXPORT_SYM _READ_WRITE_RETURN_TYPE
-read(int __fd, void *__buf, size_t __nbyte)
+_read(int __fd, void *__buf, size_t __nbyte)
 {
     bfignored(__fd);
     bfignored(__buf);
@@ -142,6 +166,12 @@ read(int __fd, void *__buf, size_t __nbyte)
 
     errno = -ENOSYS;
     return -1;
+}
+
+extern "C" EXPORT_SYM _READ_WRITE_RETURN_TYPE
+read(int __fd, void *__buf, size_t __nbyte)
+{
+    return _read(__fd, __buf, __nbyte);
 }
 
 extern "C" EXPORT_SYM int
@@ -327,7 +357,7 @@ posix_memalign(void **memptr, size_t alignment, size_t size)
 }
 
 extern "C" EXPORT_SYM int
-close(int __fildes)
+_close(int __fildes)
 {
     bfignored(__fildes);
 
@@ -335,6 +365,12 @@ close(int __fildes)
 
     errno = -ENOSYS;
     return -1;
+}
+
+extern "C" EXPORT_SYM int
+close(int __fildes)
+{
+    return _close(__fildes);
 }
 
 extern "C" EXPORT_SYM int
@@ -374,13 +410,19 @@ nanosleep(const struct timespec *rqtp, struct timespec *rmtp)
 }
 
 extern "C" EXPORT_SYM int
-fstat(int __fd, struct stat *__sbuf)
+_fstat(int __fd, struct stat *__sbuf)
 {
     bfignored(__fd);
     bfignored(__sbuf);
 
     errno = -ENOSYS;
     return -1;
+}
+
+extern "C" EXPORT_SYM int
+fstat(int __fd, struct stat *__sbuf)
+{
+    return _fstat(__fd, __sbuf);
 }
 
 extern "C" EXPORT_SYM int
@@ -484,6 +526,10 @@ WEAK_SYM _calloc_r(struct _reent * /*unused*/, size_t /*unused*/, size_t /*unuse
 extern "C" EXPORT_SYM void *
 WEAK_SYM _realloc_r(struct _reent * /*unused*/, void * /*unused*/, size_t /*unused*/)
 { return nullptr; }
+
+extern "C" EXPORT_SYM int
+WEAK_SYM _write(int /*unused*/, const void * /*unused*/, size_t /*unused*/)
+{ return 0; }
 
 extern "C" EXPORT_SYM int
 WEAK_SYM write(int /*unused*/, const void * /*unused*/, size_t /*unused*/)

@@ -1020,9 +1020,8 @@ macro(enable_asm)
         set(CMAKE_ASM_NASM_CREATE_STATIC_LIBRARY TRUE)
     endif()
     if(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
-	#find_program(AS_PATH aarch64-vmm-elf-as "${BUILD_SYSROOT_VMM}/bin")
-	#set(CMAKE_AS ${AS_PATH} CACHE INTERNAL "")
-	#set(CMAKE_ASM-ATT_COMPILER ${AS_PATH} CACHE INTERNAL "")
+        set(CMAKE_AS "${VMM_PREFIX_PATH}/bin/as" CACHE INTERNAL "")
+        set(CMAKE_ASM-ATT_COMPILER ${CMAKE_AS} CACHE INTERNAL "")
         enable_language(ASM-ATT)
     endif()
 endmacro(enable_asm)
@@ -1304,7 +1303,7 @@ function(add_vmm_executable NAME)
                 ${CMAKE_INSTALL_PREFIX}/lib/libbfvmm_vcpu_static.a
                 ${CMAKE_INSTALL_PREFIX}/lib/libbfvmm_hve_static.a
                 ${CMAKE_INSTALL_PREFIX}/lib/libbfvmm_memory_manager_static.a
-                ${CMAKE_INSTALL_PREFIX}/lib/libbfvmm_debug_static.a
+                --whole-archive ${CMAKE_INSTALL_PREFIX}/lib/libbfvmm_debug_static.a --no-whole-archive
                 ${CMAKE_INSTALL_PREFIX}/lib/libbfintrinsics_static.a
             )
         endif()
@@ -1319,7 +1318,6 @@ function(add_vmm_executable NAME)
             ${CMAKE_INSTALL_PREFIX}/lib/libbfsyscall_static.a
             --whole-archive ${CMAKE_INSTALL_PREFIX}/lib/libbfcrt_static.a --no-whole-archive
         )
-
         target_link_libraries(${NAME}_static ${LIBRARIES})
         install(TARGETS ${NAME}_static DESTINATION bin)
     endif()

@@ -28,6 +28,7 @@ list(APPEND SOURCES
 
 if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
     list(APPEND SOURCES
+        # serial/serial_ns16550a.cpp
         arch/x64/serial_ns16550a.cpp
     )
 endif()
@@ -35,6 +36,7 @@ endif()
 if(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
     list(APPEND SOURCES
         arch/aarch64/serial_ns16550a.cpp
+        serial/serial_pl011.cpp
     )
 endif()
 

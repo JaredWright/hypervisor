@@ -25,9 +25,10 @@ if((ENABLE_BUILD_VMM OR ENABLE_BUILD_TEST) AND NOT WIN32)
         URL_MD5     ${NEWLIB_URL_MD5}
     )
 
+    # TODO: Remove this, temp hack to get newlib built for aarch64
     if(${BUILD_TARGET_ARCH} STREQUAL aarch64)
-        set(CC_FOR_TARGET aarch64-linux-gnu-gcc-8)
-        set(CXX_FOR_TARGET aarch64-linux-gnu-gcc-8)
+        set(CC_FOR_TARGET aarch64-linux-gnu-gcc)
+        set(CXX_FOR_TARGET aarch64-linux-gnu-gcc)
     else()
         set(CC_FOR_TARGET clang)
         set(CXX_FOR_TARGET clang)

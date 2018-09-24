@@ -21,8 +21,8 @@
 .section .text
 .balign 4
 
-.global thread_context_cpuid
-thread_context_cpuid:
+.global _thread_context_cpuid
+_thread_context_cpuid:
     mov x2, #0x7FFF
 
     mov x0, sp
@@ -36,8 +36,8 @@ thread_context_cpuid:
     ldr x0, [x0]
     ret
 
-.global thread_context_tlsptr
-thread_context_tlsptr:
+.global _thread_context_tlsptr
+_thread_context_tlsptr:
     mov x2, #0x7FFF
 
     mov x0, sp

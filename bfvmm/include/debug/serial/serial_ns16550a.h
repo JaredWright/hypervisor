@@ -21,6 +21,7 @@
 
 #include <intrinsics.h>
 #include <bfconstants.h>
+#include <bfgsl.h>
 
 // -----------------------------------------------------------------------------
 // Exports

@@ -17,6 +17,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 #include <bfvmm/vcpu/vcpu_factory.h>
+#include <bfdebug.h>
 
 namespace bfvmm
 {
@@ -24,7 +25,11 @@ namespace bfvmm
 WEAK_SYM std::unique_ptr<vcpu>
 vcpu_factory::make_vcpu(vcpuid::type vcpuid, bfobject *obj)
 {
+    // AARCH64_TODO
+    bfignored(vcpuid);
     bfignored(obj);
+
+    bfdebug_info(0, "Hello, ARM!");
     std::unique_ptr<vcpu> dummy;
     return dummy;
 }
