@@ -23,9 +23,10 @@ include(${SOURCE_CMAKE_DIR}/project.cmake)
 init_project()
 
 if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
-    list(APPEND SOURCES
-        arch/intel_x64/vcpu_factory.cpp
-    )
+    # list(APPEND SOURCES
+    #     arch/intel_x64/vcpu_factory.cpp
+    # )
+    message(WARNING "Hypervisor main under construction!!!")
 elseif(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
     message(WARNING "Unimplemented")
 else()

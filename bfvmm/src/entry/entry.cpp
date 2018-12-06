@@ -37,6 +37,7 @@
 #include <memory_manager/memory_manager.h>
 
 #include <intrinsics.h>
+#include <hypervisor.h>
 
 extern "C" int64_t
 private_init(void)
@@ -79,10 +80,10 @@ private_init_vmm(uint64_t arg) noexcept
 {
     return guard_exceptions(ENTRY_ERROR_VMM_START_FAILED, [&]() {
 
-        g_vcm->create(arg, pre_create_vcpu(arg));
-
-        auto ___ = gsl::on_failure([&]
-        { g_vcm->destroy(arg); });
+        // g_vcm->create(arg, pre_create_vcpu(arg));
+        //
+        // auto ___ = gsl::on_failure([&]
+        // { g_vcm->destroy(arg); });
 
         g_vcm->run(arg, pre_run_vcpu(arg));
 
@@ -110,6 +111,35 @@ private_fini_vmm(uint64_t arg) noexcept
     });
 }
 
+int64_t
+WEAK_SYM hypervisor_setup(gsl::not_null<domain *> domain)
+{
+    bfignored(domain);
+    return SUCCESS;
+}
+
+extern "C" int64_t
+private_hypervisor_setup(uint64_t arg) noexcept
+{
+    return guard_exceptions(ENTRY_ERROR_VMM_STOP_FAILED, [&]() {
+
+        for(uint64_t vcpuid = 0; vcpuid < arg; vcpuid++) {
+            g_vcm->create(arg, pre_create_vcpu(arg));
+        }
+
+        auto ___ = gsl::on_failure([&]
+        {
+            for(uint64_t vcpuid = 0; vcpuid < arg; vcpuid++) {
+                g_vcm->destroy(arg);
+            }
+        });
+
+        auto d = std::make_unique<domain>(arg);
+
+        return hypervisor_setup(d.get());
+    });
+}
+
 extern "C" int64_t
 bfmain(uintptr_t request, uintptr_t arg1, uintptr_t arg2, uintptr_t arg3)
 {
@@ -131,7 +161,8 @@ bfmain(uintptr_t request, uintptr_t arg1, uintptr_t arg2, uintptr_t arg3)
 
         case BF_REQUEST_GET_DRR:
             return get_drr(arg1, reinterpret_cast<debug_ring_resources_t **>(arg2));
-
+        case BF_REQUEST_VMM_HYPERVISOR_SETUP:
+            return private_hypervisor_setup(arg1);
         case BF_REQUEST_VMM_INIT:
             return private_init_vmm(arg1);
 
