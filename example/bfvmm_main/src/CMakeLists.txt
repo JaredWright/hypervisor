@@ -16,14 +16,17 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
+cmake_minimum_required(VERSION 3.6)
+project(bfvmm_main C CXX)
+
+include(${SOURCE_CMAKE_DIR}/project.cmake)
+init_project()
+
 list(APPEND SOURCES
-    entry.cpp
+    main.cpp
 )
 
-add_static_library(
-    bfvmm_entry
+add_vmm_executable(
+    bfvmm
     SOURCES ${SOURCES}
-    ALWAYS
 )
-
-install(DIRECTORY ../../include/entry/ DESTINATION include/bfvmm/entry)

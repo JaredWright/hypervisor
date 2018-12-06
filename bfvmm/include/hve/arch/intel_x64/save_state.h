@@ -51,7 +51,7 @@ struct save_state_t {
     uint64_t vic_ptr;               // 0x088
     uint64_t reserved2;             // 0x090
     uint64_t vcpuid;                // 0x098
-    uint64_t exit_handler_ptr;      // 0x0A0
+    uint64_t vcpu_ptr;              // 0x0A0
 
     uint64_t user1;                 // 0x0A8
     uint64_t user2;                 // 0x0B0

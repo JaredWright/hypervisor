@@ -1,6 +1,6 @@
 #
 # Bareflank Hypervisor
-# Copyright (C) 2015 Assured Information Security, Inc.
+# Copyright (C) 2018 Assured Information Security, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,14 +16,13 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-list(APPEND SOURCES
-    entry.cpp
-)
+cmake_minimum_required(VERSION 3.6)
+project(cpuid C CXX)
 
-add_static_library(
-    bfvmm_entry
-    SOURCES ${SOURCES}
-    ALWAYS
-)
+include(${SOURCE_CMAKE_DIR}/project.cmake)
+init_project()
 
-install(DIRECTORY ../../include/entry/ DESTINATION include/bfvmm/entry)
+add_vmm_executable(
+    cpuid
+    SOURCES cpuid.cpp
+)
