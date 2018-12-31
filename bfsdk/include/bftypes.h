@@ -140,7 +140,7 @@ typedef INT_PTR intptr_t;
 /* -------------------------------------------------------------------------- */
 
 #ifdef __cplusplus
-#include <gsl/pointers>
+#include <bfgsl.h>
 #include <bfarch.h>
 #if defined(BF_INTEL_X64)
     namespace bfvmm::intel_x64
