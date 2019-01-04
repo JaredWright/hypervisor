@@ -151,11 +151,11 @@ if(ENABLE_BUILD_VMM)
         DEPENDS bfunwind
     )
 
-    add_subproject(
-        bfvmm_main vmm
+    vmm_extension(
+        bfvmm_main
         DEPENDS bfvmm
         DEPENDS bfintrinsics
-        SOURCE_DIR ${SOURCE_BFVMM_DIR}/src/main
+        SOURCE_DIR ${SOURCE_EXAMPLE_DIR}/bfvmm_main/src
     )
 
     add_subproject(

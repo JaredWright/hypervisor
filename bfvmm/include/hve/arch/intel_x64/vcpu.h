@@ -48,6 +48,13 @@
 
 #include "../x64/unmapper.h"
 
+#include "delegator/cpuid.h"
+#include "delegator/nmi.h"
+#include "delegator/cr.h"
+#include "delegator/invd.h"
+#include "delegator/msr.h"
+#include "delegator/unhandled_exit.h"
+
 #include "../../../vcpu/vcpu.h"
 #include "../../../memory_manager/arch/x64/cr3.h"
 
@@ -86,6 +93,9 @@ namespace bfvmm::intel_x64
 ///
 class EXPORT_HVE vcpu : public bfvmm::vcpu
 {
+
+    using handler_t = bool(gsl::not_null<bfvmm::intel_x64::vcpu *>);
+    using handler_delegate_t = delegate<handler_t>;
 
 public:
 
@@ -1549,6 +1559,38 @@ public:
     auto map_arg(void *gva)
     { return map_gva_4k<T>(gva, 1); }
 
+    /// Initialize vCPU
+    ///
+    /// Initializes the vCPU.
+    ///
+    /// @expects none
+    /// @ensures none
+    ///
+    /// @return returns true if successful, false otherwise
+    ///
+    bool init();
+
+    /// De-initialize vCPU
+    ///
+    /// De-initializes the vCPU.
+    ///
+    /// @expects none
+    /// @ensures none
+    ///
+    /// @return returns true if successful, false otherwise
+    ///
+    bool fini();
+
+    /// Add exit handler
+    ///
+    /// Adds an exit handler to be called on every vmexit
+    ///
+    /// @expects none
+    /// @ensures none
+    ///
+    // void add_exit_handler(const handler_delegate_t &d)
+    // { this->m_all_exit_delegates.push_front(d); }
+
 public:
 
     /// @cond
@@ -1685,6 +1727,30 @@ public:
 
     /// @endcond
 
+public:
+
+    /// @cond
+
+    cpuid::delegator *cpuid_delegator() const
+    { return m_cpuid_delegator.get(); }
+
+    nmi::delegator *nmi_delegator() const
+    { return m_nmi_delegator.get(); }
+
+    cr::delegator *cr_delegator() const
+    { return m_cr_delegator.get(); }
+
+    invd::delegator *invd_delegator() const
+    { return m_invd_delegator.get(); }
+
+    msr::delegator *msr_delegator() const
+    { return m_msr_delegator.get(); }
+
+    unhandled_exit::delegator *unhandled_exit_delegator() const
+    { return m_unhandled_exit_delegator.get(); }
+
+    /// @endcond
+
 private:
 
     uintptr_t get_entry(uintptr_t tble_gpa, std::ptrdiff_t index);
@@ -1733,11 +1799,27 @@ private:
     friend class io_instruction_handler;
     friend class rdmsr_handler;
     friend class wrmsr_handler;
+    std::unique_ptr<vmcs> m_vmcs;
+    std::unique_ptr<vmx> m_vmx;
+
+    std::list<handler_delegate_t> m_init_delegates;
+    std::list<handler_delegate_t> m_fini_delegates;
+    std::array<handler_delegate_t, 128> m_exit_delegates;
+
+    std::unique_ptr<cpuid::delegator> m_cpuid_delegator;
+    std::unique_ptr<nmi::delegator> m_nmi_delegator;
+    std::unique_ptr<cr::delegator> m_cr_delegator;
+    std::unique_ptr<invd::delegator> m_invd_delegator;
+    std::unique_ptr<msr::delegator> m_msr_delegator;
+    std::unique_ptr<unhandled_exit::delegator> m_unhandled_exit_delegator;
+
+
+private:
+
+    void vmexit_handler() noexcept;
 };
 
 }
-
-using vcpu_t = bfvmm::intel_x64::vcpu;
 
 /// Get Guest vCPU
 ///
@@ -1756,4 +1838,3 @@ using vcpu_t = bfvmm::intel_x64::vcpu;
 #pragma warning(pop)
 #endif
 
-#endif

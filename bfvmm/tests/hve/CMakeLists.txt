@@ -23,6 +23,7 @@ list(APPEND ARGN
     DEPENDS bfvmm_hve
     DEPENDS bfvmm_vcpu
     DEPENDS bfvmm_memory_manager
+    DEPENDS bfvmm_sdk
     DEFINES STATIC_HVE
     DEFINES STATIC_VCPU
     DEFINES STATIC_MEMORY_MANAGER

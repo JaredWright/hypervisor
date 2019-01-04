@@ -40,18 +40,32 @@ namespace intel_x64
 vmx::vmx(gsl::not_null<vcpu *> vcpu) :
     m_vmx_region{make_nullptr_page<uint32_t>()}
 {
-    if (vcpu->is_guest_vm_vcpu()) {
-        return;
-    }
+    // if (vcpu->is_guest_vm_vcpu()) {
+    //     return;
+    // }
 
     m_vmx_region = make_page<uint32_t>();
     m_vmx_region_phys = g_mm->virtptr_to_physint(m_vmx_region.get());
 
-    this->reset_vmx();
-    this->setup_vmx_region();
+    // this->reset_vmx();
+    // this->setup_vmx_region();
 
     this->check_cpuid_vmx_supported();
     this->check_vmx_capabilities_msr();
+}
+
+vmx::~vmx()
+{
+    if (::intel_x64::cr4::vmx_enable_bit::is_enabled()) {
+        this->disable();
+    }
+}
+
+void
+vmx::enable()
+{
+    this->reset_vmx();
+    this->setup_vmx_region();
 
     this->enable_vmx();
 
@@ -62,19 +76,19 @@ vmx::vmx(gsl::not_null<vcpu *> vcpu) :
 
     this->execute_vmxon();
 
-    bfdebug_pass(1, "vmx: complete");
+    bfdebug_pass(1, "vmx: enabled and on");
 }
 
-vmx::~vmx()
+void
+vmx::disable()
 {
     guard_exceptions([&]() {
         this->execute_vmxoff();
         this->disable_vmx();
     });
 
-    bfdebug_pass(1, "~vmx: complete");
+    bfdebug_pass(1, "vmx: disabled and off");
 }
-
 void
 vmx::check_cpuid_vmx_supported()
 {
