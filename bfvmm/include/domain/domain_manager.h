@@ -19,17 +19,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <bfvmm/vcpu/vcpu_factory.h>
-#include <bfvmm/hve/arch/intel_x64/vcpu.h>
+#ifndef DOMAIN_MANAGER_H
+#define DOMAIN_MANAGER_H
 
-namespace bfvmm
-{
+#include <bfmanager.h>
 
-WEAK_SYM std::unique_ptr<vcpu>
-vcpu_factory::make(vcpuid::type vcpuid, bfobject *obj)
-{
-    bfignored(obj);
-    return std::make_unique<intel_x64::vcpu>(vcpuid);
-}
+#include "domain.h"
+#include "domain_factory.h"
 
-}
+/// Domain Manager Macro
+///
+/// The following macro can be used to quickly call the domain manager as
+/// this class will likely be called by a lot of code. This call is guaranteed
+/// to not be NULL
+///
+/// @expects none
+/// @ensures ret != nullptr
+///
+#define g_dm                                                                   \
+    bfmanager<                                                                 \
+    bfvmm::domain,                                                             \
+    bfvmm::domain_factory,                                                     \
+    bfvmm::domain::domainid_type>::instance()
+
+#endif

@@ -19,23 +19,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-cmake_minimum_required(VERSION 3.6)
-project(bfvmm_main C CXX)
-
-include(${SOURCE_CMAKE_DIR}/project.cmake)
-init_project()
-
-if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
-    list(APPEND SOURCES
-        arch/intel_x64/vcpu_factory.cpp
-    )
-elseif(${BUILD_TARGET_ARCH} STREQUAL "aarch64")
-    message(WARNING "Unimplemented")
-else()
-    message(FATAL_ERROR "Unsupported archiecture")
-endif()
-
-add_vmm_executable(
-    bfvmm
-    SOURCES ${SOURCES}
+list(APPEND SOURCES
+    domain.cpp
 )
+
+add_shared_library(
+    bfvmm_domain
+    SOURCES ${SOURCES}
+    DEFINES SHARED_DOMAIN
+    DEFINES SHARED_HVE
+    DEFINES SHARED_MEMORY_MANAGER
+    DEFINES SHARED_INTRINSICS
+)
+
+add_static_library(
+    bfvmm_domain
+    SOURCES ${SOURCES}
+    DEFINES STATIC_DOMAIN
+    DEFINES STATIC_HVE
+    DEFINES STATIC_MEMORY_MANAGER
+    DEFINES STATIC_INTRINSICS
+)
+
+# ------------------------------------------------------------------------------
+# Install
+# ------------------------------------------------------------------------------
+
+install(DIRECTORY ../../include/domain/ DESTINATION include/bfvmm/domain)

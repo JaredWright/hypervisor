@@ -34,12 +34,16 @@
 #include <bfexports.h>
 #include <bfsupport.h>
 #include <bfexception.h>
+#include <bftypes.h>
 
+#include <domain/domain_manager.h>
 #include <vcpu/vcpu_manager.h>
 #include <debug/debug_ring/debug_ring.h>
 #include <memory_manager/memory_manager.h>
 
 #include <intrinsics.h>
+
+#include "entry/entry.h"
 
 extern "C" int64_t
 private_init(void)
@@ -69,46 +73,60 @@ private_set_rsdp(uintptr_t rsdp) noexcept
     return ENTRY_SUCCESS;
 }
 
-bfobject *
-WEAK_SYM pre_create_vcpu(vcpuid::type id)
-{ (void) id; return nullptr; }
+bool
+WEAK_SYM vmm_init(domain_t domain)
+{ bfignored(domain); return true; }
 
-bfobject *
-WEAK_SYM pre_run_vcpu(vcpuid::type id)
-{ (void) id; return nullptr; }
+bool
+WEAK_SYM vmm_main(vcpu_t vcpu)
+{ bfignored(vcpu); return true; }
 
-extern "C" int64_t
-private_init_vmm(uint64_t arg) noexcept
-{
-    return guard_exceptions(ENTRY_ERROR_VMM_START_FAILED, [&]() {
-
-        g_vcm->create(arg, pre_create_vcpu(arg));
-
-        auto ___ = gsl::on_failure([&]
-        { g_vcm->destroy(arg); });
-
-        g_vcm->run(arg, pre_run_vcpu(arg));
-
-        return ENTRY_SUCCESS;
-    });
-}
-
-bfobject *
-WEAK_SYM pre_hlt_vcpu(vcpuid::type id)
-{ (void) id; return nullptr; }
-
-bfobject *
-WEAK_SYM pre_destroy_vcpu(vcpuid::type id)
-{ (void) id; return nullptr; }
+bool
+WEAK_SYM vmm_fini(vcpu_t vcpu)
+{ bfignored(vcpu); return true; }
 
 extern "C" int64_t
 private_fini_vmm(uint64_t arg) noexcept
 {
     return guard_exceptions(ENTRY_ERROR_VMM_STOP_FAILED, [&]() {
+        g_vcm->hlt(arg);
+        g_vcm->destroy(arg);
 
-        g_vcm->hlt(arg, pre_hlt_vcpu(arg));
-        g_vcm->destroy(arg, pre_destroy_vcpu(arg));
+        return ENTRY_SUCCESS;
+    });
+}
 
+extern "C" bool
+private_init_vmm(uint64_t arg) noexcept
+{
+    return guard_exceptions(ENTRY_ERROR_VMM_STOP_FAILED, [&]() {
+
+        g_dm->create(0, 0);
+        auto domain_0 = g_dm->get(0);
+
+        for (uint64_t vcpuid = 0; vcpuid < arg; vcpuid++) {
+            g_vcm->create(vcpuid);
+
+            auto vcpu = get_vcpu(vcpuid);
+            domain_0->add_vcpu(vcpu);
+        }
+
+        auto ___ = gsl::on_failure([&] {
+            for (uint64_t vcpuid = 0; vcpuid < arg; vcpuid++)
+            {
+                g_vcm->destroy(arg);
+            }
+        });
+
+        return vmm_init(get_domain(0));
+    });
+}
+
+extern "C" int64_t
+private_run_vmm(uint64_t arg) noexcept
+{
+    return guard_exceptions(ENTRY_ERROR_VMM_START_FAILED, [&]() {
+        g_vcm->run(arg);
         return ENTRY_SUCCESS;
     });
 }
@@ -140,6 +158,9 @@ bfmain(uintptr_t request, uintptr_t arg1, uintptr_t arg2, uintptr_t arg3)
 
         case BF_REQUEST_VMM_FINI:
             return private_fini_vmm(arg1);
+
+        case BF_REQUEST_VMM_RUN:
+            return private_run_vmm(arg1);
 
         default:
             break;
