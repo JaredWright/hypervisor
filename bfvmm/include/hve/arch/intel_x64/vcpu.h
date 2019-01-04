@@ -1,6 +1,6 @@
 //
 // Bareflank Hypervisor
-// Copyright (C) 2015 Assured Information Security, Inc.
+// Copyright (C) 2018 Assured Information Security, Inc.
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -19,9 +19,15 @@
 #ifndef VCPU_INTEL_X64_H
 #define VCPU_INTEL_X64_H
 
-#include "exit_handler.h"
 #include "vmx.h"
 #include "vmcs.h"
+
+#include "delegator/cpuid.h"
+#include "delegator/nmi.h"
+#include "delegator/cr.h"
+#include "delegator/invd.h"
+#include "delegator/msr.h"
+#include "delegator/unhandled_exit.h"
 
 #include "../../../vcpu/vcpu.h"
 #include "../../../memory_manager/arch/x64/cr3.h"
@@ -61,6 +67,9 @@ namespace bfvmm::intel_x64
 ///
 class EXPORT_HVE vcpu : public bfvmm::vcpu
 {
+
+using handler_t = bool(gsl::not_null<bfvmm::intel_x64::vcpu *>);
+using handler_delegate_t = delegate<handler_t>;
 
 public:
 
@@ -104,8 +113,6 @@ public:
     ///
     VIRTUAL void hlt_delegate(bfobject *obj);
 
-public:
-
     /// Load vCPU
     ///
     /// Loads the vCPU into hardware.
@@ -123,36 +130,6 @@ public:
     /// @ensures none
     ///
     VIRTUAL void promote();
-
-    /// Add Handler vCPU
-    ///
-    /// Adds an exit handler to the vCPU
-    ///
-    /// @expects none
-    /// @ensures none
-    ///
-    /// @param reason The exit reason for the handler being registered
-    /// @param d The delegate being registered
-    ///
-    VIRTUAL void add_handler(
-        ::intel_x64::vmcs::value_type reason,
-        const handler_delegate_t &d);
-
-    /// Add Exit Delegate
-    ///
-    /// Adds an exit function to the exit list. Exit functions are executed
-    /// right after a vCPU exits for any reason. Use this with care because
-    /// this function will be executed a lot.
-    ///
-    /// Note the return value of the delegate is ignored
-    ///
-    /// @expects none
-    /// @ensures none
-    ///
-    /// @param d The delegate being registered
-    ///
-    VIRTUAL void add_exit_handler(
-        const handler_delegate_t &d);
 
     /// Dump State
     ///
@@ -186,62 +163,119 @@ public:
     ///
     VIRTUAL bool advance();
 
+
+    /// Initialize vCPU
+    ///
+    /// Initializes the vCPU.
+    ///
+    /// @expects none
+    /// @ensures none
+    ///
+    /// @return returns true if successful, false otherwise
+    ///
+    bool init();
+
+    /// De-initialize vCPU
+    ///
+    /// De-initializes the vCPU.
+    ///
+    /// @expects none
+    /// @ensures none
+    ///
+    /// @return returns true if successful, false otherwise
+    ///
+    bool fini();
+
+    /// Add exit handler
+    ///
+    /// Adds an exit handler to be called on every vmexit
+    ///
+    /// @expects none
+    /// @ensures none
+    ///
+    void add_exit_handler(const handler_delegate_t &d)
+    { this->m_all_exit_delegates.push_front(d); }
+
 public:
 
     /// @cond
 
-    VIRTUAL uint64_t rax() const;
-    VIRTUAL void set_rax(uint64_t val);
+    uint64_t rax() const;
+    void set_rax(uint64_t val);
 
-    VIRTUAL uint64_t rbx() const;
-    VIRTUAL void set_rbx(uint64_t val);
+    uint64_t rbx() const;
+    void set_rbx(uint64_t val);
 
-    VIRTUAL uint64_t rcx() const;
-    VIRTUAL void set_rcx(uint64_t val);
+    uint64_t rcx() const;
+    void set_rcx(uint64_t val);
 
-    VIRTUAL uint64_t rdx() const;
-    VIRTUAL void set_rdx(uint64_t val);
+    uint64_t rdx() const;
+    void set_rdx(uint64_t val);
 
-    VIRTUAL uint64_t rbp() const;
-    VIRTUAL void set_rbp(uint64_t val);
+    uint64_t rbp() const;
+    void set_rbp(uint64_t val);
 
-    VIRTUAL uint64_t rsi() const;
-    VIRTUAL void set_rsi(uint64_t val);
+    uint64_t rsi() const;
+    void set_rsi(uint64_t val);
 
-    VIRTUAL uint64_t rdi() const;
-    VIRTUAL void set_rdi(uint64_t val);
+    uint64_t rdi() const;
+    void set_rdi(uint64_t val);
 
-    VIRTUAL uint64_t r08() const;
-    VIRTUAL void set_r08(uint64_t val);
+    uint64_t r08() const;
+    void set_r08(uint64_t val);
 
-    VIRTUAL uint64_t r09() const;
-    VIRTUAL void set_r09(uint64_t val);
+    uint64_t r09() const;
+    void set_r09(uint64_t val);
 
-    VIRTUAL uint64_t r10() const;
-    VIRTUAL void set_r10(uint64_t val);
+    uint64_t r10() const;
+    void set_r10(uint64_t val);
 
-    VIRTUAL uint64_t r11() const;
-    VIRTUAL void set_r11(uint64_t val);
+    uint64_t r11() const;
+    void set_r11(uint64_t val);
 
-    VIRTUAL uint64_t r12() const;
-    VIRTUAL void set_r12(uint64_t val);
+    uint64_t r12() const;
+    void set_r12(uint64_t val);
 
-    VIRTUAL uint64_t r13() const;
-    VIRTUAL void set_r13(uint64_t val);
+    uint64_t r13() const;
+    void set_r13(uint64_t val);
 
-    VIRTUAL uint64_t r14() const;
-    VIRTUAL void set_r14(uint64_t val);
+    uint64_t r14() const;
+    void set_r14(uint64_t val);
 
-    VIRTUAL uint64_t r15() const;
-    VIRTUAL void set_r15(uint64_t val);
+    uint64_t r15() const;
+    void set_r15(uint64_t val);
 
-    VIRTUAL uint64_t rip() const;
-    VIRTUAL void set_rip(uint64_t val);
+    uint64_t rip() const;
+    void set_rip(uint64_t val);
 
-    VIRTUAL uint64_t rsp() const;
-    VIRTUAL void set_rsp(uint64_t val);
+    uint64_t rsp() const;
+    void set_rsp(uint64_t val);
 
-    VIRTUAL gsl::not_null<save_state_t *> save_state() const;
+    gsl::not_null<save_state_t *> save_state() const;
+
+    /// @endcond
+
+public:
+
+    /// @cond
+
+    cpuid::delegator * cpuid_delegator() const
+    { return m_cpuid_delegator.get(); }
+
+    nmi::delegator * nmi_delegator() const
+    { return m_nmi_delegator.get(); }
+
+    cr::delegator * cr_delegator() const
+    { return m_cr_delegator.get(); }
+
+    invd::delegator * invd_delegator() const
+    { return m_invd_delegator.get(); }
+
+    msr::delegator * msr_delegator() const
+    { return m_msr_delegator.get(); }
+
+    unhandled_exit::delegator * unhandled_exit_delegator() const
+    { return m_unhandled_exit_delegator.get(); }
 
     /// @endcond
 
@@ -249,14 +283,28 @@ private:
 
     bool m_launched{false};
 
-    std::unique_ptr<exit_handler> m_exit_handler;
     std::unique_ptr<vmcs> m_vmcs;
     std::unique_ptr<vmx> m_vmx;
+
+    std::list<handler_delegate_t> m_init_delegates;
+    std::list<handler_delegate_t> m_fini_delegates;
+    std::array<handler_delegate_t, 128> m_exit_delegates;
+    std::list<handler_delegate_t> m_all_exit_delegates;
+
+    std::unique_ptr<cpuid::delegator> m_cpuid_delegator;
+    std::unique_ptr<nmi::delegator> m_nmi_delegator;
+    std::unique_ptr<cr::delegator> m_cr_delegator;
+    std::unique_ptr<invd::delegator> m_invd_delegator;
+    std::unique_ptr<msr::delegator> m_msr_delegator;
+    std::unique_ptr<unhandled_exit::delegator> m_unhandled_exit_delegator;
+
+
+private:
+
+    void vmexit_handler() noexcept;
 };
 
 }
-
-using vcpu_t = bfvmm::intel_x64::vcpu;
 
 /// Get Guest vCPU
 ///
