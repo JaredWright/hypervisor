@@ -50,10 +50,10 @@
 // Definitions
 // -----------------------------------------------------------------------------
 
-namespace bfvmm
+namespace bfvmm::intel_x64
 {
-namespace intel_x64
-{
+
+class vcpu;
 
 /// VMXON (Intel x86_64)
 ///
@@ -72,7 +72,7 @@ public:
     /// @expects none
     /// @ensures none
     ///
-    vmx();
+    vmx(gsl::not_null<vcpu *> vcpu);
 
     /// Destructor
     ///
@@ -117,7 +117,6 @@ public:
     /// @endcond
 };
 
-}
 }
 
 #ifdef _MSC_VER

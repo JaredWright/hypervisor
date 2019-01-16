@@ -35,10 +35,15 @@ namespace bfvmm
 namespace intel_x64
 {
 
-vmx::vmx() :
-    m_vmx_region{make_page<uint32_t>()},
-    m_vmx_region_phys{g_mm->virtptr_to_physint(m_vmx_region.get())}
+vmx::vmx(gsl::not_null<vcpu *> vcpu)
 {
+    if (vcpu->is_guest_vm_vcpu()) {
+        return;
+    }
+
+    m_vmx_region = make_page<uint32_t>();
+    m_vmx_region_phys = g_mm->virtptr_to_physint(m_vmx_region.get());
+
     this->reset_vmx();
     this->setup_vmx_region();
 
