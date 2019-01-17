@@ -19,17 +19,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_vmexit_control_register_trap_cr0
+add_vmm_executable(
+    integration_intel_x64_vmexit_control_register_trap_cr0
     SOURCES trap_cr0.cpp
 )
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_vmexit_control_register_trap_cr3
+add_vmm_executable(
+    integration_intel_x64_vmexit_control_register_trap_cr3
     SOURCES trap_cr3.cpp
 )
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_vmexit_control_register_trap_cr4
+add_vmm_executable(
+    integration_intel_x64_vmexit_control_register_trap_cr4
     SOURCES trap_cr4.cpp
 )

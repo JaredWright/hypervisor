@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_monitor_trap_single_step_cpuid
+add_vmm_executable(
+    integration_intel_x64_monitor_trap_single_step_cpuid
     SOURCES single_step_cpuid.cpp
 )

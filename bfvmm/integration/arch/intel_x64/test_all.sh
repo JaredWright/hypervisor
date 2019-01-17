@@ -94,7 +94,7 @@ done
 
 if [[ $# -ne 3 ]] || [[ $option_help -ne 0 ]];
 then
-    echo "usage: $(basename $0) [options] <build-dir> <hypervisor-src> <eapis-debug-config>"
+    echo "usage: $(basename $0) [options] <build-dir> <hypervisor-src> <debug-config>"
     echo
     echo "options:"
     echo "  --help | -h     Display this text"
@@ -450,7 +450,7 @@ init_test()
 
 parse_test_name()
 {
-    name=$(basename $1 | sed 's|eapis_integration_intel_x64_\(.*\)_static|\1|')
+    name=$(basename $1 | sed 's|integration_intel_x64_\(.*\)_static|\1|')
     echo "$name"
 }
 
@@ -482,7 +482,7 @@ echo_task "loading  bfdriver\n"
 cmake --build $build_dir --target driver_load
 
 echo_milestone "Running test vmms\n"
-for vmm in $(find $vmm_bin_dir -name "*eapis*integration*" | sort)
+for vmm in $(find $vmm_bin_dir -name "*integration*" | sort)
 do
     echo_task "testing: $(parse_test_name $vmm)"
     init_test $vmm

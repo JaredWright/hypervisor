@@ -157,6 +157,12 @@ if(ENABLE_BUILD_VMM)
         DEPENDS bfintrinsics
         SOURCE_DIR ${SOURCE_BFVMM_DIR}/src/main
     )
+
+    add_subproject(
+        integration vmm
+        DEPENDS bfvmm
+        SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/bfvmm/integration/
+    )
 endif()
 
 # ------------------------------------------------------------------------------

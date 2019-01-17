@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef VPID_INTEL_X64_EAPIS_H
-#define VPID_INTEL_X64_EAPIS_H
+#ifndef VPID_INTEL_X64_H
+#define VPID_INTEL_X64_H
 
 // -----------------------------------------------------------------------------
 // Exports
@@ -28,14 +28,14 @@
 
 #include <bfexports.h>
 
-#ifndef STATIC_EAPIS_HVE
-#ifdef SHARED_EAPIS_HVE
-#define EXPORT_EAPIS_HVE EXPORT_SYM
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
 #else
-#define EXPORT_EAPIS_HVE IMPORT_SYM
+#define EXPORT_HVE IMPORT_SYM
 #endif
 #else
-#define EXPORT_EAPIS_HVE
+#define EXPORT_HVE
 #endif
 
 // -----------------------------------------------------------------------------
@@ -51,7 +51,7 @@ class vcpu;
 ///
 /// Provides an interface for enabling VPID
 ///
-class EXPORT_EAPIS_HVE vpid_handler
+class EXPORT_HVE vpid_handler
 {
 public:
 

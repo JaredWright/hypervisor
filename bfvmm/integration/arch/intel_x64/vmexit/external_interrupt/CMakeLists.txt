@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_vmexit_trap_all_interrupts
+add_vmm_executable(
+    integration_intel_x64_vmexit_trap_all_interrupts
     SOURCES trap_all_interrupts.cpp
 )

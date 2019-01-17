@@ -19,8 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_test_all
+add_vmm_executable(
+    integration_intel_x64_test_all
     SOURCES test_all.cpp
 )
 
@@ -35,5 +35,4 @@ add_subdirectory(vmexit/io_instruction)
 add_subdirectory(vmexit/monitor_trap)
 add_subdirectory(vmexit/rdmsr)
 add_subdirectory(vmexit/wrmsr)
-add_subdirectory(vmexit/vmx_preemption_timer)
 add_subdirectory(vpid)

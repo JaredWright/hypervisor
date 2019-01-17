@@ -19,10 +19,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef VCPU_GLOBAL_STATE_INTEL_X64_EAPIS_H
-#define VCPU_GLOBAL_STATE_INTEL_X64_EAPIS_H
+#ifndef VCPU_GLOBAL_STATE_INTEL_X64_H
+#define VCPU_GLOBAL_STATE_INTEL_X64_H
 
 #include <intrinsics.h>
+
+// -----------------------------------------------------------------------------
+// Exports
+// -----------------------------------------------------------------------------
+
+#include <bfexports.h>
+
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
+#else
+#define EXPORT_HVE IMPORT_SYM
+#endif
+#else
+#define EXPORT_HVE
+#endif
+
+// -----------------------------------------------------------------------------
+// Definitions
+// -----------------------------------------------------------------------------
 
 namespace bfvmm::intel_x64
 {

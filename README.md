@@ -23,8 +23,8 @@ The Bareflank Hypervisor uses a layered, modular approach.
 implementation, the build system, and architecture specific intrinsics.
 - [extended_apis](https://github.com/Bareflank/extended_apis): adds hardware virtualization extension
 APIs to the hypervisor.
-- [boxy](https://github.com/Bareflank/boxy): leverages the Bareflank SDK to provide a 
-fully functional hypervisor with guest support. 
+- [boxy](https://github.com/Bareflank/boxy): leverages the Bareflank SDK to provide a
+fully functional hypervisor with guest support.
 
 To support Bareflank's design approach, the hypervisor is licensed
 under MIT, specifically
@@ -254,8 +254,8 @@ set(OVERRIDE_VMM_TARGET <name>)
 If for example you are using the integration test listed above, these setting would
 be as follows:
 ```
-set(OVERRIDE_VMM eapis_integration_intel_x64_efi_test_efi)
-set(OVERRIDE_VMM_TARGET eapis_integration)
+set(OVERRIDE_VMM integration_intel_x64_efi_test_efi)
+set(OVERRIDE_VMM_TARGET integration)
 ```
 The first variable defines the VMM's name and the second variable defines the target
 that builds this VMM (which tells the buid system what dependency EFI has). From

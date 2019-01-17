@@ -19,12 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_efi_test_efi_with_interrupts
+add_vmm_executable(
+    integration_intel_x64_efi_test_efi_with_interrupts
     SOURCES test_efi_with_interrupts.cpp
 )
 
-eapis_add_vmm_executable(
-    eapis_integration_intel_x64_efi_test_efi
+add_vmm_executable(
+    integration_intel_x64_efi_test_efi
     SOURCES test_efi.cpp
 )

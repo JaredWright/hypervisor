@@ -20,7 +20,7 @@
 # SOFTWARE.
 
 cmake_minimum_required(VERSION 3.6)
-project(eapis_integration C CXX)
+project(integration C CXX)
 
 include(${SOURCE_CMAKE_DIR}/project.cmake)
 init_project()

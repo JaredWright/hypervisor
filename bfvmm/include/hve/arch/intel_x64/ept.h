@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef EAPIS_EPT_HANDLER_INTEL_X64_H
-#define EAPIS_EPT_HANDLER_INTEL_X64_H
+#ifndef EPT_HANDLER_INTEL_X64_H
+#define EPT_HANDLER_INTEL_X64_H
 
 #include "ept/mmap.h"
 #include "ept/helpers.h"
@@ -31,14 +31,14 @@
 
 #include <bfexports.h>
 
-#ifndef STATIC_EAPIS_HVE
-#ifdef SHARED_EAPIS_HVE
-#define EXPORT_EAPIS_HVE EXPORT_SYM
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
 #else
-#define EXPORT_EAPIS_HVE IMPORT_SYM
+#define EXPORT_HVE IMPORT_SYM
 #endif
 #else
-#define EXPORT_EAPIS_HVE
+#define EXPORT_HVE
 #endif
 
 // -----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ class vcpu;
 ///
 /// Provides an interface for enabling EPT
 ///
-class EXPORT_EAPIS_HVE ept_handler
+class EXPORT_HVE ept_handler
 {
 public:
 

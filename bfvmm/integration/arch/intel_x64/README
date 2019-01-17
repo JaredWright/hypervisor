@@ -1,6 +1,6 @@
-Extended APIs integration testing
+Integration Testing
 
-Integration tests work by running the VMM with various extended API features
+Integration tests work by running the VMM with various features
 enabled and/or disabled.
 
 Building
@@ -11,15 +11,15 @@ The test_all.sh script requires three arguments:
     2. The path to the hypervisor source directory
     3. The path to a cmake config file
 
-The config must be set to build the extended APIs with the NDEBUG
-flag NOT defined in the CXX flags. The script will build the eapis
-integration test VMMs, build and load bfdriver, and run the VMMs in sequence.
+The config must be set to build the tests with the NDEBUG
+flag NOT defined in the CXX flags. The script will build the
+test VMMs, build and load bfdriver, and run the VMMs in sequence.
 
 Adding new tests
 ----------------
 To add a new integration test:
 
-1. Add a target for the test in the eapis top-level CMakeLists.txt
+1. Add a target for the test in the top-level CMakeLists.txt
 2. Add a regular expression that uniquely identifies the test binaries
    to the switch statement in 'check_test()' in test_all.sh. Then create
    a check_<test> function that is called when a match occurs. The

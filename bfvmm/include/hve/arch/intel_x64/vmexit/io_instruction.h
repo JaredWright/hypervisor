@@ -19,13 +19,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef IO_INSTRUCTION_INTEL_X64_EAPIS_H
-#define IO_INSTRUCTION_INTEL_X64_EAPIS_H
+#ifndef IO_INSTRUCTION_INTEL_X64_H
+#define IO_INSTRUCTION_INTEL_X64_H
 
 #include <list>
 
 #include <bfgsl.h>
 #include <bfdelegate.h>
+
+#include "../exit_handler.h"
 
 // -----------------------------------------------------------------------------
 // Exports
@@ -33,14 +35,14 @@
 
 #include <bfexports.h>
 
-#ifndef STATIC_EAPIS_HVE
-#ifdef SHARED_EAPIS_HVE
-#define EXPORT_EAPIS_HVE EXPORT_SYM
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
 #else
-#define EXPORT_EAPIS_HVE IMPORT_SYM
+#define EXPORT_HVE IMPORT_SYM
 #endif
 #else
-#define EXPORT_EAPIS_HVE
+#define EXPORT_HVE
 #endif
 
 // -----------------------------------------------------------------------------
@@ -56,7 +58,7 @@ class vcpu;
 ///
 /// Provides an interface for handling port I/O exits base on the port number
 ///
-class EXPORT_EAPIS_HVE io_instruction_handler
+class EXPORT_HVE io_instruction_handler
 {
 public:
 

@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef UNMAPPER_X64_EAPIS_H
-#define UNMAPPER_X64_EAPIS_H
+#ifndef UNMAPPER_X64_H
+#define UNMAPPER_X64_H
 
 #include <memory>
 #include <intrinsics.h>
@@ -31,14 +31,14 @@
 
 #include <bfexports.h>
 
-#ifndef STATIC_EAPIS_HVE
-#ifdef SHARED_EAPIS_HVE
-#define EXPORT_EAPIS_HVE EXPORT_SYM
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
 #else
-#define EXPORT_EAPIS_HVE IMPORT_SYM
+#define EXPORT_HVE IMPORT_SYM
 #endif
 #else
-#define EXPORT_EAPIS_HVE
+#define EXPORT_HVE
 #endif
 
 // -----------------------------------------------------------------------------

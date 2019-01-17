@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef CONTROL_REGISTER_INTEL_X64_EAPIS_H
-#define CONTROL_REGISTER_INTEL_X64_EAPIS_H
+#ifndef CONTROL_REGISTER_INTEL_X64_H
+#define CONTROL_REGISTER_INTEL_X64_H
 
 #include <list>
 
@@ -35,14 +35,14 @@
 
 #include <bfexports.h>
 
-#ifndef STATIC_EAPIS_HVE
-#ifdef SHARED_EAPIS_HVE
-#define EXPORT_EAPIS_HVE EXPORT_SYM
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
 #else
-#define EXPORT_EAPIS_HVE IMPORT_SYM
+#define EXPORT_HVE IMPORT_SYM
 #endif
 #else
-#define EXPORT_EAPIS_HVE
+#define EXPORT_HVE
 #endif
 
 // -----------------------------------------------------------------------------
@@ -60,7 +60,7 @@ class vcpu;
 /// access. Users may supply handlers and specify shadow values (for CR0 and
 /// CR4).
 ///
-class EXPORT_EAPIS_HVE control_register_handler
+class EXPORT_HVE control_register_handler
 {
 public:
 
