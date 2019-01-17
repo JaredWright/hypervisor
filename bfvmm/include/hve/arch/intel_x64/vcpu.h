@@ -40,7 +40,6 @@
 #include "ept.h"
 #include "exit_handler.h"
 #include "interrupt_queue.h"
-#include "lapic.h"
 #include "microcode.h"
 #include "vcpu_global_state.h"
 #include "vmcs.h"

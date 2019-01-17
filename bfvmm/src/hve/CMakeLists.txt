@@ -38,7 +38,6 @@ if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
         arch/intel_x64/check_vmcs_control_fields.cpp
         arch/intel_x64/check_vmcs_guest_fields.cpp
         arch/intel_x64/check_vmcs_host_fields.cpp
-        arch/intel_x64/cpuid.cpp
         arch/intel_x64/ept.cpp
         arch/intel_x64/exception.cpp
         arch/intel_x64/exit_handler.cpp

@@ -24,6 +24,8 @@
 #include <bfexception.h>
 
 #include <hve/arch/intel_x64/vmx.h>
+#include <hve/arch/intel_x64/vcpu.h>
+
 #include <intrinsics.h>
 
 // -----------------------------------------------------------------------------
@@ -35,7 +37,8 @@ namespace bfvmm
 namespace intel_x64
 {
 
-vmx::vmx(gsl::not_null<vcpu *> vcpu)
+vmx::vmx(gsl::not_null<vcpu *> vcpu) :
+    m_vmx_region{make_nullptr_page<uint32_t>()}
 {
     if (vcpu->is_guest_vm_vcpu()) {
         return;
@@ -91,7 +94,7 @@ vmx::check_vmx_capabilities_msr()
 
     bfdebug_pass(1, "check vmx capabilities physical address width");
 
-    if (::intel_x64::msrs::ia32_vmx_basic::memory_type::get() != x64::memory_type::write_back) {
+    if (::intel_x64::msrs::ia32_vmx_basic::memory_type::get() != ::x64::memory_type::write_back) {
         throw std::runtime_error("invalid memory type");
     }
 
