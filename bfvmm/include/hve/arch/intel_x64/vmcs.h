@@ -220,13 +220,24 @@ public:
     save_state_t *save_state() const
     { return m_save_state.get(); }
 
+    gsl::not_null<uint8_t *> msr_bitmap() const
+    { return m_msr_bitmap.get(); }
+
+    gsl::not_null<uint8_t *> io_bitmap_a() const
+    { return m_io_bitmap_a.get(); }
+
+    gsl::not_null<uint8_t *> io_bitmap_b() const
+    { return m_io_bitmap_b.get(); }
+
 private:
 
-    // vcpu *m_vcpu;
     page_ptr<save_state_t> m_save_state;
-    // std::unique_ptr<save_state_t> m_save_state;
 
     page_ptr<uint32_t> m_vmcs_region;
+    page_ptr<uint8_t> m_msr_bitmap;
+    page_ptr<uint8_t> m_io_bitmap_a;
+    page_ptr<uint8_t> m_io_bitmap_b;
+
     uintptr_t m_vmcs_region_phys;
     std::unique_ptr<gsl::byte[]> m_ist1;
     std::unique_ptr<gsl::byte[]> m_stack;
@@ -252,8 +263,6 @@ public:
 };
 
 }
-
-using vmcs_t = bfvmm::intel_x64::vmcs;
 
 #ifdef _MSC_VER
 #pragma warning(pop)

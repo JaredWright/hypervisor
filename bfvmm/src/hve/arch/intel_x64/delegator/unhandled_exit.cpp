@@ -43,8 +43,6 @@ delegator::handle(vcpu_t vcpu)
         check::all();
     }
 
-
-    vcpu->halt();
     return false;
 }
 

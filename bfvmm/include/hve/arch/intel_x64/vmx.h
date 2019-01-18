@@ -72,7 +72,7 @@ public:
     /// @expects none
     /// @ensures none
     ///
-    vmx(gsl::not_null<vcpu *> vcpu);
+    vmx();
 
     /// Destructor
     ///

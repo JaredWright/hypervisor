@@ -126,9 +126,11 @@ namespace bfvmm::intel_x64
 
 vmcs::vmcs(vcpu_t vcpu) :
     m_save_state{make_page<save_state_t>()},
-    // m_save_state{std::make_unique<save_state_t>()},
     m_vmcs_region{make_page<uint32_t>()},
     m_vmcs_region_phys{g_mm->virtptr_to_physint(m_vmcs_region.get())},
+    m_msr_bitmap{make_page<uint8_t>()},
+    m_io_bitmap_a{make_page<uint8_t>()},
+    m_io_bitmap_b{make_page<uint8_t>()},
     m_ist1{std::make_unique<gsl::byte[]>(STACK_SIZE * 2)},
     m_stack{std::make_unique<gsl::byte[]>(STACK_SIZE * 2)}
 {
@@ -386,10 +388,21 @@ vmcs::write_control_state()
         ((ia32_vmx_pinbased_ctls_msr >> 32) & 0x00000000FFFFFFFF)
     );
 
+
     primary_processor_based_vm_execution_controls::set(
         ((ia32_vmx_procbased_ctls_msr >> 0) & 0x00000000FFFFFFFF) &
         ((ia32_vmx_procbased_ctls_msr >> 32) & 0x00000000FFFFFFFF)
     );
+
+    // <TODO>: Move these to the VMCS
+    address_of_msr_bitmap::set(g_mm->virtptr_to_physint(m_msr_bitmap.get()));
+    address_of_io_bitmap_a::set(g_mm->virtptr_to_physint(m_io_bitmap_a.get()));
+    address_of_io_bitmap_b::set(g_mm->virtptr_to_physint(m_io_bitmap_b.get()));
+
+    primary_processor_based_vm_execution_controls::use_msr_bitmap::enable();
+    primary_processor_based_vm_execution_controls::use_io_bitmaps::enable();
+    // </TODO>
+
 
     vm_exit_controls::set(
         ((ia32_vmx_exit_ctls_msr >> 0) & 0x00000000FFFFFFFF) &

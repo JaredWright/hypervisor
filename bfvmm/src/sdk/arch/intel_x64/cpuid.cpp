@@ -26,7 +26,7 @@ namespace bfvmm::intel_x64::cpuid
 
 void emulate(vcpu_t vcpu, leaf_t leaf, delegate_t handler)
 {
-    vcpu->cpuid_delegator()->add_handler(leaf, handler);
+    vcpu->exit_handler()->cpuid_delegator()->add_handler(leaf, handler);
 }
 
 void emulate(domain_t domain, leaf_t leaf, delegate_t handler)

@@ -157,7 +157,9 @@ if(ENABLE_BUILD_VMM)
         DEPENDS bfintrinsics
         SOURCE_DIR ${SOURCE_EXAMPLE_DIR}/bfvmm_main/src
     )
+endif()
 
+if(ENABLE_BUILD_TEST AND ENABLE_BUILD_VMM)
     add_subproject(
         integration vmm
         DEPENDS bfvmm

@@ -37,7 +37,7 @@ namespace bfvmm
 namespace intel_x64
 {
 
-vmx::vmx(gsl::not_null<vcpu *> vcpu) :
+vmx::vmx() :
     m_vmx_region{make_nullptr_page<uint32_t>()}
 {
     // if (vcpu->is_guest_vm_vcpu()) {

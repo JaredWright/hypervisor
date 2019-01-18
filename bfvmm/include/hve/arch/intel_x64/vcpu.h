@@ -48,13 +48,6 @@
 
 #include "../x64/unmapper.h"
 
-#include "delegator/cpuid.h"
-#include "delegator/nmi.h"
-#include "delegator/cr.h"
-#include "delegator/invd.h"
-#include "delegator/msr.h"
-#include "delegator/unhandled_exit.h"
-
 #include "../../../vcpu/vcpu.h"
 #include "../../../memory_manager/arch/x64/cr3.h"
 
@@ -306,12 +299,8 @@ public:
     VIRTUAL void pass_through_msr_access(vmcs_n::value_type msr);
 
     //==========================================================================
-    // VMExit
+    // Legacy Handler Mechanism, these will be deprecated
     //==========================================================================
-
-    //--------------------------------------------------------------------------
-    // Control Register
-    //--------------------------------------------------------------------------
 
     /// Add Write CR0 Handler
     ///
@@ -357,10 +346,6 @@ public:
         vmcs_n::value_type mask,
         const control_register_handler::handler_delegate_t &d);
 
-    //--------------------------------------------------------------------------
-    // CPUID
-    //--------------------------------------------------------------------------
-
     /// Add CPUID Handler
     ///
     /// @expects
@@ -396,10 +381,6 @@ public:
     VIRTUAL void add_default_cpuid_handler(
         const ::handler_delegate_t &d);
 
-    //--------------------------------------------------------------------------
-    // EPT Misconfiguration
-    //--------------------------------------------------------------------------
-
     /// Add EPT Misconfiguration Handler
     ///
     /// @expects
@@ -409,10 +390,6 @@ public:
     ///
     VIRTUAL void add_ept_misconfiguration_handler(
         const ept_misconfiguration_handler::handler_delegate_t &d);
-
-    //--------------------------------------------------------------------------
-    // EPT Violation
-    //--------------------------------------------------------------------------
 
     /// Add EPT read violation handler
     ///
@@ -474,10 +451,6 @@ public:
     VIRTUAL void add_default_ept_execute_violation_handler(
         const ::handler_delegate_t &d);
 
-    //--------------------------------------------------------------------------
-    // External Interrupt
-    //--------------------------------------------------------------------------
-
     /// Add External Interrupt Handler
     ///
     /// Turns on external interrupt handling and adds an external interrupt
@@ -497,10 +470,6 @@ public:
     /// @ensures
     ///
     VIRTUAL void disable_external_interrupts();
-
-    //--------------------------------------------------------------------------
-    // Interrupt Window
-    //--------------------------------------------------------------------------
 
     /// Queue External Interrupt
     ///
@@ -542,10 +511,6 @@ public:
     /// @param vector the vector to inject into the guest
     ///
     VIRTUAL void inject_external_interrupt(uint64_t vector);
-
-    //--------------------------------------------------------------------------
-    // IO Instruction
-    //--------------------------------------------------------------------------
 
     /// Trap All IO Instruction Accesses
     ///
@@ -613,10 +578,6 @@ public:
     VIRTUAL void add_default_io_instruction_handler(
         const ::handler_delegate_t &d);
 
-    //--------------------------------------------------------------------------
-    // Monitor Trap
-    //--------------------------------------------------------------------------
-
     /// Add Monitor Trap Flag Handler
     ///
     /// @expects
@@ -633,10 +594,6 @@ public:
     /// @ensures
     ///
     VIRTUAL void enable_monitor_trap_flag();
-
-    //--------------------------------------------------------------------------
-    // Read MSR
-    //--------------------------------------------------------------------------
 
     /// Trap On Access
     ///
@@ -713,10 +670,6 @@ public:
     VIRTUAL void add_default_rdmsr_handler(
         const ::handler_delegate_t &d);
 
-    //--------------------------------------------------------------------------
-    // Write MSR
-    //--------------------------------------------------------------------------
-
     /// Trap On Access
     ///
     /// Sets a '1' in the MSR bitmap corresponding with the provided msr. All
@@ -792,10 +745,6 @@ public:
     VIRTUAL void add_default_wrmsr_handler(
         const ::handler_delegate_t &d);
 
-    //--------------------------------------------------------------------------
-    // XSetBV
-    //--------------------------------------------------------------------------
-
     /// Add XSetBV Handler
     ///
     /// @expects
@@ -805,10 +754,6 @@ public:
     ///
     VIRTUAL void add_xsetbv_handler(
         const xsetbv_handler::handler_delegate_t &d);
-
-    //--------------------------------------------------------------------------
-    // VMX preemption timer
-    //--------------------------------------------------------------------------
 
     /// Add VMX preemption timer handler
     ///
@@ -1724,30 +1669,8 @@ public:
     VIRTUAL void set_ldtr_access_rights(uint64_t val) noexcept;
 
     VIRTUAL gsl::not_null<save_state_t *> save_state() const;
-
-    /// @endcond
-
-public:
-
-    /// @cond
-
-    cpuid::delegator *cpuid_delegator() const
-    { return m_cpuid_delegator.get(); }
-
-    nmi::delegator *nmi_delegator() const
-    { return m_nmi_delegator.get(); }
-
-    cr::delegator *cr_delegator() const
-    { return m_cr_delegator.get(); }
-
-    invd::delegator *invd_delegator() const
-    { return m_invd_delegator.get(); }
-
-    msr::delegator *msr_delegator() const
-    { return m_msr_delegator.get(); }
-
-    unhandled_exit::delegator *unhandled_exit_delegator() const
-    { return m_unhandled_exit_delegator.get(); }
+    VIRTUAL gsl::not_null<intel_x64::exit_handler *> exit_handler() const;
+    VIRTUAL gsl::not_null<intel_x64::vmcs *> vmcs() const;
 
     /// @endcond
 
@@ -1760,15 +1683,7 @@ private:
     ept::mmap *m_mmap{};
     vcpu_global_state_t *m_vcpu_global_state;
 
-    page_ptr<uint8_t> m_msr_bitmap;
-    page_ptr<uint8_t> m_io_bitmap_a;
-    page_ptr<uint8_t> m_io_bitmap_b;
-
 private:
-
-    vmx m_vmx;
-    vmcs m_vmcs;
-    exit_handler m_exit_handler;
 
     control_register_handler m_control_register_handler;
     cpuid_handler m_cpuid_handler;
@@ -1799,20 +1714,12 @@ private:
     friend class io_instruction_handler;
     friend class rdmsr_handler;
     friend class wrmsr_handler;
-    std::unique_ptr<vmcs> m_vmcs;
-    std::unique_ptr<vmx> m_vmx;
+    std::unique_ptr<intel_x64::vmcs> m_vmcs;
+    std::unique_ptr<intel_x64::vmx> m_vmx;
+    std::unique_ptr<intel_x64::exit_handler> m_exit_handler;
 
     std::list<handler_delegate_t> m_init_delegates;
     std::list<handler_delegate_t> m_fini_delegates;
-    std::array<handler_delegate_t, 128> m_exit_delegates;
-
-    std::unique_ptr<cpuid::delegator> m_cpuid_delegator;
-    std::unique_ptr<nmi::delegator> m_nmi_delegator;
-    std::unique_ptr<cr::delegator> m_cr_delegator;
-    std::unique_ptr<invd::delegator> m_invd_delegator;
-    std::unique_ptr<msr::delegator> m_msr_delegator;
-    std::unique_ptr<unhandled_exit::delegator> m_unhandled_exit_delegator;
-
 
 private:
 
@@ -1838,3 +1745,4 @@ private:
 #pragma warning(pop)
 #endif
 
+#endif
