@@ -25,9 +25,10 @@
 #include <stdint.h>
 #include <bfdelegate.h>
 #include <bfgsl.h>
-#include <bftypes.h>
 #include <unordered_map>
 #include <list>
+
+#include "../../../../vmm_types.h"
 
 namespace bfvmm::intel_x64::cpuid
 {
@@ -82,8 +83,6 @@ struct info_t {
 };
 
 using delegate_t = delegate<bool(vcpu_t, info_t &)>;
-#define handler(function) delegate_t::create<function>()
-#define stateful_handler(class, object, member) delegate_t::create<class, &class::member>(object)
 
 /// CPUID delegator
 ///

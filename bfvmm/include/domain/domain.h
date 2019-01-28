@@ -25,9 +25,10 @@
 #include <bftypes.h>
 #include <bfobject.h>
 #include <bfgsl.h>
-#include <bfarch.h>
 #include <bfvcpuid.h>
 #include <list>
+
+#include "../vmm_types.h"
 
 // -----------------------------------------------------------------------------
 // Exports
@@ -35,14 +36,19 @@
 
 #include <bfexports.h>
 
-#ifndef BFVMM_STATIC_DOMAIN
-#ifdef BFVMM_SHARED_DOMAIN
-#define BFVMM_EXPORT_DOMAIN EXPORT_SYM
+#ifndef STATIC_DOMAIN
+#ifdef SHARED_DOMAIN
+#define EXPORT_DOMAIN EXPORT_SYM
 #else
-#define BFVMM_EXPORT_DOMAIN IMPORT_SYM
+#define EXPORT_DOMAIN IMPORT_SYM
 #endif
 #else
-#define BFVMM_EXPORT_DOMAIN
+#define EXPORT_DOMAIN
+#endif
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4251)
 #endif
 
 // -----------------------------------------------------------------------------
@@ -54,7 +60,7 @@ namespace bfvmm
 
 /// Domain
 ///
-class BFVMM_EXPORT_DOMAIN domain : public bfobject
+class EXPORT_DOMAIN domain : public bfobject
 {
 public:
 
@@ -204,11 +210,5 @@ constexpr domain::domainid_type invalid_domainid = 0xFFFFFFFFFFFFFFFF;
 /// @endcond
 
 }
-
-#if defined(BF_INTEL_X64)
-#include "../hve/arch/intel_x64/domain.h"
-#else
-#   error "domain.h: unsupported architecture"
-#endif
 
 #endif

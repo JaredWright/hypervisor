@@ -22,22 +22,6 @@
 #ifndef VMM_H
 #define VMM_H
 
-#include <bfarch.h>
-#include <bfdebug.h>
-#include <bferrorcodes.h>
-#include <bftypes.h>
-
-#ifdef VMM
-
-#include <bfvmm/domain/domain_manager.h>
-#include <bfvmm/vcpu/vcpu_manager.h>
-#include <bfvmm/vcpu/vcpu.h>
-#include <bfvmm/domain/domain.h>
-
-#ifdef BF_INTEL_X64
-#include <bfvmm/sdk/arch/intel_x64/cpuid.h>
-#endif
-
-#endif
+#include <bfvmm/bfvmm.h>
 
 #endif

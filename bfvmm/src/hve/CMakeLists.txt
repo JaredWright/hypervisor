@@ -58,7 +58,7 @@ if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
         arch/intel_x64/delegator/cr.cpp
         arch/intel_x64/delegator/invd.cpp
         arch/intel_x64/delegator/msr.cpp
-        arch/intel_x64/delegator/unhandled_exit.cpp
+        arch/intel_x64/delegator/fallback.cpp
     )
 
     if(NOT WIN32 AND NOT ENABLE_MOCKING)

@@ -106,6 +106,6 @@ public:
 #define get_domain(a) \
     g_dm->get<bfvmm::intel_x64::domain *>(a, "invalid domainid: " __FILE__)
 
-#define domain_cast(a) domain_t(dynamic_cast<bfvmm::intel_x64::domain *>(a.get()))
+#define domain_cast(a) domain_t(static_cast<bfvmm::intel_x64::domain *>(a.get()))
 
 #endif

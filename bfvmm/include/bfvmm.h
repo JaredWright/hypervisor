@@ -19,54 +19,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef BFVMM_DELEGATOR_UNHANDLED_INTEL_X64_H
-#define BFVMM_DELEGATOR_UNHANDLED_INTEL_X64_H
+#ifndef BFVMM_H
+#define BFVMM_H
 
-#include <stdint.h>
-#include <bfdelegate.h>
-#include <bfgsl.h>
+#include <bfarch.h>
+#include <bfdebug.h>
+#include <bferrorcodes.h>
 #include <bftypes.h>
 
-namespace bfvmm::intel_x64::unhandled_exit
-{
+#include "vmm_types.h"
 
-/// Unhandled exit delegator
-///
-/// Delegates processing of vmexits that were not handled by any exit handlers
-///
-class delegator
-{
+#include "domain/domain_manager.h"
+#include "domain/domain.h"
+#include "vcpu/vcpu_manager.h"
+#include "vcpu/vcpu.h"
 
-public:
+#ifdef BF_INTEL_X64
+#include "hve/arch/intel_x64/vcpu.h"
+#include "hve/arch/intel_x64/domain.h"
+#include "sdk/arch/intel_x64/cpuid.h"
+#endif
 
-    /// Default Constructor
-    ///
-    /// @expects none
-    /// @ensures none
-    ///
-    delegator() = default;
-
-    /// Destructor
-    ///
-    /// @expects none
-    /// @ensures none
-    ///
-    ~delegator() = default;
-
-    /// Handle
-    ///
-    /// Handle an unhandled vmexit using registered handlers
-    ///
-    /// @expects none
-    /// @ensures none
-    ///
-    /// @param vcpu The vcpu the vmexit occurred on
-    ///
-    /// @return True if the vmexit was successfully handled, false otherwise
-    ///
-    bool handle(vcpu_t vcpu);
-};
-
-}
+#define handler(function) delegate_t::create<function>()
 
 #endif

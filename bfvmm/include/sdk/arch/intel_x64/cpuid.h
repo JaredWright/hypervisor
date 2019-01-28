@@ -19,8 +19,7 @@
 #ifndef BFVMM_SDK_INTEL_X64_CPUID
 #define BFVMM_SDK_INTEL_X64_CPUID
 
-#include <bftypes.h>
-
+#include "../../../bfvmm.h"
 #include "../../../hve/arch/intel_x64/delegator/cpuid.h"
 
 namespace bfvmm::intel_x64::cpuid

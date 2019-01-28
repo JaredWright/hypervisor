@@ -158,7 +158,9 @@ auto memset(span<DstElementType, DstExtent> dst, T val)
 
 #else
 
-#include <gsl/pointers>
+#ifdef NEED_STD_LITE
+#include <bfstd.h>
+#endif
 
 /// @cond
 

@@ -22,6 +22,8 @@
 
 #include <hve/arch/intel_x64/delegator/cpuid.h>
 
+#include "bfvmm.h"
+
 namespace bfvmm::intel_x64::cpuid
 {
 

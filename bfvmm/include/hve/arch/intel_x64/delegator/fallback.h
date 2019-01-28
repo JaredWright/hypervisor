@@ -19,8 +19,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef BFVMM_DELEGATOR_NMI_INTEL_X64_H
-#define BFVMM_DELEGATOR_NMI_INTEL_X64_H
+#ifndef BFVMM_DELEGATOR_FALLBACK_INTEL_X64_H
+#define BFVMM_DELEGATOR_FALLBACK_INTEL_X64_H
 
 #include <stdint.h>
 #include <bfdelegate.h>
@@ -28,13 +28,12 @@
 
 #include "../../../../vmm_types.h"
 
-namespace bfvmm::intel_x64::nmi
+namespace bfvmm::intel_x64::fallback
 {
 
-/// NMI delegator
+/// Fallback delegator
 ///
-/// Delegates processing of non maskable interrupt based vmexits to registered
-/// handlers
+/// Delegates processing of vmexits that were not handled by any exit handlers
 ///
 class delegator
 {
@@ -57,7 +56,7 @@ public:
 
     /// Handle
     ///
-    /// Handle an NMI based vmexit using registered handlers
+    /// Handle an unhandled vmexit using registered handlers
     ///
     /// @expects none
     /// @ensures none
@@ -66,20 +65,7 @@ public:
     ///
     /// @return True if the vmexit was successfully handled, false otherwise
     ///
-    bool handle_nmi(vcpu_t vcpu);
-
-    /// Handle
-    ///
-    /// Handle an NMI window vmexit using registered handlers
-    ///
-    /// @expects none
-    /// @ensures none
-    ///
-    /// @param vcpu The vcpu the vmexit occurred on
-    ///
-    /// @return True if the vmexit was successfully handled, false otherwise
-    ///
-    bool handle_nmi_window(vcpu_t vcpu);
+    bool handle(vcpu_t vcpu);
 };
 
 }

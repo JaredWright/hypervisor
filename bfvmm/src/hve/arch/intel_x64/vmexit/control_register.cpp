@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 #include <hve/arch/intel_x64/vcpu.h>
-#include <bftypes.h>
 
 namespace bfvmm::intel_x64
 {

@@ -35,7 +35,7 @@
 #include "delegator/cr.h"
 #include "delegator/invd.h"
 #include "delegator/msr.h"
-#include "delegator/unhandled_exit.h"
+#include "delegator/fallback.h"
 
 // -----------------------------------------------------------------------------
 // Exports
@@ -159,16 +159,16 @@ private:
     std::list<init_handler_delegate_t> m_exit_handlers;
     std::list<init_handler_delegate_t> m_init_handlers;
     std::list<fini_handler_delegate_t> m_fini_handlers;
-    std::array<std::list<handler_delegate_t>, 128> m_exit_handlers_array;
+    std::array<std::list<handler_delegate_t>, 64> m_exit_handlers_array;
 
     // These members will provide the new exit handler mechanism
-    std::array<handler_delegate_t, 128> m_exit_delegates;
+    std::array<handler_delegate_t, 64> m_exit_delegates;
     std::unique_ptr<cpuid::delegator> m_cpuid_delegator;
     std::unique_ptr<nmi::delegator> m_nmi_delegator;
     std::unique_ptr<cr::delegator> m_cr_delegator;
     std::unique_ptr<invd::delegator> m_invd_delegator;
     std::unique_ptr<msr::delegator> m_msr_delegator;
-    std::unique_ptr<unhandled_exit::delegator> m_unhandled_exit_delegator;
+    std::unique_ptr<fallback::delegator> m_fallback_delegator;
 
 public:
 
@@ -189,8 +189,8 @@ public:
     msr::delegator *msr_delegator() const
     { return m_msr_delegator.get(); }
 
-    unhandled_exit::delegator *unhandled_exit_delegator() const
-    { return m_unhandled_exit_delegator.get(); }
+    fallback::delegator *fallback_delegator() const
+    { return m_fallback_delegator.get(); }
 
     /// @endcond
 

@@ -25,7 +25,8 @@
 #include <stdint.h>
 #include <bfdelegate.h>
 #include <bfgsl.h>
-#include <bftypes.h>
+
+#include "../../../../vmm_types.h"
 
 namespace bfvmm::intel_x64::invd
 {

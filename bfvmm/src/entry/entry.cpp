@@ -44,6 +44,7 @@
 #include <intrinsics.h>
 
 #include "entry/entry.h"
+#include "bfvmm.h"
 
 extern "C" int64_t
 private_init(void)

@@ -53,12 +53,12 @@ exit_handler::exit_handler():
     m_cr_delegator{std::make_unique<cr::delegator>()},
     m_invd_delegator{std::make_unique<invd::delegator>()},
     m_msr_delegator{std::make_unique<msr::delegator>()},
-    m_unhandled_exit_delegator{std::make_unique<unhandled_exit::delegator>()}
+    m_fallback_delegator{std::make_unique<fallback::delegator>()}
 {
     using namespace ::intel_x64::vmcs::exit_reason;
 
-    auto exit_delegate = handler_delegate_t::create<unhandled_exit::delegator,
-         &unhandled_exit::delegator::handle>(m_unhandled_exit_delegator);
+    auto exit_delegate = handler_delegate_t::create<fallback::delegator,
+         &fallback::delegator::handle>(m_fallback_delegator);
     m_exit_delegates.fill(exit_delegate);
 
     exit_delegate = handler_delegate_t::create<cpuid::delegator,
@@ -125,7 +125,7 @@ exit_handler::handle(vcpu_t vcpu)
         }
     }
 
-    return m_unhandled_exit_delegator->handle(vcpu);
+    return m_fallback_delegator->handle(vcpu);
 }
 
 }

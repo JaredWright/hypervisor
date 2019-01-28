@@ -159,13 +159,13 @@ if(ENABLE_BUILD_VMM)
     )
 endif()
 
-# if(ENABLE_BUILD_TEST AND ENABLE_BUILD_VMM)
-#     add_subproject(
-#         integration vmm
-#         DEPENDS bfvmm
-#         SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/bfvmm/integration/
-#     )
-# endif()
+if(ENABLE_BUILD_TEST AND ENABLE_BUILD_VMM)
+    add_subproject(
+        integration vmm
+        DEPENDS bfvmm
+        SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/bfvmm/integration/
+    )
+endif()
 
 # ------------------------------------------------------------------------------
 # Unit Tests
