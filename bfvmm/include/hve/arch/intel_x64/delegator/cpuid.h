@@ -30,6 +30,22 @@
 
 #include "../../../../vmm_types.h"
 
+// -----------------------------------------------------------------------------
+// Exports
+// -----------------------------------------------------------------------------
+
+#include <bfexports.h>
+
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
+#else
+#define EXPORT_HVE IMPORT_SYM
+#endif
+#else
+#define EXPORT_HVE
+#endif
+
 namespace bfvmm::intel_x64::cpuid
 {
 
@@ -88,7 +104,7 @@ using delegate_t = delegate<bool(vcpu_t, info_t &)>;
 ///
 /// Delegates processing of CPUID based vmexits to registered handlers
 ///
-class delegator
+class EXPORT_HVE delegator
 {
 
 public:

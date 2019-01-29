@@ -28,6 +28,22 @@
 
 #include "../../../../vmm_types.h"
 
+// -----------------------------------------------------------------------------
+// Exports
+// -----------------------------------------------------------------------------
+
+#include <bfexports.h>
+
+#ifndef STATIC_HVE
+#ifdef SHARED_HVE
+#define EXPORT_HVE EXPORT_SYM
+#else
+#define EXPORT_HVE IMPORT_SYM
+#endif
+#else
+#define EXPORT_HVE
+#endif
+
 namespace bfvmm::intel_x64::fallback
 {
 
@@ -35,7 +51,7 @@ namespace bfvmm::intel_x64::fallback
 ///
 /// Delegates processing of vmexits that were not handled by any exit handlers
 ///
-class delegator
+class EXPORT_HVE delegator
 {
 
 public:
