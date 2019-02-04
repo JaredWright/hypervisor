@@ -22,9 +22,8 @@
 #include <vmm.h>
 
 bool
-vmm_init(domain_t domain)
+vmm_init()
 {
-    bfignored(domain);
     return true;
 }
 

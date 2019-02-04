@@ -42,12 +42,9 @@ bool test_external_interrupt_handler(
     return true;
 }
 
-bool vmm_init(domain_t domain)
+bool vmm_init()
 {
-    bfignored(domain);
-
     ept::identity_map(g_guest_map, MAX_PHYS_ADDR);
-
     return true;
 }
 

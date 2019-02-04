@@ -40,24 +40,21 @@ bool my_cpuid_handler_2(vcpu_t vcpu, cpuid::info_t &info)
     bfignored(vcpu);
     bfignored(info);
 
-    bfdebug_info(0, "An extra handler for special-purpose CPUID leaf 0xBF21");
+    bfdebug_info(0, "An extra handler for special-purpose CPUID leaf 0x4BF00020");
     bfdebug_info(0, "This handler is only registered to vcpu 0");
 
     return false;
 }
 
-bool vmm_init(domain_t domain)
+bool vmm_main(vcpu_t vcpu)
 {
-    bfdebug_info(0, "Initializing 2 CPUID handlers...");
-
     auto handler = cpuid::handler(my_cpuid_handler);
-    cpuid::emulate(domain, 0xF00D, handler);
+    cpuid::emulate(vcpu, 0xF00D, handler);
 
-    auto vcpu_0 = get_vcpu(0);
     auto handler_2 = cpuid::handler(my_cpuid_handler_2);
-    cpuid::emulate(vcpu_0, 0x4BF00020, handler_2);
+    cpuid::emulate(vcpu, 0x4BF00020, handler_2);
 
-    bfdebug_info(0, "CPUID example vmm setup complete!");
+    bfdebug_info(0, "CPUID example initialized");
 
     return true;
 }

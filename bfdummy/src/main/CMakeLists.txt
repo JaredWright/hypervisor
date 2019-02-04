@@ -77,7 +77,7 @@ add_vmm_executable(dummy_main_set_rsdp_fails
 add_vmm_executable(dummy_main_vmm_init_fails
     SOURCES dummy_main.cpp
     LIBRARIES ${LIBRARIES}
-    DEFINES REQUEST_VMM_RUN_FAILS
+    DEFINES REQUEST_VMM_INIT_FAILS
     NOVMMLIBS
 )
 

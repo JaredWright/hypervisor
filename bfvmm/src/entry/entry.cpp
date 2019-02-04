@@ -35,16 +35,17 @@
 #include <bfsupport.h>
 #include <bfexception.h>
 #include <bftypes.h>
+#include <bfcallonce.h>
 
 #include <domain/domain_manager.h>
 #include <vcpu/vcpu_manager.h>
 #include <debug/debug_ring/debug_ring.h>
 #include <memory_manager/memory_manager.h>
 
-#include <intrinsics.h>
-
 #include "entry/entry.h"
 #include "bfvmm.h"
+
+static bfn::once_flag g_init_flag;
 
 extern "C" int64_t
 private_init(void)
@@ -75,8 +76,8 @@ private_set_rsdp(uintptr_t rsdp) noexcept
 }
 
 bool
-WEAK_SYM vmm_init(domain_t domain)
-{ bfignored(domain); return true; }
+WEAK_SYM vmm_init()
+{ return true; }
 
 bool
 WEAK_SYM vmm_main(vcpu_t vcpu)
@@ -100,34 +101,17 @@ private_fini_vmm(uint64_t arg) noexcept
 extern "C" bool
 private_init_vmm(uint64_t arg) noexcept
 {
-    return guard_exceptions(ENTRY_ERROR_VMM_STOP_FAILED, [&]() {
-
-        g_dm->create(0, 0);
-        auto domain_0 = g_dm->get(0);
-
-        for (uint64_t vcpuid = 0; vcpuid < arg; vcpuid++) {
-            g_vcm->create(vcpuid);
-
-            auto vcpu = get_vcpu(vcpuid);
-            domain_0->add_vcpu(vcpu);
-        }
-
-        auto ___ = gsl::on_failure([&] {
-            for (uint64_t vcpuid = 0; vcpuid < arg; vcpuid++)
-            {
-                g_vcm->destroy(arg);
-            }
-        });
-
-        return vmm_init(get_domain(0));
-    });
-}
-
-extern "C" int64_t
-private_run_vmm(uint64_t arg) noexcept
-{
     return guard_exceptions(ENTRY_ERROR_VMM_START_FAILED, [&]() {
-        g_vcm->run(arg);
+
+        bfn::call_once(g_init_flag, vmm_init);
+
+        g_vcm->create(arg, nullptr);
+
+        auto ___ = gsl::on_failure([&]
+        { g_vcm->destroy(arg); });
+
+        g_vcm->run(arg, nullptr);
+
         return ENTRY_SUCCESS;
     });
 }
@@ -159,9 +143,6 @@ bfmain(uintptr_t request, uintptr_t arg1, uintptr_t arg2, uintptr_t arg3)
 
         case BF_REQUEST_VMM_FINI:
             return private_fini_vmm(arg1);
-
-        case BF_REQUEST_VMM_RUN:
-            return private_run_vmm(arg1);
 
         default:
             break;

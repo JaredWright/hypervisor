@@ -22,7 +22,7 @@
 #include "../vcpu/vcpu.h"
 #include "../domain/domain.h"
 
-bool vmm_init(domain_t domain);
+bool vmm_init();
 bool vmm_main(vcpu_t vcpu);
 bool vmm_fini(vcpu_t vcpu);
 
