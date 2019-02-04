@@ -37,7 +37,6 @@
 #include <bftypes.h>
 #include <bfcallonce.h>
 
-#include <domain/domain_manager.h>
 #include <vcpu/vcpu_manager.h>
 #include <debug/debug_ring/debug_ring.h>
 #include <memory_manager/memory_manager.h>

@@ -29,14 +29,11 @@
 
 #include "vmm_types.h"
 
-#include "domain/domain_manager.h"
-#include "domain/domain.h"
 #include "vcpu/vcpu_manager.h"
 #include "vcpu/vcpu.h"
 
 #ifdef BF_INTEL_X64
 #include "hve/arch/intel_x64/vcpu.h"
-#include "hve/arch/intel_x64/domain.h"
 #include "sdk/arch/intel_x64/cpuid.h"
 #endif
 

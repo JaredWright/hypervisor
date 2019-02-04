@@ -34,15 +34,6 @@ namespace bfvmm::intel_x64::cpuid
 ///
 void emulate(vcpu_t vcpu, leaf_t leaf, delegate_t handler);
 
-/// Emulate the given cpuid leaf using the given cpuid handler on
-/// on vcpus in the given domain
-///
-/// @param domain the domain to apply emulation to
-/// @param leaf the cpuid leaf to emulate
-/// @param handler the handler to be called for the emulation of @param leaf
-///
-void emulate(domain_t domain, leaf_t leaf, delegate_t handler);
-
 }
 
 #endif

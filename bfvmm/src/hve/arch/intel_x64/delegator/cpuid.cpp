@@ -17,7 +17,6 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
 #include <vcpu/vcpu.h>
-#include <domain/domain.h>
 #include <entry/entry.h>
 
 #include <hve/arch/intel_x64/delegator/cpuid.h>

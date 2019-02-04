@@ -20,7 +20,6 @@
 // SOFTWARE.
 
 #include <vcpu/vcpu.h>
-#include <domain/domain.h>
 
 #include "sdk/arch/intel_x64/cpuid.h"
 
@@ -30,13 +29,6 @@ namespace bfvmm::intel_x64::cpuid
 void emulate(vcpu_t vcpu, leaf_t leaf, delegate_t handler)
 {
     vcpu->exit_handler()->cpuid_delegator()->add_handler(leaf, handler);
-}
-
-void emulate(domain_t domain, leaf_t leaf, delegate_t handler)
-{
-    for (auto vcpu : domain->vcpus()) {
-        emulate(vcpu, leaf, handler);
-    }
 }
 
 }

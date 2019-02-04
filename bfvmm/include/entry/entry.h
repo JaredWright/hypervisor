@@ -20,7 +20,6 @@
 #define BF_ENTRY_H
 
 #include "../vcpu/vcpu.h"
-#include "../domain/domain.h"
 
 bool vmm_init();
 bool vmm_main(vcpu_t vcpu);

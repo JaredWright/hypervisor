@@ -45,8 +45,6 @@ if(${BUILD_TARGET_ARCH} STREQUAL "x86_64")
         arch/intel_x64/microcode.cpp
         arch/intel_x64/mtrrs.cpp
         arch/intel_x64/nmi.cpp
-        arch/intel_x64/domain.cpp
-        arch/intel_x64/domain_factory.cpp
         arch/intel_x64/vcpu.cpp
         arch/intel_x64/vcpu_factory.cpp
         arch/intel_x64/vmcs.cpp
@@ -82,7 +80,6 @@ add_shared_library(
     SOURCES ${SOURCES}
     DEFINES SHARED_HVE
     DEFINES SHARED_VCPU
-    DEFINES SHARED_DOMAIN
     DEFINES SHARED_MEMORY_MANAGER
     DEFINES SHARED_INTRINSICS
 )
@@ -92,7 +89,6 @@ add_static_library(
     SOURCES ${SOURCES}
     DEFINES STATIC_HVE
     DEFINES STATIC_VCPU
-    DEFINES STATIC_DOMAIN
     DEFINES STATIC_MEMORY_MANAGER
     DEFINES STATIC_INTRINSICS
 )
