@@ -1085,7 +1085,7 @@ __bfdebug_fail(
 #ifdef __cplusplus
 #include <cstdio>
 #else
-#include <stdio.h>
+// #include <stdio.h>
 #endif
 #define BFDEBUG(...) printf("[BAREFLANK DEBUG]: " __VA_ARGS__)
 #define BFALERT(...) printf("[BAREFLANK ALERT]: " __VA_ARGS__)
