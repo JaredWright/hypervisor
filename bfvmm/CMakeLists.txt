@@ -47,6 +47,7 @@ add_subdirectory(src/hve)
 add_subdirectory(src/vcpu)
 add_subdirectory(src/memory_manager)
 add_subdirectory(src/debug)
+add_subdirectory(src/sdk)
 
 install(FILES include/vmm.h DESTINATION include/bfvmm)
 
@@ -85,6 +86,7 @@ if(PREFIX STREQUAL vmm)
         bfvmm_vcpu
         bfvmm_memory_manager
         bfvmm_debug
+        bfvmm_sdk
         vmm::bfintrinsics
         ${CMAKE_INSTALL_PREFIX}/lib/libc++.a
         ${CMAKE_INSTALL_PREFIX}/lib/libc++abi.a
