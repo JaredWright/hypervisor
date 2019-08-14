@@ -28,31 +28,20 @@ list(APPEND BFFLAGS_VMM
 )
 
 list(APPEND BFFLAGS_VMM
-    --target=${BUILD_TARGET_ARCH}-vmm-elf
-    --sysroot=${VMM_PREFIX_PATH}
     -fpic
-    -fstack-protector-strong
-    -DVMM
-    -D${OSTYPE}
-    -D${ABITYPE}
-    -DGSL_THROW_ON_CONTRACT_VIOLATION
-    -DMALLOC_PROVIDED
-    -DCLOCK_MONOTONIC
-    -D_HAVE_LONG_DOUBLE
-    -D_LDBL_EQ_DBL
-    -D_POSIX_TIMERS
-    -D_POSIX_THREADS
-    -D_POSIX_PRIORITY_SCHEDULING
-    -D_UNIX98_THREAD_MUTEX_ATTRIBUTES
-    -U__STRICT_ANSI__
-    -D__SINGLE_THREAD__
-    -U__USER_LABEL_PREFIX__
-    -D__USER_LABEL_PREFIX__=
-    -D__ELF__
+    -fno-stack-protector
+    -march=armv8-a
+    -mstrict-align
+    -fno-builtin
+    -mgeneral-regs-only
+    # -march=armv8.4-a
+    # -mcpu=cortex-a53
+    # -fno-omit-frame-pointer
 )
 
 list(APPEND BFFLAGS_VMM_C
-    -std=c11
+    -std=gnu11
+    # -std=c11
 )
 
 list(APPEND BFFLAGS_VMM_CXX

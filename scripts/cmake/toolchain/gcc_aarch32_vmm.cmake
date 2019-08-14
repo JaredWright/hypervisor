@@ -24,10 +24,10 @@ endif()
 
 set(CMAKE_SYSTEM_NAME Linux)
 
-set(CMAKE_C_COMPILER /usr/bin/aarch64-linux-gnu-gcc-8)
-set(CMAKE_CXX_COMPILER /usr/bin/aarch64-linux-gnu-gcc-8)
-# set(CMAKE_C_COMPILER /usr/bin/aarch64-linux-gnu-gcc)
-# set(CMAKE_CXX_COMPILER /usr/bin/aarch64-linux-gnu-gcc)
+if(NOT WIN32)
+    set(CMAKE_C_COMPILER /usr/bin/arm-linux-gnueabihf-gcc)
+    set(CMAKE_CXX_COMPILER /usr/bin/arm-linux-gnueabihf-gcc)
+endif()
 
 string(CONCAT LD_FLAGS
     "--sysroot=${CMAKE_INSTALL_PREFIX} "
@@ -39,16 +39,22 @@ string(CONCAT LD_FLAGS
     "-nostdlib "
 )
 
+if(EXISTS "${CMAKE_INSTALL_PREFIX}/lib/libbfdso_static.a")
+    string(CONCAT LD_FLAGS
+        "--whole-archive ${CMAKE_INSTALL_PREFIX}/lib/libbfdso_static.a --no-whole-archive "
+    )
+endif()
+
 if(DEFINED ENV{LD_BIN})
     set(LD_BIN $ENV{LD_BIN})
 else()
-    set(LD_BIN aarch64-linux-gnu-ld)
+    set(LD_BIN arm-linux-gnueabihf-ld)
 endif()
 
 if(DEFINED ENV{AR_BIN})
     set(AR_BIN $ENV{AR_BIN})
 else()
-    set(AR_BIN aarch64-linux-gnu-ar)
+    set(AR_BIN arm-linux-gnueabihf-ar)
 endif()
 
 set(CMAKE_C_ARCHIVE_CREATE

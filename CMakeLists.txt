@@ -50,33 +50,33 @@ include(scripts/cmake/targets.cmake)
 # General Dependencies
 # ------------------------------------------------------------------------------
 
-include_dependency(SOURCE_DEPENDS_DIR gsl)
-include_dependency(SOURCE_DEPENDS_DIR json)
-include_dependency(SOURCE_DEPENDS_DIR astyle)
-include_dependency(SOURCE_DEPENDS_DIR clang_tidy)
-include_dependency(SOURCE_DEPENDS_DIR catch)
-include_dependency(SOURCE_DEPENDS_DIR hippomocks)
-include_dependency(SOURCE_DEPENDS_DIR python)
+# include_dependency(SOURCE_DEPENDS_DIR gsl)
+# include_dependency(SOURCE_DEPENDS_DIR json)
+# include_dependency(SOURCE_DEPENDS_DIR astyle)
+# include_dependency(SOURCE_DEPENDS_DIR clang_tidy)
+# include_dependency(SOURCE_DEPENDS_DIR catch)
+# include_dependency(SOURCE_DEPENDS_DIR hippomocks)
+# include_dependency(SOURCE_DEPENDS_DIR python)
 
 # ------------------------------------------------------------------------------
 # EFI Cleanup
 # ------------------------------------------------------------------------------
 
-if(ENABLE_BUILD_EFI)
-    file(MAKE_DIRECTORY ${EFI_OUTPUT_DIR})
-    file(REMOVE ${EFI_MODULE_H})
-    file(REMOVE ${EFI_SOURCES_CMAKE})
-endif()
+# if(ENABLE_BUILD_EFI)
+#     file(MAKE_DIRECTORY ${EFI_OUTPUT_DIR})
+#     file(REMOVE ${EFI_MODULE_H})
+#     file(REMOVE ${EFI_SOURCES_CMAKE})
+# endif()
 
 # ------------------------------------------------------------------------------
 # No Build Components
 # ------------------------------------------------------------------------------
 
-if(ENABLE_BUILD_VMM)
-    add_subproject(
-        bfdriver none
-        NOBUILD
-    )
+# if(ENABLE_BUILD_VMM)
+    # add_subproject(
+    #     bfdriver none
+    #     NOBUILD
+    # )
 
     add_subproject(
         bfelf_loader none
@@ -87,181 +87,182 @@ if(ENABLE_BUILD_VMM)
         bfsdk none
         NOBUILD
     )
-endif()
+# endif()
 
 # ------------------------------------------------------------------------------
 # VMM Components
 # ------------------------------------------------------------------------------
 
-include_dependency(SOURCE_DEPENDS_DIR binutils)
+# include_dependency(SOURCE_DEPENDS_DIR binutils)
+#
+# if(NOT WIN32)
+#     if(NOT ENABLE_BUILD_BINUTILS)
+#         add_subproject(
+#             bfdso vmm
+#             SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/dso
+#         )
+#     else()
+#         add_subproject(
+#             bfdso vmm
+#             SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/dso
+#             DEPENDS binutils
+#         )
+#     endif()
+# endif()
 
-if(NOT WIN32)
-    if(NOT ENABLE_BUILD_BINUTILS)
-        add_subproject(
-            bfdso vmm
-            SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/dso
-        )
-    else()
-        add_subproject(
-            bfdso vmm
-            SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/dso
-            DEPENDS binutils
-        )
-    endif()
-endif()
+# include_dependency(SOURCE_DEPENDS_DIR newlib)
+# include_dependency(SOURCE_DEPENDS_DIR llvm)
+# include_dependency(SOURCE_DEPENDS_DIR libcxxabi)
+# include_dependency(SOURCE_DEPENDS_DIR libcxx)
 
-include_dependency(SOURCE_DEPENDS_DIR newlib)
-include_dependency(SOURCE_DEPENDS_DIR llvm)
-include_dependency(SOURCE_DEPENDS_DIR libcxxabi)
-include_dependency(SOURCE_DEPENDS_DIR libcxx)
+# if(ENABLE_BUILD_VMM OR (ENABLE_BUILD_TEST AND NOT WIN32))
+#     add_subproject(
+#         bfcrt vmm
+#         DEPENDS gsl
+#         DEPENDS libcxx
+#         SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/crt
+#     )
+#
+#     add_subproject(
+#         bfpthread vmm
+#         DEPENDS gsl
+#         DEPENDS libcxx
+#         SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/pthread
+#     )
+#
+#     add_subproject(
+#         bfsyscall vmm
+#         DEPENDS gsl
+#         DEPENDS libcxx
+#         SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/syscall
+#     )
+#
+#     add_subproject(
+#         bfunwind vmm
+#         DEPENDS bfcrt
+#         DEPENDS bfpthread
+#         DEPENDS bfsyscall
+#     )
+# endif()
 
-if(ENABLE_BUILD_VMM OR (ENABLE_BUILD_TEST AND NOT WIN32))
-    add_subproject(
-        bfcrt vmm
-        DEPENDS gsl
-        DEPENDS libcxx
-        SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/crt
-    )
-
-    add_subproject(
-        bfpthread vmm
-        DEPENDS gsl
-        DEPENDS libcxx
-        SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/pthread
-    )
-
-    add_subproject(
-        bfsyscall vmm
-        DEPENDS gsl
-        DEPENDS libcxx
-        SOURCE_DIR ${SOURCE_BFRUNTIME_DIR}/src/syscall
-    )
-
-    add_subproject(
-        bfunwind vmm
-        DEPENDS bfcrt
-        DEPENDS bfpthread
-        DEPENDS bfsyscall
-    )
-endif()
-
-if(ENABLE_BUILD_VMM)
-    add_subproject(
-        bfintrinsics vmm
-        DEPENDS bfunwind
-    )
-
-    add_subproject(
-        bfvmm vmm
-        DEPENDS bfunwind
-    )
-
-    add_subproject(
-        bfvmm_main vmm
-        DEPENDS bfvmm
-        DEPENDS bfintrinsics
-        SOURCE_DIR ${SOURCE_BFVMM_DIR}/src/main
-    )
-endif()
+# if(ENABLE_BUILD_VMM)
+#     add_subproject(
+#         bfintrinsics vmm
+#         DEPENDS bfunwind
+#     )
+#
+#     add_subproject(
+#         bfvmm vmm
+#         DEPENDS bfunwind
+#     )
+#
+#     add_subproject(
+#         bfvmm_main vmm
+#         DEPENDS bfvmm
+#         DEPENDS bfintrinsics
+#         SOURCE_DIR ${SOURCE_BFVMM_DIR}/src/main
+#     )
+# endif()
+# add_custom_target(bfvmm_aarch64-vmm-elf DEPENDS newlib_aarch64-vmm-elf)
 
 # ------------------------------------------------------------------------------
 # Unit Tests
 # ------------------------------------------------------------------------------
 
-if(ENABLE_BUILD_TEST)
-    add_subproject(
-        bfsdk test
-        DEPENDS gsl
-        DEPENDS json
-        DEPENDS catch
-        DEPENDS hippomocks
-    )
-endif()
-
-if(ENABLE_BUILD_TEST AND NOT WIN32)
-    add_subproject(
-        bfdummy vmm
-        DEPENDS bfunwind
-    )
-
-    add_subproject(
-        bfdummy_main vmm
-        SOURCE_DIR ${SOURCE_BFDUMMY_DIR}/src/main
-        DEPENDS bfdummy
-    )
-
-    add_subproject(
-        bfelf_loader test
-        DEPENDS bfsdk
-        NOINSTALL
-    )
-
-    add_subproject(
-        bfdriver test
-        DEPENDS bfsdk
-        NOINSTALL
-    )
-endif()
-
-if(ENABLE_BUILD_TEST)
-    add_subproject(
-        bfm test
-        DEPENDS bfsdk
-        NOINSTALL
-    )
-
-    add_subproject(
-        bfruntime test
-        DEPENDS bfsdk
-        NOINSTALL
-    )
-
-    add_subproject(
-        bfvmm test
-        DEPENDS bfsdk
-    )
-endif()
+# if(ENABLE_BUILD_TEST)
+#     add_subproject(
+#         bfsdk test
+#         DEPENDS gsl
+#         DEPENDS json
+#         DEPENDS catch
+#         DEPENDS hippomocks
+#     )
+# endif()
+#
+# if(ENABLE_BUILD_TEST AND NOT WIN32)
+#     add_subproject(
+#         bfdummy vmm
+#         DEPENDS bfunwind
+#     )
+#
+#     add_subproject(
+#         bfdummy_main vmm
+#         SOURCE_DIR ${SOURCE_BFDUMMY_DIR}/src/main
+#         DEPENDS bfdummy
+#     )
+#
+#     add_subproject(
+#         bfelf_loader test
+#         DEPENDS bfsdk
+#         NOINSTALL
+#     )
+#
+#     add_subproject(
+#         bfdriver test
+#         DEPENDS bfsdk
+#         NOINSTALL
+#     )
+# endif()
+#
+# if(ENABLE_BUILD_TEST)
+#     add_subproject(
+#         bfm test
+#         DEPENDS bfsdk
+#         NOINSTALL
+#     )
+#
+#     add_subproject(
+#         bfruntime test
+#         DEPENDS bfsdk
+#         NOINSTALL
+#     )
+#
+#     add_subproject(
+#         bfvmm test
+#         DEPENDS bfsdk
+#     )
+# endif()
 
 # ------------------------------------------------------------------------------
 # Userspace Components
 # ------------------------------------------------------------------------------
 
-if(ENABLE_BUILD_USERSPACE)
-    add_subproject(
-        bfintrinsics userspace
-        DEPENDS gsl
-        DEPENDS json
-    )
-
-    add_subproject(
-        bfm userspace
-        DEPENDS gsl
-        DEPENDS json
-    )
-endif()
+# if(ENABLE_BUILD_USERSPACE)
+#     add_subproject(
+#         bfintrinsics userspace
+#         DEPENDS gsl
+#         DEPENDS json
+#     )
+#
+#     add_subproject(
+#         bfm userspace
+#         DEPENDS gsl
+#         DEPENDS json
+#     )
+# endif()
 
 # ------------------------------------------------------------------------------
 # EFI Components
 # ------------------------------------------------------------------------------
 
-if (ENABLE_BUILD_EFI)
-    include_dependency(SOURCE_DEPENDS_DIR gnuefi)
-
-    add_subproject(
-        efi_main vmm
-        DEPENDS gnuefi bfvmm_main
-        SOURCE_DIR ${SOURCE_BFDRIVER_DIR}/src/platform/efi
-        TOOLCHAIN ${EFI_TOOLCHAIN_PATH}
-    )
-
-    add_efi_module(
-        NAME base
-        SOURCES ${SOURCE_BFDRIVER_DIR}/src/platform/efi/efi_base/base.c
-        SOURCES ${SOURCE_BFDRIVER_DIR}/src/platform/efi/efi_base/platform.c
-        SOURCES ${SOURCE_BFDRIVER_DIR}/src/common.c
-    )
-
-endif()
+# if (ENABLE_BUILD_EFI)
+#     include_dependency(SOURCE_DEPENDS_DIR gnuefi)
+#
+#     add_subproject(
+#         efi_main vmm
+#         DEPENDS gnuefi bfvmm_main
+#         SOURCE_DIR ${SOURCE_BFDRIVER_DIR}/src/platform/efi
+#         TOOLCHAIN ${EFI_TOOLCHAIN_PATH}
+#     )
+#
+#     add_efi_module(
+#         NAME base
+#         SOURCES ${SOURCE_BFDRIVER_DIR}/src/platform/efi/efi_base/base.c
+#         SOURCES ${SOURCE_BFDRIVER_DIR}/src/platform/efi/efi_base/platform.c
+#         SOURCES ${SOURCE_BFDRIVER_DIR}/src/common.c
+#     )
+#
+# endif()
 
 # ------------------------------------------------------------------------------
 # External Components
