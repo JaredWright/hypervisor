@@ -1,13 +1,24 @@
-#include <vmm_init.hpp>
-#include <vm/virtual_machine.hpp>
+#include <vmm/x64_vm.hpp>
+#include <vmm/x64_vcpu.hpp>
 
 namespace vmm
 {
 
-bool
-vmm_init(vmm::virtual_machine &vm) noexcept
+bsl::errc_type
+init_root_vcpu(x64_vcpu &vcpu) noexcept
 {
-    return true;
+    vcpu.run();
+    vcpu.hlt();
+    // vcpu.vpid_enable();
+    // vcpu.cpuid_vmexit_handler_set(my_cpuid_handler);
+    return -1;
+}
+
+bsl::errc_type
+init_root_vm(x64_vm &root_vm) noexcept
+{
+    root_vm.vcpu_set_init_handler(init_root_vcpu);
+    return -1;
 }
 
 }

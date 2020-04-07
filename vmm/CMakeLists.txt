@@ -11,6 +11,15 @@ target_compile_definitions(vmm PUBLIC
     "$<$<CONFIG:RELEASE>:BUILD_RELEASE>"
     "$<$<CONFIG:DEBUG>:BUILD_DEBUG>"
     "$<$<CONFIG:TEST>:TEST>"
+    # TODO: The bsl might need these defined to the VMM's versions?
+    "BSL_BUILTIN_FILE=\"file\""
+    "BSL_BUILTIN_FUNCTION=\"function\""
+    "BSL_BUILTIN_LINE=0"
+    "BSL_BUILTIN_MEMSET=nullptr"
+    "BSL_BUILTIN_MEMCMP=0"
+    "BSL_BUILTIN_STRNCMP=0"
+    "BSL_BUILTIN_STRLEN=0U"
+    "BSL_BUILTIN_CHAR_MEMCHR=0"
 )
 
 target_compile_options(vmm PUBLIC
