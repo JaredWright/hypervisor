@@ -1,5 +1,7 @@
-# Always build the hello_world example
-add_subdirectory(hello_world)
+# Always build a hello_world example
+if(HYPERVISOR_TARGET_ARCH STREQUAL "x86_64")
+    add_subdirectory(intel_x64/hello_world)
+endif()
 
 if(HYPERVISOR_BUILD_EXAMPLES)
     # TODO: Add other examples here

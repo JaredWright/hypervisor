@@ -9,11 +9,13 @@
 #include <vmm/x64_vcpu.hpp>
 #include <vcpu/x64/x64_vcpu_instance.hpp>
 #include <vcpu/x64/intel/intel_execute.hpp>
+#include <vcpu/x64/intel/intel_vpid.hpp>
 
 namespace vmm
 {
     typedef x64_vcpu_instance<
-        intel_execute
+        intel_execute,
+        intel_vpid
     > vcpu_type;
 
     typedef x64_vm_instance<

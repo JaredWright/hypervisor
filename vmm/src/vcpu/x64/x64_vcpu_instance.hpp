@@ -7,7 +7,8 @@ namespace vmm
 {
 
 template<
-    class vcpu_execute_type
+    class vcpu_execute_type,
+    class vcpu_vpid_type
 >
 class x64_vcpu_instance :
     public x64_vcpu
@@ -20,8 +21,12 @@ public:
     bsl::errc_type hlt() noexcept final
     { return m_vcpu_execute.hlt(); }
 
+    bsl::errc_type vpid_enable() noexcept final
+    { return m_vcpu_vpid.vpid_enable(); }
+
 private:
     vcpu_execute_type m_vcpu_execute{};
+    vcpu_vpid_type m_vcpu_vpid{};
 };
 
 }

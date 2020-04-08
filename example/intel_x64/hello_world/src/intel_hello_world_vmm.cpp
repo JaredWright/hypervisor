@@ -9,7 +9,7 @@ init_root_vcpu(x64_vcpu &vcpu) noexcept
 {
     vcpu.run();
     vcpu.hlt();
-    // vcpu.vpid_enable();
+    vcpu.vpid_enable();
     // vcpu.cpuid_vmexit_handler_set(my_cpuid_handler);
     return -1;
 }
