@@ -7,7 +7,7 @@ namespace vmm
 {
 
 class intel_execute :
-    public vcpu_execute
+    public execute
 {
 public:
 

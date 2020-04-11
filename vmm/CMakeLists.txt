@@ -6,6 +6,10 @@ target_sources(vmm PRIVATE
     main/intel_x64/main.cpp
 )
 
+if(${HYPERVISOR_TARGET_ARCH} STREQUAL "x86_64")
+    target_sources(vmm PRIVATE main/intel_x64/main.cpp)
+endif()
+
 target_compile_definitions(vmm PUBLIC
     "VMM"
     "$<$<CONFIG:RELEASE>:BUILD_RELEASE>"

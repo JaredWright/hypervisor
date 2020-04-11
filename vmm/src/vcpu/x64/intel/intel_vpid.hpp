@@ -7,7 +7,7 @@ namespace vmm
 {
 
 class intel_vpid :
-    public vcpu_vpid
+    public vpid
 {
 public:
 

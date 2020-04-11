@@ -1,8 +1,11 @@
-# Always build a hello_world example
 if(HYPERVISOR_TARGET_ARCH STREQUAL "x86_64")
+    # Always build a hello_world example
     add_subdirectory(intel_x64/hello_world)
+
+    if(HYPERVISOR_BUILD_EXAMPLES)
+        # TODO: Add other examples here
+        add_subdirectory(intel_x64/bare_minimum)
+        add_subdirectory(intel_x64/create_child_vm)
+    endif()
 endif()
 
-if(HYPERVISOR_BUILD_EXAMPLES)
-    # TODO: Add other examples here
-endif()

@@ -6,19 +6,19 @@
 namespace vmm
 {
 
-class vcpu_vpid
+class vpid
 {
 public:
 
     virtual bsl::errc_type vpid_enable() noexcept = 0;
 
-    virtual ~vcpu_vpid() noexcept = default;
+    virtual ~vpid() noexcept = default;
 protected:
-    vcpu_vpid() noexcept = default;
-    vcpu_vpid(vcpu_vpid &&) noexcept = default;
-    vcpu_vpid &operator=(vcpu_vpid &&) noexcept = default;
-    vcpu_vpid(vcpu_vpid const &) = delete;
-    vcpu_vpid &operator=(vcpu_vpid const &) & = delete;
+    vpid() noexcept = default;
+    vpid(vpid &&) noexcept = default;
+    vpid &operator=(vpid &&) noexcept = default;
+    vpid(vpid const &) = delete;
+    vpid &operator=(vpid const &) & = delete;
 };
 
 }
