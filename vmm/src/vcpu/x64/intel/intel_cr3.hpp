@@ -11,9 +11,62 @@ class intel_cr3 :
 {
 public:
 
-    intel_cr3() noexcept = default;
+    void read_cr3_vmexit_enable() noexcept
+    {
+        return;
+    }
 
-    // TODO: Implement Me!
+    void read_cr3_vmexit_disable() noexcept
+    {
+        return;
+    }
+
+    void read_cr3_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    {
+        return;
+    }
+
+    void read_cr3_execute() noexcept
+    {
+        return;
+    }
+
+    void read_cr3_emulate(uint64_t cr3_value) noexcept
+    {
+        return;
+    }
+
+    void write_cr3_vmexit_enable() noexcept
+    {
+        return;
+    }
+
+    void write_cr3_vmexit_disable() noexcept
+    {
+        return;
+    }
+
+    void write_cr3_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    {
+        return;
+    }
+
+    uint64_t write_cr3_vmexit_value() noexcept
+    {
+        return 0;
+    }
+
+    void write_cr3_execute() noexcept
+    {
+        return;
+    }
+
+    void write_cr3_emulate(uint64_t cr3_value) noexcept
+    {
+        return;
+    }
+
+    intel_cr3() noexcept = default;
 };
 
 }

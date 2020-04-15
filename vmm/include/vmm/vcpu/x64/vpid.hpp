@@ -10,7 +10,7 @@ class vpid
 {
 public:
 
-    virtual bsl::errc_type vpid_enable() noexcept = 0;
+    virtual void vpid_enable() noexcept = 0;
 
     virtual ~vpid() noexcept = default;
 protected:

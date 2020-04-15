@@ -11,9 +11,27 @@ class intel_nmi :
 {
 public:
 
-    intel_nmi() noexcept = default;
+    void nmi_vmexit_enable() noexcept
+    {
+        return;
+    }
 
-    // TODO: Implement Me!
+    void nmi_vmexit_disable() noexcept
+    {
+        return;
+    }
+
+    void nmi_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    {
+        return;
+    }
+
+    void nmi_inject() noexcept
+    {
+        return;
+    }
+
+    intel_nmi() noexcept = default;
 };
 
 }

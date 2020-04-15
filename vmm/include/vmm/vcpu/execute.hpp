@@ -10,8 +10,9 @@ class execute
 {
 public:
 
+    virtual bsl::errc_type load() noexcept = 0;
+    virtual bsl::errc_type unload() noexcept = 0;
     virtual bsl::errc_type run() noexcept = 0;
-    virtual bsl::errc_type hlt() noexcept = 0;
 
     virtual ~execute() noexcept = default;
 protected:

@@ -11,9 +11,22 @@ class intel_monitor_trap :
 {
 public:
 
-    intel_monitor_trap() noexcept = default;
+    void monitor_trap_vmexit_enable() noexcept
+    {
+        return;
+    }
 
-    // TODO: Implement Me!
+    void monitor_trap_vmexit_disable() noexcept
+    {
+        return;
+    }
+
+    void monitor_trap_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    {
+        return;
+    }
+
+    intel_monitor_trap() noexcept = default;
 };
 
 }

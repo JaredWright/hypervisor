@@ -10,8 +10,7 @@ class rdmsr
 {
 public:
 
-    // TODO: Define My Interface!
-    virtual bsl::errc_type rdmsr_vmexit_enable() noexcept = 0;
+    virtual void rdmsr_vmexit_enable() noexcept = 0;
 
     virtual ~rdmsr() noexcept = default;
 protected:

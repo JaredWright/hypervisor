@@ -11,9 +11,22 @@ class intel_cpuid :
 {
 public:
 
-    intel_cpuid() noexcept = default;
+    void cpuid_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    {
+        return;
+    }
 
-    // TODO: Implement Me!
+    void cpuid_execute() noexcept
+    {
+        return;
+    }
+
+    void cpuid_emulate(uint64_t cpuid_value) noexcept
+    {
+        return;
+    }
+
+    intel_cpuid() noexcept = default;
 };
 
 }

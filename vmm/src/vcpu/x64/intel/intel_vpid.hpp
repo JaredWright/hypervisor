@@ -11,14 +11,13 @@ class intel_vpid :
 {
 public:
 
-    intel_vpid() noexcept = default;
-
-    bsl::errc_type
+    void
     vpid_enable() noexcept final
     {
         // TODO: Implement Me!
-        return -1;
     }
+
+    intel_vpid() noexcept = default;
 };
 
 }

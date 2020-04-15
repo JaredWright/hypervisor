@@ -11,14 +11,13 @@ class intel_rdmsr :
 {
 public:
 
-    intel_rdmsr() noexcept = default;
-
-    bsl::errc_type
+    void
     rdmsr_vmexit_enable() noexcept final
     {
         // TODO: Implement Me!
-        return -1;
     }
+
+    intel_rdmsr() noexcept = default;
 };
 
 }

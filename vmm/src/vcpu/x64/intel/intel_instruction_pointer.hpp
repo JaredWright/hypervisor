@@ -11,14 +11,14 @@ class intel_instruction_pointer :
 {
 public:
 
-    intel_instruction_pointer() noexcept = default;
-
     bsl::errc_type
     instruction_pointer_advance() noexcept final
     {
         // TODO: Implement Me!
         return -1;
     }
+
+    intel_instruction_pointer() noexcept = default;
 };
 
 }
