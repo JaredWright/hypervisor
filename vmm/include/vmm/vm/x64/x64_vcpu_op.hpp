@@ -11,8 +11,8 @@ class vcpu_op
 {
 public:
 
-    virtual void set_vcpu_init_handler(bsl::delegate<bsl::errc_type (x64_vcpu &)> func) noexcept = 0;
-    virtual void set_vcpu_fini_handler(bsl::delegate<bsl::errc_type (x64_vcpu &)> func) noexcept = 0;
+    virtual void vcpu_init_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept = 0;
+    virtual void vcpu_fini_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept = 0;
 
     virtual ~vcpu_op() noexcept = default;
 protected:

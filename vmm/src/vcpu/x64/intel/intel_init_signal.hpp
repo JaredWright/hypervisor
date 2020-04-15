@@ -11,9 +11,13 @@ class intel_init_signal :
 {
 public:
 
-    intel_init_signal() noexcept = default;
+    void init_signal_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    {
+        // TODO: Implement Me!
+        return;
+    }
 
-    // TODO: Implement Me!
+    intel_init_signal() noexcept = default;
 };
 
 }

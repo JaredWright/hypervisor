@@ -5,6 +5,7 @@
 #include <vmm/vm/x64/x64_vm.hpp>
 #include <bsl/delegate.hpp>
 #include <bsl/errc_type.hpp>
+#include <bsl/exit_code.hpp>
 
 namespace vmm
 {

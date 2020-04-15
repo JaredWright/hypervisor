@@ -11,9 +11,61 @@ class intel_wrmsr :
 {
 public:
 
-    intel_wrmsr() noexcept = default;
+    void wrmsr_vmexit_enable(uint32_t msr_address) noexcept
+    {
+        // TODO: Implement Me!
+        return;
+    }
 
-    // TODO: Implement Me!
+    void wrmsr_vmexit_range_enable(uint32_t begin, uint32_t end) noexcept
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
+    void wrmsr_vmexit_disable(uint32_t msr_address) noexcept
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
+    void wrmsr_vmexit_range_disable(uint32_t begin, uint32_t end) noexcept
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
+    void wrmsr_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
+    uint32_t wrmsr_vmexit_address() noexcept
+    {
+        // TODO: Implement Me!
+        return 0;
+    }
+
+    uint64_t wrmsr_vmexit_value() noexcept
+    {
+        // TODO: Implement Me!
+        return 0;
+    }
+
+    void wrmsr_execute() noexcept
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
+    void wrmsr_emulate(uint64_t value) noexcept
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
+    intel_wrmsr() noexcept = default;
 };
 
 }

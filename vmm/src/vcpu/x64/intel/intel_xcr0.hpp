@@ -11,9 +11,13 @@ class intel_xcr0 :
 {
 public:
 
-    intel_xcr0() noexcept = default;
+    void write_xcr0_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    {
+        // TODO: Implement Me!
+        return;
+    }
 
-    // TODO: Implement Me!
+    intel_xcr0() noexcept = default;
 };
 
 }

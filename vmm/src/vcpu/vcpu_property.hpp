@@ -11,9 +11,43 @@ class vcpu_property :
 {
 public:
 
-    vcpu_property() noexcept = default;
+    id_type id() noexcept
+    {
+        // TODO: Implement me!
+        return 0;
+    }
 
-    // TODO: Implement Me!
+    void set_id(id_type value) noexcept
+    {
+        // TODO: Implement me!
+        return;
+    }
+
+    bool is_bootstrap_vcpu() noexcept
+    {
+        // TODO: Implement me!
+        return false;
+    }
+
+    void set_is_bootstrap_vcpu(bool value) noexcept
+    {
+        // TODO: Implement me!
+        return;
+    }
+
+    bool is_root_vcpu() noexcept
+    {
+        // TODO: Implement me!
+        return false;
+    }
+
+    void set_is_root_vcpu(bool value) noexcept
+    {
+        // TODO: Implement me!
+        return;
+    }
+
+    vcpu_property() noexcept = default;
 };
 
 }

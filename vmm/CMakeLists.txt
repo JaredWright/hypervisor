@@ -1,13 +1,14 @@
 add_library(vmm OBJECT)
 
 target_sources(vmm PRIVATE
-    src/entry/start.s
     src/junk_to_get_rid_of.cpp
-    main/intel_x64/main.cpp
 )
 
 if(${HYPERVISOR_TARGET_ARCH} STREQUAL "x86_64")
-    target_sources(vmm PRIVATE main/intel_x64/main.cpp)
+    target_sources(vmm PRIVATE
+        src/entry/x64/start.s
+        src/entry/x64/start.cpp
+    )
 endif()
 
 target_compile_definitions(vmm PUBLIC

@@ -10,7 +10,16 @@ namespace vmm
 class x64_vm :
     public vm,
     public vcpu_op
-{ };
+{
+public:
+    ~x64_vm() noexcept override = default;
+protected:
+    x64_vm() noexcept = default;
+    x64_vm(x64_vm &&) noexcept = default;
+    x64_vm &operator=(x64_vm &&) noexcept = default;
+    x64_vm(x64_vm const &) = delete;
+    x64_vm &operator=(x64_vm const &) & = delete;
+};
 
 }
 

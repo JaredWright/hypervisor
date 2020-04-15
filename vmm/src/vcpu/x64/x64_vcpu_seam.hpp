@@ -18,13 +18,11 @@ template<
     class cr0_type,
     class cr3_type,
     class cr4_type,
-    class exception_type,
     class external_interrupt_type,
     class general_register_x64_type,
     class init_signal_type,
     class interrupt_window_type,
     class io_port_type,
-    class microcode_update_type,
     class monitor_trap_type,
     class nmi_type,
     class nmi_window_type,
@@ -160,6 +158,10 @@ public:
     void external_interrupt_inject(uint64_t vector) noexcept final
     { return m_external_interrupt.external_interrupt_inject(vector); }
 
+    // ------------------------- init signal seam ------------------------------
+    void init_signal_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
+    { return m_init_signal.init_signal_vmexit_handler_set(func); }
+
     // ---------------------- interrupt window seam ----------------------------
     void interrupt_window_vmexit_enable() noexcept final
     { return m_interrupt_window.interrupt_window_vmexit_enable(); }
@@ -246,9 +248,47 @@ public:
     void nmi_window_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
     { return m_nmi_window.nmi_window_vmexit_handler_set(func); }
 
+    // ----------------------- preemption timer seam ---------------------------
+    void preemption_timer_vmexit_enable() noexcept final
+    { return m_preemption_timer.preemption_timer_vmexit_enable(); }
+
+    void preemption_timer_vmexit_disable() noexcept final
+    { return m_preemption_timer.preemption_timer_vmexit_disable(); }
+
+    void preemption_timer_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
+    { return m_preemption_timer.preemption_timer_vmexit_handler_set(func); }
+
+    void preemption_timer_set(uint64_t value) noexcept final
+    { return m_preemption_timer.preemption_timer_set(value); }
+
     // ----------------------------- rdmsr seam --------------------------------
-    void rdmsr_vmexit_enable() noexcept final
-    { return m_rdmsr.rdmsr_vmexit_enable(); }
+    void rdmsr_vmexit_enable(uint32_t msr_address) noexcept final
+    { return m_rdmsr.rdmsr_vmexit_enable(msr_address); }
+
+    void rdmsr_vmexit_range_enable(uint32_t begin, uint32_t end) noexcept final
+    { return m_rdmsr.rdmsr_vmexit_range_enable(begin, end); }
+
+    void rdmsr_vmexit_disable(uint32_t msr_address) noexcept final
+    { return m_rdmsr.rdmsr_vmexit_disable(msr_address); }
+
+    void rdmsr_vmexit_range_disable(uint32_t begin, uint32_t end) noexcept final
+    { return m_rdmsr.rdmsr_vmexit_range_disable(begin, end); }
+
+    void rdmsr_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
+    { return m_rdmsr.rdmsr_vmexit_handler_set(func); }
+
+    uint32_t rdmsr_vmexit_address() noexcept final
+    { return m_rdmsr.rdmsr_vmexit_address(); }
+
+    void rdmsr_execute() noexcept final
+    { return m_rdmsr.rdmsr_execute(); }
+
+    void rdmsr_emulate(uint64_t value) noexcept final
+    { return m_rdmsr.rdmsr_emulate(value); }
+
+    // ------------------------- sipi signal seam ------------------------------
+    void sipi_signal_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
+    { return m_sipi_signal.sipi_signal_vmexit_handler_set(func); }
 
     // ----------------------------- vmexit seam -------------------------------
     uint32_t vmexit_reason() noexcept final
@@ -267,6 +307,38 @@ public:
     void vpid_enable() noexcept final
     { return m_vpid.vpid_enable(); }
 
+    // ----------------------------- wrmsr seam --------------------------------
+    void wrmsr_vmexit_enable(uint32_t msr_address) noexcept final
+    { return m_wrmsr.wrmsr_vmexit_enable(msr_address); }
+
+    void wrmsr_vmexit_range_enable(uint32_t begin, uint32_t end) noexcept final
+    { return m_wrmsr.wrmsr_vmexit_range_enable(begin, end); }
+
+    void wrmsr_vmexit_disable(uint32_t msr_address) noexcept final
+    { return m_wrmsr.wrmsr_vmexit_disable(msr_address); }
+
+    void wrmsr_vmexit_range_disable(uint32_t begin, uint32_t end) noexcept final
+    { return m_wrmsr.wrmsr_vmexit_range_disable(begin, end); }
+
+    void wrmsr_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
+    { return m_wrmsr.wrmsr_vmexit_handler_set(func); }
+
+    uint32_t wrmsr_vmexit_address() noexcept final
+    { return m_wrmsr.wrmsr_vmexit_address(); }
+
+    uint64_t wrmsr_vmexit_value() noexcept final
+    { return m_wrmsr.wrmsr_vmexit_value(); }
+
+    void wrmsr_execute() noexcept final
+    { return m_wrmsr.wrmsr_execute(); }
+
+    void wrmsr_emulate(uint64_t value) noexcept final
+    { return m_wrmsr.wrmsr_emulate(value); }
+
+    // ------------------------------ xcr0 seam --------------------------------
+    void write_xcr0_vmexit_handler_set(bsl::delegate<void (x64_vcpu &)> func)
+    { return m_xcr0.write_xcr0_vmexit_handler_set(func); }
+
 private:
     execute_type m_execute{};
     instruction_pointer_type m_instruction_pointer{};
@@ -277,13 +349,11 @@ private:
     cr0_type m_cr0{};
     cr3_type m_cr3{};
     cr4_type m_cr4{};
-    exception_type m_exception{};
     external_interrupt_type m_external_interrupt{};
     general_register_x64_type m_general_register_x64{};
     init_signal_type m_init_signal{};
     interrupt_window_type m_interrupt_window{};
     io_port_type m_io_port{};
-    microcode_update_type m_microcode_update{};
     monitor_trap_type m_monitor_trap{};
     nmi_type m_nmi{};
     nmi_window_type m_nmi_window{};

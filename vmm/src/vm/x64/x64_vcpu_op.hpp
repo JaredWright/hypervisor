@@ -11,21 +11,20 @@ class x64_vcpu_op:
 {
 public:
 
+    void vcpu_init_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
+    void
+    vcpu_fini_handler_set(bsl::delegate<void (x64_vcpu &)> func) noexcept final
+    {
+        // TODO: Implement Me!
+        return;
+    }
+
     x64_vcpu_op() noexcept = default;
-
-    void
-    set_vcpu_init_handler(bsl::delegate<bsl::errc_type (x64_vcpu &)> func) noexcept final
-    {
-        // TODO: Implement Me!
-        return;
-    }
-
-    void
-    set_vcpu_fini_handler(bsl::delegate<bsl::errc_type (x64_vcpu &)> func) noexcept final
-    {
-        // TODO: Implement Me!
-        return;
-    }
 };
 
 }
